@@ -1,0 +1,21 @@
+﻿.Condor_clear_both {
+    clear: both;
+}
+
+.Condor_float_left {
+    float: left;
+}
+
+.Condor_margin_left_5px {
+    margin-left: 5px;
+}
+
+.Condor_margin_left_10px {
+    margin-left: 10px;
+}
+
+.Separacao {
+    clear: both;
+    float: left;
+    padding-top: 20px;
+}

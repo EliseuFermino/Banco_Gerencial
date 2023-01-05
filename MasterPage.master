@@ -1,0 +1,58 @@
+﻿<%@ Master Language="VB" CodeFile="MasterPage.master.vb" Inherits="MasterPage" %>
+
+<%@ Register assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web" tagprefix="dx" %>
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" 
+            ClientInstanceName="splitter" Height="800px" Theme="DevEx" Width="100%">
+            <panes>
+                <dx:SplitterPane Size="150px" MinSize="150px" ShowCollapseBackwardButton="True">
+                    <ContentCollection>
+                        <dx:SplitterContentControl runat="server" >
+
+                            <dx:ASPxNavBar ID="ASPxNavBar1" runat="server">
+                                <Groups>
+                                    <dx:NavBarGroup Text="Sample Page">
+                                        <Items>
+                                            <dx:NavBarItem Text="Test" NavigateUrl="~/Default3.aspx">
+                                            </dx:NavBarItem>
+                                            <dx:NavBarItem NavigateUrl="~/Default4.aspx" Text="Test 4 ">
+                                            </dx:NavBarItem>
+                                        </Items>
+                                    </dx:NavBarGroup>
+                                </Groups>
+                            </dx:ASPxNavBar>
+
+                        </dx:SplitterContentControl>
+                    </ContentCollection>
+                </dx:SplitterPane>
+
+                <dx:SplitterPane Name="ContentUrlPane" ScrollBars="Auto" ContentUrlIFrameName="contentUrlPane">
+                    <ContentCollection>
+                        <dx:SplitterContentControl runat="server" SupportsDisabledAttribute="True">
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </dx:SplitterContentControl>
+                    </ContentCollection>
+                </dx:SplitterPane>
+            </panes>
+        </dx:ASPxSplitter>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

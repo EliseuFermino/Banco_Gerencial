@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="gerProjetos_Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="gerProjetos_ModelStoreContainer">
+          <EntitySet Name="tblDados" EntityType="gerProjetos_Model.Store.tblDados" store:Type="Tables" Schema="Patrimonio" />
+        </EntityContainer>
+        <EntityType Name="tblDados">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EAN" Type="bigint" />
+          <Property Name="Qtde" Type="money" />
+          <Property Name="Preco" Type="money" />
+          <Property Name="Total" Type="money" />
+          <Property Name="NomeFiscalAbordagem" Type="varchar" MaxLength="50" />
+          <Property Name="Observacao" Type="varchar" MaxLength="1000" />
+          <Property Name="Dia" Type="date" />
+          <Property Name="NomeFiscalConstatou" Type="varchar" MaxLength="50" />
+          <Property Name="Hora" Type="varchar" MaxLength="10" />
+          <Property Name="NumCamera" Type="varchar" MaxLength="3" />
+          <Property Name="DVR" Type="varchar" MaxLength="3" />
+          <Property Name="idFilial" Type="smallint" />
+          <Property Name="idReativaPreventiva" Type="tinyint" />
+          <Property Name="DiaCadastro" Type="date" />
+          <Property Name="idFurtante" Type="tinyint" />
+          <Property Name="idEtiqueta" Type="tinyint" />
+          <Property Name="IdadeFurtante" Type="tinyint" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="gerProjetos_Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="gerProjetos_Entities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="tblDados" EntityType="gerProjetos_Model.tblDados" />
+        </EntityContainer>
+        <EntityType Name="tblDados">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="EAN" Type="Int64" />
+          <Property Name="Qtde" Precision="19" Scale="4" Type="Decimal" />
+          <Property Name="Preco" Precision="19" Scale="4" Type="Decimal" />
+          <Property Name="Total" Precision="19" Scale="4" Type="Decimal" />
+          <Property Name="NomeFiscalAbordagem" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Observacao" MaxLength="1000" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Dia" Precision="0" Type="DateTime" />
+          <Property Name="NomeFiscalConstatou" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Hora" MaxLength="10" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="NumCamera" MaxLength="3" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="DVR" MaxLength="3" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="idFilial" Type="Int16" />
+          <Property Name="idReativaPreventiva" Type="Byte" />
+          <Property Name="DiaCadastro" Precision="0" Type="DateTime" />
+          <Property Name="idFurtante" Type="Byte" />
+          <Property Name="IdadeFurtante" Type="Byte" />
+          <Property Name="idEtiqueta" Type="Byte" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="gerProjetos_ModelStoreContainer" CdmEntityContainer="gerProjetos_Entities">
+          <EntitySetMapping Name="tblDados">
+            <EntityTypeMapping TypeName="gerProjetos_Model.tblDados">
+              <MappingFragment StoreEntitySet="tblDados">
+                <ScalarProperty Name="idEtiqueta" ColumnName="idEtiqueta" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EAN" ColumnName="EAN" />
+                <ScalarProperty Name="Qtde" ColumnName="Qtde" />
+                <ScalarProperty Name="Preco" ColumnName="Preco" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="NomeFiscalAbordagem" ColumnName="NomeFiscalAbordagem" />
+                <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+                <ScalarProperty Name="Dia" ColumnName="Dia" />
+                <ScalarProperty Name="NomeFiscalConstatou" ColumnName="NomeFiscalConstatou" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="NumCamera" ColumnName="NumCamera" />
+                <ScalarProperty Name="DVR" ColumnName="DVR" />
+                <ScalarProperty Name="idFilial" ColumnName="idFilial" />
+                <ScalarProperty Name="idReativaPreventiva" ColumnName="idReativaPreventiva" />
+                <ScalarProperty Name="DiaCadastro" ColumnName="DiaCadastro" />
+                <ScalarProperty Name="idFurtante" ColumnName="idFurtante" />
+                <ScalarProperty Name="IdadeFurtante" ColumnName="IdadeFurtante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams />
+  </Designer>
+</edmx:Edmx>

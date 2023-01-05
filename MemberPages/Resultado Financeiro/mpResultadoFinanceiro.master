@@ -1,0 +1,133 @@
+﻿<%@ Master Language="VB" CodeFile="mpResultadoFinanceiro.master.vb" Inherits="MemberPages_Resultado_Financeiro_mpResultadoFinanceiro" %>
+
+<%@ Register assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web" tagprefix="dxm" %>
+
+<%@ Register assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web" tagprefix="dxlp" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Menu Resultado Financeiro</title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .dxmMenu, .dxmVerticalMenu
+{
+	font: 9pt Tahoma;
+	color: black;
+	background-color: #F0F0F0;
+	border: solid 1px #A8A8A8;
+	padding: 2px 2px 2px 2px;
+}
+.dxmMenuItem, .dxmMenuItemWithImage
+{
+	padding-top: 4px;
+	padding-right: 8px;
+	padding-bottom: 5px;
+	padding-left: 8px;
+}
+.dxmMenuItem, .dxmMenuItemWithImage, .dxmMenuItemWithPopOutImage, .dxmMenuItemWithImageWithPopOutImage,
+.dxmVerticalMenuItem, .dxmVerticalMenuItemWithImage, .dxmVerticalMenuItemWithPopOutImage, .dxmVerticalMenuItemWithImageWithPopOutImage, 
+.dxmMenuLargeItem, .dxmMenuLargeItemWithImage, .dxmMenuLargeItemWithPopOutImage, .dxmMenuLargeItemWithImageWithPopOutImage,
+.dxmVerticalMenuLargeItem, .dxmVerticalMenuLargeItemWithImage, .dxmVerticalMenuLargeItemWithPopOutImage, .dxmVerticalMenuLargeItemWithImageWithPopOutImage
+{
+	font: 9pt Tahoma;
+	color: black;
+	white-space: nowrap;
+}
+.dxmControl a, .dxmMenu a, .dxmVerticalMenu a, .dxmSubMenu a
+{
+	color: black;
+	text-decoration: none;
+}
+    </style>
+</head>
+<body bgcolor="White">
+    <form id="form1" runat="server">
+    <div style="background-color: #CCCCCC">
+        <dxm:ASPxMenu ID="ASPxMenu1" runat="server" AutoSeparators="RootOnly" 
+            CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+             Height="15px" ImageFolder="~/App_Themes/Aqua/{0}/" 
+            ItemSpacing="0px" SeparatorColor="#AECAF0" SeparatorHeight="100%" 
+            SeparatorWidth="1px" ShowPopOutImages="True">
+            <RootItemSubMenuOffset FirstItemX="-1" FirstItemY="-1" X="-1" Y="-1" />
+            <Items>
+                <dxm:MenuItem NavigateUrl="~/MemberPages/menuPrincipal.aspx" 
+                    Text="Menu Principal">
+                </dxm:MenuItem>
+                <dxm:MenuItem NavigateUrl="~/MemberPages/Resultado Financeiro/frmSaldoInicial.aspx" 
+                    Text="Saldo Inicial" ToolTip="Define saldo inicial do  Contas à Pagar">
+                </dxm:MenuItem>
+                <dxm:MenuItem NavigateUrl="~/MemberPages/Resultado Financeiro/frmResumoFinanceiro.aspx" 
+                    Text="Resumo" 
+                    ToolTip="Planilha que exibe somente o valor do financeiro de cada loja. São mostrados os 12 meses do ano especificado.">
+                </dxm:MenuItem>
+                <dxm:MenuItem NavigateUrl="~/MemberPages/Resultado Financeiro/frmRateioFinanc.aspx" 
+                    Text="Rateios" 
+                    ToolTip="Planilha que calcula quanto cada loja vai absorver do resultado financeiro do CD (Central de Distribuição, Trocas e Ceasa). Há informações de Vendas, % Participação de Vendas, Financeiro da Loja e do CD. Há também o % de representavidade sobre o faturamento.">
+                </dxm:MenuItem>
+                <dxm:MenuItem Text="Financeiro">
+                    <Items>
+                        <dxm:MenuItem NavigateUrl="~/MemberPages/Resultado Financeiro/frmResumo.aspx" 
+                            Text="por Mês" 
+                            ToolTip="Planilha Mensal da composição das contas (Entradas e Saídas) do Resultado Financeiro. É mostrado os 12 meses do ano especificado para ánalise.">
+                        </dxm:MenuItem>
+                        <dxm:MenuItem NavigateUrl="~/MemberPages/Resultado Financeiro/frmResumoDia.aspx" 
+                            Text="por Dia" 
+                            ToolTip="Planilha Diária da composição das contas (Entradas e Saídas) do Resultado Financeiro.">
+                        </dxm:MenuItem>
+                    </Items>
+                </dxm:MenuItem>
+                <dxm:MenuItem NavigateUrl="~/MemberPages/Resultado Financeiro/frmParaEliseu.aspx" 
+                    Text="Para Eliseu" 
+                    ToolTip="Planilha 'Para Eliseu' - Informações de Despesas e Impostos que compõe o Resultado Financeiro.">
+                </dxm:MenuItem>
+                <dxm:MenuItem NavigateUrl="~/MemberPages/Resultado Financeiro/frmResFinDefinitivo.aspx" 
+                    Text="Entradas e Saidas" 
+                    ToolTip="Planilha que exibe os totais por dia das Entradas e Saídas da composição do Resultado Financeiro. Nesta planilha é mostrado o Saldo Inicial, Saldo Anterior, Total das Entradas, Total das Saídas, Taxa Selic (taxa do mês dividido pelo nº de dias do mês especificado).">
+                </dxm:MenuItem>
+                <dxm:MenuItem 
+                    Text="Dados">
+                    <Items>
+                        <dxm:MenuItem NavigateUrl="~/MemberPages/Resultado Financeiro/frmResFin_Conferencia.aspx" 
+                            Text="Abertura por Agenda">
+                        </dxm:MenuItem>
+                        <dxm:MenuItem NavigateUrl="~/MemberPages/Resultado Financeiro/viewImpostoCompraImportacao.aspx" 
+                            Text="Impostos da Exportação">
+                        </dxm:MenuItem>
+                        <dxm:MenuItem NavigateUrl="~/MemberPages/Resultado Financeiro/viewImpostoFiscal.aspx" 
+                            Text="Impostos do Fiscal">
+                        </dxm:MenuItem>
+                    </Items>
+                </dxm:MenuItem>
+                <dxm:MenuItem Text="Conferência">
+                    <Items>
+                        <dxm:MenuItem NavigateUrl="~/MemberPages/Resultado Financeiro/frmConsultaPorAgrupamento.aspx" Text="Consulta por Agrupamento">
+                        </dxm:MenuItem>
+                    </Items>
+                </dxm:MenuItem>
+            </Items>
+            <VerticalPopOutImage Height="11px" Width="11px" />
+            <ItemStyle ImageSpacing="5px" PopOutImageSpacing="18px" 
+                VerticalAlign="Middle" />
+            <SubMenuStyle BackColor="#F9F9F9" GutterWidth="0px" SeparatorColor="#AECAF0" />
+            <SubMenuItemStyle ImageSpacing="7px">
+            </SubMenuItemStyle>
+            <Border BorderColor="#AECAF0" BorderStyle="Solid" BorderWidth="1px" />
+            <HorizontalPopOutImage Height="7px" Width="7px" />
+        </dxm:ASPxMenu>
+    </div>
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+            </div>
+    <dxlp:ASPxLoadingPanel ID="ASPxLoadingPanel1" runat="server" 
+        ClientInstanceName="lp" Modal="True" 
+        CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+        ImageFolder="~/App_Themes/Aqua/{0}/" Text="">
+    </dxlp:ASPxLoadingPanel>
+    </form>
+</body>
+</html>

@@ -1,0 +1,238 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="SiteVendas.master.vb" Inherits="MemberPages_SiteVendas" %>
+
+<%@ Register assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web" tagprefix="dx" %>
+
+
+
+
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
+    <style type="text/css">
+        .auto-style1 {
+            border-collapse: collapse;
+            width: 100%;
+            float: left;
+        }
+        .auto-style2 {
+            width: 133px;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+    <table align="left" cellpadding="0" class="auto-style1">
+        <tr>
+            <td class="auto-style2" style="vertical-align: top; text-align: left">
+                        <dx:ASPxNavBar ID="navVendas" runat="server" AutoCollapse="True" 
+                            EnableTheming="True" Theme="Office2010Silver" Width="108px">
+                            <ClientSideEvents ItemClick="function(s, e) {Callback.PerformCallback(); LoadingPanel.Show(); LoadingPanel.SetText('Condor, de mãos dadas com você. Aguarde...');}" />
+                            <Groups>
+                                <dx:NavBarGroup Expanded="False" Text="Ranking">
+                                    <HeaderImage Url="~/image/icon16_money3.png">
+                                    </HeaderImage>
+                                    <Items>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/Vendas/VendaAcompanhamento.aspx" 
+                                            Text="Acompanhamento" 
+                                            ToolTip="Acompanhamento das Vendas Financeiras, Lucratividade, Estatistica e por Hora por Dia.">
+                                            <image url="~/image/icon16_MaquinaRegistradora.png">
+                                            </image>
+                                        </dx:NavBarItem>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/Gerencial/AnaliseHora.aspx" 
+                                            Text="Analise Hora" ToolTip="Analise das Vendas por Hora.">
+                                            <image url="~/image/icon16_Relogio2.png">
+                                            </image>
+                                        </dx:NavBarItem>
+                                        <dx:NavBarItem Text="Acumulado Mes" 
+                                            NavigateUrl="~/MemberPages/Vendas/RankingMes.aspx">
+                                            <Image Url="~/image/icon16_calendar_mes1.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/Vendas/RankingAno.aspx" 
+                                            Text="Acumulado Ano">
+                                            <Image Url="~/image/icon16_calendar_ano.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/Gerencial/ProjecaoVendas.aspx" 
+                                            Text="Projeção Vendas" 
+                                            ToolTip="Projeção de Vendas com base no ano anterior e no atingimento da venda sobre a meta.">
+                                            <Image Url="~/image/icon16_grafico1.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/Vendas/ConsultaVendaMes.aspx" 
+                                            Text="Histórico">
+                                            <Image Url="~/image/icon16_money2.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/Vendas/VendasPorHora.aspx" 
+                                            Text="por Hora">
+                                            <Image Url="~/image/icon16_Relogio1.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/Vendas/menuRankingDiario.aspx" 
+                                            Text="Venda por Dia" ToolTip="Exibe as vendas por Dia.">
+                                            <Image Url="~/image/icon16_calendar_mes.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                    </Items>
+                                </dx:NavBarGroup>
+                                <dx:NavBarGroup Expanded="False" Text="Meta x Realizado">
+                                    <HeaderImage Url="~/image/icon16_grafico2.png">
+                                    </HeaderImage>
+                                    <Items>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/Vendas/MetaDeVenda.aspx" 
+                                            Text="Empresa">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/Vendas/MetaDeVendaLojas.aspx" 
+                                            Text="Filial">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/Vendas/MetaDeVendaRegional.aspx" 
+                                            Text="Regional">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                    </Items>
+                                </dx:NavBarGroup>
+                                <dx:NavBarGroup Text="Vendas" Expanded="False">
+                                    <HeaderImage Url="~/image/icon16_moeda1.png">
+                                    </HeaderImage>
+                                    <Items>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/Vendas/VendaLoja.aspx" 
+                                            Text="por Loja">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                    </Items>
+                                </dx:NavBarGroup>
+<dx:NavBarGroup Expanded="False" Name="grpVendaPorTotal" Text="Venda por Total">
+    <HeaderImage Url="~/image/icon16_numero_1.png">
+    </HeaderImage>
+    <Items>
+<dx:NavBarItem NavigateUrl="~/MemberPages/SLV/Total/AnaliseVendaTotal.aspx" 
+            Text="Analise loja x loja" 
+            ToolTip="Faz analise da venda total loja por loja do periodo selecionado.">
+<Image Url="~/image/24_checklist-icon.png"></Image>
+</dx:NavBarItem>
+</Items>
+</dx:NavBarGroup>
+                                <dx:NavBarGroup Text="Venda por Departamento" 
+                                    Name="grpVendaPorDepartamento" Expanded="False" 
+                                    ToolTip="Exibe as informações de vendas por departamento">
+                                    <HeaderImage Url="~/image/icon16_numero_2.png">
+                                    </HeaderImage>
+                                    <Items>
+                                        <dx:NavBarItem 
+                                            NavigateUrl="~/MemberPages/SLV/Depto/AnaliseVenda_porDepto.aspx" 
+                                            Text="Ánalise loja x loja" 
+                                            
+                                            ToolTip="Faz analise da venda por departamento loja por loja do periodo selecionado.">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                    </Items>
+                                </dx:NavBarGroup>
+                                <dx:NavBarGroup Name="grpVendaPorSecao" Text="Venda por Seção">
+                                    <HeaderImage Url="~/image/icon16_numero_3.png">
+                                    </HeaderImage>
+                                    <Items>
+                                        <dx:NavBarItem Name="itemAnalise" 
+                                            NavigateUrl="~/MemberPages/SLV/AnaliseVenda_porSecao.aspx" 
+                                            Text="Ánalise loja x loja" 
+                                            ToolTip="Ao selecionar uma seção, defina um período (dia inicial e dia final) e clique em &quot;Atualizar&quot;, você terá a ánalise loja a loja e empresa da seção especificada com base no ano atual, ano anterior e mês anterior. As informações exibidas são: Quantidade, Venda, Lucro, Margem, Meta, Crescimento e Atingimento. ">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/SLV/AnaliseVenda_porSecaoSemana.aspx" 
+                                            Text="Ánalise Semana" 
+                                            ToolTip="Nesta tela você analisa a venda por dia da semana - exemplo, qual foi a Quantidade, Venda, Margem só do Domingo ou Segunda, etc. Selecione uma seção, defina um período (dia inicial e dia final), selecione um dia da semana e clique em &quot;Atualizar&quot;, você terá a ánalise loja a loja e empresa da seção especificada com base no ano atual, ano anterior e mês anterior. As informações exibidas são: Quantidade, Venda, Lucro, Margem, Meta, Crescimento e Atingimento. ">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/SLV/AnaliseVenda_porEmpresa.aspx" 
+                                            Text="Ánalise - Mês" 
+                                            ToolTip="Nesta tela você analisa todas as seções. Defina um período (mês inicial e mês final), selecione um dia da semana e clique em &quot;Atualizar&quot;, você pode analisar uma Loja especifica, Empresa,   Empresa mesmas lojas, Super, Super E (supermercado com eletro), Hiper, por Região e Regional com base no ano atual, ano anterior e mês anterior. As informações exibidas são: Quantidade, Venda, Lucro, Margem, Meta, Crescimento e Atingimento.">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/SLV/AnaliseVenda_porEmpresaDia.aspx" 
+                                            Text="Ánalise - Dia" 
+                                            ToolTip="Nesta tela você analisa todas as seções. Defina um período (dia inicial e dia final), selecione um dia da semana e clique em &quot;Atualizar&quot;, você pode analisar uma Loja especifica, Empresa,   Empresa mesmas lojas, Super, Super E (supermercado com eletro), Hiper, por Região e Regional com base no ano atual, ano anterior e mês anterior. As informações exibidas são: Quantidade, Venda, Lucro, Margem, Meta, Crescimento e Atingimento.">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                    </Items>
+                                </dx:NavBarGroup>
+                                <dx:NavBarGroup Expanded="False" Text="Venda por Grupo" Name="grpVendaPorGrupo" 
+                                    ToolTip="Análise das informações por mercadológico.">
+                                    <Items>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/SLV/Grupo/AnaliseVenda_porGrupo.aspx" 
+                                            Text="Ánalise Loja x Loja">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                    </Items>
+                                    <HeaderImage Url="~/image/icon16_numero_4.png">
+                                    </HeaderImage>                                    
+                                </dx:NavBarGroup>
+                                <dx:NavBarGroup Text="Ranking por Seção" Expanded="False">
+                                    <Items>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/SLV/AnaliseVendaMaiorVenda.aspx">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/SLV/AnaliseVendaMaiorTop1000.aspx" 
+                                            Text="Item - Top 1000">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                    </Items>
+                                </dx:NavBarGroup>
+                                <dx:NavBarGroup Expanded="False" Text="Venda por Fornecedor" 
+                                    ToolTip="Ánalises e desempenho do fornecedor">
+                                    <HeaderImage Url="~/image/icon16_fornecedor.png">
+                                    </HeaderImage>
+                                    <Items>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/SLV/AnaliseVendaPorFornecedor.aspx" 
+                                            Text="Ánalise ">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                    </Items>
+                                </dx:NavBarGroup>
+                                <dx:NavBarGroup Expanded="False" Text="Venda por Campanha" 
+                                    ToolTip="Analise de Vendas por Campanha">
+                                    <Items>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/SLV/AnaliseVenda_porCampanha.aspx" 
+                                            Text="Analise loja x loja" 
+                                            
+                                            ToolTip="Vendas por Campanha pré-definida. Não é preciso informar as datas.">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                    </Items>
+                                </dx:NavBarGroup>
+                            </Groups>
+                        </dx:ASPxNavBar>
+                        <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </td>
+            <td style="vertical-align: top; text-align: left">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <dx:ASPxCallback ID="ASPxCallback1" runat="server" ClientInstanceName="Callback">
+                    <ClientSideEvents CallbackComplete="function(s, e) { LoadingPanel.Hide(); }" />
+                </dx:ASPxCallback>
+                <dx:ASPxLoadingPanel ID="ASPxLoadingPanel1" runat="server"  ClientInstanceName="LoadingPanel"  
+                        Modal="True">
+                </dx:ASPxLoadingPanel>
+            </td>
+        </tr>
+    </table>
+</asp:Content>
+

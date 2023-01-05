@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Tarefa Operação Comercial</title>
+</head>
+<body>
+
+<p style=" text-align: left; margin-left: 40px;"><span style=" text-decoration: underline;"><b><span style=" font-size: large;">Passos para fazer as Operações Comerciais</span></b></span></p>
+
+<ol style="margin-left: 80px">
+<li><input type="checkbox" />Gerar o últimos 3 anos da agenda 2 e 48 no Progress: O caminho no progress é Livro Fiscal => Relatórios => Resumo do Livro Fiscal.
+    <ol>
+        <li><input type="checkbox" />No relatório de notas, no menu Painel, clique em <b>Parâmetros</b> e siga as instruções abaixo.
+            <ol>
+                <li><input type="checkbox" /><b>Periodo:</b> informe o período inicial e final</li>
+                <li><input type ="checkbox" /><b>Quebra por loja: </b>marque</li>
+                <li><input type ="checkbox" /><b>Analítico: </b>marque</li>
+                <li><input type ="checkbox" /><b>Mostra PIS e COFINS?:</b> deixe NAO</li>
+                <li><input type ="checkbox" /><b>AGENDAS: </b>clique no botão (-) e depois selecione apenas a 2 e 48</li>
+                <li><input type ="checkbox" /><b>Filiais: </b>selecione todas as filiais. Clique primeiro no botão (-) e depois no botão (+)</li>
+                <li><input type ="checkbox" /><b>CFO: </b>selecione todos os CFO. Clique perimeiro no botão (-) e depois no botão (+)</li>
+                <li><input type ="checkbox" /><b>Exporta Arq: </b>clique nesse boão e altere o caminho c:\lfi090.csv para <i>c:\temp\lfi090.csv </i>e confirme</li>
+                <li><input type ="checkbox" />No menu Painel, clique em <b>Impressora</b> não selecione nada nessa opção.</li>
+                <li><input type ="checkbox" />No menu Painel, clique em <b>Execução</b> e depois clique no botão "inicial execução..."</li>
+                <li><input type ="checkbox" />Depois de gerar o relatório, exporte para o Microsoft Acces que esta em C:\Access\Banco\Controladoria.mdb</li>
+                <li><input type ="checkbox" />Vá em Formulários => frmImpBonificação. Defina o périodo e clique em "importar"</li>               
+            </ol>
+        </li>
+
+        <li><input type="checkbox" />Gerar ano AA2 - de janeiro a dezembro. Repita o <i>processo de 1 à 12 acima </i>só alterando a data inicial e final.</li>
+
+        <li><input type="checkbox" />Gerar ano AA1 - de janeiro a dezembro. Repita o <i>processo de 1 à 12 acima </i>só alterando a data inicial e final.</li>
+
+        <li><input type="checkbox" />Gerar ano Ano Atual e o mês do teórico. Repita o <i>processo de 1 à 12 acima </i>só alterando a data inicial e final.</li>
+    </ol>
+</li>   
+
+<li style="color:blue"><input type="checkbox" />Clique no X para fechar o formulário "frmImpBonificacao" </li>    
+    
+<li style="color:blue"><input type="checkbox" />No banco de dados Access Controladoria.mdb, vá na consulta <b>"qadd_SERVER_tblBonifDet"</b> e execute ela, informe o Mês e o Ano." </li>      
+
+<li style="color:blue"><input type="checkbox" />Feche no X o banco de dados Access Controladoria.mdb" </li>
+
+<li style="color:blue"><input type="checkbox" />Execute a Stored Procedure "gerManager.OperacaoComercial.uspAtualizar" (<i>vai atualizar os Ajustes de Bonificação e a Bonificação do Mês Atual</i>) </li>
+
+<li><input type="checkbox" />no <b>10.1.1.14</b>, salve os arquivo que a Carol passa "Contas a Receber - 05 - Maio de 2012" normalmente.</li>
+
+<li><input type="checkbox" />Atualize a moda antiga por causa da macro da "Baixas Efetuadas" (use este metodo até você conseguir importar as Baixas Efeutadas para o SQL Server) e depois feche o arquivo sem salvar</li>
+
+<li><input type="checkbox" />Abra o arquivo "Contas a Receber - 05 - Maio de 2012" novamente.</li>
+
+<li><input type="checkbox" />Vá na parte de programação (visual studio) e importe a classe "OperacaoComercial.bas" que esta no &#160;C:\Tarefas\Operações Comerciais</li>
+
+<li><input type="checkbox" />Rode a Macro (feche todas as outras planilhas antes)</li>
+
+<li><input type="checkbox" />Feche a planilha "Contas a Receber - 05 - Maio de 2012" sem salvar.</li>
+
+<li><input type="checkbox" />Depois de executar a macro, entre no SQL SERVER 2012 na Solution "Data WareHouse" e execute os scripts abaixo:
+    <ol>
+        <li><input type="checkbox" />AtualizarTeorico_OperacoesComerciais.sql</li>
+
+        <li><input type="checkbox" />AtualizarTeorico.sql</li>
+    </ol>
+</li>
+
+<li><input type="checkbox" />Abra a planilha de Operação Comercial "Operações Comerciais 052012", va na guia "Resumo", mude o Mês e o Ano. Agora clique na guia "Base", mantenha a planilha aberta. &#160;</li>
+
+<li><input type="checkbox" />Vá na aba "Dados Teórico", depois no quadrante "Operações Comerciais", clique no botão "Planilha" e depois em "Atualizar dados".</li>
+
+<li><input type="checkbox" />Vá no menu "Desenvolverdor", clique em "Macros", rode a macro "ImportarDadosAgendas"</li>
+
+<li><input type="checkbox" />Digite o FIDELIDADE no Excel manualmente, na guia Base, na célula <b>BQ3</b>.</li>
+
+<li><input type="checkbox" />Digite as BAIXAS EFETUADAS no Excel manualmente, na guia Base, na célula <b>BC3</b>.</li>
+
+<li><input type="checkbox" />Zere o ENXOVAL no Excel manualmente, na guia Base, na célula <b>S3</b> (se houver) .</li>
+
+<li><input type="checkbox" />Vá na guia "Resumo" e atualize as vendas (Importe do Access)</li>
+
+<li><input type="checkbox" />Abra a planilha de exportação (N:\SqlData\ImpOperComl.xlsw)</li>
+
+<li><input type="checkbox" />Limpe todos os dados da planilha de exportação.</li>
+
+<li><input type="checkbox" />Volte para a planilha "Operações Comerciais 052012", salve a planilha, vá na guia "Exportação", marque os dados a partir do cabeçalho, copie.</li>
+
+<li><input type="checkbox" />Vá para&#160;planilha de exportação (N:\SqlData\ImpOperComl.xlsw), cole as informações usando a opção "COLAR VALORES". Salve e feche.</li>
+
+<li><input type="checkbox" />Saia da planilha "Operações Comerciais 052012" sem salvar.</li>
+
+<li><input type="checkbox" />Vá no 10.1.1.14 (SQL Server) e execute o script M:\Projects\Teorico\AtualizarOperacoesComerciais.sql</li>
+
+<li><input type="checkbox" />Entre na Solution "Data WareHouse" =&#62; Queries =&#62; AtualizarTeorico.sql.</li>
+</ol>
+
+<p style="margin-left: 40px">&#160;</p>
+
+<p style="margin-left: 40px">&#160;</p>
+
+</body>
+</html>

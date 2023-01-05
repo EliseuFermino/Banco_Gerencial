@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="BomDiaEconomia" targetNamespace="http://tempuri.org/BomDiaEconomia.xsd" xmlns:mstns="http://tempuri.org/BomDiaEconomia.xsd" xmlns="http://tempuri.org/BomDiaEconomia.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="VendasConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="VendasConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.VendasConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vw_Vendas_BomDiaEconomiaTableAdapter" GeneratorDataComponentClassName="vw_Vendas_BomDiaEconomiaTableAdapter" Name="vw_Vendas_BomDiaEconomia" UserDataComponentName="vw_Vendas_BomDiaEconomiaTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="VendasConnectionString (Web.config)" DbObjectName="Vendas.dbo.vw_Vendas_BomDiaEconomia" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        Dia, nomeDiaSemana, Qtde, vlrVenda, vlrLucroComercial, LucroSellOut, vlrFinal, percMargemPDV, percSellOut, percMargemFinal, numCliente
+FROM            vw_Vendas_BomDiaEconomia</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Dia" DataSetColumn="Dia" />
+              <Mapping SourceColumn="nomeDiaSemana" DataSetColumn="nomeDiaSemana" />
+              <Mapping SourceColumn="Qtde" DataSetColumn="Qtde" />
+              <Mapping SourceColumn="vlrVenda" DataSetColumn="vlrVenda" />
+              <Mapping SourceColumn="vlrLucroComercial" DataSetColumn="vlrLucroComercial" />
+              <Mapping SourceColumn="LucroSellOut" DataSetColumn="LucroSellOut" />
+              <Mapping SourceColumn="vlrFinal" DataSetColumn="vlrFinal" />
+              <Mapping SourceColumn="percMargemPDV" DataSetColumn="percMargemPDV" />
+              <Mapping SourceColumn="percSellOut" DataSetColumn="percSellOut" />
+              <Mapping SourceColumn="percMargemFinal" DataSetColumn="percMargemFinal" />
+              <Mapping SourceColumn="numCliente" DataSetColumn="numCliente" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="BomDiaEconomia" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="BomDiaEconomia" msprop:Generator_DataSetName="BomDiaEconomia">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="vw_Vendas_BomDiaEconomia" msprop:Generator_TableClassName="vw_Vendas_BomDiaEconomiaDataTable" msprop:Generator_TableVarName="tablevw_Vendas_BomDiaEconomia" msprop:Generator_TablePropName="vw_Vendas_BomDiaEconomia" msprop:Generator_RowDeletingName="vw_Vendas_BomDiaEconomiaRowDeleting" msprop:Generator_RowChangingName="vw_Vendas_BomDiaEconomiaRowChanging" msprop:Generator_RowEvHandlerName="vw_Vendas_BomDiaEconomiaRowChangeEventHandler" msprop:Generator_RowDeletedName="vw_Vendas_BomDiaEconomiaRowDeleted" msprop:Generator_UserTableName="vw_Vendas_BomDiaEconomia" msprop:Generator_RowChangedName="vw_Vendas_BomDiaEconomiaRowChanged" msprop:Generator_RowEvArgName="vw_Vendas_BomDiaEconomiaRowChangeEvent" msprop:Generator_RowClassName="vw_Vendas_BomDiaEconomiaRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Dia" msprop:Generator_ColumnVarNameInTable="columnDia" msprop:Generator_ColumnPropNameInRow="Dia" msprop:Generator_ColumnPropNameInTable="DiaColumn" msprop:Generator_UserColumnName="Dia" type="xs:dateTime" />
+              <xs:element name="nomeDiaSemana" msprop:Generator_ColumnVarNameInTable="columnnomeDiaSemana" msprop:Generator_ColumnPropNameInRow="nomeDiaSemana" msprop:Generator_ColumnPropNameInTable="nomeDiaSemanaColumn" msprop:Generator_UserColumnName="nomeDiaSemana">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Qtde" msprop:Generator_ColumnVarNameInTable="columnQtde" msprop:Generator_ColumnPropNameInRow="Qtde" msprop:Generator_ColumnPropNameInTable="QtdeColumn" msprop:Generator_UserColumnName="Qtde" type="xs:double" minOccurs="0" />
+              <xs:element name="vlrVenda" msprop:Generator_ColumnVarNameInTable="columnvlrVenda" msprop:Generator_ColumnPropNameInRow="vlrVenda" msprop:Generator_ColumnPropNameInTable="vlrVendaColumn" msprop:Generator_UserColumnName="vlrVenda" type="xs:decimal" minOccurs="0" />
+              <xs:element name="vlrLucroComercial" msprop:Generator_ColumnVarNameInTable="columnvlrLucroComercial" msprop:Generator_ColumnPropNameInRow="vlrLucroComercial" msprop:Generator_ColumnPropNameInTable="vlrLucroComercialColumn" msprop:Generator_UserColumnName="vlrLucroComercial" type="xs:decimal" minOccurs="0" />
+              <xs:element name="LucroSellOut" msprop:Generator_ColumnVarNameInTable="columnLucroSellOut" msprop:Generator_ColumnPropNameInRow="LucroSellOut" msprop:Generator_ColumnPropNameInTable="LucroSellOutColumn" msprop:Generator_UserColumnName="LucroSellOut" type="xs:decimal" minOccurs="0" />
+              <xs:element name="vlrFinal" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnvlrFinal" msprop:Generator_ColumnPropNameInRow="vlrFinal" msprop:Generator_ColumnPropNameInTable="vlrFinalColumn" msprop:Generator_UserColumnName="vlrFinal" type="xs:decimal" minOccurs="0" />
+              <xs:element name="percMargemPDV" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnpercMargemPDV" msprop:Generator_ColumnPropNameInRow="percMargemPDV" msprop:Generator_ColumnPropNameInTable="percMargemPDVColumn" msprop:Generator_UserColumnName="percMargemPDV" type="xs:decimal" minOccurs="0" />
+              <xs:element name="percSellOut" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnpercSellOut" msprop:Generator_ColumnPropNameInRow="percSellOut" msprop:Generator_ColumnPropNameInTable="percSellOutColumn" msprop:Generator_UserColumnName="percSellOut" type="xs:decimal" minOccurs="0" />
+              <xs:element name="percMargemFinal" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnpercMargemFinal" msprop:Generator_ColumnPropNameInRow="percMargemFinal" msprop:Generator_ColumnPropNameInTable="percMargemFinalColumn" msprop:Generator_UserColumnName="percMargemFinal" type="xs:decimal" minOccurs="0" />
+              <xs:element name="numCliente" msprop:Generator_ColumnVarNameInTable="columnnumCliente" msprop:Generator_ColumnPropNameInRow="numCliente" msprop:Generator_ColumnPropNameInTable="numClienteColumn" msprop:Generator_UserColumnName="numCliente" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

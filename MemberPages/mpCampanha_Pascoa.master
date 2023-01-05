@@ -1,0 +1,111 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="mpCampanha_Pascoa.master.vb" Inherits="MemberPages_mpCampanha_Pascoa" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
+<%@ Register Assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dxtc" %>
+<%@ Register Assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dxw" %>
+
+<%@ Register Assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dxe" %>
+<%@ Register Assembly="DevExpress.XtraCharts.v18.2.Web, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.XtraCharts.Web" TagPrefix="dxchartsui" %>
+<%@ Register Assembly="DevExpress.XtraCharts.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.XtraCharts" TagPrefix="cc1" %>
+<%@ Register Assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dxwgv" %>
+<%@ Register Src="~/Controles/wucBotaoExcel.ascx" TagPrefix="uc1" TagName="wucBotaoExcel" %>
+
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
+
+    <style type="text/css">
+    .modalBackground
+    {
+        background-color: Black;
+        filter: alpha(opacity=70);
+        opacity: 0.7;
+    }
+    .modalPopup
+    {   
+        padding-top: 2px;
+        padding-left: 5px;
+        width: 1290px;
+        height: 590px;
+    }
+    .modalPopup1
+    {        
+        padding-top: 10px;
+        padding-left: 10px;
+        width: 1240px;
+        height: 540px;
+    }
+
+     </style>
+
+    <table cellpadding="0" cellspacing="0" class="style1">
+        <tr>
+            <td>
+                <table cellspacing="1" class="style1">
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td style="width: 545px">
+                            <dxtc:ASPxTabControl ID="ASPxTabControl1" runat="server" ActiveTabIndex="11"                                
+                                 EnableTheming="True" Theme="PlasticBlue" TabPosition="Bottom">
+                                <ContentStyle>
+                                    <Border BorderColor="#3D5294" BorderWidth="0px" />
+                                </ContentStyle>
+                                <TabStyle>
+                                    <BorderBottom BorderColor="#3D5294" />
+                                </TabStyle>
+                                <Tabs>
+                                    <dxtc:Tab NavigateUrl="~/MemberPages/Campanhas/Pascoa/PascoaCapa.aspx" Text="Capa">
+                                    </dxtc:Tab>
+                                    <dxtc:Tab Text="Por Dia" NavigateUrl="~/MemberPages/Campanhas/Pascoa/Campanha_Pascoa_PorDia.aspx">
+                                    </dxtc:Tab>
+                                    <dxtc:Tab NavigateUrl="~/MemberPages/Campanhas/Pascoa/PascoaParticipacao.aspx" Text="Semanal" ToolTip="Crescimento Semanal">
+                                    </dxtc:Tab>
+                                    <dxtc:Tab Text="Total" NavigateUrl="~/MemberPages/Campanhas/Pascoa/Campanha_Pascoa_Total.aspx">
+                                    </dxtc:Tab>
+                                    <dxtc:Tab Text="Ovos de Páscoa"
+                                        NavigateUrl="~/MemberPages/Campanhas/Pascoa/Campanha_Pascoa_Ovos.aspx">
+                                    </dxtc:Tab>
+                                    <dxtc:Tab NavigateUrl="~/MemberPages/Campanhas/Pascoa/OvosGramagem.aspx" Text="Ovos por Peso" Visible="False">
+                                        <TabStyle BackColor="#CCCCCC">
+                                        </TabStyle>
+                                    </dxtc:Tab>
+                                    <dxtc:Tab NavigateUrl="~/MemberPages/Campanhas/Pascoa/PascoaPorLoja.aspx" Text="Ovos por Loja">
+                                    </dxtc:Tab>
+                                    <dxtc:Tab Text="Caixa de Bombom"
+                                        NavigateUrl="~/MemberPages/Campanhas/Pascoa/Campanha_Pascoa_Bombom.aspx">
+                                    </dxtc:Tab>
+                                    <dxtc:Tab
+                                        Text="Coelhinhos"
+                                        NavigateUrl="~/MemberPages/Campanhas/Pascoa/Campanha_Pascoa_Coelhinho.aspx">
+                                    </dxtc:Tab>
+                                    <dxtc:Tab NavigateUrl="~/MemberPages/Campanhas/Pascoa/Campanha_Pascoa_Colomba.aspx"
+                                        Text="Colomba ">
+                                    </dxtc:Tab>
+                                    <dxtc:Tab NavigateUrl="~/MemberPages/Campanhas/Pascoa/Campanha_Pascoa_Bacalhau.aspx"
+                                        Text="Bacalhau">
+                                    </dxtc:Tab>
+                                    <dxtc:Tab NavigateUrl="~/MemberPages/Campanhas/Pascoa/Campanha_Pascoa_Barra.aspx" Text="Barras de Chocolate">
+                                    </dxtc:Tab>
+                                </Tabs>
+                                <Paddings PaddingLeft="5px" PaddingRight="5px" PaddingTop="5px" />
+                            </dxtc:ASPxTabControl>
+                        </td> <%--Menus--%>
+                       
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+                </asp:ContentPlaceHolder>
+            </td>
+        </tr>
+    </table>
+
+    <asp:SqlDataSource ID="dsPorDia" runat="server"
+        ConnectionString="<%$ ConnectionStrings:gerManagerConnectionString %>"
+        SelectCommand="Pascoa.uspBuscarTotalDaPascoaPorDia" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+
+</asp:Content>
+

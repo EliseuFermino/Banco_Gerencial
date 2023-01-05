@@ -1,0 +1,45 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="Patrimonio_Preventica_Reativa.master.vb" Inherits="MemberPages_Patrimonio_Patrimonio_Preventica_Reativa" %>
+
+<%@ Register Assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+
+
+<%@ Register Assembly="DevExpress.XtraCharts.v18.2.Web, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.XtraCharts.Web" TagPrefix="dxchartsui" %>
+<%@ Register assembly="DevExpress.XtraCharts.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.XtraCharts" tagprefix="cc1" %>
+
+
+
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+   
+    
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+    
+
+    <dx:ASPxTabControl ID="ASPxTabControl1" runat="server" ActiveTabIndex="0">
+        <Tabs>
+            <dx:Tab Text="Empresa" NavigateUrl="~/MemberPages/Patrimonio/grafico_Empresa.aspx" Name="tabEmpresa">
+            </dx:Tab>
+            <dx:Tab Text="Natureza Abordagem" NavigateUrl="~/MemberPages/Patrimonio/NaturezaAbordagem.aspx">
+            </dx:Tab>
+            <dx:Tab Text="Valor Recuperado" NavigateUrl="~/MemberPages/Patrimonio/ValorRecuperado.aspx">
+            </dx:Tab>
+            <dx:Tab Text="Furto e Degustação" NavigateUrl="~/MemberPages/Patrimonio/FurtoDegustacao.aspx">
+            </dx:Tab>
+            <dx:Tab Text="Furto e Degustação por Produto" NavigateUrl="~/MemberPages/Patrimonio/FurtoDegustacaoProduto.aspx">
+            </dx:Tab>
+        </Tabs>
+    </dx:ASPxTabControl>
+            
+    <div style="padding-top: 10px">
+    
+        <asp:ContentPlaceHolder ID="PatrimonioContent" runat="server">
+
+        </asp:ContentPlaceHolder>
+
+    </div>
+ 
+            </ContentTemplate>
+        </asp:UpdatePanel>
+</asp:Content>
+

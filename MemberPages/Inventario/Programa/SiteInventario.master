@@ -1,0 +1,97 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="SiteInventario.master.vb" Inherits="MemberPages_Inventario_SiteInventario" %>
+
+<%@ Register assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web" tagprefix="dx" %>
+
+
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
+    <style type="text/css">
+        .style1
+        {
+            width: 100%;
+        }
+        .style2
+        {
+            width: 205px;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+    <table cellspacing="1" class="style1">
+        <tr>
+            <td align="left" class="style2" valign="top" style="padding-top: 10px">
+                <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="600px" 
+                    Theme="Default" Width="100%" PaneMinSize="20px">
+                    <panes>
+                        <dx:SplitterPane Size="200px">
+                            <ContentCollection>
+<dx:SplitterContentControl runat="server" SupportsDisabledAttribute="True">
+    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+        <ContentTemplate>
+            <dx:ASPxNavBar ID="ASPxNavBar1" runat="server" AutoCollapse="True" 
+                EnableTheming="True" Theme="PlasticBlue">
+                <Groups>
+                    <dx:NavBarGroup Text="Lotes">
+                        <Items>
+                            <dx:NavBarItem NavigateUrl="~/MemberPages/Inventario/Programa/CadastroLotes.aspx" 
+                                Text="Liberar">
+                            </dx:NavBarItem>
+                            <dx:NavBarItem NavigateUrl="~/MemberPages/Inventario/Programa/CadastroBaixas.aspx" 
+                                Text="Baixar">
+                            </dx:NavBarItem>
+                        </Items>
+                    </dx:NavBarGroup>
+                    <dx:NavBarGroup Expanded="False" Text="Cadastros">
+                        <Items>
+                            <dx:NavBarItem NavigateUrl="~/MemberPages/Inventario/Programa/CadastroColaborador.aspx" 
+                                Text="Funcionários">
+                            </dx:NavBarItem>
+                            <dx:NavBarItem NavigateUrl="~/MemberPages/Inventario/Programa/CadastroEquipe.aspx" 
+                                Text="Equipes">
+                            </dx:NavBarItem>
+                        </Items>
+                    </dx:NavBarGroup>
+                    <dx:NavBarGroup Expanded="False" Text="Lotes e Produtos">
+                        <Items>
+                            <dx:NavBarItem NavigateUrl="~/MemberPages/Inventario/Programa/viewQuadroDeLotes.aspx" 
+                                Text="Consultar Quadro de Lotes">
+                            </dx:NavBarItem>
+                            <dx:NavBarItem NavigateUrl="~/MemberPages/Inventario/Programa/ConsultarListagem.aspx" 
+                                Text="Consultar Listagem">
+                            </dx:NavBarItem>
+                        </Items>
+                    </dx:NavBarGroup>
+                    <dx:NavBarGroup Expanded="False" Text="Informações">
+                        <Items>
+                            <dx:NavBarItem NavigateUrl="~/MemberPages/Inventario/Programa/Estatistic.aspx" 
+                                Text="Estatisicas">
+                            </dx:NavBarItem>
+                            <dx:NavBarItem NavigateUrl="~/MemberPages/Inventario/Programa/ListaDeEquipes.aspx" 
+                                Text="Lista de Equipes">
+                            </dx:NavBarItem>
+                        </Items>
+                    </dx:NavBarGroup>
+                    <dx:NavBarGroup Expanded="False" Text="Listagem da Mesa">
+                    </dx:NavBarGroup>
+                </Groups>
+            </dx:ASPxNavBar>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+                                </dx:SplitterContentControl>
+</ContentCollection>
+                        </dx:SplitterPane>
+                        <dx:SplitterPane Size="1024px">
+                            <ContentCollection>
+<dx:SplitterContentControl runat="server" SupportsDisabledAttribute="True">
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+    </asp:ContentPlaceHolder>
+                                </dx:SplitterContentControl>
+</ContentCollection>
+                        </dx:SplitterPane>
+                    </panes>
+                </dx:ASPxSplitter>
+            </td>
+        </tr>
+    </table>
+</asp:Content>
+

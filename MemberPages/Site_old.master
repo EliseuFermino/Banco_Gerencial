@@ -1,0 +1,510 @@
+﻿<%@ Master Language="VB" AutoEventWireup="true" CodeFile="Site_old.master.vb" Inherits="SiteMaster_Old" %>
+
+<%@ Register assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web" tagprefix="dx" %>
+
+<!DOCTYPE html>
+<html lang="pt">
+
+<head id="Head1" runat="server">
+    
+    <meta charset="utf-8" />     
+    <title></title>
+            
+                <link href="~/Content/Site.css" rel="stylesheet" />
+            
+    <asp:PlaceHolder runat="server">        
+           <link href="<%: ResolveUrl("~/Content/themes/base/jquery.ui.all.css") %>" rel="stylesheet" type="text/css" /> 
+           <link href="<%: ResolveUrl("~/Content/Site.css") %>" rel="stylesheet" type="text/css" /> 
+           <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+           <script src="<%: ResolveUrl("~/Scripts/modernizr-2.0.6-development-only.js") %>"></script>
+    </asp:PlaceHolder>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+   
+</head>
+<body>
+     
+    <form runat="server">
+        
+    <asp:ScriptManager ID="ScriptManager1" runat="server">       
+        <Scripts>
+            <asp:ScriptReference Name="jquery" />
+            <asp:ScriptReference Name="jquery.ui.combined" />
+        </Scripts>
+    </asp:ScriptManager>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <table >
+                    <tr>
+                        <td>
+                            <asp:Image ID="Image1" runat="server" Height="34px" 
+                                ImageUrl="~/image/LogoCondor_Vermelho_25.jpg" Width="165px" />
+                        </td>
+                        <td >
+                            <asp:Label ID="lblTitle" runat="server" Text="Label" Font-Size="Medium"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+  
+
+            <div class="float-right">
+                <section id="login">
+                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul>
+                                <li><a id="registerLink" runat="server" href="~/Account/Register.aspx">Register</a></li>
+                                <li><a id="loginLink" runat="server" href="~/Account/Login.aspx">Log in</a></li>
+                            </ul>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <p>
+                                Bem-vindo, <a runat="server" class="username" href="~/Account/ChangePassword.aspx" title="Mudar Senha">
+                                    <asp:LoginName runat="server" CssClass="username" />
+                                </a>!
+                                <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" />
+                            </p>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </section>          
+            </div>
+        </div>
+
+          <dx:ASPxMenu ID="Menu" runat="server"     
+                            BackColor="White" 
+                            BorderBetweenItemAndSubMenu="HideAll" ForeColor="#999999" 
+                            Font-Size= "Small"  Font-Bold="False" Font-Names="Segoe UI" 
+                             SeparatorWidth="0px"  
+            Theme="Office2010Silver">
+                            <Paddings Padding="0px" />
+                            <SeparatorPaddings Padding="0px" />
+                            <Items>
+                                <dx:MenuItem Text="Principal" NavigateUrl="~/MemberPages/menuPrincipal.aspx"></dx:MenuItem>
+
+                                <dx:MenuItem Text="Vendas" Name="Vendas">
+                                    <Items>
+                                        <dx:MenuItem Text="Ánalise de Vendas" 
+                                            NavigateUrl="~/MemberPages/SLV/PrincipalSLV.aspx">
+                                            <Image Url="~/image/Seta_Padrao.png">
+                                            </Image>
+                                        </dx:MenuItem>
+                                        <dx:MenuItem NavigateUrl="~/MemberPages/Termometro.aspx" Text="Termomêtro" 
+                                            ToolTip="Termômetro de Vendas">
+                                            <Image Url="~/image/Thermometer-icon.png" />
+                                        </dx:MenuItem>
+                                        <dx:MenuItem NavigateUrl="~/MemberPages/Perfil.aspx" Text="Perfil">
+                                            <Image Url="~/image/perfil-icon-32.png" />
+                                        </dx:MenuItem>
+                                        <dx:MenuItem NavigateUrl="~/MemberPages/SLV/webDashAcompOnLine.aspx" 
+                                            Text="Acompanhamento de Margens">
+                                            <Image Url="~/image/Seta_Padrao.png" />
+                                        </dx:MenuItem>
+                                    </Items>
+                                </dx:MenuItem>
+
+
+                            <dx:MenuItem Text="Margens" NavigateUrl="MargemComposicao2011.aspx">
+                            </dx:MenuItem>
+                            <dx:MenuItem Text="Metas">
+                                <Items>
+                                    <dx:MenuItem Text="Orçamento 2013" 
+                                        NavigateUrl="~/MemberPages/Planejamento/normativa.aspx">
+                                        <Image Url="~/image/planejamento_32.png" />
+                                    </dx:MenuItem>
+                                    <dx:MenuItem Text="Relatórios" 
+                                        NavigateUrl="~/MemberPages/Planejamento/PrincipalPlanejamento.aspx" 
+                                        ToolTip="Relatório de metas">
+                                        <Image Url="~/image/keynote-on-icon_32.png" />
+                                    </dx:MenuItem>
+                                    <dx:MenuItem 
+                                        Text="Replanejamento" 
+                                        NavigateUrl="~/MemberPages/Replanejamento/webAP0154.aspx">
+                                        <Image Url="~/image/Edit-icon.png" />
+                                    </dx:MenuItem>
+                                    <dx:MenuItem NavigateUrl="~/MemberPages/NovaDRE.aspx" Text="Nova D.R.E." 
+                                        ToolTip="Nova D.R.E (Demonstração do Resultado do Exercício) com Centro de Custo">
+                                        <Image Url="~/image/nova_DRE.png" />
+                                    </dx:MenuItem>
+                                    <dx:MenuItem Text="Despesas">
+                                        <Items>
+                                            <dx:MenuItem Text="por Total">
+                                                <Items>
+                                                    <dx:MenuItem NavigateUrl="MetaDeDespesa.aspx" Text="Empresa">
+                                                    </dx:MenuItem>
+                                                </Items>
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="MetaDespesaGrupo.aspx" Text="por Grupo">
+                                            </dx:MenuItem>
+                                        </Items>
+                                    </dx:MenuItem>
+                                    <dx:MenuItem NavigateUrl="~/MemberPages/frmReplanNew.aspx" 
+                                        Text="Replanejamento Novo">
+                                    </dx:MenuItem>
+                                    <dx:MenuItem Text="Manutenção">
+                                        <Items>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/EditDivergenciaQuebraFisica.aspx" 
+                                                Text="Divergência e quebra Fisica">
+                                            </dx:MenuItem>
+                                        </Items>
+                                    </dx:MenuItem>
+                                </Items>
+                            </dx:MenuItem>
+                            <dx:MenuItem Text="Ánalise de Mercado" ToolTip="Informações sobre a Concorrência" 
+                                Name="menuConcorrentes">
+                                <Items>
+                                    <dx:MenuItem 
+                                        Text="Estimativa de Vendas dos Concorrentes" 
+                                        NavigateUrl="~/MemberPages/Concorrrentes/ConcPrincipal.aspx">
+                                        <Image Url="~/image/evolucao_32.png">
+                                        </Image>
+                                    </dx:MenuItem>
+                                    <dx:MenuItem NavigateUrl="~/MemberPages/Concorrrentes/AnaliseConc.aspx" 
+                                        Text="Análise Concorrentes">
+                                        <Image Url="~/image/padrao1.png">
+                                        </Image>
+                                    </dx:MenuItem>
+                                </Items>
+                            </dx:MenuItem>
+                            <dx:MenuItem Name="menuOpcoes" Text="Opções">
+                                <Items>
+                                    <dx:MenuItem NavigateUrl="manutAcessos.aspx" Text="Acessos" 
+                                        ToolTip="Ver a quantidade de acesso em cada programa e por usuário.">
+                                        <Image Url="~/image/acessos_32.png" />
+                                    </dx:MenuItem>
+                                    <dx:MenuItem Text="Cadastros">
+                                        <Items>
+                                            <dx:MenuItem Text="Concorrentes">
+                                                <Items>
+                                                    <dx:MenuItem NavigateUrl="~/MemberPages/ConcCodigoIE.aspx" 
+                                                        Text="Código dos Concorrentes" 
+                                                        ToolTip="Exibe os códigos que estão associados a cada Inscrição Estadual.">
+                                                    </dx:MenuItem>
+                                                </Items>
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/frmCadFiliais.aspx" Text="Filiais">
+                                            </dx:MenuItem>
+                                        </Items>
+                                    </dx:MenuItem>
+                                    <dx:MenuItem Text="Gerencial" 
+                                        NavigateUrl="~/MemberPages/Gerencial/principal_gerencial.aspx">
+                                        <Items>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/Gerencial/numClientesEmpresaSemana.aspx" 
+                                                Text="Número de Clientes Empresa - por Semana">
+                                                <Image Url="~/image/Seta_Padrao.png" />
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/Gerencial/ComparativoVendaSecaoTodas.aspx" 
+                                                Text="Comparativo de Vendas por Seção Acumulado">
+                                                <Image Url="~/image/Seta_Padrao.png" />
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/Gerencial/ComparativoVendaGrupoTodas.aspx" 
+                                                Text="Comparativo de Vendas por Grupo Acumulado">
+                                                <Image Url="~/image/Seta_Padrao.png" />
+                                            </dx:MenuItem>
+                                        </Items>
+                                        <Image Url="~/image/Seta_Padrao.png" />
+                                    </dx:MenuItem>
+                                    <dx:MenuItem NavigateUrl="~/MemberPages/CheckList/CheckListCondor.aspx">
+                                    </dx:MenuItem>
+                                    <dx:MenuItem NavigateUrl="~/MemberPages/CheckList/Viewer.aspx" Text="Viewer">
+                                    </dx:MenuItem>
+                                    <dx:MenuItem Text="Manutenção">
+                                        <Items>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/Manutencao/Atualizacoes.aspx" 
+                                                Text="Atualizações">
+                                                <Image Url="~/image/Padrao.png">
+                                                </Image>
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/Manutencao/AnaliseDiferencaVenda.aspx" 
+                                                Text="Diferenças de Vendas">
+                                                <Image Url="~/image/Log-Out-icon_24.png">
+                                                </Image>
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/Temp/my2013t.aspx">
+                                            </dx:MenuItem>
+                                        </Items>
+                                        <Image Url="~/image/Padrao.png">
+                                        </Image>
+                                    </dx:MenuItem>
+                                </Items>
+                            </dx:MenuItem>
+                            <dx:MenuItem Text="Projeto">
+                                <Items>
+                                    <dx:MenuItem Text="Agendamento" 
+                                        ToolTip="Agenda um horário na sala da reunião para discutir o projeto." 
+                                        NavigateUrl="~/MemberPages/Projetos/Calendario.aspx">
+                                        <Image Url="~/image/Apps-planner-icon_32.png" />
+                                    </dx:MenuItem>
+                                    <dx:MenuItem NavigateUrl="planej00_Planejamento.aspx" Text="Planejamento">
+                                        <Image Url="~/image/Document-Flow-Chart-icon.png" />
+                                    </dx:MenuItem>
+                                    <dx:MenuItem Text="Carteira de Projetos" NavigateUrl="projMenuPrincipal.aspx" 
+                                        ToolTip="Planejamento Estratégico do Condor.">
+                                        <Image Url="~/image/calendar-copy-icon.png" />
+                                    </dx:MenuItem>
+                                    <dx:MenuItem Text="Cadastro">
+                                        <Items>
+                                            <dx:MenuItem NavigateUrl="projCadCoordenador.aspx" Text="Coordenador">
+                                                <Image Url="~/image/user-group-icon.png" />
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="projCadProjeto.aspx" Text="Projetos" 
+                                                ToolTip="Principais Projetos">
+                                                <Image Url="~/image/Document-Gant-Chart-icon.png" />
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/planej_UploadFile.aspx" 
+                                                Text="Arquivos">
+                                                <Image Url="~/image/Pastinha_32.png" />
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/ConsultaDespesaAnalitica.aspx" 
+                                                Text="Consultar Despesas Analiticas">
+                                                <Image Url="~/image/folder-invoices-icon_32.png" />
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/NumClienteMesLojaRef.aspx" 
+                                                Text="Numero de Clientes" ToolTip="Exibe o número de clientes por loja">
+                                                <Image Url="~/image/family-icon_32.png" />
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/planej_UploadFile_Padronizacao.aspx" 
+                                                Text="Padronização" ToolTip="Insere arquivos ">
+                                                <Image Url="~/image/Pastinha_32.png" />
+                                            </dx:MenuItem>
+                                        </Items>
+                                        <Image Url="~/image/catalog-icon.png" />
+                                    </dx:MenuItem>
+                                    <dx:MenuItem NavigateUrl="~/MemberPages/projTarefas.aspx" 
+                                        Text="Lista de Tarefas">
+                                        <Image Url="~/image/tarefa_32.png" />
+                                    </dx:MenuItem>
+                                    <dx:MenuItem NavigateUrl="~/MemberPages/planej04_PlanoAcao_All.aspx" 
+                                        Text="Acompanhamento">
+                                        <Image Url="~/image/Hourglass-icon_32.png" />
+                                    </dx:MenuItem>
+                                </Items>
+                            </dx:MenuItem>
+                            <dx:MenuItem Text="ABRAS" 
+                                ToolTip="Informações oficial da Associação Brasileira de Supermercados.">
+                                <Items>
+                                    <dx:MenuItem NavigateUrl="~/MemberPages/ABRAS/RankingTotal.aspx" 
+                                        Text="Ranking Nacional" 
+                                        
+                                        
+                                        ToolTip="Informações de vendas do segmento de super, hiper, farmácia, posto de gasolina, atacado, atacarejo e etc.">
+                                        <image url="~/image/Brazil-icon.png" />
+                                    </dx:MenuItem>
+                                    <dx:MenuItem NavigateUrl="~/MemberPages/ABRAS/RankingSuperHiper.aspx" 
+                                        Text="Ranking 20 Maiores - Super / Hiper" 
+                                        
+                                        
+                                        ToolTip="Informações de vendas do segmento de supermercado e hipermercado.">
+                                        <image url="~/image/Brazil-icon.png" />
+                                    </dx:MenuItem>
+                                    <dx:MenuItem NavigateUrl="~/MemberPages/ABRAS/EvolucaoInternacional.aspx" 
+                                        Text="Ranking Internacional">
+                                        <image url="~/image/Globe-icon.png" />
+                                    </dx:MenuItem>
+                                    <dx:MenuItem NavigateUrl="~/MemberPages/ABRAS/EvolucaoCondor.aspx" 
+                                        Text="Evolução Condor ABRAS">
+                                        <image url="~/image/evolucao_32.png" />
+                                    </dx:MenuItem>
+                                </Items>
+                            </dx:MenuItem>
+                            <dx:MenuItem NavigateUrl="~/MemberPages/Empreend/sisMenuPrincipal.aspx" 
+                                Text="Financeiro">
+                            </dx:MenuItem>
+                            <dx:MenuItem NavigateUrl="~/MemberPages/viConc.aspx" Text="Itens">
+                            </dx:MenuItem>
+                            <dx:MenuItem Text="Gerencial">
+                                <Items>
+                                    <dx:MenuItem NavigateUrl="~/MemberPages/Despesas/AnaliseDespesas.aspx" 
+                                        Text="Análise Despesas">
+                                        <Image Url="~/image/Padrao.png">
+                                        </Image>
+                                    </dx:MenuItem>
+                                    <dx:MenuItem NavigateUrl="~/MemberPages/Inventario/Programa/CadastroLotes.aspx" 
+                                        Text="Inventário">
+                                        <Image Url="~/image/Seta_Padrao.png">
+                                        </Image>
+                                    </dx:MenuItem>
+                                </Items>
+                            </dx:MenuItem>
+                            <dx:MenuItem Text="Comercial" 
+                                ToolTip="Cadastros e consultas do setor comercial.">
+                                <Items>
+                                    <dx:MenuItem Text="Metas">
+                                        <Items>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/Planejamento/Comercial/Coml_frmCadVendaSecao.aspx" 
+                                                Text="Cadastro de Venda - por Comprador" 
+                                                ToolTip="Cadastro de metas de vendas (planejamento)">
+                                                <Image Url="~/image/comercial_cadastros.png" />
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/Coml_frmCadMargemSecao.aspx" 
+                                                Text="Cadastro de Margem - por Comprador" 
+                                                ToolTip="Cadastro de metas de margem (planejamento)">
+                                                <Image Url="~/image/comercial_cadastros.png" />
+                                            </dx:MenuItem>
+                                        </Items>
+                                        <Image Url="~/image/comercial.png" />
+                                    </dx:MenuItem>
+                                    <dx:MenuItem Text="Consulta">
+                                        <Items>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/Coml_VendaMesComprador.aspx" 
+                                                Text="Venda por Comprador">
+                                                <Image Url="~/image/comercial_vendas.png" />
+                                            </dx:MenuItem>
+                                            <dx:MenuItem Text="Comprador">
+                                                <Items>
+                                                    <dx:MenuItem NavigateUrl="~/MemberPages/viewVendaComprador_Mes.aspx" 
+                                                        Text="Venda, Participação e Margem - Mês">
+                                                    </dx:MenuItem>
+                                                </Items>
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/viewMetasPorSecao_TodasLojas.aspx" 
+                                                Text="Meta de Venda por Seção">
+                                                <Image Url="~/image/Pastinha_32.png" />
+                                            </dx:MenuItem>
+                                        </Items>
+                                        <Image Url="~/image/comercial_menu_vendas.png" />
+                                    </dx:MenuItem>
+                                </Items>
+                            </dx:MenuItem>
+                            <dx:MenuItem Text="Resultados">
+                                <Items>
+                                    <dx:MenuItem NavigateUrl="~/MemberPages/Resultado/TeoricoMesLoja.aspx" 
+                                        Text="Téorico">
+                                        <Image Url="~/image/reports-32.png" />
+                                    </dx:MenuItem>
+                                    <dx:MenuItem Text="Despesas" 
+                                        NavigateUrl="~/MemberPages/Despesas/principal_despesas.aspx">
+                                        <Image Url="~/image/Padrao.png" />
+                                    </dx:MenuItem>
+                                </Items>
+                            </dx:MenuItem>
+                            <dx:MenuItem Text="Perdas">
+                                <Items>
+                                    <dx:MenuItem NavigateUrl="~/MemberPages/Agendas/QuebrasPorItem.aspx" 
+                                        Text="Perda por Item">
+                                        <Image Url="~/image/Seta_Padrao.png" />
+                                    </dx:MenuItem>
+                                    <dx:MenuItem Text="Checklist">
+                                        <Items>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/CheckList/CheckListCondor.aspx" 
+                                                Text="Fazer Checklist">
+                                                <Image Url="~/image/Seta_Padrao.png" />
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/CheckList/Pontuacao.aspx" 
+                                                Text="Pontuação">
+                                                <Image Url="~/image/Seta_Padrao.png" />
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/Checklist/DashboardPontuacao.aspx" 
+                                                Text="Pontuação Mensal">
+                                                <Image Url="~/image/Seta_Padrao.png">
+                                                </Image>
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/Checklist/CheckListViewer.aspx" 
+                                                Text="Ver Fotos">
+                                                <Image Url="~/image/padrao1.png">
+                                                </Image>
+                                            </dx:MenuItem>
+                                        </Items>
+                                        <Image Url="~/image/Seta_Padrao.png" />
+                                    </dx:MenuItem>
+                                    <dx:MenuItem Text="Ánalise de Quebras">
+                                        <Items>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/SLV/AnaliseVendaItemAg23.aspx" 
+                                                Text="Análise Vendas e Agendas 23">
+                                                <Image Url="~/image/note-accept-icon_24.png">
+                                                </Image>
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/SLV/AnaliseVendaItemAg23Filial.aspx" 
+                                                Text="Análise Vendas e Agendas 23 - por Filial">
+                                                <Image Url="~/image/note-accept-icon_24.png">
+                                                </Image>
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/SLV/viewAg23DiaLoja.aspx" 
+                                                Text="Consultar Agenda 23 por Dia">
+                                                <Image Url="~/image/note-accept-icon_24.png">
+                                                </Image>
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/Quebras/AnaliseComposicaoQuebraMes.aspx" Text="Ánalise de Quebra por Item">
+                                                <Image Url="~/image/note-accept-icon_24.png">
+                                                </Image>
+                                            </dx:MenuItem>
+                                            <dx:MenuItem NavigateUrl="~/MemberPages/Quebras/appQuebras001.aspx" Text="Ánalise TOP N">
+                                                <Image Url="~/image/note-accept-icon_24.png">
+                                                </Image>
+                                            </dx:MenuItem>
+                                            <dx:MenuItem Text="Analise Loja a Loja">
+                                                <Items>
+                                                    <dx:MenuItem NavigateUrl="~/MemberPages/Quebras/appQuebras003.aspx" Text="por Total">
+                                                        <Image Url="~/image/note-accept-icon_24.png">
+                                                        </Image>
+                                                    </dx:MenuItem>
+                                                    <dx:MenuItem NavigateUrl="~/MemberPages/Quebras/appQuebras004.aspx" Text="por Departamento">
+                                                        <Image Url="~/image/note-accept-icon_24.png">
+                                                        </Image>
+                                                    </dx:MenuItem>
+                                                    <dx:MenuItem NavigateUrl="~/MemberPages/Quebras/appQuebras005.aspx" Text="por Seção">
+                                                        <Image Url="~/image/note-accept-icon_24.png">
+                                                        </Image>
+                                                    </dx:MenuItem>
+                                                    <dx:MenuItem NavigateUrl="~/MemberPages/Quebras/appQuebras006.aspx" Text="por Grupo">
+                                                        <Image Url="~/image/note-accept-icon_24.png">
+                                                        </Image>
+                                                    </dx:MenuItem>
+                                                    <dx:MenuItem NavigateUrl="~/MemberPages/Quebras/appQuebras007.aspx" Text="por Subgrupo">
+                                                        <Image Url="~/image/note-accept-icon_24.png">
+                                                        </Image>
+                                                    </dx:MenuItem>
+                                                    <dx:MenuItem NavigateUrl="~/MemberPages/Quebras/appQuebras002.aspx" Text="por Produto">
+                                                        <Image Url="~/image/note-accept-icon_24.png">
+                                                        </Image>
+                                                    </dx:MenuItem>
+                                                </Items>
+                                                <Image Url="~/image/note-accept-icon_24.png">
+                                                </Image>
+                                            </dx:MenuItem>
+                                        </Items>
+                                    </dx:MenuItem>
+                                </Items>
+                            </dx:MenuItem>
+                            <dx:MenuItem NavigateUrl="~/MemberPages/SLV/webDashAcompOnLine.aspx" 
+                                Text="Acompanhamento de Margens">
+                            </dx:MenuItem>
+
+
+                            </Items>
+                            <Border BorderColor="White" BorderStyle="None" BorderWidth="0px" />
+                        </dx:ASPxMenu>  
+        
+   </header>
+    <div id="body">
+        <section class="content-wrapper clear-fix">
+            <asp:ContentPlaceHolder runat="server" ID="MainContent" >
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                </asp:UpdatePanel>
+            </asp:ContentPlaceHolder>
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p id="#999">
+                    &copy;
+                    <%--<%: DateTime.Now.Year %>- Condor Super Center Development--%>
+                </p>
+            </div>
+            <div class="float-right">
+                <ul id="social">
+                    <li><a href="http://facebook.com/RedeCondor" class="facebook">Facebook</a></li>
+                    <li><a href="http://twitter.com" class="twitter">Twitter</a></li>                    
+                    <asp:HyperLink ID="HyperLink1" runat="server" Height="40px" 
+                        ImageUrl="~/image/logo-portal-abras.gif" NavigateUrl="http://abrasnet.com.br/">HyperLink</asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink2" runat="server" Height="40px" 
+                        ImageUrl="~/image/empresav2.jpg" NavigateUrl="http://10.1.1.19/cgi-bin/wspd_cgi.sh/WService=webdscondor/basico/login.w">Banco Corporativo</asp:HyperLink>                </ul>
+            </div>
+        </div>
+    </footer>
+    </form>
+</body>
+</html>

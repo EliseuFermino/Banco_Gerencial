@@ -1,0 +1,252 @@
+﻿<%@ Master Language="VB" CodeFile="SiteNovo.master.vb" Inherits="MemberPages_SiteNovo" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../Styles/menu.css" rel="stylesheet" type="text/css" media="screen" />
+    
+    <title></title>
+    <asp:ContentPlaceHolder id="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>    
+    <form id="Form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <table style="width:100%" >
+            <tr>
+                <td>
+                    <asp:Image ID="Image1" runat="server" Height="34px"  ImageUrl="~/image/LogoCondor_Vermelho_25.jpg" Width="165px" />
+                </td> <%--Logotipo--%>
+
+                <td style="text-align: center">
+                     <asp:Label ID="lblTitle" runat="server" Text="Label" Font-Size="Large"></asp:Label>
+                </td> <%--Titulo da Aplicação em Questão--%>
+
+                <td id="login">                  
+                    <asp:LoginView ID="LoginView1" runat="server" ViewStateMode="Disabled" EnableTheming="True">
+                        <AnonymousTemplate>
+                            <ul>
+                                <li><a id="registerLink" runat="server" href="~/Account/Register.aspx">Register</a></li>
+                                <li><a id="loginLink" runat="server" href="~/Account/Login.aspx">Log in</a></li>
+                            </ul>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <p>
+                                Bem-vindo, <a id="A1" runat="server" class="username" href="~/Account/ChangePassword.aspx" title="Mudar Senha">
+                                    <asp:LoginName ID="LoginName1" runat="server" CssClass="username" />
+                                </a>!
+                                <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" />
+                            </p>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </td> <%--Login--%>
+            </tr>
+        </table>
+        <ul id="menu">  
+
+            <li><a href="#" class="drop">Vendas</a><!-- Begin 4 columns Item -->
+    
+                <div class="dropdown_4columns"><!-- Begin 4 columns container -->
+        
+                    <div class="col_4">
+                        <h2>Informações de Vendas</h2>
+                    </div>
+            
+                    <div class="col_1">
+                        
+                        <h3>Acompanhamentos</h3>
+                        <ul>
+                            <li><a href="~/../../Vendas/VendaAcompanhamento.aspx">A cada 15 minutos</a></li>
+                            <li><a href="#">Analise Hora</a></li>
+                            <li><a href="#">Histórico</a></li>
+                            <li><a href="#">por Hora</a></li>
+                            <li><a href="#">por Dia</a></li>
+                            <li><a href="#">por Loja</a></li>
+                        </ul>   
+
+                        <h3>Acumulados</h3>
+                        <ul>
+                            <li><a href="~/../../Vendas/RankingMes.aspx">Mensal</a></li>
+                            <li><a href="#">Anual</a></li>
+                        </ul> 
+
+                        <h3>Projeções</h3>
+                        <ul>
+                            <li><asp:HyperLink ID="aProjecaoVendas" runat="server" NavigateUrl="~/MemberPages/Gerencial/ProjecaoVendas.aspx">Projeção de Vendas</asp:HyperLink></li>
+                            <li><a href="#">Analise de Participação</a></li>
+                        </ul> <%--Fim Coluna 1--%>                 
+                    </div>
+    
+                    <div class="col_1">
+            
+                        <h3>Metas</h3>
+                        <ul>
+                            <li><a href="#">Empresa</a></li>
+                            <li><a href="#">Filial</a></li>
+                            <li><a href="#">Regional</a></li>                           
+                        </ul>   <%--Fim Coluna 2--%> 
+
+                        <h3>Campanhas</h3>
+                        <ul>
+                            <li><a href="#">Pascoa</a></li>                                                  
+                        </ul>   <%--Fim Coluna 2--%> 
+                 
+                    </div>
+    
+                    <div class="col_1">
+            
+                        <h3>Departamento</h3>
+                        <ul>                            
+                            <li><a href="#">por Dia</a></li>                            
+                        </ul>  
+                        
+                        <h3>Seção</h3>
+                        <ul>                            
+                            <li><a href="#">por Dia</a></li>                            
+                            <li><a href="#">por Semana</a></li> 
+                        </ul>  
+                        
+                        <h3>Grupo</h3>
+                        <ul>                            
+                            <li><a href="#">por Dia</a></li>                            
+                        </ul>  
+                        
+                        <h3>Sub-grupo</h3>
+                        <ul>                            
+                            <li><a href="#">por Dia</a></li>                            
+                        </ul>                                                                          
+                 
+                    </div>
+    
+                    <div class="col_1">
+            
+                        <h3>Loja a Loja</h3>
+                        <ul>
+                            <li><a href="~/../../SLV/Total/AnaliseVendaTotal.aspx">Análise Total</a></li>
+                            <li><a href="#">Análise Departamento</a></li>
+                            <li><a href="#">Análise Seção</a></li>
+                            <li><a href="#">Análise Grupo</a></li>
+                            <li><a href="#">Análise Sub-grupo</a></li>
+                        </ul>   
+
+                        <h3>Produto</h3>
+                        <ul>
+                            <li><a href="#">por Seção</a></li>
+                            <li><a href="#">Top 1000</a></li>                          
+                        </ul>  
+                        
+                        <h3>Fornecedor</h3>
+                        <ul>
+                            <li><a href="#">por Mês</a></li>                                                    
+                        </ul>                           
+                 
+                    </div>
+            
+                </div><!-- End 4 columns container -->
+    
+            </li><!-- End 4 columns Item -->
+
+	        <li class="menu_right"><a href="#" class="drop">1 Column</a>
+    
+		        <div class="dropdown_1column align_right">
+        
+                        <div class="col_1">
+                
+                            <ul class="simple">
+                                <li><a href="#">FreelanceSwitch</a></li>
+                                <li><a href="#">Creattica</a></li>
+                                <li><a href="#">WorkAwesome</a></li>
+                                <li><a href="#">Mac Apps</a></li>
+                                <li><a href="#">Web Apps</a></li>
+                                <li><a href="#">NetTuts</a></li>
+                                <li><a href="#">VectorTuts</a></li>
+                                <li><a href="#">PsdTuts</a></li>
+                                <li><a href="#">PhotoTuts</a></li>
+                                <li><a href="#">ActiveTuts</a></li>
+                                <li><a href="#">Design</a></li>
+                                <li><a href="#">Logo</a></li>
+                                <li><a href="#">Flash</a></li>
+                                <li><a href="#">Illustration</a></li>
+                                <li><a href="#">More...</a></li>
+                            </ul>   
+                     
+                        </div>
+                
+		        </div>
+        
+	        </li>
+
+            <li class="menu_right"><a href="#" class="drop">3 columns</a><!-- Begin 3 columns Item -->
+    
+                <div class="dropdown_3columns align_right"><!-- Begin 3 columns container -->
+            
+                    <div class="col_3">
+                        <h2>Lists in Boxes</h2>
+                    </div>
+            
+                    <div class="col_1">
+    
+                        <ul class="greybox">
+                            <li><a href="#">FreelanceSwitch</a></li>
+                            <li><a href="#">Creattica</a></li>
+                            <li><a href="#">WorkAwesome</a></li>
+                            <li><a href="#">Mac Apps</a></li>
+                            <li><a href="#">Web Apps</a></li>
+                        </ul>   
+    
+                    </div>
+            
+                    <div class="col_1">
+    
+                        <ul class="greybox">
+                            <li><a href="#">ThemeForest</a></li>
+                            <li><a href="#">GraphicRiver</a></li>
+                            <li><a href="#">ActiveDen</a></li>
+                            <li><a href="#">VideoHive</a></li>
+                            <li><a href="#">3DOcean</a></li>
+                        </ul>   
+    
+                    </div>
+            
+                    <div class="col_1">
+    
+                        <ul class="greybox">
+                            <li><a href="#">Design</a></li>
+                            <li><a href="#">Logo</a></li>
+                            <li><a href="#">Flash</a></li>
+                            <li><a href="#">Illustration</a></li>
+                            <li><a href="#">More...</a></li>
+                        </ul>   
+    
+                    </div>
+            
+                    <div class="col_3">
+                        <h2>Here are some image examples</h2>
+                    </div>
+            
+                    <div class="col_3">
+                        <img src="img/02.jpg" width="70" height="70" class="img_left imgshadow" alt="" />
+                        <p>Maecenas eget eros lorem, nec pellentesque lacus. Aenean dui orci, rhoncus sit amet tristique eu, tristique sed odio. Praesent ut interdum elit. Maecenas imperdiet, nibh vitae rutrum vulputate, lorem sem condimentum.<a href="#">Read more...</a></p>
+    
+                        <img src="img/01.jpg" width="70" height="70" class="img_left imgshadow" alt="" />
+                        <p>Aliquam elementum felis quis felis consequat scelerisque. Fusce sed lectus at arcu mollis accumsan at nec nisi. Aliquam pretium mollis fringilla. Vestibulum tempor facilisis malesuada. <a href="#">Read more...</a></p>
+                    </div>
+        
+                </div><!-- End 3 columns container -->
+        
+            </li><!-- End 3 columns Item -->
+
+
+        </ul>
+   
+    <div style="padding-top :0px">
+        <asp:ContentPlaceHolder id="MainContent" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

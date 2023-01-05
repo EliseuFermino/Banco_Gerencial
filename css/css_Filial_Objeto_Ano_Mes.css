@@ -1,0 +1,33 @@
+﻿
+#div_Filial{
+    clear:both;
+    float: left;
+    margin-left: 2px;
+}
+
+#div_Objeto{
+    clear:both;
+    float: left;
+    margin-left: 2px;
+}
+
+.div_Ano{
+    clear:both;
+    float: left;
+    margin-left: 2px;
+}
+
+#div_Mes{   
+    float: left;
+    margin-left: 15px;
+}
+
+.font_size_12 {
+    font-size: 12px;
+}
+
+.font_size_14 {
+    font-size: 14px;
+}
+
+

@@ -1,0 +1,23 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="PDCA_Condor.master.vb" Inherits="MemberPages_PDCA_PDCA_Condor" %>
+
+<%@ Register Assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+
+    <dx:ASPxPageControl ID="TabControl" runat="server" Width="100%" ActiveTabIndex="0" EnableHierarchyRecreation="True" Theme="SoftOrange">
+        <TabPages>
+            <dx:TabPage Text="Vendas">
+                <ContentCollection>
+                    <dx:ContentControl ID="ContentControl1" runat="server">
+
+                    </dx:ContentControl>
+                </ContentCollection>
+            </dx:TabPage>
+        </TabPages>
+
+    </dx:ASPxPageControl>
+
+</asp:Content>
+

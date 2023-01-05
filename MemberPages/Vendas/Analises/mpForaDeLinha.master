@@ -1,0 +1,27 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="mpForaDeLinha.master.vb" Inherits="MemberPages_Vendas_Analises_mpForaDeLinha" %>
+
+<%@ Register Assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+
+    <dx:ASPxTabControl ID="ASPxTabControl1" runat="server" ActiveTabIndex="2">
+        <Tabs>
+            <dx:Tab Text="por Semana" NavigateUrl="~/MemberPages/Vendas/Analises/ForaDeLinha_Eletro.aspx">
+            </dx:Tab>
+            <dx:Tab Text="por Mes" NavigateUrl="~/MemberPages/Vendas/Analises/ForaDeLinha_Eletro_Mes.aspx">
+            </dx:Tab>
+            <dx:Tab Text="por Ano" NavigateUrl="~/MemberPages/Vendas/Analises/ForaDeLinha_Eletro_Ano.aspx">
+            </dx:Tab>
+            <dx:Tab Text="Estoque" NavigateUrl="~/MemberPages/Vendas/Analises/EstoqueForaDeLinha.aspx">
+            </dx:Tab>
+        </Tabs>
+    </dx:ASPxTabControl>
+
+    <asp:ContentPlaceHolder ID="ContentForaDeLinha" runat="server">
+
+    </asp:ContentPlaceHolder>
+
+</asp:Content>
+

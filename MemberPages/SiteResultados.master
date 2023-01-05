@@ -1,0 +1,65 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="SiteResultados.master.vb" Inherits="MemberPages_SiteResultados
+    " %>
+
+<%@ Register assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web" tagprefix="dx" %>
+
+
+
+
+
+
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
+    </asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+    <dx:ASPxSplitter ID="ASPxSplitter1" ClientInstanceName="splitter" Height="3000px" Width="100%" runat="server">
+        <panes>
+            <dx:SplitterPane Size="160px" MinSize="1px" ShowCollapseBackwardButton="True">
+               <PaneStyle>
+                    <Paddings Padding="0px" />
+                </PaneStyle>
+
+                <ContentCollection>
+                    <dx:SplitterContentControl runat="server">
+                         
+                       <div style ="padding-left: 1px; padding-top : 1px">
+                            <dx:ASPxNavBar ID="navFaAQ" runat="server" ExpandButtonPosition="Right" EncodeHtml ="False" ShowExpandButtons="True" Theme="Office2010Silver" AutoCollapse="true" EnableTheming="True" Font-Size="12px" >
+                                <GroupHeaderStyle CssClass="Question"></GroupHeaderStyle>
+                                <ItemStyle CssClass="Answer " />
+                            </dx:ASPxNavBar>
+                        </div>
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:LocalSqlServer %>" SelectCommand="Menu.uspProgramasDoUsuario" SelectCommandType="StoredProcedure">
+                            <SelectParameters>
+                                <asp:SessionParameter Name="idUsuario" SessionField="sUSUARIO" Type="String" /> 
+                                <asp:SessionParameter Name="idMaster" SessionField="sMASTER" Type="Byte" />                                
+                            </SelectParameters>
+                            </asp:SqlDataSource>
+
+                    <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
+
+                    </dx:SplitterContentControl>
+                </ContentCollection>
+
+            </dx:SplitterPane>
+
+            <dx:SplitterPane Name="ContentUrlPane" ScrollBars="Auto" ContentUrlIFrameName="contentUrlPane">
+                <PaneStyle BackColor="#EFEEEF">  </PaneStyle>
+                <ContentCollection>
+                    <dx:SplitterContentControl>
+                        <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+                   </dx:SplitterContentControl>
+                </ContentCollection>
+            </dx:SplitterPane>
+        </panes>
+
+        <Styles>
+            <Separator BackColor="#CCCCCC">
+            </Separator>
+        </Styles>
+    </dx:ASPxSplitter>
+               
+                <dx:ASPxCallback ID="ASPxCallback1" runat="server" ClientInstanceName="Callback">
+                       <ClientSideEvents CallbackComplete="function(s, e) { LoadingPanel.Hide(); }" />
+                </dx:ASPxCallback>
+                </asp:Content>
+

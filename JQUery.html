@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>My Test Page</title>
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script src="Scripts/jquery.maskedinput.js"></script>
+
+    <script type ="text/javascript" >
+        jQuery(function ($)
+        {
+
+            // do  things here
+            alert(jQuery('img').attr('alt'));
+
+            $("#date1").mask("99/99/9999");
+
+        });
+
+    </script>
+
+</head>
+<body>
+    <p>This is my test page.</p>
+    <img src="Images/house.jpg" height="28" width="28" alt="This is a test image." />
+
+    <input id="date1" type="text" />
+
+</body>
+</html>

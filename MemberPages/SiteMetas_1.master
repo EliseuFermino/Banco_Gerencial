@@ -1,0 +1,42 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="SiteMetas_1.master.vb" Inherits="MemberPages_SiteMetas_1" %>
+
+<%@ Register Assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+
+    <dx:ASPxPanel ID="LeftPanel" runat="server" FixedPosition="WindowLeft" Collapsible="true" >
+        <SettingsAdaptivity CollapseAtWindowInnerWidth="1920" />
+            <PanelCollection>
+				<dx:PanelContent ID="PanelContent1" runat="server" SupportsDisabledAttribute="True">
+					<dx:ASPxNavBar ID="nbMain" runat="server">
+						<Groups>
+							<dx:NavBarGroup Text="Main">
+								<Items>
+									<dx:NavBarItem Text="Overview" NavigateUrl="javascript:void(4)"></dx:NavBarItem>
+									<dx:NavBarItem Text="Reports" NavigateUrl="javascript:void(5)"></dx:NavBarItem>
+									<dx:NavBarItem Text="Analitics" NavigateUrl="javascript:void(6)"></dx:NavBarItem>
+								</Items>
+							</dx:NavBarGroup>
+							<dx:NavBarGroup Text="Export">
+								<Items>
+									<dx:NavBarItem Text="Rtf" NavigateUrl="javascript:void(7)"></dx:NavBarItem>
+									<dx:NavBarItem Text="Xls" NavigateUrl="javascript:void(8)"></dx:NavBarItem>
+									<dx:NavBarItem Text="Pdf" NavigateUrl="javascript:void(9)"></dx:NavBarItem>
+								</Items>
+							</dx:NavBarGroup>
+						</Groups>
+						<Paddings Padding="0px" />
+					</dx:ASPxNavBar>
+				</dx:PanelContent>
+			</PanelCollection>
+
+    </dx:ASPxPanel>
+
+    <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
+
+
+</asp:Content>
+

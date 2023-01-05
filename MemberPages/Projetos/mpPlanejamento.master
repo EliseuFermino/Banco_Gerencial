@@ -1,0 +1,66 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="mpPlanejamento.master.vb" Inherits="Ranking_mpPlanejamento" %>
+
+<%@ Register assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web" tagprefix="dxtc" %>
+<%@ Register assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web" tagprefix="dxw" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
+    <style type="text/css">
+        .style3
+        {
+            height: 14px;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+    <table class="style1">
+        <tr>
+            <td>
+                <dxtc:ASPxTabControl ID="ASPxTabControl1" runat="server" ActiveTabIndex="5" 
+                    CssFilePath="~/App_Themes/Plastic Blue/{0}/styles.css" CssPostfix="PlasticBlue" 
+                    ImageFolder="~/App_Themes/Plastic Blue/{0}/" EnableTheming="True" Theme="PlasticBlue">
+                    <ContentStyle>
+                        <Border BorderColor="#3D5294" BorderWidth="0px" />
+                    </ContentStyle>
+                    <TabStyle>
+                        <BorderBottom BorderColor="#3D5294" />
+                    </TabStyle>
+                    <Tabs>
+                        <dxtc:Tab Text="Ficha" NavigateUrl="planej01_Ficha.aspx">
+                            <TabImage Url="~/image/Number-1-icon.png" />
+                        </dxtc:Tab>
+                        <dxtc:Tab Text="Ata" NavigateUrl="planej06_DiarioBordo.aspx">
+                            <TabImage Url="~/image/Number-2-icon.png" />
+                        </dxtc:Tab>
+                        <dxtc:Tab Text="Plano de Ação" NavigateUrl="planej04_PlanoAcao.aspx">
+                            <TabImage Url="~/image/Number-3-icon.png" />
+                        </dxtc:Tab>
+                        <dxtc:Tab Text="Diário de Bordo" NavigateUrl="planej06_Ata.aspx">
+                            <TabImage Url="~/image/Number-4-icon.png" />
+                        </dxtc:Tab>
+                        <dxtc:Tab Text="Arquivos" NavigateUrl="projProcessoAtual.aspx">
+                            <TabImage Url="~/image/Number-5-icon.png" />
+                        </dxtc:Tab>
+                        <dxtc:Tab Text="Padronização" NavigateUrl="projPadronizacao.aspx">
+                            <TabImage Url="~/image/Number-6-icon.png" />
+                        </dxtc:Tab>
+                        <dxtc:Tab Text="POP" Visible="False">
+                            <TabImage Url="~/image/Number-7-icon.png" />
+                        </dxtc:Tab>
+                        <dxtc:Tab Text="Indicadores" NavigateUrl="~/MemberPages/planej03_Meta_w.aspx" 
+                            ToolTip="projIndicadores.aspx" Visible="False">
+                            <TabImage Url="~/image/Number-8-icon.png" />
+                        </dxtc:Tab>
+                    </Tabs>
+                    <Paddings PaddingLeft="5px" PaddingRight="5px" PaddingTop="5px" />
+                </dxtc:ASPxTabControl>
+            </td>
+        </tr>
+        <tr>
+            <td class="style3">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </td>
+        </tr>
+    </table>
+</asp:Content>
+

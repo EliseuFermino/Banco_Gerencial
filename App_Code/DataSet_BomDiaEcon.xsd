@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" xmlns:mstns="http://tempuri.org/nwindDataSet.xsd" id="DataSet_BomDiaEcon" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=WIN-DJITT2B93NO;Initial Catalog=Vendas;User ID=sa;Password=rd700@1" IsAppSettingsProperty="false" Modifier="Assembly" ParameterPrefix="@" Provider="System.Data.SqlClient" Name="Connection" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vw_Vendas_BomDiaEconomiaAdapter" Name="vw_Vendas_BomDiaEconomia" UserDataComponentName="vw_Vendas_BomDiaEconomiaAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="Connection" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Dia, nomeDiaSemana, Qtde, vlrVenda, vlrLucroComercial, LucroSellOut, vlrFinal, percMargemPDV, percSellOut, percMargemFinal, numCliente FROM dbo.vw_Vendas_BomDiaEconomia</CommandText>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Dia" DataSetColumn="Dia" />
+              <Mapping SourceColumn="nomeDiaSemana" DataSetColumn="nomeDiaSemana" />
+              <Mapping SourceColumn="Qtde" DataSetColumn="Qtde" />
+              <Mapping SourceColumn="vlrVenda" DataSetColumn="vlrVenda" />
+              <Mapping SourceColumn="vlrLucroComercial" DataSetColumn="vlrLucroComercial" />
+              <Mapping SourceColumn="LucroSellOut" DataSetColumn="LucroSellOut" />
+              <Mapping SourceColumn="vlrFinal" DataSetColumn="vlrFinal" />
+              <Mapping SourceColumn="percMargemPDV" DataSetColumn="percMargemPDV" />
+              <Mapping SourceColumn="percSellOut" DataSetColumn="percSellOut" />
+              <Mapping SourceColumn="percMargemFinal" DataSetColumn="percMargemFinal" />
+              <Mapping SourceColumn="numCliente" DataSetColumn="numCliente" />
+            </Mappings>
+          </TableAdapter>
+        </Tables>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet_BomDiaEcon" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="vw_Vendas_BomDiaEconomia">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Dia" type="xs:dateTime" />
+              <xs:element name="nomeDiaSemana">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Qtde" type="xs:double" minOccurs="0" />
+              <xs:element name="vlrVenda" type="xs:decimal" minOccurs="0" />
+              <xs:element name="vlrLucroComercial" type="xs:decimal" minOccurs="0" />
+              <xs:element name="LucroSellOut" type="xs:decimal" minOccurs="0" />
+              <xs:element name="vlrFinal" msdata:ReadOnly="true" type="xs:decimal" minOccurs="0" />
+              <xs:element name="percMargemPDV" msdata:ReadOnly="true" type="xs:decimal" minOccurs="0" />
+              <xs:element name="percSellOut" msdata:ReadOnly="true" type="xs:decimal" minOccurs="0" />
+              <xs:element name="percMargemFinal" msdata:ReadOnly="true" type="xs:decimal" minOccurs="0" />
+              <xs:element name="numCliente" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

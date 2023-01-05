@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="pt-BR">
+  <Title Text="Vendas e Margem de Hoje" />
+  <DataSources>
+    <SqlDataSource Name="vw_Totais" ComponentName="sqlDataSource1">
+      <Connection Name="gerKnowledgeConnectionString" FromAppConfig="true" />
+      <Query Type="SelectQuery" Name="vw_Totais">
+        <Tables>
+          <Table Name="vw_Totallizador" />
+        </Tables>
+        <Columns>
+          <Column Table="vw_Totallizador" Name="Dia" />
+          <Column Table="vw_Totallizador" Name="Descricao" />
+          <Column Table="vw_Totallizador" Name="vlrMeta" />
+          <Column Table="vw_Totallizador" Name="vlrRealizado" />
+          <Column Table="vw_Totallizador" Name="percMargem_Meta" />
+          <Column Table="vw_Totallizador" Name="percMargem_Real" />
+        </Columns>
+      </Query>
+      <Query Type="SelectQuery" Name="vw_Postos">
+        <Tables>
+          <Table Name="vw_Totallizador" />
+        </Tables>
+        <Columns>
+          <Column Table="vw_Totallizador" Name="Dia" />
+          <Column Table="vw_Totallizador" Name="Descricao" />
+          <Column Table="vw_Totallizador" Name="vlrMeta" />
+          <Column Table="vw_Totallizador" Name="vlrRealizado" />
+        </Columns>
+        <Filter>Descricao = 'Total dos Postos'</Filter>
+      </Query>
+      <Query Type="SelectQuery" Name="vw_AnaliseHora">
+        <Tables>
+          <Table Name="vw_AnaliseHora" />
+        </Tables>
+        <Columns>
+          <Column Table="vw_AnaliseHora" Name="Descricao" />
+          <Column Table="vw_AnaliseHora" Name="vlr1" />
+          <Column Table="vw_AnaliseHora" Name="vlr2" />
+          <Column Table="vw_AnaliseHora" Name="vlr3" />
+          <Column Table="vw_AnaliseHora" Name="vlr4" />
+        </Columns>
+      </Query>
+      <Query Type="SelectQuery" Name="tblVenda_Mes_Ano_Empresa">
+        <Tables>
+          <Table Name="tblVenda_Mes_Ano_Empresa" />
+        </Tables>
+        <Columns>
+          <Column Table="tblVenda_Mes_Ano_Empresa" Name="descMes" />
+          <Column Table="tblVenda_Mes_Ano_Empresa" Name="vlrMeta_Venda" />
+          <Column Table="tblVenda_Mes_Ano_Empresa" Name="vlrVenda" />
+        </Columns>
+      </Query>
+      <Query Type="SelectQuery" Name="vw_Totais_Ontem">
+        <Tables>
+          <Table Name="tblMxR_Total_Ontem" />
+        </Tables>
+        <Columns>
+          <Column Table="tblMxR_Total_Ontem" Name="Dia" />
+          <Column Table="tblMxR_Total_Ontem" Name="Descricao" />
+          <Column Table="tblMxR_Total_Ontem" Name="vlrMeta" />
+          <Column Table="tblMxR_Total_Ontem" Name="vlrRealizado" />
+        </Columns>
+      </Query>
+      <Query Type="SelectQuery" Name="vw_Meta_Total_Hoje">
+        <Tables>
+          <Table Name="tblMxR_Total" />
+        </Tables>
+        <Columns>
+          <Column Table="tblMxR_Total" Name="Descricao" />
+          <Column Table="tblMxR_Total" Name="vlrMeta" />
+        </Columns>
+        <Filter>Descricao = 'Total Condor'</Filter>
+      </Query>
+      <Query Type="SelectQuery" Name="vw_Meta_Total_Ontem">
+        <Tables>
+          <Table Name="tblMxR_Total_Ontem" />
+        </Tables>
+        <Columns>
+          <Column Table="tblMxR_Total_Ontem" Name="Descricao" />
+          <Column Table="tblMxR_Total_Ontem" Name="vlrMeta" />
+        </Columns>
+        <Filter>Descricao = 'Total Condor'</Filter>
+      </Query>
+      <Query Type="SelectQuery" Name="vw_Margem_Hoje">
+        <Tables>
+          <Table Name="tblMxR_Total" />
+        </Tables>
+        <Columns>
+          <Column Table="tblMxR_Total" Name="Descricao" />
+          <Column Table="tblMxR_Total" Name="percMargem_Meta" />
+          <Column Table="tblMxR_Total" Name="percMargem_Real" />
+        </Columns>
+        <Filter>Descricao = 'Total Condor'</Filter>
+      </Query>
+      <Query Type="SelectQuery" Name="vw_Margem_Ontem">
+        <Tables>
+          <Table Name="tblMxR_Total_Ontem" />
+        </Tables>
+        <Columns>
+          <Column Table="tblMxR_Total_Ontem" Name="Descricao" />
+          <Column Table="tblMxR_Total_Ontem" Name="percMargem_Real" />
+          <Column Table="tblMxR_Total_Ontem" Name="percMargem_Meta" />
+        </Columns>
+        <Filter>Descricao = 'Total Condor'</Filter>
+      </Query>
+      <ConnectionOptions CloseConnection="true" />
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <Card ComponentName="cardDashboardItem1" Name="Cards 1" />
+    <Card ComponentName="cardDashboardItem3" Name="Cards 2" />
+    <ComboBox ComponentName="comboBoxDashboardItem1" Name="Selecione um Dia" DataSource="sqlDataSource1" DataMember="vw_Totais" ShowAllValue="false">
+      <DataItems>
+        <Dimension DataMember="Dia" SortOrder="Descending" DateTimeGroupInterval="DayMonthYear" DefaultId="DataItem0" />
+      </DataItems>
+      <FilterDimensions>
+        <Dimension DefaultId="DataItem0" />
+      </FilterDimensions>
+    </ComboBox>
+    <Card ComponentName="cardDashboardItem5" Name="Vendas - Total Empresa - Ano e Mes Atual" DataSource="sqlDataSource1" DataMember="tblVenda_Mes_Ano_Empresa">
+      <DataItems>
+        <Measure DataMember="vlrVenda" DefaultId="DataItem0" />
+        <Measure DataMember="vlrMeta_Venda" DefaultId="DataItem1" />
+        <Dimension DataMember="descMes" SortOrder="Descending" DefaultId="DataItem2" />
+      </DataItems>
+      <SeriesDimensions>
+        <SeriesDimension DefaultId="DataItem2" />
+      </SeriesDimensions>
+      <Card>
+        <ActualValue DefaultId="DataItem0" />
+        <TargetValue DefaultId="DataItem1" />
+        <AbsoluteVariationNumericFormat />
+        <PercentVariationNumericFormat />
+        <PercentOfTargetNumericFormat />
+        <LayoutTemplate MinWidth="270" MaxWidth="270" Type="Centered">
+          <MainValue Visible="true" ValueType="Title" DimensionIndex="0" />
+          <SubValue Visible="true" ValueType="Subtitle" DimensionIndex="0" />
+          <BottomValue Visible="true" ValueType="ActualValue" DimensionIndex="0" />
+          <BottomSubValue1 Visible="true" ValueType="AbsoluteVariation" DimensionIndex="0" />
+          <BottomSubValue2 Visible="true" ValueType="PercentVariation" DimensionIndex="0" />
+          <DeltaIndicator Visible="true" />
+          <Sparkline Visible="true" />
+        </LayoutTemplate>
+      </Card>
+    </Card>
+    <Card ComponentName="cardDashboardItem2" Name="Venda Realizada" DataSource="sqlDataSource1" DataMember="vw_Totais">
+      <DataItems>
+        <Measure DataMember="vlrRealizado" DefaultId="DataItem0" />
+        <Measure DataMember="vlrMeta" DefaultId="DataItem1" />
+        <Dimension DataMember="Descricao" DefaultId="DataItem2" />
+      </DataItems>
+      <SeriesDimensions>
+        <SeriesDimension DefaultId="DataItem2" />
+      </SeriesDimensions>
+      <Card>
+        <ActualValue DefaultId="DataItem0" />
+        <TargetValue DefaultId="DataItem1" />
+        <AbsoluteVariationNumericFormat />
+        <PercentVariationNumericFormat />
+        <PercentOfTargetNumericFormat />
+        <LayoutTemplate MinWidth="270" MaxWidth="270" Type="Centered">
+          <MainValue Visible="true" ValueType="Title" DimensionIndex="0" />
+          <SubValue Visible="true" ValueType="Subtitle" DimensionIndex="0" />
+          <BottomValue Visible="true" ValueType="ActualValue" DimensionIndex="0" />
+          <BottomSubValue1 Visible="true" ValueType="AbsoluteVariation" DimensionIndex="0" />
+          <BottomSubValue2 Visible="true" ValueType="PercentVariation" DimensionIndex="0" />
+          <DeltaIndicator Visible="true" />
+          <Sparkline Visible="true" />
+        </LayoutTemplate>
+      </Card>
+    </Card>
+    <Card ComponentName="cardDashboardItem4" Name="Meta de Venda" DataSource="sqlDataSource1" DataMember="vw_Totais">
+      <DataItems>
+        <Measure DataMember="vlrMeta" SummaryType="Max" DefaultId="DataItem0" />
+      </DataItems>
+      <Card Name="Meta de Venda">
+        <ActualValue DefaultId="DataItem0" />
+        <AbsoluteVariationNumericFormat />
+        <PercentVariationNumericFormat />
+        <PercentOfTargetNumericFormat />
+        <LayoutTemplate MinWidth="270" MaxWidth="270" Type="Centered">
+          <MainValue Visible="true" ValueType="Title" DimensionIndex="0" />
+          <SubValue Visible="true" ValueType="Subtitle" DimensionIndex="0" />
+          <BottomValue Visible="true" ValueType="ActualValue" DimensionIndex="0" />
+          <BottomSubValue1 Visible="true" ValueType="AbsoluteVariation" DimensionIndex="0" />
+          <BottomSubValue2 Visible="true" ValueType="PercentVariation" DimensionIndex="0" />
+          <DeltaIndicator Visible="true" />
+          <Sparkline Visible="true" />
+        </LayoutTemplate>
+      </Card>
+    </Card>
+    <Card ComponentName="cardDashboardItem6" Name="Margem Total (PDV + SellOut)" DataSource="sqlDataSource1" DataMember="vw_Totais">
+      <DataItems>
+        <Measure DataMember="percMargem_Real" DefaultId="DataItem0">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="percMargem_Meta" SummaryType="Max" DefaultId="DataItem1" />
+      </DataItems>
+      <Card Name="% Margem Empresa">
+        <ActualValue DefaultId="DataItem0" />
+        <TargetValue DefaultId="DataItem1" />
+        <AbsoluteVariationNumericFormat />
+        <PercentVariationNumericFormat />
+        <PercentOfTargetNumericFormat />
+        <LayoutTemplate MinWidth="270" MaxWidth="270" Type="Centered">
+          <MainValue Visible="true" ValueType="Title" DimensionIndex="0" />
+          <SubValue Visible="true" ValueType="Subtitle" DimensionIndex="0" />
+          <BottomValue Visible="true" ValueType="ActualValue" DimensionIndex="0" />
+          <BottomSubValue1 Visible="true" ValueType="AbsoluteVariation" DimensionIndex="0" />
+          <BottomSubValue2 Visible="true" ValueType="PercentVariation" DimensionIndex="0" />
+          <DeltaIndicator Visible="true" />
+          <Sparkline Visible="true" />
+        </LayoutTemplate>
+      </Card>
+    </Card>
+    <Card ComponentName="cardDashboardItem7" Name="Meta de Venda - Mês e Ano" DataSource="sqlDataSource1" DataMember="tblVenda_Mes_Ano_Empresa">
+      <DataItems>
+        <Measure DataMember="vlrMeta_Venda" DefaultId="DataItem0" />
+        <Dimension DataMember="descMes" SortOrder="Descending" DefaultId="DataItem1" />
+      </DataItems>
+      <SeriesDimensions>
+        <SeriesDimension DefaultId="DataItem1" />
+      </SeriesDimensions>
+      <Card>
+        <ActualValue DefaultId="DataItem0" />
+        <AbsoluteVariationNumericFormat />
+        <PercentVariationNumericFormat />
+        <PercentOfTargetNumericFormat />
+        <LayoutTemplate MinWidth="270" MaxWidth="270" Type="Centered">
+          <MainValue Visible="true" ValueType="Title" DimensionIndex="0" />
+          <SubValue Visible="true" ValueType="Subtitle" DimensionIndex="0" />
+          <BottomValue Visible="true" ValueType="ActualValue" DimensionIndex="0" />
+          <BottomSubValue1 Visible="true" ValueType="AbsoluteVariation" DimensionIndex="0" />
+          <BottomSubValue2 Visible="true" ValueType="PercentVariation" DimensionIndex="0" />
+          <DeltaIndicator Visible="true" />
+          <Sparkline Visible="true" />
+        </LayoutTemplate>
+      </Card>
+    </Card>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup Orientation="Vertical">
+      <LayoutGroup Orientation="Vertical">
+        <LayoutItem DashboardItem="comboBoxDashboardItem1" Weight="1.2454545454545452" />
+        <LayoutItem DashboardItem="cardDashboardItem2" Weight="0.76206063316099371" />
+        <LayoutGroup Weight="0.64601476618535847">
+          <LayoutItem DashboardItem="cardDashboardItem4" Weight="0.70403769967317609" />
+          <LayoutItem DashboardItem="cardDashboardItem6" Weight="0.70403769967317609" />
+        </LayoutGroup>
+        <LayoutItem DashboardItem="cardDashboardItem5" Weight="0.77261025743150624" />
+        <LayoutItem DashboardItem="cardDashboardItem7" Weight="0.63546514191484593" />
+      </LayoutGroup>
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

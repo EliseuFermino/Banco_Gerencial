@@ -1,0 +1,93 @@
+﻿<%@ Master Language="VB" AutoEventWireup="true" CodeFile="Site.master.vb" Inherits="SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="pt">
+<head id="Head1" runat="server">
+    <meta charset="utf-8" />     
+    <title>
+            <%: Page.Title %>
+            - Banco Gerencial</title>
+            <% IF (false) %><%--Designer support--%>
+                <link href="~/Content/Site.css" rel="stylesheet" />
+            <% End If %>
+    <asp:PlaceHolder runat="server">        
+           <link href="<%: ResolveUrl("~/Content/themes/base/jquery.ui.all.css") %>" rel="stylesheet" type="text/css" /> 
+           <link href="<%: ResolveUrl("~/Content/Site.css") %>" rel="stylesheet" type="text/css" /> 
+           <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+           <script src="<%: ResolveUrl("~/Scripts/modernizr-2.0.6-development-only.js") %>"></script>
+    </asp:PlaceHolder>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+    </head>
+<body>
+    <form runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+        <Scripts>
+            <asp:ScriptReference Name="jquery" />
+            <asp:ScriptReference Name="jquery.ui.combined" />
+        </Scripts>
+    </asp:ScriptManager>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+            </div>
+            <div class="float-right">
+                <section id="login">
+                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul>                                
+                                <li><a id="loginLink" runat="server" href="~/Account/Login.aspx">Login</a></li>
+                            </ul>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <p>
+                                Olá, <a runat="server" class="username" href="~/Account/ChangePassword.aspx" title="Mudar senha">
+                                    <asp:LoginName runat="server" CssClass="username" />
+                                </a>!
+                                <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Sair" LogoutPageUrl="~/" />
+                            </p>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </section>
+   <%--             <nav>
+                    <ul id="menu">
+                        <li><a runat="server" href="~/">Principal</a></li>                                           
+                    </ul>
+                </nav>--%>
+            </div>
+            <asp:Image ID="Image1" runat="server" Height="34px" 
+                ImageUrl="~/image/LogoCondor_Vermelho_25.jpg" Width="165px" />
+        </div>
+    </header>
+    <div id="body">
+        <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
+        <section class="content-wrapper main-content clear-fix">
+            <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>
+                    &copy;
+                    <%: DateTime.Now.Year %>
+                    - Condor Super Center Development
+                </p>
+            </div>
+            <div class="float-right">
+                <ul id="social">
+                    <li><a href="http://facebook.com/RedeCondor" class="facebook">Facebook</a></li>
+                    <li><a href="http://twitter.com" class="twitter">Twitter</a></li>                    
+                    <asp:HyperLink ID="HyperLink1" runat="server" Height="40px" 
+                        ImageUrl="~/image/logo-portal-abras.gif" NavigateUrl="http://abrasnet.com.br/">HyperLink</asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink2" runat="server" Height="40px" 
+                        ImageUrl="~/image/empresav2.jpg" NavigateUrl="http://10.1.1.19/cgi-bin/wspd_cgi.sh/WService=webdscondor/basico/login.w">Banco Corporativo</asp:HyperLink>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    </form>
+</body>
+</html>
+

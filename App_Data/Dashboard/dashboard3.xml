@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard>
+  <Title Text="Meta x Realizado Loja a Loja - Dia" />
+  <DataSources>
+    <SqlDataSource Name="tblMxR_Lojas" ComponentName="sqlDataSource1">
+      <Connection Name="gerKnowledgeConnectionString" FromAppConfig="true" />
+      <Query Type="SelectQuery" Name="tblMxR_Lojas">
+        <Tables>
+          <Table Name="tblMxR_Lojas" />
+        </Tables>
+        <Columns>
+          <Column Table="tblMxR_Lojas" Name="Filial" />
+          <Column Table="tblMxR_Lojas" Name="vlrMeta_Venda" />
+          <Column Table="tblMxR_Lojas" Name="vlrVenda" />
+          <Column Table="tblMxR_Lojas" Name="vlrVendaAA" />
+          <Column Table="tblMxR_Lojas" Name="Dia" />
+        </Columns>
+      </Query>
+      <ConnectionOptions CloseConnection="true" />
+      <CalculatedFields>
+        <CalculatedField Name="Dif" Expression="[vlrVenda] - [vlrMeta_Venda]" DataType="Decimal" DataMember="tblMxR_Lojas" />
+        <CalculatedField Name="% Ating" Expression="[vlrVenda] / [vlrMeta_Venda] - 1" DataType="Auto" DataMember="tblMxR_Lojas" />
+        <CalculatedField Name="Falta_Atingir" Expression="[vlrMeta_Venda] - [vlrVenda]" DataType="Auto" DataMember="tblMxR_Lojas" />
+        <CalculatedField Name="new" Expression="[vlrVenda] / [vlrMeta_Venda] * 100" DataType="Auto" DataMember="tblMxR_Lojas" />
+      </CalculatedFields>
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <Grid ComponentName="gridDashboardItem1" Name="Meta x Realizado - Loja a Loja " DataSource="sqlDataSource1" DataMember="tblMxR_Lojas">
+      <DataItems>
+        <Dimension DataMember="Filial" DefaultId="DataItem0" />
+        <Measure DataMember="vlrMeta_Venda" DefaultId="DataItem1">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="vlrVenda" DefaultId="DataItem2">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="% Ating" DefaultId="DataItem4">
+          <NumericFormat FormatType="Percent" />
+        </Measure>
+        <Measure DataMember="vlrVenda" DefaultId="DataItem5" />
+        <Measure DataMember="vlrMeta_Venda" DefaultId="DataItem6" />
+        <Measure DataMember="vlrVenda" DefaultId="DataItem3" />
+        <Measure DataMember="vlrVendaAA" DefaultId="DataItem7" />
+      </DataItems>
+      <FormatRules>
+        <GridItemFormatRule Name="Format Rule 3" DataItem="DataItem4" DataItemApplyTo="DataItem4">
+          <FormatConditionValue Condition="Less">
+            <AppearanceSettings AppearanceType="FontRed" />
+            <Value1 Type="System.Decimal" Value="0" />
+          </FormatConditionValue>
+        </GridItemFormatRule>
+        <GridItemFormatRule Name="Format Rule 2">
+          <FormatConditionValue Condition="Less">
+            <AppearanceSettings AppearanceType="FontRed" />
+            <Value1 Type="System.Decimal" Value="0" />
+          </FormatConditionValue>
+        </GridItemFormatRule>
+        <GridItemFormatRule Name="Format Rule 4" DataItem="DataItem1" DataItemApplyTo="DataItem1">
+          <FormatConditionValue Condition="Greater">
+            <AppearanceSettings AppearanceType="FontGreen" />
+            <Value1 Type="System.Decimal" Value="0" />
+          </FormatConditionValue>
+        </GridItemFormatRule>
+        <GridItemFormatRule Name="Format Rule 5" DataItem="DataItem2" DataItemApplyTo="DataItem2">
+          <FormatConditionValue Condition="Greater">
+            <AppearanceSettings AppearanceType="FontBlue" />
+            <Value1 Type="System.Decimal" Value="0" />
+          </FormatConditionValue>
+        </GridItemFormatRule>
+        <GridItemFormatRule Name="Format Rule 8">
+          <FormatConditionValue Condition="Greater">
+            <IconSettings IconType="DirectionalGreenTriangleUp" />
+            <Value1 Type="System.Decimal" Value="0" />
+          </FormatConditionValue>
+        </GridItemFormatRule>
+        <GridItemFormatRule Name="Format Rule 6">
+          <FormatConditionValue Condition="Less">
+            <IconSettings IconType="DirectionalRedTriangleDown" />
+            <Value1 Type="System.Decimal" Value="0" />
+          </FormatConditionValue>
+        </GridItemFormatRule>
+        <GridItemFormatRule Name="Format Rule 1" DataItemApplyTo="DataItem4">
+          <FormatConditionColorRangeBar ValueType="Percent">
+            <RangeSet>
+              <Ranges>
+                <RangeInfo>
+                  <Value Type="System.Decimal" Value="0" />
+                  <BarStyleSettings PredefinedColor="Red" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Decimal" Value="50" />
+                  <BarStyleSettings PredefinedColor="Green" />
+                </RangeInfo>
+              </Ranges>
+            </RangeSet>
+            <BarOptions />
+          </FormatConditionColorRangeBar>
+        </GridItemFormatRule>
+        <GridItemFormatRule Name="Format Rule 7" DataItem="DataItem4" DataItemApplyTo="DataItem4">
+          <FormatConditionBar>
+            <NegativeStyleSettings />
+            <StyleSettings PredefinedColor="PaleRed" />
+            <BarOptions />
+          </FormatConditionBar>
+        </GridItemFormatRule>
+        <GridItemFormatRule Name="Format Rule 9" DataItemApplyTo="DataItem4">
+          <FormatConditionBar MinimumType="Percent" MaximumType="Percent">
+            <NegativeStyleSettings />
+            <StyleSettings PredefinedColor="PaleRed" />
+            <BarOptions ShowBarOnly="true" AllowNegativeAxis="false" DrawAxis="true" />
+          </FormatConditionBar>
+        </GridItemFormatRule>
+      </FormatRules>
+      <GridColumns>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem0" />
+        </GridDimensionColumn>
+        <GridDeltaColumn Name="% Cresc A.A">
+          <ActualValue DefaultId="DataItem3" />
+          <TargetValue DefaultId="DataItem7" />
+          <DeltaOptions ValueType="PercentVariation" />
+        </GridDeltaColumn>
+        <GridMeasureColumn Name="Meta">
+          <Measure DefaultId="DataItem1" />
+        </GridMeasureColumn>
+        <GridMeasureColumn Name="Real">
+          <Measure DefaultId="DataItem2" />
+        </GridMeasureColumn>
+        <GridDeltaColumn Name="Meta x Real">
+          <ActualValue DefaultId="DataItem5" />
+          <TargetValue DefaultId="DataItem6" />
+        </GridDeltaColumn>
+        <GridMeasureColumn Name="% Ating">
+          <Measure DefaultId="DataItem4" />
+        </GridMeasureColumn>
+      </GridColumns>
+      <GridOptions EnableBandedRows="true" WordWrap="true" />
+    </Grid>
+    <ComboBox ComponentName="comboBoxDashboardItem1" Name="Periodo" DataSource="sqlDataSource1" DataMember="tblMxR_Lojas" ShowAllValue="false">
+      <InteractivityOptions IgnoreMasterFilters="false" />
+      <DataItems>
+        <Dimension DataMember="Dia" Name="Selecione um Dia" SortOrder="Descending" DateTimeGroupInterval="DayMonthYear" DefaultId="DataItem0" />
+      </DataItems>
+      <FilterDimensions>
+        <Dimension DefaultId="DataItem0" />
+      </FilterDimensions>
+    </ComboBox>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup>
+      <LayoutGroup Orientation="Vertical">
+        <LayoutItem DashboardItem="comboBoxDashboardItem1" />
+        <LayoutItem DashboardItem="gridDashboardItem1" />
+      </LayoutGroup>
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

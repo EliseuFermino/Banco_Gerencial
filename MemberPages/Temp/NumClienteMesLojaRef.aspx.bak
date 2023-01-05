@@ -1,0 +1,161 @@
+﻿<%@ Page Title="Número de Clientes - Loja - Mês" Language="VB" MasterPageFile="~/MemberPages/mpPrincipal.master" AutoEventWireup="false" CodeFile="NumClienteMesLojaRef.aspx.vb" Inherits="MemberPages_NumClienteMesLojaRef" %>
+
+<%@ Register assembly="DevExpress.Web.ASPxGridView.v9.1, Version=9.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxGridView" tagprefix="dxwgv" %>
+<%@ Register assembly="DevExpress.Web.ASPxEditors.v9.1, Version=9.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxEditors" tagprefix="dxe" %>
+
+<%@ Register assembly="DevExpress.Web.ASPxGridView.v9.1.Export, Version=9.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxGridView.Export" tagprefix="dxwgv" %>
+
+<%@ Register src="../Controles/wucListaAno.ascx" tagname="wucListaAno" tagprefix="uc4" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <p>
+    <table cellspacing="1" class="style1">
+        <tr>
+            <td>
+                <uc4:wucListaAno ID="cboAno" runat="server" />
+            </td>
+            <td>
+                <dxe:ASPxButton ID="btnExportarExcel" runat="server" 
+                    CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+                    Text="Exportar para Excel" Width="150px">
+                </dxe:ASPxButton>
+            </td>
+            <td>
+                <asp:Label ID="lblAno" runat="server" Text="Label" style="color: #0033CC"></asp:Label>
+            </td>
+            <td>
+                <dxwgv:ASPxGridViewExporter ID="ASPxGridViewExporter1" runat="server" 
+                    GridViewID="ASPxGridView1">
+                </dxwgv:ASPxGridViewExporter>
+            </td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+    </table>
+    <table cellspacing="1" class="style1">
+        <tr>
+            <td>
+                <dxwgv:ASPxGridView ID="ASPxGridView1" runat="server" 
+                    AutoGenerateColumns="False" CssFilePath="~/App_Themes/Office2003 Blue/{0}/styles.css" 
+                    CssPostfix="Office2003_Blue" DataSourceID="SqlDataSource1" Width="1000px" 
+                    KeyFieldName="FilialLista">
+                    <SettingsBehavior AllowFocusedRow="True" />
+                    <Styles CssFilePath="~/App_Themes/Office2003 Blue/{0}/styles.css" 
+                        CssPostfix="Office2003_Blue">
+                        <AlternatingRow BackColor="#ECF5FF">
+                        </AlternatingRow>
+                        <Header ImageSpacing="5px" SortingImageSpacing="5px">
+                        </Header>
+                        <LoadingPanel ImageSpacing="10px">
+                        </LoadingPanel>
+                    </Styles>
+                    <SettingsPager mode="ShowAllRecords">
+                    </SettingsPager>
+                    <Images ImageFolder="~/App_Themes/Office2003 Blue/{0}/">
+                        <CollapsedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvCollapsedButton.png" 
+                            Width="11px" />
+                        <ExpandedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvExpandedButton.png" 
+                            Width="11px" />
+                        <DetailCollapsedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvCollapsedButton.png" 
+                            Width="11px" />
+                        <DetailExpandedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvExpandedButton.png" 
+                            Width="11px" />
+                        <FilterRowButton Height="13px" Width="13px" />
+                    </Images>
+                    <SettingsText EmptyDataRow="Não há número de clientes para este ano ainda." 
+                        Title="Total de Número de Cliente por Loja - Mensal" />
+                    <Columns>
+                        <dxwgv:GridViewDataTextColumn FieldName="FilialLista" VisibleIndex="0" 
+                            Caption="Filial" Width="150px">
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn FieldName="Janeiro" ReadOnly="True" 
+                            VisibleIndex="1">
+                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn FieldName="Fevereiro" ReadOnly="True" 
+                            VisibleIndex="2">
+                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn FieldName="Março" ReadOnly="True" 
+                            VisibleIndex="3">
+                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn FieldName="ABRIL" ReadOnly="True" 
+                            VisibleIndex="4" Caption="Abril">
+                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn FieldName="Maio" ReadOnly="True" VisibleIndex="5">
+                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn FieldName="Junho" ReadOnly="True" 
+                            VisibleIndex="6">
+                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn FieldName="Julho" ReadOnly="True" 
+                            VisibleIndex="7">
+                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn FieldName="Agosto" ReadOnly="True" 
+                            VisibleIndex="8">
+                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn FieldName="Setembro" ReadOnly="True" 
+                            VisibleIndex="9">
+                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn FieldName="Outubro" ReadOnly="True" 
+                            VisibleIndex="10">
+                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn FieldName="Novembro" ReadOnly="True" 
+                            VisibleIndex="11">
+                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn FieldName="Dezembro" ReadOnly="True" 
+                            VisibleIndex="12">
+                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                    </Columns>
+                    <Settings ShowVerticalScrollBar="True" VerticalScrollableHeight="500" 
+                        ShowTitlePanel="True" />
+                    <StylesEditors>
+                        <ProgressBar Height="25px">
+                        </ProgressBar>
+                    </StylesEditors>
+                </dxwgv:ASPxGridView>
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:gerManagerConnectionString %>" 
+                    SelectCommand="SELECT FilialLista, Janeiro, Fevereiro, Março, ABRIL, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro FROM Gerencial.viewNumeroClientesLoja_Mes_Referencia WHERE (Ano = @Ano)">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="lblAno" Name="Ano" PropertyName="Text" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+            </td>
+        </tr>
+    </table>
+    <br />
+</p>
+</asp:Content>
+

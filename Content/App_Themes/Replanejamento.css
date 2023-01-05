@@ -1,0 +1,314 @@
+﻿
+td {
+    font-size: small;
+    font-family: Tahoma;
+}
+            
+.DescricaoCampo_B
+{   
+    width: 150px;           
+    border: 1px;
+    border-style:solid;
+    border-color:#999999;             
+    padding-left: 15px;                                
+} /*Descrição do Campo - Branco*/        
+.DescricaoCampo_V
+{
+    width: 150px;                      
+    border: 1px;
+    border-style:solid;
+    border-color:#999999;             
+    padding-left: 15px;
+    background-color: #E8FFE8;           
+} /*Descrição do Campo - Verde*/  
+.DescricaoCampo_L
+{
+    width: 150px;                     
+    border: 1px;
+    border-style:solid;
+    border-color:#999999;             
+    padding-left: 15px;
+    background-color:#FFE7C1;           
+} /*Descrição do Campo - Laranja*/                             
+.DescricaoCampo_A
+{
+    width: 150px;                     
+    border: 1px;
+    border-style:solid;
+    border-color:#999999;             
+    padding-left: 15px;
+    background-color:#FFFF99;           
+} /*Descrição do Campo - Amarelo*/ 
+.DescricaoCampo_R
+{
+    width: 150px;                      
+    border: 1px;
+    border-style:solid;
+    border-color:#999999;             
+    padding-left: 15px;
+    background-color:#FFE8E8;           
+} /*Descrição do Campo - Rosa*/           
+        
+.cssVlrOriginal_B
+{         
+    border: 1px;
+    border-style:solid;
+    border-color:#999999;                              
+    padding-right: 2px;
+    text-align:right;     
+    background-color:#fff;                  
+} /*Campo Valor Original - Branco*/            
+.cssVlrOriginal_V
+{
+    width: 70px;         
+    border: 1px;
+    border-style:solid;
+    border-color:#999999;                              
+    padding-right: 2px;
+    text-align:right;   
+    background-color: #E8FFE8;         
+} /*Campo Valor Original - Verde*/             
+.cssVlrOriginal_L
+{
+    width: 70px;       
+    border: 1px;
+    border-style:solid;
+    border-color:#999999;                              
+    padding-right: 2px;
+    text-align:right;   
+    background-color:#FFE7C1;
+} /*Campo Valor Original - Laranja*/                                        
+.cssVlrOriginal_A
+{
+    width: 70px;         
+    border: 1px;
+    border-style:solid;
+    border-color:#999999;                              
+    padding-right: 2px;
+    text-align:right;   
+    background-color:#FFFF99;
+} /*Campo Valor Original - Amarelo*/           
+.cssVlrOriginal_R
+{
+    width: 70px;           
+    border: 1px;
+    border-style:solid;
+    border-color:#999999;                              
+    padding-right: 2px;
+    text-align:right;   
+    background-color:#FFE8E8;
+} /*Campo Valor Original - Rosa*/              
+        
+.cssPercOriginal_B
+{
+    width: 39px;      
+    border: 1px;
+    border-style:solid;
+    border-color:#999999;                              
+    padding-right: 2px;
+    text-align:right;    
+    background-color:#fff;    
+} /*Campo Percentual Original - Branco*/             
+.cssPercOriginal_V
+{
+    width: 39px;          
+    border: 1px;
+    border-style:solid;
+    border-color:#999999;                              
+    padding-right: 2px;
+    text-align:right;       
+    background-color: #E8FFE8;
+} /*Campo Percentual Original - Verde*/                    
+.cssPercOriginal_L
+{
+    width: 39px;          
+    border: 1px;
+    border-style:solid;
+    border-color:#999999;                              
+    padding-right: 2px;
+    text-align:right;       
+    background-color: #FFE7C1;
+} /*Campo Percentual Original - Laranja*/              
+.cssPercOriginal_A
+{
+    width: 39px;        
+    border: 1px;
+    border-style:solid;
+    border-color:#999999;                              
+    padding-right: 2px;
+    text-align:right;       
+    background-color: #FFFF99;
+} /*Campo Percentual Original - Amarelo*/ 
+.cssPercOriginal_R
+{
+    width: 39px;          
+    border: 1px;
+    border-style:solid;
+    border-color:#999999;                              
+    padding-right: 2px;
+    text-align:right;       
+    background-color: #FFE8E8;
+} /*Campo Percentual Original - Rosa*/                      
+        
+.cssEspaco
+{
+    width: 1px;
+} /*Espaço em branco*/            
+        
+.cssVlrRevista_B
+{
+    border: 1px solid #999999;
+    width: 46px;
+    text-align: right;
+    color: #000000;
+    padding-right: 2px;
+    background-color:#fff;
+}  /*Campo Valor Revista - Branco*/            
+.cssVlrRevista_V
+{
+    border: 1px solid #999999;
+    width: 46px;
+    text-align: right;
+    color: #000000;
+    padding-right: 2px;
+    background-color: #E8FFE8;
+}  /*Campo Valor Revista - Verde*/  
+.cssVlrRevista_L
+{
+    border: 1px solid #999999;
+    width: 46px;
+    text-align: right;
+    color: #000000;
+    padding-right: 2px;
+    background-color: #FFE7C1;
+}  /*Campo Valor Revista - Laranja*/            
+.cssVlrRevista_A
+{
+    border: 1px solid #999999;
+    width: 46px;
+    text-align: right;
+    color: #000000;
+    padding-right: 2px;
+    background-color: #FFFF99;
+}  /*Campo Valor Revista - Amarelo*/  
+.cssVlrRevista_R
+{
+    border: 1px solid #999999;
+    width: 46px;
+    text-align: right;
+    color: #000000;
+    padding-right: 2px;
+    background-color: #FFE8E8;
+}  /*Campo Valor Revista - Rosa*/             
+                                           
+
+.cssPercRevista_B
+{
+    border: 1px solid #999999;
+    width: 46px;
+    text-align: right;
+    padding-right: 2px;
+    background-color:#fff;
+} /*Campo Percentual Revista - Branco*/       
+.cssPercRevista_V
+{
+    border: 1px solid #999999;
+    width: 46px;
+    text-align: right;
+    padding-right: 2px;
+    background-color: #E8FFE8;
+}  /*Campo Percentual Revista - Verde*/               
+.cssPercRevista_L
+{
+    border: 1px solid #999999;
+    width: 46px;
+    text-align: right;
+    padding-right: 2px;
+    background-color: #FFE7C1;
+}  /*Campo Percentual Revista - Laranja*/                    
+.cssPercRevista_A
+{
+    border: 1px solid #999999;
+    width: 46px;
+    text-align: right;
+    padding-right: 2px;
+    background-color: #FFFF99;
+}  /*Campo Percentual Revista - Amarelo*/
+.cssPercRevista_R
+{
+    border: 1px solid #999999;
+    width: 46px;
+    text-align: right;
+    padding-right: 2px;
+    background-color: #FFE8E8;
+}  /*Campo Percentual Revista - Rosa*/           
+        
+.styVlrRev
+{           
+    text-align: right;
+    background-color:#E8FFE8; 
+    color:#0000FF;            
+} /*Estilo do Controle - Verde*/   
+.styVlrRev_B
+{           
+    text-align: right; 
+    background-color:#fff;                        
+} /*Estilo do Controle - Branco*/       
+.styVlrRev_L
+{           
+    text-align: right;
+    background-color:#FFE7C1;
+    color:#0000FF;
+} /*Estilo do Controle - Laranja*/                
+.styVlrRev_A
+{           
+    text-align: right;  
+    background-color:#FFFF99;                         
+} /*Estilo do Controle - Amarelo*/          
+.styVlrRev_R
+{           
+    text-align: right;  
+    background-color:#FFE8E8;                        
+} /*Estilo do Controle - Rosa*/         
+      
+.DescConta_B {
+    width: 150px;
+    border: 1px solid #999999;
+    padding-left: 5px;
+    background-color:#fff; 
+} /*Descrição da conta - Branco*/
+.DescConta_V { 
+    width: 150px;
+    border: 1px solid #999999;
+    padding-left: 5px;
+    background-color: #E8FFE8;
+} /*Descrição da conta - Verde*/
+.DescConta_L {
+    width: 150px;
+    border: 1px solid #999999;
+    padding-left: 5px;
+    background-color: #FFE7C1;
+} /*Descrição da conta - Laranja*/     
+.DescConta_A {
+    width: 150px;
+    border: 1px solid #999999;
+    padding-left: 5px;
+    background-color: #FFFF99;
+} /*Descrição da conta - Amarelo*/                    
+.DescConta_R {
+    width: 150px;
+    border: 1px solid #999999;
+    padding-left: 5px;
+    background-color: #FFE8E8;
+} /*Descrição da conta - Rosa*/           
+        
+.TabelaBorda
+{
+    margin-left: 5px;
+    vertical-align: central;
+    width: 550px;
+    border-collapse: collapse;            
+}     
+
+    
+       

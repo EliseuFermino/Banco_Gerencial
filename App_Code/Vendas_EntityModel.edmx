@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="VendasModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="VendasModelStoreContainer">
+          <EntitySet Name="tblVenda_Mes" EntityType="VendasModel.Store.tblVenda_Mes" store:Type="Tables" Schema="Posto" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+        </EntityContainer>
+        <EntityType Name="tblVenda_Mes">
+          <Key>
+            <PropertyRef Name="Posto_Filial" />
+            <PropertyRef Name="Ano" />
+            <PropertyRef Name="Mes" />
+            <PropertyRef Name="Posto_Cod" />
+          </Key>
+          <Property Name="Posto_Filial" Type="tinyint" Nullable="false" />
+          <Property Name="Ano" Type="smallint" Nullable="false" />
+          <Property Name="Mes" Type="tinyint" Nullable="false" />
+          <Property Name="Posto_Cod" Type="smallint" Nullable="false" />
+          <Property Name="Qtde" Type="money" />
+          <Property Name="vlrVenda" Type="money" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VendasModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Vendas_Entities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="tblVenda_Mes" EntityType="VendasModel.tblVenda_Mes" />
+        </EntityContainer>
+        <EntityType Name="tblVenda_Mes">
+          <Key>
+            <PropertyRef Name="Posto_Filial" />
+            <PropertyRef Name="Ano" />
+            <PropertyRef Name="Mes" />
+            <PropertyRef Name="Posto_Cod" />
+          </Key>
+          <Property Name="Posto_Filial" Type="Byte" Nullable="false" />
+          <Property Name="Ano" Type="Int16" Nullable="false" />
+          <Property Name="Mes" Type="Byte" Nullable="false" />
+          <Property Name="Posto_Cod" Type="Int16" Nullable="false" />
+          <Property Name="Qtde" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="vlrVenda" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VendasModelStoreContainer" CdmEntityContainer="Vendas_Entities">
+          <EntitySetMapping Name="tblVenda_Mes">
+            <EntityTypeMapping TypeName="VendasModel.tblVenda_Mes">
+              <MappingFragment StoreEntitySet="tblVenda_Mes">
+                <ScalarProperty Name="Posto_Filial" ColumnName="Posto_Filial" />
+                <ScalarProperty Name="Ano" ColumnName="Ano" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="Posto_Cod" ColumnName="Posto_Cod" />
+                <ScalarProperty Name="Qtde" ColumnName="Qtde" />
+                <ScalarProperty Name="vlrVenda" ColumnName="vlrVenda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams />
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,83 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="SiteGerencial.master.vb" Inherits="MemberPages_SiteVendas" %>
+
+<%@ Register assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web" tagprefix="dx" %>
+
+
+
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
+    </asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+
+    <dx:ASPxSplitter ID="ASPxSplitter1" ClientInstanceName="splitter" 
+        Height="800px" Width="100%" runat="server" Theme="DevEx">
+        <panes>
+            <dx:SplitterPane Size="150px" ShowCollapseBackwardButton="True" 
+                AutoHeight="True" AutoWidth="True" >
+                <PaneStyle>
+                    <Paddings Padding="0px" PaddingBottom="0px" PaddingLeft="0px" 
+                        PaddingRight="0px" PaddingTop="0px" />
+                </PaneStyle>
+                <ContentCollection>
+                    <dx:SplitterContentControl>
+
+                        <dx:ASPxNavBar ID="navGerencial" runat="server" AutoCollapse="True" 
+                            EnableTheming="True" Theme="Office2010Silver" Width="160px">
+                            <Groups>
+                                <dx:NavBarGroup Text="Informações">
+                                    <Items>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/Gerencial/Enxoval.aspx" 
+                                            Text="Enxoval">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/Gerencial/CAI.aspx" Text="CAI">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                    </Items>
+                                </dx:NavBarGroup>
+                                <dx:NavBarGroup Expanded="False" Text="Garantia Estendida">
+                                    <Items>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/GE/DistribuicaoVendas.aspx" 
+                                            Text="Analise por Loja">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/GE/GEresumoDepto.aspx" 
+                                            Text="Resumo Depto.">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/GE/GEresumoSecao.aspx" 
+                                            Text="Resumo Seção">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                    </Items>
+                                </dx:NavBarGroup>
+                                <dx:NavBarGroup Expanded="False" 
+                                    NavigateUrl="~/MemberPages/Resultado Financeiro/frmParaEliseu.aspx" 
+                                    Text="Resultado Financeiro">
+                                </dx:NavBarGroup>
+                            </Groups>
+                        </dx:ASPxNavBar>
+                        <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+                        </asp:ContentPlaceHolder>
+
+                    </dx:SplitterContentControl>
+                </ContentCollection>
+                   
+            </dx:SplitterPane>
+
+            <dx:SplitterPane Name="ContentUrlPane" ScrollBars="Auto" ContentUrlIFrameName="contentUrlPane">
+                <ContentCollection>
+                    <dx:SplitterContentControl runat="server" SupportsDisabledAttribute="True">
+                        <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+                    </dx:SplitterContentControl>
+                </ContentCollection>
+            </dx:SplitterPane>
+        </panes>
+    </dx:ASPxSplitter>
+</asp:Content>
+

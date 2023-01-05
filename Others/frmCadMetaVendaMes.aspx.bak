@@ -1,0 +1,1360 @@
+﻿<%@ Page Title="Cadastro de Metas Vendas" Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="frmCadMetaVendaMes.aspx.vb" Inherits="MemberPages_frmCadMetaVendaMes" %>
+
+<%@ Register assembly="DevExpress.Web.v9.1, Version=9.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxPanel" tagprefix="dxp" %>
+<%@ Register assembly="DevExpress.Web.v9.1, Version=9.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxRoundPanel" tagprefix="dxrp" %>
+<%@ Register assembly="DevExpress.Web.ASPxEditors.v9.1, Version=9.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxEditors" tagprefix="dxe" %>
+
+<%@ Register assembly="DevExpress.Web.ASPxGridView.v9.1, Version=9.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxGridView" tagprefix="dxwgv" %>
+
+<%@ Register assembly="DevExpress.Web.ASPxGridView.v9.1.Export, Version=9.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxGridView.Export" tagprefix="dxwgv" %>
+
+<%@ Register src="../Controles/wucLink_DRE.ascx" tagname="wucLink_DRE" tagprefix="uc1" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style type="text/css">
+    .style4
+    {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .style8
+    {
+        height: 17px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: small;
+        width: 175px;
+    }
+    .style10
+    {
+        height: 17px;
+        width: 106px;
+    }
+    .style13
+    {
+        height: 17px;
+        width: 102px;
+    }
+    .style5
+    {
+        height: 17px;
+    }
+    .style9
+    {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: small;
+        width: 175px;
+    }
+    .style11
+    {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: small;
+            width: 106px;
+        }
+    .style14
+    {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: small;
+            width: 102px;
+        }
+    .style6
+    {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: small;
+    }
+    .style12
+    {
+            height: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: small;
+            width: 106px;
+        }
+    .style15
+    {
+            height: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: small;
+            width: 102px;
+        }
+    .style7
+    {
+        height: 17px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: small;
+    }
+    .style16
+    {
+        height: 19px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: small;
+        width: 175px;
+    }
+    .style17
+    {
+        height: 19px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: small;
+        width: 106px;
+    }
+    .style18
+    {
+        height: 19px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: small;
+        width: 102px;
+    }
+    .style19
+    {
+        height: 19px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: small;
+    }
+
+.dxeButtonEdit_Aqua
+{
+    background-color: White;
+    border: Solid 1px #AECAF0;
+    width: 170px;
+}
+.dxeEditArea_Aqua 
+{
+	font-family: Tahoma;
+	font-size: 9pt;
+	border: 1px solid #A0A0A0;
+}
+.dxeButtonEditButton_Aqua
+{
+	padding: 5px 2px 5px 2px;
+}
+.dxeButtonEditButton_Aqua,
+.dxeSpinIncButton_Aqua, .dxeSpinDecButton_Aqua, .dxeSpinLargeIncButton_Aqua, .dxeSpinLargeDecButton_Aqua
+{
+    padding: 1px 2px 3px 2px;
+	background-image: url('../App_Themes/Aqua/Editors/edtDropDownBack.gif');
+    background-repeat: repeat-x;
+    background-color: #DBEBFF;
+}
+.dxeButtonEditButton_Aqua, .dxeCalendarButton_Aqua,
+.dxeSpinIncButton_Aqua, .dxeSpinDecButton_Aqua,
+.dxeSpinLargeIncButton_Aqua, .dxeSpinLargeDecButton_Aqua
+{	
+	vertical-align: Middle;
+	border: Solid 1px #A3C0E8;
+	cursor: pointer;
+	cursor: hand;
+} 
+        .style23
+        {
+            width: 37px;
+        }
+        .style24
+        {
+            width: 95px;
+        }
+        .style25
+        {
+            width: 33px;
+        }
+        .style26
+        {
+            color: #666666;
+        }
+        .style27
+        {
+            width: 158px;
+        }
+        .style28
+        {
+            width: 107px;
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+        .style29
+        {
+            width: 100px;
+        }
+        .style31
+        {
+            width: 103px;
+        }
+        .style32
+        {
+            width: 161px;
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+        .style33
+        {
+            width: 431px;
+        }
+        .style34
+        {
+            width: 268px;
+        }
+        .style36
+        {
+            width: 89px;
+        }
+        .style37
+        {
+            width: 104px;
+        }
+        .style38
+        {
+            width: 245px;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <p>
+    <table cellspacing="1" class="style4">
+        <tr>
+            <td>
+                <table cellspacing="1" class="style1">
+                    <tr>
+                        <td class="style23">
+                            Ano:</td>
+                        <td class="style24">
+                                                <dxe:ASPxComboBox ID="cboAno" runat="server" AutoPostBack="True" 
+                                                    CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+                                                    ImageFolder="~/App_Themes/Aqua/{0}/" 
+                                LoadingPanelText="" ShowShadow="False" 
+                                                    ValueType="System.String" Width="61px">
+                                                    <Items>
+                                                        <dxe:ListEditItem Text="2010" Value="2010" />
+                                                        <dxe:ListEditItem Text="2011" Value="2011" />
+                                                        <dxe:ListEditItem Text="2012" Value="2012" />
+                                                    </Items>
+                                                    <ButtonEditEllipsisImage Height="3px" 
+                                                        Url="~/App_Themes/Aqua/Editors/edtEllipsis.png" 
+                                                        UrlDisabled="~/App_Themes/Aqua/Editors/edtEllipsisDisabled.png" 
+                                                        UrlHottracked="~/App_Themes/Aqua/Editors/edtEllipsisHottracked.png" 
+                                                        UrlPressed="~/App_Themes/Aqua/Editors/edtEllipsisPressed.png" 
+                                                        Width="12px" />
+                                                    <DropDownButton>
+                                                        <Image Height="7px" Url="~/App_Themes/Aqua/Editors/edtDropDown.png" 
+                                                            UrlDisabled="~/App_Themes/Aqua/Editors/edtDropDownDisabled.png" 
+                                                            UrlHottracked="~/App_Themes/Aqua/Editors/edtDropDownHottracked.png" 
+                                                            UrlPressed="~/App_Themes/Aqua/Editors/edtDropDownPressed.png" 
+                                                            Width="9px" />
+                                                    </DropDownButton>
+                                                    <ValidationSettings>
+                                                        <ErrorImage Height="14px" Url="~/App_Themes/Aqua/Editors/edtError.png" 
+                                                            Width="14px" />
+                                                        <ErrorFrameStyle ImageSpacing="4px">
+                                                            <ErrorTextPaddings PaddingLeft="4px" />
+                                                        </ErrorFrameStyle>
+                                                    </ValidationSettings>
+                                                </dxe:ASPxComboBox>
+                                            </td>
+                        <td class="style25">
+                            Mês:</td>
+                        <td>
+                                                <dxe:ASPxComboBox ID="cboMes" runat="server" AutoPostBack="True" 
+                                                    CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+                                                    ImageFolder="~/App_Themes/Aqua/{0}/" 
+                                LoadingPanelText="" ShowShadow="False" 
+                                                    ValueType="System.String" Width="105px">
+                                                    <Items>
+                                                        <dxe:ListEditItem Text="Janeiro" Value="1" />
+                                                        <dxe:ListEditItem Text="Fevereiro" Value="2" />
+                                                        <dxe:ListEditItem Text="Março" Value="3" />
+                                                        <dxe:ListEditItem Text="Abril" Value="4" />
+                                                        <dxe:ListEditItem Text="Maio" Value="5" />
+                                                        <dxe:ListEditItem Text="Junho" Value="6" />
+                                                        <dxe:ListEditItem Text="Julho" Value="7" />
+                                                        <dxe:ListEditItem Text="Agosto" Value="8" />
+                                                        <dxe:ListEditItem Text="Setembro" Value="9" />
+                                                        <dxe:ListEditItem Text="Outubro" Value="10" />
+                                                        <dxe:ListEditItem Text="Novembro" Value="11" />
+                                                        <dxe:ListEditItem Text="Dezembro" Value="12" />
+                                                    </Items>
+                                                    <ButtonEditEllipsisImage Height="3px" 
+                                                        Url="~/App_Themes/Aqua/Editors/edtEllipsis.png" 
+                                                        UrlDisabled="~/App_Themes/Aqua/Editors/edtEllipsisDisabled.png" 
+                                                        UrlHottracked="~/App_Themes/Aqua/Editors/edtEllipsisHottracked.png" 
+                                                        UrlPressed="~/App_Themes/Aqua/Editors/edtEllipsisPressed.png" 
+                                                        Width="12px" />
+                                                    <DropDownButton>
+                                                        <Image Height="7px" Url="~/App_Themes/Aqua/Editors/edtDropDown.png" 
+                                                            UrlDisabled="~/App_Themes/Aqua/Editors/edtDropDownDisabled.png" 
+                                                            UrlHottracked="~/App_Themes/Aqua/Editors/edtDropDownHottracked.png" 
+                                                            UrlPressed="~/App_Themes/Aqua/Editors/edtDropDownPressed.png" 
+                                                            Width="9px" />
+                                                    </DropDownButton>
+                                                    <ValidationSettings>
+                                                        <ErrorImage Height="14px" Url="~/App_Themes/Aqua/Editors/edtError.png" 
+                                                            Width="14px" />
+                                                        <ErrorFrameStyle ImageSpacing="4px">
+                                                            <ErrorTextPaddings PaddingLeft="4px" />
+                                                        </ErrorFrameStyle>
+                                                    </ValidationSettings>
+                                                </dxe:ASPxComboBox>
+                                            </td>
+                        <td>
+                            &nbsp;</td>
+                        <td>
+                            &nbsp;</td>
+                        <td>
+                            &nbsp;</td>
+                    </tr>
+                </table>
+                <table cellspacing="1" class="style1">
+                    <tr>
+                        <td>
+                            <asp:HyperLink ID="HyperLink3" runat="server" 
+                                NavigateUrl="~/MemberPages/frmReplan2.aspx">-</asp:HyperLink>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table cellspacing="1" class="style4">
+        <tr>
+            <td align="left" style="padding-left: 4px" valign="top" class="style33">
+                <dxrp:ASPxRoundPanel ID="ASPxRoundPanel1" runat="server" BackColor="White" 
+                    CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" Height="1380px" 
+                    Width="300px" HeaderText="Cadastro de Meta de Venda - Revista">
+                    <TopEdge>
+                        <BackgroundImage ImageUrl="~/App_Themes/Aqua/Web/rpTopEdge.gif" 
+                            Repeat="RepeatX" VerticalPosition="Top" />
+                    </TopEdge>
+                    <LeftEdge>
+                        <BackgroundImage ImageUrl="~/App_Themes/Aqua/Web/rpLeftEdge.gif" 
+                            Repeat="RepeatY" VerticalPosition="Top" />
+                    </LeftEdge>
+                    <BottomRightCorner Height="7px" Url="~/App_Themes/Aqua/Web/rpBottomRight.png" 
+                        Width="7px" />
+                    <ContentPaddings Padding="2px" />
+                    <NoHeaderTopRightCorner Height="7px" 
+                        Url="~/App_Themes/Aqua/Web/rpNoHeaderTopRight.png" Width="7px" />
+                    <RightEdge>
+                        <BackgroundImage ImageUrl="~/App_Themes/Aqua/Web/rpRightEdge.gif" 
+                            Repeat="RepeatY" VerticalPosition="Top" />
+                    </RightEdge>
+                    <HeaderRightEdge>
+                        <BackgroundImage ImageUrl="~/App_Themes/Aqua/Web/rpHeaderBackground.gif" 
+                            Repeat="RepeatX" VerticalPosition="Top" />
+                    </HeaderRightEdge>
+                    <Border BorderColor="#AECAF0" BorderStyle="Solid" BorderWidth="1px" />
+                    <HeaderLeftEdge>
+                        <BackgroundImage ImageUrl="~/App_Themes/Aqua/Web/rpHeaderBackground.gif" 
+                            Repeat="RepeatX" VerticalPosition="Top" />
+                    </HeaderLeftEdge>
+                    <HeaderStyle BackColor="#E0EDFF" HorizontalAlign="Center">
+                    <BorderBottom BorderColor="#AECAF0" BorderStyle="Solid" BorderWidth="1px" />
+                    </HeaderStyle>
+                    <BottomEdge>
+                        <BackgroundImage ImageUrl="~/App_Themes/Aqua/Web/rpBottomEdge.gif" 
+                            Repeat="RepeatX" VerticalPosition="Bottom" />
+                    </BottomEdge>
+                    <TopRightCorner Height="7px" Url="~/App_Themes/Aqua/Web/rpTopRight.png" 
+                        Width="7px" />
+                    <HeaderContent>
+                        <BackgroundImage ImageUrl="~/App_Themes/Aqua/Web/rpHeaderBackground.gif" 
+                            Repeat="RepeatX" VerticalPosition="Top" />
+                    </HeaderContent>
+                    <NoHeaderTopEdge BackColor="White">
+                        <BackgroundImage ImageUrl="~/App_Themes/Aqua/Web/rpNoHeaderTopEdge.gif" 
+                            Repeat="RepeatX" VerticalPosition="Top" />
+                    </NoHeaderTopEdge>
+                    <NoHeaderTopLeftCorner Height="7px" 
+                        Url="~/App_Themes/Aqua/Web/rpNoHeaderTopLeft.png" Width="7px" />
+                    <PanelCollection>
+<dxp:PanelContent runat="server">
+    <table cellspacing="1" class="style1">
+        <tr>
+            <td>
+                <asp:Panel ID="Panel2" runat="server" BorderColor="#999999" BorderStyle="Solid" 
+                    BorderWidth="1px" Width="375px">
+                    <table cellpadding="0" class="style4">
+                        <tr>
+                            <td align="center" bgcolor="#99CCFF" class="style32" 
+                                style="border-right-style: solid; border-right-width: 1px; border-right-color: #999999">
+                                Filial</td>
+                            <td align="center" bgcolor="#99CCFF" class="style28" 
+                                style="border-right-style: solid; border-right-width: 1px; border-right-color: #999999">
+                                Original</td>
+                            <td align="center" bgcolor="#99CCFF" class="style2">
+                                Revista</td>
+                        </tr>
+                    </table>
+                </asp:Panel>
+            </td>
+        </tr>
+    </table>
+    <asp:Panel ID="Panel1" runat="server" Height="1400px" Width="400px" 
+        ScrollBars="Vertical">
+        <table cellpadding="0" class="style4">
+            <tr>
+                <td bgcolor="#F9F9F7" class="style8" style="border: 1px solid #C0C0C0">
+                    &nbsp;03 - Santa Felicidade&nbsp;</td>
+                <td align="right" bgcolor="#F9F9F7" class="style10" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja03" runat="server" 
+                        style="font-family: Arial, Helvetica, sans-serif; font-size: small" 
+                        Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style13" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja03" runat="server" BackColor="#F9F9F7" 
+                        BorderStyle="None" Width="90px" onfocus="this.select();" 
+                        style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style5">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;04 - Lapa&nbsp;</td>
+                <td class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja04" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja04" runat="server" BorderStyle="None" Width="90px" 
+                        onfocus="this.select();" style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style8" style="border: 1px solid #C0C0C0">
+                    &nbsp;05 - Aruaucária&nbsp;</td>
+                <td bgcolor="#F9F9F7" class="style12" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja05" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style15" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja05" runat="server" BackColor="#F9F9F7" 
+                        BorderStyle="None" Width="90px" onfocus="this.select();" 
+                        style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style7">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;06 - Pinheirinho&nbsp;</td>
+                <td class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja06" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja06" runat="server" BorderStyle="None" Width="90px" 
+                        onfocus="this.select();" style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;07 - Hauer&nbsp;</td>
+                <td bgcolor="#F9F9F7" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja07" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja07" runat="server" BackColor="#F9F9F7" 
+                        BorderStyle="None" Width="90px" onfocus="this.select();" 
+                        style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;08 - Paranaguá&nbsp;</td>
+                <td class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja08" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja08" runat="server" BorderStyle="None" Width="90px" 
+                        onfocus="this.select();" style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;09 - Londrina&nbsp;</td>
+                <td bgcolor="#F9F9F7" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja09" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja09" runat="server" BackColor="#F9F9F7" 
+                        BorderStyle="None" Width="90px" onfocus="this.select();" 
+                        style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;11 - São Bráz&nbsp;</td>
+                <td class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja11" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja11" runat="server" BorderStyle="None" Width="90px" 
+                        onfocus="this.select();" style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;13 - Guarapuava&nbsp;</td>
+                <td bgcolor="#F9F9F7" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja13" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja13" runat="server" BackColor="#F9F9F7" 
+                        BorderStyle="None" Width="90px" onfocus="this.select();" 
+                        style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;14 - São José dos Pinhais&nbsp;</td>
+                <td class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja14" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja14" runat="server" BorderStyle="None" Width="90px" 
+                        onfocus="this.select();" style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;15 - Apucarana&nbsp;</td>
+                <td bgcolor="#F9F9F7" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja15" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja15" runat="server" BackColor="#F9F9F7" 
+                        BorderStyle="None" Width="90px" onfocus="this.select();" 
+                        style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="White" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;17 - Ahú&nbsp;</td>
+                <td bgcolor="White" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja17" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="White" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja17" runat="server" BorderStyle="None" Width="90px" 
+                        onfocus="this.select();" style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;18 - Ponta Grossa Centro&nbsp;</td>
+                <td bgcolor="#F9F9F7" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja18" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja18" runat="server" BackColor="#F9F9F7" 
+                        BorderStyle="None" Width="90px" onfocus="this.select();" 
+                        style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="White" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;19 - Ponta Grossa Nova&nbsp;</td>
+                <td bgcolor="White" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja19" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="White" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja19" runat="server" BorderStyle="None" Width="90px" 
+                        onfocus="this.select();" style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style16" style="border: 1px solid #C0C0C0">
+                    &nbsp;20 - Maringá&nbsp;</td>
+                <td bgcolor="#F9F9F7" class="style17" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja20" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style18" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja20" runat="server" BackColor="#F9F9F7" 
+                        BorderStyle="None" Width="90px" onfocus="this.select();" 
+                        style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style19">
+                </td>
+            </tr>
+            <tr>
+                <td bgcolor="White" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;21 - Nilo Peçanha&nbsp;</td>
+                <td bgcolor="White" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja21" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="White" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja21" runat="server" BorderStyle="None" Width="90px" 
+                        onfocus="this.select();" style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;22 - Champagnat&nbsp;</td>
+                <td bgcolor="#F9F9F7" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja22" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja22" runat="server" BackColor="#F9F9F7" 
+                        BorderStyle="None" Width="90px" onfocus="this.select();" 
+                        style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="White" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;23 - Araucária Nova&nbsp;</td>
+                <td bgcolor="White" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja23" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="White" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja23" runat="server" BorderStyle="None" Width="90px" 
+                        onfocus="this.select();" style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;24 - Santa Cândida&nbsp;</td>
+                <td bgcolor="#F9F9F7" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja24" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja24" runat="server" BackColor="#F9F9F7" 
+                        BorderStyle="None" Width="90px" onfocus="this.select();" 
+                        style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="White" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;25 - Raia&nbsp;</td>
+                <td bgcolor="White" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja25" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="White" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja25" runat="server" BorderStyle="None" Width="90px" 
+                        onfocus="this.select();" style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style8" style="border: 1px solid #C0C0C0">
+                    &nbsp;26 - Torres</td>
+                <td bgcolor="#F9F9F7" class="style12" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja26" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style15" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja26" runat="server" BackColor="#F9F9F7" 
+                        BorderStyle="None" Width="90px" onfocus="this.select();" 
+                        style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style7">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="White" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;27 - Novo Mundo&nbsp;</td>
+                <td bgcolor="White" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja27" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="White" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja27" runat="server" BorderStyle="None" Width="90px" 
+                        onfocus="this.select();" style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;28 - Cristo Rei&nbsp;</td>
+                <td bgcolor="#F9F9F7" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja28" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja28" runat="server" BackColor="#F9F9F7" 
+                        BorderStyle="None" Width="90px" onfocus="this.select();" 
+                        style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="White" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;29 - Água Verde&nbsp;</td>
+                <td bgcolor="White" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja29" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="White" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja29" runat="server" BorderStyle="None" Width="90px" 
+                        onfocus="this.select();" style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style8" style="border: 1px solid #C0C0C0">
+                    &nbsp;30 - Fazenda Rio Grande&nbsp;</td>
+                <td bgcolor="#F9F9F7" class="style12" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja30" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style15" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja30" runat="server" BackColor="#F9F9F7" 
+                        BorderStyle="None" Width="90px" onfocus="this.select();" 
+                        style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style7">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="White" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;31 - Campo Largo&nbsp;</td>
+                <td bgcolor="White" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja31" runat="server" Text="Label" CssClass="style26" ></asp:Label>
+                </td>
+                <td bgcolor="White" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja31" runat="server" BorderStyle="None" Width="90px" 
+                        onfocus="this.select();" style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;32 - Uvaranas&nbsp;</td>
+                <td bgcolor="#F9F9F7" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja32" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja32" runat="server" BackColor="#F9F9F7" 
+                        BorderStyle="None" Width="90px" onfocus="this.select();" 
+                        style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;33 - S.J.P. Braga&nbsp;</td>
+                <td bgcolor="#F9F9F7" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja33" runat="server" CssClass="style26" Text="Label"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja33" runat="server" AutoPostBack="True" 
+                        BackColor="#F9F9F7" BorderStyle="None" onfocus="this.select();" 
+                        style="text-align:right" Width="90px"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="White" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;34 - Brasilia&nbsp;</td>
+                <td bgcolor="White" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja34" runat="server" Text="Label" CssClass="style26"></asp:Label>
+                </td>
+                <td bgcolor="White" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja34" runat="server" BorderStyle="None" Width="90px" 
+                        onfocus="this.select();" style="text-align:right" AutoPostBack="True"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;36 - Castro&nbsp;</td>
+                <td bgcolor="#F9F9F7" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja36" runat="server" CssClass="style26" Text="Label"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja36" runat="server" AutoPostBack="True" 
+                        BackColor="#F9F9F7" BorderStyle="None" onfocus="this.select();" 
+                        style="text-align:right" Width="90px"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;37 - Cajuru&nbsp;</td>
+                <td bgcolor="#F9F9F7" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja37" runat="server" CssClass="style26" Text="Label"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja37" runat="server" AutoPostBack="True" 
+                        BackColor="#F9F9F7" BorderStyle="None" onfocus="this.select();" 
+                        style="text-align:right" Width="90px"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;38 - Colombo&nbsp;</td>
+                <td bgcolor="#F9F9F7" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja38" runat="server" CssClass="style26" Text="Label"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja38" runat="server" AutoPostBack="True" 
+                        BackColor="#F9F9F7" BorderStyle="None" onfocus="this.select();" 
+                        style="text-align:right" Width="90px"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;39 - Pinhais&nbsp;</td>
+                <td bgcolor="#F9F9F7" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja39" runat="server" CssClass="style26" Text="Label"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja39" runat="server" AutoPostBack="True" 
+                        BackColor="#F9F9F7" BorderStyle="None" onfocus="this.select();" 
+                        style="text-align:right" Width="90px"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td bgcolor="#F9F9F7" class="style9" style="border: 1px solid #C0C0C0">
+                    &nbsp;10 - Campo Comprido&nbsp;</td>
+                <td bgcolor="#F9F9F7" class="style11" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right">
+                    <asp:Label ID="lblLoja10" runat="server" CssClass="style26" Text="Label"></asp:Label>
+                </td>
+                <td bgcolor="#F9F9F7" class="style14" 
+                    style="border: 1px solid #C0C0C0; padding-right: 4px; text-align: right;">
+                    <asp:TextBox ID="txtLoja10" runat="server" AutoPostBack="True" 
+                        BackColor="#F9F9F7" BorderStyle="None" onfocus="this.select();" 
+                        style="text-align:right" Width="90px"></asp:TextBox>
+                </td>
+                <td class="style6">
+                    &nbsp;</td>
+            </tr>
+        </table>
+    </asp:Panel>
+    <table cellspacing="1" class="style4">
+        <tr>
+            <td class="style27" style="border: 1px solid #999999; padding-right: 4px" 
+                bgcolor="Honeydew">
+                <b>&nbsp;Total da Empresa =&gt;</b>&nbsp;</td>
+            <td align="right" class="style31" 
+                style="border: 1px solid #999999; padding-right: 4px" bgcolor="Honeydew">
+                <asp:Label ID="lblEmpresa" runat="server" CssClass="style26" 
+                    style="font-weight: 700; font-family: Arial, Helvetica, sans-serif; font-size: small;" 
+                    Text="Label"></asp:Label>
+            </td>
+            <td align="right" class="style29" 
+                style="border: 1px solid #999999; padding-right: 4px" bgcolor="Honeydew">
+                <asp:TextBox ID="txtLojaTotal" runat="server" BackColor="Honeydew" 
+                    BorderStyle="None" Font-Bold="True" onfocus="this.select();" 
+                    style="text-align:right; font-family: Arial, Helvetica, sans-serif; font-size: small;" 
+                    Width="90px"></asp:TextBox>
+            </td>
+            <td>
+                &nbsp;</td>
+        </tr>
+    </table>
+    <br />
+    <br />
+                        </dxp:PanelContent>
+</PanelCollection>
+                    <TopLeftCorner Height="7px" Url="~/App_Themes/Aqua/Web/rpTopLeft.png" 
+                        Width="7px" />
+                    <BottomLeftCorner Height="7px" Url="~/App_Themes/Aqua/Web/rpBottomLeft.png" 
+                        Width="7px" />
+                </dxrp:ASPxRoundPanel>
+            </td>
+            <td align="left" style="padding-left: 4px" valign="top" class="style34">
+                <table cellpadding="0" class="style4">
+                    <tr>
+                        <td align="center" bgcolor="#0066FF" class="style2" colspan="3" 
+                            style="border: 1px solid #99CCFF; padding-right: 2px;">
+                            Informações do Apoio</td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#3399FF" class="style2" 
+                            style="border: 1px solid #99CCFF; padding-right: 2px;">
+&nbsp;Loja</td>
+                        <td align="center" bgcolor="#3399FF" class="style2" 
+                            style="border: 1px solid #99CCFF; padding-right: 2px;">
+                            Valor</td>
+                        <td align="center" bgcolor="#3399FF" class="style2" 
+                            style="border: 1px solid #99CCFF; padding-right: 2px;">
+                            %</td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="White" style="border: 1px solid #99CCFF; padding-right: 2px;">
+&nbsp;Apoio Original</td>
+                        <td align="right" bgcolor="White" 
+                            style="border: 1px solid #99CCFF; padding-right: 2px;">
+                            <asp:Label ID="lblVlrApoioOri" runat="server" Text="Label"></asp:Label>
+                        </td>
+                        <td align="right" bgcolor="White" 
+                            style="border: 1px solid #99CCFF; padding-right: 2px;">
+                            <asp:Label ID="lblPercApoioOri" runat="server" Text="Label"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="White" style="border: 1px solid #99CCFF; padding-right: 2px;">
+&nbsp;Apoio Revisto</td>
+                        <td align="right" bgcolor="White" 
+                            style="border: 1px solid #99CCFF; padding-right: 2px;">
+                            <asp:Label ID="lblVlrApoioRev" runat="server" Text="Label"></asp:Label>
+                        </td>
+                        <td align="right" bgcolor="White" 
+                            style="border: 1px solid #99CCFF; padding-right: 2px;">
+                            <asp:Label ID="lblPercApoioRev" runat="server" Text="Label"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;</td>
+                        <td>
+                            &nbsp;</td>
+                        <td>
+                            &nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+            <td align="left" style="padding-left: 4px" valign="top">
+                &nbsp;</td>
+            <td align="left" style="padding-left: 4px" valign="top">
+                <table cellspacing="1" class="style1">
+                    <tr>
+                        <td class="style37">
+                            <asp:RadioButton ID="rndUltimaLinha" runat="server" AutoPostBack="True" 
+                                ForeColor="White" GroupName="modOpt" Text="Ultima Linha" />
+                        </td>
+                        <td class="style29">
+                            <asp:RadioButton ID="rndPart" runat="server" AutoPostBack="True" 
+                                ForeColor="White" GroupName="modOpt" Text="Participação" />
+                        </td>
+                        <td class="style36">
+                            <asp:RadioButton ID="rndMargem" runat="server" AutoPostBack="True" 
+                                ForeColor="White" GroupName="modOpt" Text="Margem" />
+                        </td>
+                        <td>
+                            <asp:RadioButton ID="rndAgenda23" runat="server" AutoPostBack="True" 
+                                ForeColor="White" GroupName="modOpt" Text="Agenda 23" />
+                        </td>
+                        <td>
+                            &nbsp;</td>
+                    </tr>
+                </table>
+                <dxwgv:ASPxGridView ID="GridRF" runat="server" AutoGenerateColumns="False" 
+                    CssFilePath="~/App_Themes/Office2003 Blue/{0}/styles.css" 
+                    CssPostfix="Office2003_Blue" DataSourceID="dsRF" KeyFieldName="idCod" 
+                    Width="400px">
+                    <SettingsBehavior AllowFocusedRow="True" />
+                    <Styles CssFilePath="~/App_Themes/Office2003 Blue/{0}/styles.css" 
+                        CssPostfix="Office2003_Blue">
+                        <Header ImageSpacing="5px" SortingImageSpacing="5px">
+                        </Header>
+                        <AlternatingRow BackColor="#EAF4FF">
+                        </AlternatingRow>
+                        <LoadingPanel ImageSpacing="10px">
+                        </LoadingPanel>
+                    </Styles>
+                    <SettingsLoadingPanel Text="Aguarde. Atualizando...&amp;hellip;" />
+                    <SettingsPager Mode="ShowAllRecords">
+                    </SettingsPager>
+                    <GroupSummary>
+                        <dxwgv:ASPxSummaryItem DisplayFormat="Lojas {0:n0}" FieldName="idCod" 
+                            SummaryType="Count" />
+                    </GroupSummary>
+                    <Images ImageFolder="~/App_Themes/Office2003 Blue/{0}/">
+                        <CollapsedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvCollapsedButton.png" 
+                            Width="11px" />
+                        <ExpandedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvExpandedButton.png" Width="11px" />
+                        <DetailCollapsedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvCollapsedButton.png" 
+                            Width="11px" />
+                        <DetailExpandedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvExpandedButton.png" Width="11px" />
+                        <FilterRowButton Height="13px" Width="13px" />
+                    </Images>
+                    <SettingsText EmptyDataRow="Não nenhuma informação disponivel" 
+                        GroupPanel="Arraste uma coluna abaixo para agrupar." />
+                    <Columns>
+                        <dxwgv:GridViewDataTextColumn FieldName="Descricao" VisibleIndex="0" 
+                            Width="150px">
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn Caption="Original" FieldName="percOri" 
+                            VisibleIndex="1" Width="60px">
+                            <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn Caption="Revista" FieldName="percRev" 
+                            VisibleIndex="2" Width="60px">
+                            <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn Caption="Status" FieldName="Check" GroupIndex="0" 
+                            SortIndex="0" SortOrder="Ascending" VisibleIndex="3" Width="50px">
+                            <CellStyle HorizontalAlign="Center">
+                            </CellStyle>
+                        </dxwgv:GridViewDataTextColumn>
+                    </Columns>
+                    <Settings ShowGroupPanel="True" ShowVerticalScrollBar="True" 
+                        VerticalScrollableHeight="400" />
+                    <StylesEditors>
+                        <ProgressBar Height="25px">
+                        </ProgressBar>
+                    </StylesEditors>
+                </dxwgv:ASPxGridView>
+                    <asp:SqlDataSource ID="dsRF" runat="server" 
+                        ConnectionString="<%$ ConnectionStrings:gerContSQL1ConnectionString %>" 
+                        
+                        
+                    SelectCommand="SELECT tblRev.idCod, tblRev.Ano, tblRev.Mes, tblRev.idFilial, tblCadFiliais.Descricao, tblOri.perc AS percOri, tblRev.perc AS percRev, CASE WHEN CAST(tblOri.perc AS FLOAT) &lt;= CAST(tblRev.perc AS FLOAT) THEN 'OK' ELSE '?' END AS [Check] FROM tblRev INNER JOIN tblCadFiliais ON tblRev.idFilial = tblCadFiliais.Filial LEFT OUTER JOIN tblOri ON tblRev.idCod = tblOri.idCod AND tblRev.Ano = tblOri.Ano AND tblRev.Mes = tblOri.Mes AND tblRev.idFilial = tblOri.idFilial WHERE (tblRev.idCod = 47) AND (tblRev.Ano = @Ano) AND (tblRev.Mes = @Mes) ORDER BY tblRev.idFilial">
+                        <SelectParameters>
+                            <asp:ControlParameter ControlID="cboAno" Name="Ano" PropertyName="Value" />
+                            <asp:ControlParameter ControlID="cboMes" Name="Mes" PropertyName="Value" />
+                        </SelectParameters>
+                    </asp:SqlDataSource>
+                <dxwgv:ASPxGridView ID="GridMargem" runat="server" AutoGenerateColumns="False" 
+                    CssFilePath="~/App_Themes/Office2003 Blue/{0}/styles.css" 
+                    CssPostfix="Office2003_Blue" DataSourceID="dsMargem" KeyFieldName="idCod" 
+                    Width="400px" Visible="False">
+                    <SettingsBehavior AllowFocusedRow="True" />
+                    <Styles CssFilePath="~/App_Themes/Office2003 Blue/{0}/styles.css" 
+                        CssPostfix="Office2003_Blue">
+                        <Header ImageSpacing="5px" SortingImageSpacing="5px">
+                        </Header>
+                        <AlternatingRow BackColor="#EAF4FF">
+                        </AlternatingRow>
+                        <LoadingPanel ImageSpacing="10px">
+                        </LoadingPanel>
+                    </Styles>
+                    <SettingsLoadingPanel Text="Aguarde. Atualizando...&amp;hellip;" />
+                    <SettingsPager Mode="ShowAllRecords">
+                    </SettingsPager>
+                    <GroupSummary>
+                        <dxwgv:ASPxSummaryItem DisplayFormat="Lojas {0:n0}" FieldName="idCod" 
+                            SummaryType="Count" />
+                    </GroupSummary>
+                    <Images ImageFolder="~/App_Themes/Office2003 Blue/{0}/">
+                        <CollapsedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvCollapsedButton.png" 
+                            Width="11px" />
+                        <ExpandedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvExpandedButton.png" Width="11px" />
+                        <DetailCollapsedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvCollapsedButton.png" 
+                            Width="11px" />
+                        <DetailExpandedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvExpandedButton.png" Width="11px" />
+                        <FilterRowButton Height="13px" Width="13px" />
+                    </Images>
+                    <SettingsText EmptyDataRow="Não nenhuma informação disponivel" 
+                        GroupPanel="Arraste uma coluna abaixo para agrupar." />
+                    <Columns>
+                        <dxwgv:GridViewDataTextColumn FieldName="Descricao" VisibleIndex="0" 
+                            Width="150px">
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn Caption="Replan." FieldName="percRev" 
+                            VisibleIndex="1" Width="60px" ToolTip="Margem que esta no Replanejamento">
+                            <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn Caption="Seção" FieldName="percOri" 
+                            VisibleIndex="2" Width="60px" ToolTip="Total da Margem da Seção">
+                            <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn Caption="Status" FieldName="Check" GroupIndex="0" 
+                            SortIndex="0" SortOrder="Ascending" VisibleIndex="3" Width="50px">
+                            <CellStyle HorizontalAlign="Center">
+                            </CellStyle>
+                        </dxwgv:GridViewDataTextColumn>
+                    </Columns>
+                    <Settings ShowGroupPanel="True" ShowVerticalScrollBar="True" 
+                        VerticalScrollableHeight="400" />
+                    <StylesEditors>
+                        <ProgressBar Height="25px">
+                        </ProgressBar>
+                    </StylesEditors>
+                </dxwgv:ASPxGridView>
+                    <asp:SqlDataSource ID="dsMargem" runat="server" 
+                        ConnectionString="<%$ ConnectionStrings:gerContSQL1ConnectionString %>" 
+                        
+                        
+                    
+                    
+                    SelectCommand="SELECT tblRev.idCod, tblRev.Ano, tblRev.Mes, tblRev.idFilial, tblCadFiliais.Descricao, tblRevSecao.perc AS percOri, tblRev.perc AS percRev, CASE WHEN CAST(tblRevSecao.perc AS FLOAT) = CAST(tblRev.perc AS FLOAT) THEN 'OK' ELSE '?' END AS [Check] FROM tblRev INNER JOIN tblCadFiliais ON tblRev.idFilial = tblCadFiliais.Filial LEFT OUTER JOIN tblRevSecao ON tblRev.Ano = tblRevSecao.Ano AND tblRev.Mes = tblRevSecao.Mes AND tblRev.idFilial = tblRevSecao.idFilial WHERE (tblRev.idCod = 5) AND (tblRev.Ano = @Ano) AND (tblRev.Mes = @Mes) AND (tblRevSecao.idSecao = 255) AND (tblRevSecao.idTipoSecao = 2) ORDER BY tblRev.idFilial">
+                        <SelectParameters>
+                            <asp:ControlParameter ControlID="cboAno" Name="Ano" PropertyName="Value" />
+                            <asp:ControlParameter ControlID="cboMes" Name="Mes" PropertyName="Value" />
+                        </SelectParameters>
+                    </asp:SqlDataSource>
+                <dxwgv:ASPxGridView ID="GridAgenda23" runat="server" AutoGenerateColumns="False" 
+                    CssFilePath="~/App_Themes/Office2003 Blue/{0}/styles.css" 
+                    CssPostfix="Office2003_Blue" DataSourceID="dsAgenda23" KeyFieldName="idCod" 
+                    Width="400px" Visible="False">
+                    <SettingsBehavior AllowFocusedRow="True" />
+                    <Styles CssFilePath="~/App_Themes/Office2003 Blue/{0}/styles.css" 
+                        CssPostfix="Office2003_Blue">
+                        <Header ImageSpacing="5px" SortingImageSpacing="5px">
+                        </Header>
+                        <AlternatingRow BackColor="#EAF4FF">
+                        </AlternatingRow>
+                        <LoadingPanel ImageSpacing="10px">
+                        </LoadingPanel>
+                    </Styles>
+                    <SettingsLoadingPanel Text="Aguarde. Atualizando...&amp;hellip;" />
+                    <SettingsPager Mode="ShowAllRecords">
+                    </SettingsPager>
+                    <GroupSummary>
+                        <dxwgv:ASPxSummaryItem DisplayFormat="Lojas {0:n0}" FieldName="idCod" 
+                            SummaryType="Count" />
+                    </GroupSummary>
+                    <Images ImageFolder="~/App_Themes/Office2003 Blue/{0}/">
+                        <CollapsedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvCollapsedButton.png" 
+                            Width="11px" />
+                        <ExpandedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvExpandedButton.png" Width="11px" />
+                        <DetailCollapsedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvCollapsedButton.png" 
+                            Width="11px" />
+                        <DetailExpandedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvExpandedButton.png" Width="11px" />
+                        <FilterRowButton Height="13px" Width="13px" />
+                    </Images>
+                    <SettingsText EmptyDataRow="Não nenhuma informação disponivel" 
+                        GroupPanel="Arraste uma coluna abaixo para agrupar." />
+                    <Columns>
+                        <dxwgv:GridViewDataTextColumn FieldName="Descricao" VisibleIndex="0" 
+                            Width="150px">
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn Caption="Replan." FieldName="percRev" 
+                            VisibleIndex="1" Width="60px" 
+                            ToolTip="Agenda 23 que esta no Replanejamento">
+                            <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn Caption="Seção" FieldName="percOri" 
+                            VisibleIndex="2" Width="60px" ToolTip="Total da Agenda 23 por Seção">
+                            <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn Caption="Status" FieldName="Check" GroupIndex="0" 
+                            SortIndex="0" SortOrder="Ascending" VisibleIndex="3" Width="50px">
+                            <CellStyle HorizontalAlign="Center">
+                            </CellStyle>
+                        </dxwgv:GridViewDataTextColumn>
+                    </Columns>
+                    <Settings ShowGroupPanel="True" ShowVerticalScrollBar="True" 
+                        VerticalScrollableHeight="400" />
+                    <StylesEditors>
+                        <ProgressBar Height="25px">
+                        </ProgressBar>
+                    </StylesEditors>
+                </dxwgv:ASPxGridView>
+                    <asp:SqlDataSource ID="dsAgenda23" runat="server" 
+                        ConnectionString="<%$ ConnectionStrings:gerContSQL1ConnectionString %>" 
+                        
+                        
+                    
+                    
+                    SelectCommand="SELECT tblRev.idCod, tblRev.Ano, tblRev.Mes, tblRev.idFilial, tblCadFiliais.Descricao, tblRevSecao.perc AS percOri, tblRev.perc AS percRev, CASE WHEN CAST(tblRevSecao.perc AS FLOAT) = CAST(tblRev.perc AS FLOAT) THEN 'OK' ELSE '?' END AS [Check] FROM tblRev INNER JOIN tblCadFiliais ON tblRev.idFilial = tblCadFiliais.Filial LEFT OUTER JOIN tblRevSecao ON tblRev.Ano = tblRevSecao.Ano AND tblRev.Mes = tblRevSecao.Mes AND tblRev.idFilial = tblRevSecao.idFilial WHERE (tblRev.idCod = 70) AND (tblRev.Ano = @Ano) AND (tblRev.Mes = @Mes) AND (tblRevSecao.idSecao = 255) AND (tblRevSecao.idTipoSecao = 4) ORDER BY tblRev.idFilial">
+                        <SelectParameters>
+                            <asp:ControlParameter ControlID="cboAno" Name="Ano" PropertyName="Value" />
+                            <asp:ControlParameter ControlID="cboMes" Name="Mes" PropertyName="Value" />
+                        </SelectParameters>
+                    </asp:SqlDataSource>
+                <dxwgv:ASPxGridView ID="GridPart" runat="server" AutoGenerateColumns="False" 
+                    CssFilePath="~/App_Themes/Office2003 Blue/{0}/styles.css" 
+                    CssPostfix="Office2003_Blue" DataSourceID="dsPart" KeyFieldName="idCod" 
+                    Width="400px" Visible="False">
+                    <SettingsBehavior AllowFocusedRow="True" />
+                    <Styles CssFilePath="~/App_Themes/Office2003 Blue/{0}/styles.css" 
+                        CssPostfix="Office2003_Blue">
+                        <Header ImageSpacing="5px" SortingImageSpacing="5px">
+                        </Header>
+                        <AlternatingRow BackColor="#EAF4FF">
+                        </AlternatingRow>
+                        <LoadingPanel ImageSpacing="10px">
+                        </LoadingPanel>
+                    </Styles>
+                    <SettingsLoadingPanel Text="Aguarde. Atualizando...&amp;hellip;" />
+                    <SettingsPager Mode="ShowAllRecords">
+                    </SettingsPager>
+                    <GroupSummary>
+                        <dxwgv:ASPxSummaryItem DisplayFormat="Lojas {0:n0}" FieldName="idCod" 
+                            SummaryType="Count" />
+                    </GroupSummary>
+                    <Images ImageFolder="~/App_Themes/Office2003 Blue/{0}/">
+                        <CollapsedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvCollapsedButton.png" 
+                            Width="11px" />
+                        <ExpandedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvExpandedButton.png" Width="11px" />
+                        <DetailCollapsedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvCollapsedButton.png" 
+                            Width="11px" />
+                        <DetailExpandedButton Height="12px" 
+                            Url="~/App_Themes/Office2003 Blue/GridView/gvExpandedButton.png" Width="11px" />
+                        <FilterRowButton Height="13px" Width="13px" />
+                    </Images>
+                    <SettingsText EmptyDataRow="Não nenhuma informação disponivel" 
+                        GroupPanel="Arraste uma coluna abaixo para agrupar." />
+                    <Columns>
+                        <dxwgv:GridViewDataTextColumn FieldName="Descricao" VisibleIndex="0" 
+                            Width="150px">
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn Caption="Replan." FieldName="percRev" 
+                            VisibleIndex="1" Width="60px" 
+                            ToolTip="Venda Revista que esta no Replanejamento">
+                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn Caption="Seção" FieldName="percOri" 
+                            VisibleIndex="2" Width="60px" ToolTip="Total da Venda por da Seção">
+                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                            </PropertiesTextEdit>
+                        </dxwgv:GridViewDataTextColumn>
+                        <dxwgv:GridViewDataTextColumn Caption="Status" FieldName="Check" GroupIndex="0" 
+                            SortIndex="0" SortOrder="Ascending" VisibleIndex="3" Width="50px">
+                            <CellStyle HorizontalAlign="Center">
+                            </CellStyle>
+                        </dxwgv:GridViewDataTextColumn>
+                    </Columns>
+                    <Settings ShowGroupPanel="True" ShowVerticalScrollBar="True" 
+                        VerticalScrollableHeight="400" />
+                    <StylesEditors>
+                        <ProgressBar Height="25px">
+                        </ProgressBar>
+                    </StylesEditors>
+                </dxwgv:ASPxGridView>
+                    <asp:SqlDataSource ID="dsPart" runat="server" 
+                        ConnectionString="<%$ ConnectionStrings:gerContSQL1ConnectionString %>" 
+                        
+                        
+                    
+                    
+                    
+                    
+                    SelectCommand="SELECT tblRev.idCod, tblRev.Ano, tblRev.Mes, tblRev.idFilial, tblCadFiliais.Descricao, tblRevSecao.vlr AS percOri, tblRev.vlr AS percRev, CASE WHEN CAST(tblRevSecao.vlr AS FLOAT) = CAST(tblRev.vlr AS FLOAT) THEN 'OK' ELSE '?' END AS [Check] FROM tblRev INNER JOIN tblCadFiliais ON tblRev.idFilial = tblCadFiliais.Filial LEFT OUTER JOIN tblRevSecao ON tblRev.Ano = tblRevSecao.Ano AND tblRev.Mes = tblRevSecao.Mes AND tblRev.idFilial = tblRevSecao.idFilial WHERE (tblRev.idCod = 1) AND (tblRev.Ano = @Ano) AND (tblRev.Mes = @Mes) AND (tblRevSecao.idSecao = 255) AND (tblRevSecao.idTipoSecao = 1) ORDER BY tblRev.idFilial">
+                        <SelectParameters>
+                            <asp:ControlParameter ControlID="cboAno" Name="Ano" PropertyName="Value" />
+                            <asp:ControlParameter ControlID="cboMes" Name="Mes" PropertyName="Value" />
+                        </SelectParameters>
+                    </asp:SqlDataSource>
+                <br />
+                <br />
+                </td>
+            <td align="left" style="padding-left: 4px" valign="top">
+                &nbsp;</td>
+        </tr>
+    </table>
+    <table cellspacing="1" class="style4">
+        <tr>
+            <td>
+                &nbsp;</td>
+            <td class="style38">
+                <asp:Button ID="btnSalvar" runat="server" Text="Salvar" Width="100px" />
+&nbsp;
+                <asp:Label ID="Label1" runat="server" Visible="False"></asp:Label>
+            </td>
+            <td>
+                <uc1:wucLink_DRE ID="wucLink_DRE1" runat="server" />
+            </td>
+            <td>
+                &nbsp;</td>
+        </tr>
+    </table>
+    <br />
+</p>
+</asp:Content>
+

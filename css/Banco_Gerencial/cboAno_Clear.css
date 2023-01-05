@@ -1,0 +1,9 @@
+﻿
+#divAno { 
+    clear: both;  
+    float: left; 
+
+    border: 1px solid #bdbbbb;
+    padding: 3px 5px;
+    margin-top: 2px;
+}

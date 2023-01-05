@@ -1,0 +1,45 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="masterRPM.master.vb" Inherits="MemberPages_RPM_masterRPM" %>
+
+<%@ Register assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web" tagprefix="dx" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
+    <style type="text/css">
+        .auto-style1 {
+            width: 183px;
+            vertical-align: top;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+    <table cellpadding="0" cellspacing="0" >
+        <tr>
+            <td class="auto-style1">
+                <dx:ASPxNavBar ID="ASPxNavBar1" runat="server" Theme="SoftOrange">
+                    <Groups>
+                        <dx:NavBarGroup Text="Objetivos" NavigateUrl="~/MemberPages/RPM/CadastroRPM.aspx">
+                        </dx:NavBarGroup>
+                        <dx:NavBarGroup Text="Acompanhamentos">
+                            <Items>
+                                <dx:NavBarItem NavigateUrl="~/MemberPages/RPM/rpmTarefasOntem.aspx" Text="Ontem">
+                                </dx:NavBarItem>
+                                <dx:NavBarItem NavigateUrl="~/MemberPages/RPM/rpmTarefasHoje.aspx" Text="Hoje" ToolTip="Todas as Tarefas de Hoje">
+                                </dx:NavBarItem>
+                                <dx:NavBarItem NavigateUrl="~/MemberPages/RPM/rpmTarefasAmanha.aspx" Text="Amanhã" ToolTip="Todas as Tarefas de Amanhã.">
+                                </dx:NavBarItem>
+                                <dx:NavBarItem NavigateUrl="~/MemberPages/RPM/rpmTodasTarefas.aspx" Text="Todas " ToolTip="Todas as Tarefas">
+                                </dx:NavBarItem>
+                            </Items>
+                        </dx:NavBarGroup>
+                        <dx:NavBarGroup Text="Projetos">
+                        </dx:NavBarGroup>
+                    </Groups>
+                </dx:ASPxNavBar>
+            </td>
+            <td style="vertical-align: top">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </td>
+        </tr>
+    </table>
+</asp:Content>
+

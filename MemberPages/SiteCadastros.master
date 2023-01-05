@@ -1,0 +1,52 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="SiteCadastros.master.vb" Inherits="MemberPages_SiteRelatorioMetas" %>
+
+<%@ Register assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web" tagprefix="dx" %>
+
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
+    <style type="text/css">
+        .auto-style1 {
+            border-collapse: collapse;
+            width: 100%;
+            float: left;
+        }
+        .auto-style2 {
+            width: 133px;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+    <table align="left" cellpadding="0" class="auto-style1">
+        <tr>
+            <td class="auto-style2" style="vertical-align: top; text-align: left">
+                        <dx:ASPxNavBar ID="ASPxNavBar1" runat="server" AutoCollapse="True" 
+                            EnableTheming="True" Theme="Office2010Silver" Width="158px">
+                            <Groups>
+                                <dx:NavBarGroup Text="Cadastros" 
+                                    
+                                    ToolTip="Cadastros de Produtos com código do Departamento, Seção Grupo e Sub-grupo">
+                                    <Items>
+                                        <dx:NavBarItem NavigateUrl="~/MemberPages/Planejamento/Vendas/viewOri_MetaVendaAno.aspx" 
+                                            Text="Total - Filial Ano" 
+                                            
+                                            
+                                            ToolTip="Venda total do ano filial por filial e empresa. Há opção de exportar para o Excel.">
+                                            <Image Url="~/image/24_checklist-icon.png">
+                                            </Image>
+                                        </dx:NavBarItem>
+                                    </Items>
+                                    <HeaderStyle Font-Bold="True" HorizontalAlign="Center" />
+                                </dx:NavBarGroup>
+                            </Groups>
+                        </dx:ASPxNavBar>
+                        <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </td>
+            <td style="vertical-align: top; text-align: left">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </td>
+        </tr>
+    </table>
+</asp:Content>
+

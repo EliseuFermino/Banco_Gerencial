@@ -1,0 +1,26 @@
+﻿
+ASPxGridView: gvDetail
+ClientInstanceName: detailGridView
+SqlDataSource ID="adsProducts"
+BANCO: DW
+STORED PROCEDURE: usp_Buscar_Quebra_Venda_por_Loja_Item
+
+*********** GRID SECAO *************
+GRID ID: gvMaster
+ClientInstanceName: masterGridView
+DataSource: SqlDataSource1
+Database: DW_Condor_One
+Schema: Vendas_Dia
+Stored Procedure: SLV004_Perdas
+
+OnGridFocusedRowChanged_Secao();	
+UpdateSecaoGraph();
+
+*********** GRID FAMILIA *************
+GRID ID: gvFamilia
+ClientInstanceName: detailGridView_Familia
+DataSource: dsFamilia
+Database: DW_Condor_One
+Schema: Vendas_Dia
+Stored Procedure: SLV004_Perdas_Familia
+

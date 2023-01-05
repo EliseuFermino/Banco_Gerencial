@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+
+<html5>
+<head>
+    <title>Tarefa Resultado Financeiro</title>
+</head>
+<body>
+    <p>&#160;</p>
+
+<p><span style=" text-decoration: underline;"><span style=" font-size: large;"><b>Etapas para Atualizar o Resultado Financeiro</b></span></span></p>
+
+<p>&#160;</p>
+
+<ol>
+<li><input type="checkbox" checked="checked" />Gerar os arquivos no Sistema Corporativo (PROGRESS)</li>
+
+<li><input type="checkbox" checked="checked" />Atualizar Taxa Selic <a href="http://idg.receita.fazenda.gov.br/orientacao/tributaria/pagamentos-e-parcelamentos/taxa-de-juros-selic.html"></a>. Abra o Access Banco Gerencial=&#38;gttblIndicador =&#38;gtidIndicador 2 e atualize a taxa. Banco gerContSQL1 (SELECT        TOP (200) idIndicador, Mes, Ano, taxaMes, taxaAno, taxaAcumulada, taxaDia
+FROM            tblIndicadorDet
+WHERE        (idIndicador = 2) AND (Ano = 2016))</li>
+
+<li><input type="checkbox" checked="checked" />Gerar o Resumo do Livro Fiscal do período do financeiro. Progress -&#62; Livro Fiscal -&#62; Relatórios -&#62; Resumo do&#160;Livro Fiscal (Na opção "Exportar Arq" mudar para C:\Temp).&#160;</li>
+
+<li><input type="checkbox" checked="checked" />No C:\Temp abra o arquivo "lfi090.csv".&#160;</li>
+
+<li><input type="checkbox" checked="checked" />Aplique um filtro (Dados =&#62; Filtro).&#160;Na coluna "DESCRICAO AG." selecione apenas "TOTAL POR LOJA...:" e "TOTAL GERAL...:".</li>
+
+<li><input type="checkbox" checked="checked" />Exclua todas a linhas filtradas. Tire o filtro. Delete a coluna "DESCRICAO AG."</li>
+
+<li><input type="checkbox" checked="checked" />Insira duas colunas após "COD.LOJA". Preencha o Ano e Mês.</li>
+
+<li><input type="checkbox" checked="checked" />Abra a planilha N:\SqlData\impCompraFiscal.xlsw, limpe a planilha exceto o cabeçalho (linha 1)</li>
+
+<li><input type="checkbox" checked="checked" />Volte para o arquivo lfi090.csv (já aberto) e copie todos os dados - exceto a linha 1 (cabeçalho) e cole na planilha N:\SqlData\impCompraFiscal.xlsw. Salve e feche</li>
+
+<li><input type="checkbox" checked="checked" />Saia do arquivo lfi090.csv sem salvar </li>
+
+<li><input type="checkbox" checked="checked" />Execute o script M:\Projects\Resultado Financeiro\AtualizarResultadoFinanceiro.sql</li>
+
+<li><input type="checkbox" checked="checked" />Importar os arquivos pelo Access (Resultado Financeiro)</li>
+
+<li><input type="checkbox" />Aperte o botão "Calcular Saldo Financeiro"</li>
+</ol>
+
+<p>&#160;</p>
+
+<hr />
+
+<h1>Duvidas Frequentes</h1>
+
+ <ul>
+     <li><a href="#atualizarImpostoCompras">Como eu faço para atualizar o Imposto de Compras que esta na planilha "Para Eliseu"?</a></li>
+     <li><a href="#atualizarImpostoCompras">Como eu faço para atualizar o Imposto de Vendas que esta na planilha "Para Eliseu"?</a></li>
+ </ul>
+
+<br />
+
+<h3><i><a name="atualizarImpostoCompras">Atualizar Imposto de Compra</a></i></h3>
+<p>Entre no sistema <b>PROGRESS =&gt; Relatórios =&gt; Resumo do Livro Fiscal</b> gere o período que você quer. <br />Em <b>Exporta Arq.</b> 
+    mude o diretório para <i>temp</i>, o caminho tera que ficar (c:\temp\lfi090.csv). O arquivo sera gerado no C:\temp. <br /> No C:\Temp abra o 
+    arquivo "lfi090.csv" no excel. Aplique um filtro (Dados =&gt; Filtro). Na coluna "DESCRICAO AG." selecione apenas "TOTAL POR LOJA...:" e "TOTAL GERAL...:" <br />
+    Exclua todas a linhas filtradas. Tire o filtro. Delete a coluna "DESCRICAO AG.". Insira duas colunas após "COD.LOJA". Preencha o Ano e Mês.<br />
+    Selecione toda a planilhe e cole no "Banco Gerencial" =&gt; "tblComprasFiscal". Entre no 10.1.1.14, M:\Projects\Resultado Financeiro e execute o scipt "AtualizarImpostos_CompraVenda.sql". Isso atualiza a planilha "Para Eliseu"
+</p>
+
+<h3><i><a name="atualizarImpostoVendas">Atualizar Imposto de Venda</a></i></h3>
+    <p>Primeiro verifique se a Caroline já atualizou os impostos de vendas que vem da Eliane do Fiscal. Caso sim entre no Entre no 10.1.1.14, M:\Projects\Resultado Financeiro e execute o scipt "AtualizarImpostos_CompraVenda.sql". Isso atualiza a planilha "Para Eliseu"</p>
+
+</body>
+</html5>

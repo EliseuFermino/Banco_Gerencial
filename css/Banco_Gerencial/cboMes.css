@@ -1,0 +1,9 @@
+﻿
+#divMes {  
+    float: left;
+    margin-left: 5px;  
+    
+    border: 1px solid #bdbbbb;
+    padding: 3px 5px;
+    margin-top: 2px;
+}

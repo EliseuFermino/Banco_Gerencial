@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="pt-BR">
+  <Title Text="Analise Hora" />
+  <DataSources>
+    <SqlDataSource Name="vw_Horaria" ComponentName="sqlDataSource1">
+      <Connection Name="gerKnowledgeConnectionString" FromAppConfig="true" />
+      <Query Type="SelectQuery" Name="vw_Horaria">
+        <Tables>
+          <Table Name="tblHoraria" />
+        </Tables>
+        <Columns>
+          <Column Table="tblHoraria" Name="Data" />
+          <Column Table="tblHoraria" Name="AnoReduzido" />
+          <Column Table="tblHoraria" Name="perc" />
+          <Column Table="tblHoraria" Name="descHI" />
+          <Column Table="tblHoraria" Name="Day_of_Week" />
+          <Column Table="tblHoraria" Name="Semana" />
+        </Columns>
+      </Query>
+      <Query Type="SelectQuery" Name="vw_Analise_Hora">
+        <Tables>
+          <Table Name="vw_AnaliseHora" />
+        </Tables>
+        <Columns>
+          <Column Table="vw_AnaliseHora" Name="Descricao" />
+          <Column Table="vw_AnaliseHora" Name="vlr1" />
+          <Column Table="vw_AnaliseHora" Name="vlr2" />
+          <Column Table="vw_AnaliseHora" Name="vlr3" />
+          <Column Table="vw_AnaliseHora" Name="vlr4" />
+        </Columns>
+      </Query>
+      <ConnectionOptions CloseConnection="true" />
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <Pivot ComponentName="pivotDashboardItem1" Name="Analise Hora" DataSource="sqlDataSource1" DataMember="vw_Horaria">
+      <DataItems>
+        <Dimension DataMember="descHI" DefaultId="DataItem3" />
+        <Dimension DataMember="AnoReduzido" DefaultId="DataItem2">
+          <NumericFormat FormatType="General" />
+        </Dimension>
+        <Dimension DataMember="Data" DefaultId="DataItem1" />
+        <Measure DataMember="perc" ShowTotals="false" ShowGrandTotals="false" DefaultId="DataItem0">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Dimension DataMember="Day_of_Week" DefaultId="DataItem5" />
+      </DataItems>
+      <FormatRules>
+        <PivotItemFormatRule Name="Format Rule 1" DataItem="DataItem0" DataItemApplyTo="DataItem0" IntersectionLevelMode="LastLevel">
+          <FormatConditionValue Condition="Less">
+            <AppearanceSettings AppearanceType="FontRed" />
+            <Value1 Type="System.Decimal" Value="0" />
+          </FormatConditionValue>
+          <PivotItemFormatRuleLevel />
+        </PivotItemFormatRule>
+      </FormatRules>
+      <Columns>
+        <Column DefaultId="DataItem5" />
+        <Column DefaultId="DataItem2" />
+        <Column DefaultId="DataItem1" />
+      </Columns>
+      <Rows>
+        <Row DefaultId="DataItem3" />
+      </Rows>
+      <Values>
+        <Value DefaultId="DataItem0" />
+      </Values>
+      <AutoExpandColumnGroups>true</AutoExpandColumnGroups>
+      <AutoExpandRowGroups>true</AutoExpandRowGroups>
+      <ShowColumnGrandTotals>false</ShowColumnGrandTotals>
+      <ShowRowGrandTotals>false</ShowRowGrandTotals>
+      <ShowColumnTotals>false</ShowColumnTotals>
+      <ShowRowTotals>false</ShowRowTotals>
+      <ValuesPosition>Rows</ValuesPosition>
+      <ColumnTotalsPosition>Near</ColumnTotalsPosition>
+      <LayoutType>Tabular</LayoutType>
+    </Pivot>
+    <Grid ComponentName="gridDashboardItem1" Name="Análise Hora - Mês Atual - Mesmos Dias" DataSource="sqlDataSource1" DataMember="vw_Analise_Hora">
+      <DataItems>
+        <Dimension DataMember="Descricao" DefaultId="DataItem0" />
+        <Measure DataMember="vlr1" DefaultId="DataItem1">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="vlr2" DefaultId="DataItem2">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="vlr3" DefaultId="DataItem3">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="vlr4" DefaultId="DataItem4">
+          <NumericFormat FormatType="Percent" />
+        </Measure>
+      </DataItems>
+      <FormatRules>
+        <GridItemFormatRule Name="Format Rule 1" DataItem="DataItem4" DataItemApplyTo="DataItem4">
+          <FormatConditionValue Condition="Less">
+            <AppearanceSettings AppearanceType="FontRed" />
+            <Value1 Type="System.Decimal" Value="0" />
+          </FormatConditionValue>
+        </GridItemFormatRule>
+        <GridItemFormatRule Name="Format Rule 2" DataItem="DataItem3" DataItemApplyTo="DataItem3">
+          <FormatConditionValue Condition="Less">
+            <AppearanceSettings AppearanceType="Red" />
+            <Value1 Type="System.Decimal" Value="0" />
+          </FormatConditionValue>
+        </GridItemFormatRule>
+        <GridItemFormatRule Name="Format Rule 3" DataItem="DataItem3" DataItemApplyTo="DataItem3">
+          <FormatConditionValue Condition="Greater">
+            <AppearanceSettings AppearanceType="Green" />
+            <Value1 Type="System.Decimal" Value="0" />
+          </FormatConditionValue>
+        </GridItemFormatRule>
+      </FormatRules>
+      <GridColumns>
+        <GridDimensionColumn Name="Dia">
+          <Dimension DefaultId="DataItem0" />
+        </GridDimensionColumn>
+        <GridMeasureColumn Name="Real AA">
+          <Measure DefaultId="DataItem1" />
+        </GridMeasureColumn>
+        <GridMeasureColumn Name="Real">
+          <Measure DefaultId="DataItem2" />
+        </GridMeasureColumn>
+        <GridMeasureColumn Name="Dif.">
+          <Measure DefaultId="DataItem3" />
+        </GridMeasureColumn>
+        <GridMeasureColumn Name="% Cresc">
+          <Measure DefaultId="DataItem4" />
+        </GridMeasureColumn>
+      </GridColumns>
+      <GridOptions EnableBandedRows="true" />
+    </Grid>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup>
+      <LayoutGroup Orientation="Vertical">
+        <LayoutItem DashboardItem="pivotDashboardItem1" />
+        <LayoutItem DashboardItem="gridDashboardItem1" />
+      </LayoutGroup>
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

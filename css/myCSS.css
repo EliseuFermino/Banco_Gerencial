@@ -1,0 +1,56 @@
+﻿
+.Esquerda {
+    float: left;
+    margin-left: 15px;
+}
+
+.EsquerdaDetail {
+    clear: both;
+    float: left;
+    margin-left: 20px;
+}
+
+.divisao {
+    float: left;
+    padding: 2px;    
+    width: 803px;
+    margin-right: 5px;
+    margin-top: 15px;
+    height: 50px;
+    background-color : #F2F2F2;
+    border-radius: 5px;
+    border: 1px solid #DEDCD9;
+}
+
+/*
+    CRIADO em 02/04/2019 ---------------------------------------
+    Usado em: SLV005 e SLV005g e Outros
+    DECLARADO AONDE: Site.master
+    
+ */
+        .BGC_myBorder {
+            border: 1px solid #bdbbbb;
+            padding: 3px 5px;
+            margin-top: 2px; 
+        }
+
+        .BGC_Periodo { 
+           float: left;                                    
+           padding-left: 2px;               
+           margin-left: 3px;   
+           margin-top: 3px;                          
+        } 
+
+        .BGC_Filial {     
+           float: left; 
+           padding-left: 1px;                   
+           margin-left: 5px;
+           margin-top: 3px;              
+        }
+
+        .BGC_Filial_Clear {    
+           clear: both; 
+           float: left;                    
+           margin-left: 5px;
+           margin-top: 3px;              
+        }
