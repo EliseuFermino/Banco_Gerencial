@@ -14,6 +14,7 @@
         .cssFilial {
             margin-top: -8px;
             margin-left: -5px;
+            margin-right: -7px;
         }
 
        
