@@ -48,6 +48,7 @@ Partial Class MemberPages_SLV_AnaliseVendaItemAg23Filial
 
         Session("sDIA_INICIAL") = cboPeriodo.CallDiaInicial
         Session("sDIA_FINAL") = cboPeriodo.CallDiaFinal
+        Session("sFILIAL") = cboFilial.CallFilial
 
         Me.grid.DataBind()
 
