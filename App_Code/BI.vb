@@ -243,7 +243,7 @@ Public Class BI
         comando.Parameters.Add(New SqlParameter("@Mes", SqlDbType.TinyInt))
         comando.Parameters("@Mes").Value = iMes
 
-        comando.Parameters.Add(New SqlParameter("@idFilial", SqlDbType.TinyInt))
+        comando.Parameters.Add(New SqlParameter("@idFilial", SqlDbType.SmallInt))
         comando.Parameters("@idFilial").Value = iFilial
 
         comando.Parameters.Add(New SqlParameter("@idCod", SqlDbType.TinyInt))
