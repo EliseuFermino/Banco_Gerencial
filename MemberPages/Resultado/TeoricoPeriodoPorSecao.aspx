@@ -12,12 +12,17 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
-    <%--<script src="../../plugins/bootstrap-5.3.0-alpha1-dist/js/bootstrap.js"></script>
-    <script src="../../plugins/bootstrap-5.3.0-alpha1-dist/js/bootstrap.min.js"></script>
-    <link href="../../plugins/bootstrap-5.3.0-alpha1-dist/css/bootstrap.css" rel="stylesheet" />--%>
-    <script src="../../js/bootstrap.js"></script>
-    <script src="../../js/bootstrap.min.js"></script>
 
+    <script src="../../js/bootstrap.js"></script>
+    <%--<script src="../../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />--%>
+    <script type="text/javascript" src="../../assets/datepickerRange/jquery.min.js"></script>
+    <script type="text/javascript" src="../../assets/datepickerRange/moment.min.js"></script>
+    <script type="text/javascript" src="../../assets/datepickerRange/daterangepicker.min.js"></script>
+    <link  rel="stylesheet" type="text/css" href="../../assets/datepickerRange/daterangepicker.css" />
     <style type="text/css">
         html {
             overflow-x: hidden;
@@ -111,9 +116,25 @@
 
         function atualizaGrid(s, e) {
             cbPanel.PerformCallback();
-        }
+        };
+
+        $(function () {
+            $('input[name="ctl00$MainContent$daterange"]').daterangepicker({
+                opens: 'left',
+                locale: {
+                    format: 'DD/MM/YYYY',
+                    separator: " à "
+                },
+                language: 'pt-BR'
+            }, function (start, end, label) {                
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            });
+        });
 
     </script>
+
+
+
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
@@ -127,6 +148,17 @@
                     <div class="input-group-text">Ano</div>
                 </div>
                 <asp:DropDownList class="form-control" ID="selAno" runat="server" DataTextField="Desc" AutoPostBack="true" OnSelectedIndexChanged="selAno_SelectedIndexChanged"></asp:DropDownList>
+            </div>
+        </div>
+        <div class="col col-auto sm">
+            <div class="input-group sm-2 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Data:</div>
+                </div>
+                <input type="text" class="form-control" name="daterange" runat="server" id="daterange" />
+                <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                </div>
             </div>
         </div>
         <div class="col col-auto sm">
@@ -145,6 +177,11 @@
                 <asp:DropDownList class="form-control" ID="selTipo" runat="server" DataTextField="Desc" AutoPostBack="true" OnSelectedIndexChanged="selTipo_SelectedIndexChanged"></asp:DropDownList>
             </div>
         </div>
+        <div class="col-sm-1"></div>
+    </div>
+
+    <div class="row justify-content-sm-center">
+        <div class="col-xs-1"></div>
         <div class="col col-auto sm">
             <div class="input-group mb-2 mr-sm-2">
                 <div class="input-group-prepend">
@@ -164,19 +201,6 @@
                 </asp:DropDownList>
             </div>
         </div>
-        <div class="col col-auto sm set">
-            <div class="form-check">
-                <dx:ASPxCheckBox ID="chkMostrarCabecalho" runat="server"
-                    Checked="True" CheckState="Checked" Text="Mostrar cabeçalho" Theme="DevEx">
-                    <ClientSideEvents CheckedChanged="function(s, e) {	cbPanel.PerformCallback();}" />
-                </dx:ASPxCheckBox>
-            </div>
-        </div>
-        <div class="col-sm-1"></div>
-    </div>
-
-    <div class="row justify-content-sm-center">
-        <div class="col-xs-1"></div>
         <div class="col col-auto xs">
             <div class="input-group xs-2 mr-xs-2">
                 <div class="input-group-prepend">
@@ -206,7 +230,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-auto">
+        <div class="col-auto" runat="server" visible="false">
             <div class="input-group sm-2 mr-sm-2">
                 <div class="input-group-prepend">
                     <div class="input-group-text">Grupo</div>
@@ -221,7 +245,7 @@
                 </div>
             </div>
         </div>
-        <div class="col col-auto">
+        <div class="col col-auto" runat="server" visible="false">
             <div class="input-group sm-2 mr-sm-2">
                 <div class="input-group-prepend">
                     <div class="input-group-text">Sub-Grupo</div>
@@ -316,6 +340,12 @@
                     <div class="divCheck">
                         <dx:ASPxCheckBox ID="chkPeriodo_6" runat="server" Text="Ano" AutoPostBack="false" Theme="DevEx"
                             Checked="true" ForeColor="Black" Font-Bold="true">
+                        </dx:ASPxCheckBox>
+                    </div>
+                    <div class="divCheck">
+                        <dx:ASPxCheckBox ID="chkMostrarCabecalho" runat="server"
+                            Checked="True" CheckState="Checked" Text="Mostrar cabeçalho" ForeColor="Red" Font-Bold="true" Theme="DevEx">
+                            <ClientSideEvents CheckedChanged="function(s, e) {	cbPanel.PerformCallback();}" />
                         </dx:ASPxCheckBox>
                     </div>
                 </div>
@@ -1605,7 +1635,7 @@
         </dx:ASPxCallbackPanel>
     </div>
 
-<%--    <dx:ASPxLabel ID="ASPxLabel1" runat="server" Text="ASPxLabel" ClientInstanceName="checkStateLabel" Visible="False">
+    <%--    <dx:ASPxLabel ID="ASPxLabel1" runat="server" Text="ASPxLabel" ClientInstanceName="checkStateLabel" Visible="False">
     </dx:ASPxLabel>
     <br />
     <dx:ASPxLabel ID="ASPxLabel2" runat="server" Text="ASPxLabel" ClientInstanceName="checkedLabel" Visible="False">
@@ -1613,5 +1643,5 @@
     <asp:Label ID="Label1" runat="server" Visible="False"></asp:Label>--%>
 
     <uc1:wucObsPrograma runat="server" ID="wucObsPrograma" Anotacao1="Banco: gerBI" Anotacao2="Stored Procedure: Resultados.uspBuscarTeorico12Meses" />
-</asp:Content>
 
+</asp:Content>

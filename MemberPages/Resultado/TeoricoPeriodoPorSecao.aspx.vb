@@ -252,7 +252,7 @@ Partial Class MemberPages_TeoricoPeriodoPorSecao
 
             Session("sANO") = Me.selAno.SelectedValue
             Session("sFILIAL") = Me.selFilial.SelectedValue
-            'Session("sSECAO") = Me.cboSecao.CallSecao
+
             Call ColocarBordas()
 
             Me.ASPxGridView1.DataBind()
@@ -1578,6 +1578,17 @@ Partial Class MemberPages_TeoricoPeriodoPorSecao
     End Sub
 
     Protected Sub cbPanel_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase) Handles cbPanel.Callback
+
+        Dim status_CAI As Byte
+        If chkCAI.Checked = True Then
+            status_CAI = 1
+        Else
+            status_CAI = 0
+        End If
+
+        clDataDb.ExecuteStoredProcedure_Scalar("dbo.usp_Insert_Usuarios", Conexao.gerTemp_tr, "@Usuario", User.Identity.Name, "@PGR", "269", "idValue", status_CAI.ToString)
+        clDataDb.ExecuteStoredProcedure_Scalar("Resultados.uspAtualizarTeorico_Acumulados", Conexao.gerBI_str, "@Ano", Session("sANO"), "@Mes", "78", "@idFilial", Session("sFILIAL"), "@Usuario", User.Identity.Name)
+
         Me.ASPxGridView1.DataBind()
     End Sub
 
