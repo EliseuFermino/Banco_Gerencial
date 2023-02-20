@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="RankingMes.aspx.vb" Inherits="MemberPages_Vendas_RankingMes" %>
+﻿<%@ Page Title="Ranking de Vendas Mensal" Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="RankingMes.aspx.vb" Inherits="MemberPages_Vendas_RankingMes" %>
 
 <%@ Register Assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
@@ -11,7 +11,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 
-    <link href="../../css/Banco_Gerencial/Banco_Gerencial.css" rel="stylesheet" />
+    <link href="~/css/Banco_Gerencial/Banco_Gerencial.css" rel="stylesheet" />
 
     <style type ="text/css" >
 
@@ -151,7 +151,7 @@ cbPanel.PerformCallback();
                             </TotalSummary>
                             <Columns>
                                 <dx:GridViewBandColumn Caption="Meta Mês" ToolTip="Meta mensal e quanto que falta para atingir a meta do mês." 
-                                    VisibleIndex="5" Name="bandMetaMes">
+                                    VisibleIndex="6" Name="bandMetaMes">
                                     <Columns>
                                         <dx:GridViewDataTextColumn Caption="Previsao" FieldName="vlrMetaAnual" 
                                             VisibleIndex="0" Width="100px">
@@ -176,7 +176,8 @@ cbPanel.PerformCallback();
                                     </Columns>
                                     <HeaderStyle HorizontalAlign="Center" />
                                 </dx:GridViewBandColumn>
-                                <dx:GridViewBandColumn Caption="Atingimento e Crescimento" VisibleIndex="4">
+
+                                <dx:GridViewBandColumn Caption="Atingimento e Crescimento" VisibleIndex="5">
                                     <Columns>
                                         <dx:GridViewDataTextColumn Caption="% Prev" FieldName="percCresc_RealMeta" 
                                             ToolTip="% de crescimento. Meta sobre o  Realizado" VisibleIndex="0" 
@@ -237,7 +238,8 @@ cbPanel.PerformCallback();
                                     </Columns>
                                     <HeaderStyle HorizontalAlign="Center" Wrap="False" />
                                 </dx:GridViewBandColumn>
-                                <dx:GridViewBandColumn Caption="Anos Anteriores" VisibleIndex="3">
+
+                                <dx:GridViewBandColumn Caption="Anos Anteriores" VisibleIndex="4">
                                     <Columns>
                                         <dx:GridViewDataTextColumn Caption="2011" FieldName="vlrAA1" 
                                             VisibleIndex="0" Width="110px" Name="bandAA1">
@@ -264,7 +266,7 @@ cbPanel.PerformCallback();
                                     <HeaderStyle HorizontalAlign="Center" />
                                 </dx:GridViewBandColumn>
 
-                                <dx:GridViewBandColumn Caption="Ano 2012" VisibleIndex="2" Name="bandAtual">
+                                <dx:GridViewBandColumn Caption="Ano 2012" VisibleIndex="3" Name="bandAtual">
                                     <Columns>
                                         <dx:GridViewDataTextColumn Caption="Meta" FieldName="vlrMeta" 
                                             VisibleIndex="0" Width="100px">
@@ -335,6 +337,7 @@ cbPanel.PerformCallback();
                                 <dx:GridViewDataTextColumn Caption="ID" FieldName="idFilial" VisibleIndex="0" 
                                     Width="30px" Visible="False" FixedStyle="Left">
                                 </dx:GridViewDataTextColumn>
+
                                 <dx:GridViewDataTextColumn Caption="Filial" FieldName="FilialLista" 
                                     VisibleIndex="1" Width="130px" FixedStyle="Left">
                                     <HeaderStyle HorizontalAlign="Center" />
@@ -342,6 +345,7 @@ cbPanel.PerformCallback();
                                         <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="2px" />
                                     </CellStyle>
                                 </dx:GridViewDataTextColumn>
+
                                 <dx:GridViewBandColumn Caption="Margem PDV" VisibleIndex="12">
                                     <Columns>
                                         <dx:GridViewDataTextColumn Caption="Meta" FieldName="percMargMeta" 
@@ -376,7 +380,8 @@ cbPanel.PerformCallback();
                                     </Columns>
                                     <HeaderStyle HorizontalAlign="Center" />
                                 </dx:GridViewBandColumn>
-                                <dx:GridViewBandColumn Caption="Margem Final" ShowInCustomizationForm="True" VisibleIndex="14">
+
+                                <dx:GridViewBandColumn Caption="Margem Final" ShowInCustomizationForm="True" VisibleIndex="2">
                                     <Columns>
                                         <dx:GridViewDataTextColumn Caption="Meta" FieldName="percMargMetaFinal" ShowInCustomizationForm="True" VisibleIndex="0" Width="60px">
                                             <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
@@ -394,6 +399,34 @@ cbPanel.PerformCallback();
                                     </Columns>
                                     <HeaderStyle BackColor="Gray" ForeColor="White" HorizontalAlign="Center" />
                                 </dx:GridViewBandColumn>
+
+                                <dx:GridViewBandColumn Caption="Ano" VisibleIndex="1" Name="bandAtual">
+                                    <Columns>
+                                        <dx:GridViewDataTextColumn Caption="Meta" FieldName="vlrMeta" 
+                                            VisibleIndex="0" Width="100px">
+                                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                            </PropertiesTextEdit>
+                                            <HeaderStyle HorizontalAlign="Center"  BackColor="Green"  ForeColor ="White"/>
+                                            <CellStyle ForeColor="#009900">
+                                            </CellStyle>
+                                            <FooterCellStyle ForeColor="#009900">
+                                            </FooterCellStyle>
+                                        </dx:GridViewDataTextColumn>                                        
+
+                                        <dx:GridViewDataTextColumn Caption="Total" FieldName="vlrRea" 
+                                            VisibleIndex="3" Width="100px">
+                                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                            </PropertiesTextEdit>
+                                            <HeaderStyle HorizontalAlign="Center"  BackColor="Blue"  ForeColor ="White" />
+                                            <CellStyle ForeColor="Blue">
+                                            </CellStyle>
+                                            <FooterCellStyle ForeColor="Blue">
+                                            </FooterCellStyle>
+                                        </dx:GridViewDataTextColumn>
+                                    </Columns>
+                                    <HeaderStyle HorizontalAlign="Center" />
+                                </dx:GridViewBandColumn>
+
                             </Columns>
                              <SettingsResizing ColumnResizeMode="Control" />
                              <SettingsExport EnableClientSideExportAPI="true" ExcelExportMode="WYSIWYG"></SettingsExport>
@@ -491,9 +524,10 @@ cbPanel.PerformCallback();
                                 <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percPart_vlrRea" 
                                     SummaryType="Custom" />
                             </TotalSummary>
+
                             <Columns>
                                 <dx:GridViewBandColumn Caption="Meta Mês" ToolTip="Meta mensal e quanto que falta para atingir a meta do mês." 
-                                    VisibleIndex="5" Name="bandMetaMes">
+                                    VisibleIndex="6" Name="bandMetaMes">
                                     <Columns>
                                         <dx:GridViewDataTextColumn Caption="Previsao" FieldName="vlrMetaAnual" 
                                             VisibleIndex="0" Width="100px">
@@ -518,7 +552,8 @@ cbPanel.PerformCallback();
                                     </Columns>
                                     <HeaderStyle HorizontalAlign="Center" />
                                 </dx:GridViewBandColumn>
-                                <dx:GridViewBandColumn Caption="Atingimento e Crescimento" VisibleIndex="4">
+
+                                <dx:GridViewBandColumn Caption="Atingimento e Crescimento" VisibleIndex="5">
                                     <Columns>
                                         <dx:GridViewDataTextColumn Caption="% Prev" FieldName="percCresc_RealMeta" 
                                             ToolTip="% de crescimento. Meta sobre o  Realizado" VisibleIndex="0" 
@@ -579,7 +614,8 @@ cbPanel.PerformCallback();
                                     </Columns>
                                     <HeaderStyle HorizontalAlign="Center" Wrap="False" />
                                 </dx:GridViewBandColumn>
-                                <dx:GridViewBandColumn Caption="Anos Anteriores" VisibleIndex="3">
+
+                                <dx:GridViewBandColumn Caption="Anos Anteriores" VisibleIndex="4">
                                     <Columns>
                                         <dx:GridViewDataTextColumn Caption="2011" FieldName="vlrAA1" 
                                             VisibleIndex="0" Width="110px" Name="bandAA1">
@@ -606,7 +642,7 @@ cbPanel.PerformCallback();
                                     <HeaderStyle HorizontalAlign="Center" />
                                 </dx:GridViewBandColumn>
 
-                                <dx:GridViewBandColumn Caption="Ano 2012" VisibleIndex="2" Name="bandAtual">
+                                <dx:GridViewBandColumn Caption="Ano 2012" VisibleIndex="3" Name="bandAtual">
                                     <Columns>
                                         <dx:GridViewDataTextColumn Caption="Meta" FieldName="vlrMeta" 
                                             VisibleIndex="0" Width="100px">
@@ -677,6 +713,7 @@ cbPanel.PerformCallback();
                                 <dx:GridViewDataTextColumn Caption="ID" FieldName="idFilial" VisibleIndex="0" 
                                     Width="30px" Visible="False" FixedStyle="Left">
                                 </dx:GridViewDataTextColumn>
+
                                 <dx:GridViewDataTextColumn Caption="Filial" FieldName="FilialLista" 
                                     VisibleIndex="1" Width="130px" FixedStyle="Left">
                                     <HeaderStyle HorizontalAlign="Center" />
@@ -684,6 +721,7 @@ cbPanel.PerformCallback();
                                         <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="2px" />
                                     </CellStyle>
                                 </dx:GridViewDataTextColumn>
+
                                 <dx:GridViewBandColumn Caption="Margem PDV" VisibleIndex="12">
                                     <Columns>
                                         <dx:GridViewDataTextColumn Caption="Meta" FieldName="percMargMeta" 
@@ -718,7 +756,8 @@ cbPanel.PerformCallback();
                                     </Columns>
                                     <HeaderStyle HorizontalAlign="Center" />
                                 </dx:GridViewBandColumn>
-                                <dx:GridViewBandColumn Caption="Margem Final" ShowInCustomizationForm="True" VisibleIndex="14">
+
+                                <dx:GridViewBandColumn Caption="Margem Final" ShowInCustomizationForm="True" VisibleIndex="2">
                                     <Columns>
                                         <dx:GridViewDataTextColumn Caption="Meta" FieldName="percMargMetaFinal" ShowInCustomizationForm="True" VisibleIndex="0" Width="60px">
                                             <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
@@ -736,7 +775,36 @@ cbPanel.PerformCallback();
                                     </Columns>
                                     <HeaderStyle BackColor="Gray" ForeColor="White" HorizontalAlign="Center" />
                                 </dx:GridViewBandColumn>
+
+                                <dx:GridViewBandColumn Caption="Ano" VisibleIndex="1" Name="bandAtual">
+                                    <Columns>
+                                        <dx:GridViewDataTextColumn Caption="Meta" FieldName="vlrMeta" 
+                                            VisibleIndex="0" Width="100px">
+                                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                            </PropertiesTextEdit>
+                                            <HeaderStyle HorizontalAlign="Center"  BackColor="Green"  ForeColor ="White"/>
+                                            <CellStyle ForeColor="#009900">
+                                            </CellStyle>
+                                            <FooterCellStyle ForeColor="#009900">
+                                            </FooterCellStyle>
+                                        </dx:GridViewDataTextColumn>                                        
+
+                                        <dx:GridViewDataTextColumn Caption="Total" FieldName="vlrRea" 
+                                            VisibleIndex="3" Width="100px">
+                                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                            </PropertiesTextEdit>
+                                            <HeaderStyle HorizontalAlign="Center"  BackColor="Blue"  ForeColor ="White" />
+                                            <CellStyle ForeColor="Blue">
+                                            </CellStyle>
+                                            <FooterCellStyle ForeColor="Blue">
+                                            </FooterCellStyle>
+                                        </dx:GridViewDataTextColumn>
+                                    </Columns>
+                                    <HeaderStyle HorizontalAlign="Center" />
+                                </dx:GridViewBandColumn>
+
                             </Columns>
+
                              <SettingsResizing ColumnResizeMode="Control" />
                              <SettingsExport EnableClientSideExportAPI="true" ExcelExportMode="WYSIWYG"></SettingsExport>
                             <Settings ShowTitlePanel="True" ShowVerticalScrollBar="True" 
