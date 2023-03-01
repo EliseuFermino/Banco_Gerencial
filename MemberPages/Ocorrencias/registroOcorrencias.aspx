@@ -11,42 +11,56 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="Server">
 
-    <div class="container">
+    <div class="container" style="max-width: 95%">
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="../../image/LogoCondor_Vermelho_25-sem-fundo.png" alt="" width="350" height="90">
             <p class="lead">Formulário de registro de ocorrências.</p>
         </div>
 
+
         <div class="row justify-content-sm-center" runat="server" id="divOcorrencia">
+
             <div class="col-md-12 order-md-1">
-                <div class="row">
+                <div class="row justify-content-sm-center">
                     <div class="col-md-4 mb-1" runat="server">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">Solicitante</span>
+                                <span class="input-group-text">Assunto</span>
                             </div>
-                            <input type="text" class="form-control justify-content-center" id="lblMatricula" runat="server" placeholder="Matricula" disabled="disabled">
+                            <input type="text" class="form-control justify-content-center" maxlength="50" id="lblAssunto" runat="server" required>
                         </div>
                     </div>
+
+                    <div class="col-md-4 mb-1" runat="server">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Unidade</span>
+                            </div>
+                            <select id="selUnidade" runat="server" class="form-control justify-content-center" required></select>
+                            <%--<input type="text" class="form-control justify-content-center" maxlength="50" id="lblAssunto" runat="server" required placeholder="Assunto">--%>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row justify-content-sm-center">
 
                     <div class="col-md-4 mb-1">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Setor</span>
                             </div>
-                            <input type="text" class="form-control justify-content-center" id="lblSetor" runat="server" required placeholder="Setor">
+                            <select id="selSetor" runat="server" class="form-control justify-content-center" required></select>
                         </div>
                     </div>
 
                     <div class="col-md-4 mb-1">
                         <asp:FileUpload type="file" class="form-control justify-content-center" aria-label="file example" runat="server" ID="uploadImage" AllowMultiple="true" autopostback="false" />
                     </div>
-
                 </div>
 
                 <br />
-                <div class="row">
-                    <div class="col-md-4 mb-1 justify-content-center" style="justify-content: space-between">
+                <div class="row justify-content-center">
+                    <div class="col-md-4 mb-1 justify-content-center" style="justify-content: space-between; max-width: 350px">
                         <span class="input-group-text justify-content-center">Gravidade</span>
                         <div class="form-control center">
                             <asp:RadioButtonList runat="server" ID="rdlGravidade" CssClass="form-label justify-content-center" RepeatDirection="Horizontal" CellSpacing="4">
@@ -60,7 +74,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4 mb-1 justify-content-center" style="justify-content: space-between">
+                    <div class="col-md-4 mb-1 justify-content-center" style="justify-content: space-between; max-width: 350px">
                         <span class="input-group-text justify-content-center">Urgência</span>
                         <div class="form-control center">
                             <asp:RadioButtonList runat="server" ID="rdlUrgencia" CssClass="form-label justify-content-center" RepeatDirection="Horizontal" CellSpacing="4">
@@ -73,7 +87,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4 mb-1 justify-content-center" style="justify-content: space-between">
+                    <div class="col-md-4 mb-1 justify-content-center" style="justify-content: space-between; max-width: 350px">
                         <span class="input-group-text justify-content-center">Tendência</span>
                         <div class="form-control center">
                             <asp:RadioButtonList runat="server" ID="rdlTendencia" CssClass="form-label justify-content-center" RepeatDirection="Horizontal" CellSpacing="4">
@@ -86,7 +100,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <hr class="mb-3">
                 <div class="mb-3">
                     <label for="descricao" class="input-group-text">Descrição da ocorrência:</label>
@@ -98,7 +112,7 @@
                 <hr class="mb-3">
 
                 <div class="row justify-content-sm-center">
-                    <asp:Button class="btn btn-primary btn-lg" Style="width: auto" runat="server" autoPostBack="false" ID="btnSubmit" Text="Registrar ocorrência" OnClientClick="getValueEditor()" OnClick="btnSubmit_Click" />
+                    <asp:Button class="btn btn-primary btn-lg" Style="width: auto" runat="server" autoPostBack="false" ID="btnSubmit" Text="Registrar ocorrência" OnClick="btnSubmit_Click" />
                 </div>
 
                 <hr class="mb-3">
@@ -147,6 +161,32 @@
     <!-- Foi colocado no final para a página carregar mais rápido -->
     <script src="../../assets/js/jquery-2.1.4.min.js"></script>
     <link href="../../assets/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .container {
+            max-width: 95%;
+        }
+    </style>
 
+    <script>
+        $('#MainContent_btnSubmit').each(function () {
+
+            //add a class to identify itself:
+            //$(this).addClass('disabled');
+            this.onclick = function (event) {
+
+            var assunto = document.getElementById("MainContent_lblAssunto");
+            var setor = document.getElementById("MainContent_lblSetor");
+                //Restrict click if it has disabled class:
+                if (assunto.value == "" || setor.value == "") {
+                    return false;
+                }
+                else {
+                    $(this).addClass('disabled');
+                    return true;
+                }
+            }
+
+        });
+    </script>
 </asp:Content>
 

@@ -8,24 +8,93 @@ Imports System.Activities.Expressions
 Imports DevExpress.CodeParser
 Imports DevExpress.Xpo.Exceptions
 Imports DevExpress.XtraRichEdit.Layout.Engine
+Imports DevExpress.Xpf.Data.Native
 
 Partial Class MemberPages_Ocorrencias_registroOcorrencias
     Inherits System.Web.UI.Page
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Not IsPostBack Then
 
-            lblMatricula.Value = User.Identity.Name.ToUpper()
+            carregaLojas()
+
+            carregaSetor()
+
+            If CKEditor1.Text.Length() < 183 Then
+                CKEditor1.Text = "<p style='text-align: center;'><span style='font-size: 20px;'><strong>Registro de Ocorr&ecirc;ncia</strong></span></p><ul><li><span style='font-size 14px;'>&nbsp;</span></li></ul>"
+            End If
 
         End If
     End Sub
 
-    Protected Sub btnSubmit_Click(sender As Object, e As EventArgs)
-        Dim dtReq = Now()
-        Dim matricula = User.Identity.Name.ToUpper()
-        Dim setor = lblSetor.Value
+    Protected Sub carregaLojas()
+        Dim selectSQL As String = "SELECT Filial ,RTRIM(FilialLista) AS nomeFilial FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE (IdLojasCDs=1 or isAtacarejo = 1) and Filial not in (100) ORDER BY nomeFilial"
+        Dim con As New SqlConnection(Conexao.gerCadastros_str)
+        Dim cmd As New SqlCommand(selectSQL, con)
 
+        ' Open the connection
+        con.Open()
+
+        Try
+            ' Define the binding
+            selUnidade.DataSource = cmd.ExecuteReader()
+            selUnidade.DataTextField = "nomeFilial"
+            selUnidade.DataValueField = "Filial"
+
+            'Activate the binding.
+            selUnidade.DataBind()
+
+            con.Close()
+
+        Catch ex As Exception
+            'lblError.Text = iStr
+        Finally
+            con.Close()
+        End Try
+        '
+    End Sub
+
+    Protected Sub carregaSetor()
+        Dim selectSQL As String = "Select	idSetor, nomeSetor From	gerCadastros.dbo.[tblCadSetor] "
+        Dim con As New SqlConnection(Conexao.gerCadastros_str)
+        Dim cmd As New SqlCommand(selectSQL, con)
+
+        ' Open the connection
+        con.Open()
+
+        Try
+            ' Define the binding
+            selSetor.DataSource = cmd.ExecuteReader()
+            selSetor.DataTextField = "nomeSetor"
+            selSetor.DataValueField = "idSetor"
+
+            'Activate the binding.
+            selSetor.DataBind()
+
+            selSetor.Items.Insert(0, New ListItem("", ""))
+            selSetor.SelectedIndex = 0
+
+            con.Close()
+
+        Catch ex As Exception
+            'lblError.Text = iStr
+        Finally
+            con.Close()
+        End Try
+        '
+    End Sub
+
+    Protected Sub btnSubmit_Click(sender As Object, e As EventArgs)
+
+        divSucesso.Visible = True
+        divOcorrencia.Visible = False
+        divCarregamento.Visible = False
+
+        Dim matricula = User.Identity.Name.ToUpper()
+        Dim setor = selSetor.Value
+        Dim assunto = lblAssunto.Value
+        Dim unidade = selUnidade.Value
         Dim desc = CKEditor1.Text
-        Dim classificacao = ""
+        Dim classificacao As String
         Dim arquivo = ""
 
         Dim calc = ((rdlGravidade.SelectedValue * rdlUrgencia.SelectedValue) * rdlTendencia.SelectedValue)
@@ -73,10 +142,12 @@ Partial Class MemberPages_Ocorrencias_registroOcorrencias
                 Next
             End If
 
-            Dim query As String = "INSERT INTO [dbo].[tblOcorrencias] ([Data_Requisicao] ,[Matricula] ,[Solicitante] ,[Setor] ,[Gravidade]  ,[Urgencia]  ,[Tendencia] ,[Descricao], [Classificacao] ,[Upload] ,[Status]) VALUES (GETDATE(), @Matricula, @Solicitante, @Setor, @Gravidade, @Urgencia, @Tendencia, @Descricao, @Classificacao, @Upload, @Status)"
+            Dim query As String = "INSERT INTO [dbo].[tblOcorrencias] ([Data_Requisicao] , [Assunto] ,[idFilial], [Matricula] ,[Solicitante], [idSetor] ,[Gravidade]  ,[Urgencia]  ,[Tendencia] ,[Descricao], [Classificacao] ,[Upload] ,[Status]) VALUES (GETDATE(), @Assunto, @Unidade, @Matricula, @Solicitante, @Setor, @Gravidade, @Urgencia, @Tendencia, @Descricao, @Classificacao, @Upload, @Status)"
             Using cmd As SqlCommand = New SqlCommand(query)
 
                 cmd.Connection = con
+                cmd.Parameters.AddWithValue("@Assunto", assunto)
+                cmd.Parameters.AddWithValue("@Unidade", unidade)
                 cmd.Parameters.AddWithValue("@Matricula", matricula)
                 cmd.Parameters.AddWithValue("@Solicitante", matricula)
                 cmd.Parameters.AddWithValue("@Setor", setor)
@@ -93,13 +164,7 @@ Partial Class MemberPages_Ocorrencias_registroOcorrencias
                 con.Close()
 
             End Using
-
-            Me.divSucesso.Visible = True
-            Me.divOcorrencia.Visible = False
-            Me.divCarregamento.Visible = False
-
         End Using
-
     End Sub
 
 End Class

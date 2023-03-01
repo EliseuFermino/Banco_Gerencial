@@ -1,4 +1,5 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.Data
+Imports System.Data.SqlClient
 Imports DevExpress.Web
 Imports DevExpress.XtraSpreadsheet.Forms
 
@@ -191,6 +192,7 @@ Partial Class MemberPages_TeoricoPeriodoPorSecao
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Not IsPostBack Then
+
             Dim oVem As New VendaEmpresaMes
             oVem.AtualizarEstatisticaPrograma(149, Page.User.Identity.Name)
 
@@ -227,6 +229,10 @@ Partial Class MemberPages_TeoricoPeriodoPorSecao
             Session("sANO") = Me.selAno.SelectedValue
             Session("sFILIAL") = Me.selFilial.SelectedValue
 
+            'Dim query = "Execute [gerBI].[Resultados].[uspBuscarTeorico12Meses]  " + Session("sANO").ToString() + ", " + Session("sFILIAL").ToString()
+            'gvTeorico.DataSource = GetData(query)
+            'gvTeorico.DataBind()
+
             Call ExibirOcultar_Original()
             Call ExibirOcultar_Revista()
             Call ExibirOcultar_Realizado()
@@ -240,7 +246,7 @@ Partial Class MemberPages_TeoricoPeriodoPorSecao
     End Sub
 
     Protected Sub Page_LoadComplete(sender As Object, e As System.EventArgs) Handles Me.LoadComplete
-        CType(Master.FindControl("lblTitle"), Label).Text = "Resultado Teórico - Por Seção"
+        'CType(Master.FindControl("lblTitle"), Label).Text = "Resultado Teórico - Por Seção"
 
 
         'MainContent_selFilial_selFilial_CapC
@@ -268,6 +274,35 @@ Partial Class MemberPages_TeoricoPeriodoPorSecao
 
         End If
     End Sub
+
+    'Private Shared Function GetData(query As String) As DataTable
+    '    Dim strConnString As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+    '    Using con As New SqlConnection(strConnString)
+    '        Using cmd As New SqlCommand()
+    '            cmd.CommandText = query
+    '            Using sda As New SqlDataAdapter()
+    '                cmd.Connection = con
+    '                sda.SelectCommand = cmd
+    '                Using ds As New DataSet()
+    '                    Dim dt As New DataTable()
+    '                    sda.Fill(dt)
+    '                    Return dt
+    '                End Using
+    '            End Using
+    '        End Using
+    '    End Using
+    'End Function
+
+    'Protected Sub gvCustomers_RowDataBound(sender As Object, e As GridViewRowEventArgs)
+    '    If e.Row.RowType = DataControlRowType.DataRow Then
+    '        Dim customerId As String = gvCustomers.DataKeys(e.Row.RowIndex).Value.ToString()
+    '        Dim gvOrders As GridView = TryCast(e.Row.FindControl("gvOrders"), GridView)
+    '        gvOrders.DataSource = GetData(String.Format("select top 3 * from Orders where CustomerId='{0}'", customerId))
+    '        gvOrders.DataBind()
+    '    End If
+    'End Sub
+
+
 
 #End Region
 
@@ -2136,4 +2171,10 @@ Partial Class MemberPages_TeoricoPeriodoPorSecao
 
 #End Region
 
+
+
+
+    Protected Sub gridSub_Load(sender As Object, e As EventArgs)
+
+    End Sub
 End Class
