@@ -86,8 +86,8 @@
                                 <%--Primeira Linha--%>
                                 <div class="row col-auto">
                                     <div class="col-md-6">
-                                        <span class="input-group-text justify-content-center">Solicitante</span>
-                                        <label runat="server" id="lblSol" class="form-control" style="text-align: center;"></label>
+                                        <span class="input-group-text justify-content-center">Atendente</span>
+                                        <label runat="server" id="lblAtendente" class="form-control" style="text-align: center;"></label>
                                     </div>
 
                                     <div class="col-md-6">
@@ -125,7 +125,7 @@
                                 <div class="row col-auto justify-content-center">
                                     <div class="justify-content-center">
                                         <br />
-                                        <button type="button" class="btn btn-success" data-toggle="modal" runat="server" id="btnAtend" data-target="#ModalAtend" title="Atendimento">Atendimento</button>
+                                        <button type="button" class="btn btn-success btn-md" data-toggle="modal" runat="server" id="btnAtend" data-target="#ModalAtend" title="Atendimento">Atendimento</button>
                                     </div>
                                 </div>
                             </div>
@@ -206,8 +206,8 @@
                             </div>
 
                             <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancelar</button>
-                                <asp:Button ID="btnChange" runat="server" Text="Salvar Alterações" OnClick="btnChange_Click" CssClass="btn btn-success btn-sm justify-content-around" />
+                                <button type="button" class="btn btn-danger btn-md" data-dismiss="modal" runat="server" id="btnCancelar">Cancelar</button>
+                                <asp:Button ID="btnChange" runat="server" Text="Salvar Alterações" OnClick="btnChange_Click" CssClass="btn btn-success btn-md justify-content-around" />
                             </div>
                         </div>
                     </div>
@@ -248,7 +248,30 @@
                     format: 'DD/MM/YYYY',
                     cancelLabel: 'Limpar',
                     applyLabel: 'Aplicar',
-                    language: 'pt-br'
+                    language: 'pt-br',
+                    daysOfWeek: [
+                        "Dom",
+                        "Seg",
+                        "Ter",
+                        "Qua",
+                        "Qui",
+                        "Sex",
+                        "Sab"
+                    ],
+                    monthNames: [
+                        "Janeiro",
+                        "Fevereiro",
+                        "Março",
+                        "Abril",
+                        "Maio",
+                        "Junho",
+                        "Julho",
+                        "Agosto",
+                        "Setembro",
+                        "Outubro",
+                        "Novembro",
+                        "Dezembro"
+                    ]
                 }
             });
 

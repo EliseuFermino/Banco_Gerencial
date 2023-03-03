@@ -1,15 +1,5 @@
-﻿Imports System.Net
-Imports System.IO
-Imports System.Data.SqlClient
-Imports System.Windows.Forms
-Imports System.Windows.Forms.HtmlElement
-Imports DevExpress.XtraReports.Design
-Imports System.Activities.Expressions
-Imports DevExpress.CodeParser
-Imports DevExpress.Xpo.Exceptions
-Imports DevExpress.XtraRichEdit.Layout.Engine
-Imports DevExpress.Xpf.Data.Native
-
+﻿Imports System.Data.SqlClient
+'
 Partial Class MemberPages_Ocorrencias_registroOcorrencias
     Inherits System.Web.UI.Page
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -22,6 +12,15 @@ Partial Class MemberPages_Ocorrencias_registroOcorrencias
             If CKEditor1.Text.Length() < 183 Then
                 CKEditor1.Text = "<p style='text-align: center;'><span style='font-size: 20px;'><strong>Registro de Ocorr&ecirc;ncia</strong></span></p><ul><li><span style='font-size 14px;'>&nbsp;</span></li></ul>"
             End If
+
+        End If
+    End Sub
+
+    Protected Sub Page_Init(sender As Object, e As EventArgs) Handles Me.Init
+        If Not IsPostBack Then
+            Dim oVem As New VendaEmpresaMes
+            oVem.AtualizarEstatisticaPrograma(435, User.Identity.Name)
+
 
         End If
     End Sub
@@ -124,12 +123,13 @@ Partial Class MemberPages_Ocorrencias_registroOcorrencias
                     'Dim size = i.ContentLength
 
                     If i.ContentLength > 0 Then
-                        Dim SaveLocation As String = Server.MapPath("imgs\") & "" & i.FileName
+                        Dim data = Now.ToString()
+                        Dim SaveLocation As String = Server.MapPath("imgs_atend\") & "" & Replace(data.Substring(0, 10), "/", "_") & "_" & Replace(data.Substring(11, 5), ":", "_") & "." & Split(i.ContentType, "/", -1)(1)
 
                         If arquivo <> "" Then
-                            arquivo += ";" & i.FileName
+                            arquivo += ";" & Replace(data.Substring(0, 10), "/", "_") & "_" & Replace(data.Substring(11, 5), ":", "_") & "." & Split(i.ContentType, "/", -1)(1)
                         Else
-                            arquivo = i.FileName
+                            arquivo = Replace(data.Substring(0, 10), "/", "_") & "_" & Replace(data.Substring(11, 5), ":", "_") & "." & Split(i.ContentType, "/", -1)(1)
                         End If
 
                         Try

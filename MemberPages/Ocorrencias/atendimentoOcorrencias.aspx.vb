@@ -1,24 +1,7 @@
 ﻿
-Imports System.Activities.Expressions
 Imports System.Data
 Imports System.Data.SqlClient
-Imports System.Drawing
-Imports System.Security.Cryptography
-Imports System.Windows.Forms
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement
-Imports DevExpress.Mvvm.POCO
-Imports DevExpress.Utils
-Imports DevExpress.Web
-Imports DevExpress.Web.ASPxHtmlEditor.Internal
 Imports DevExpress.Xpf.Editors.Helpers
-Imports DevExpress.Xpf.Editors.Native.TypedStyles
-Imports DevExpress.Xpf.Map.Native
-Imports DevExpress.XtraBars.Alerter
-Imports DevExpress.XtraCharts.Native
-Imports DevExpress.XtraDiagram.Base
-Imports DevExpress.XtraExport.Helpers
-Imports DevExpress.XtraSpreadsheet.Model
-Imports DevExpress.XtraTreeList
 
 Partial Class MemberPages_Ocorrencias_atendimentoOcorrencias
     Inherits System.Web.UI.Page
@@ -32,14 +15,26 @@ Partial Class MemberPages_Ocorrencias_atendimentoOcorrencias
         End If
     End Sub
 
+    Protected Sub Page_Init(sender As Object, e As EventArgs) Handles Me.Init
+        If Not IsPostBack Then
+            Dim oVem As New VendaEmpresaMes
+            oVem.AtualizarEstatisticaPrograma(436, User.Identity.Name)
+
+
+        End If
+    End Sub
+
     Protected Sub carregaGrid()
+
         Dim constr As String = ConfigurationManager.ConnectionStrings("gerTempConnectionString").ConnectionString
         Dim con As SqlConnection = New SqlConnection(constr)
-        Dim data As SqlDataReader
         Dim adapter As New SqlDataAdapter
         Dim parameter As New SqlParameter
-        Dim query As String = "Select ID From tblOcorrenciasGestores Where UserName = @User"
-        Dim command As SqlCommand = New SqlCommand(query, con)
+        Dim Mountquery As String = "Select ID, Convert(varchar,Data_Requisicao,103) As Data_Requisicao, Solicitante, idSetor, Assunto, b.FilialLista As Unidade From gerTemp.dbo.tblOcorrencias A Join gerCadastros.Cadastros.tblCadFiliais B On A.idFilial = b.Filial Where 1=1 "
+        Dim command As SqlCommand
+        Dim data As SqlDataReader
+        Dim query As String = "Select Username From Gertemp.dbo.[vw_OcorrenciaGestores] Where UserName = @User"
+        command = New SqlCommand(query, con)
 
         grvDados.Columns(0).Visible = True
 
@@ -53,18 +48,35 @@ Partial Class MemberPages_Ocorrencias_atendimentoOcorrencias
         data = command.ExecuteReader()
 
         If data.HasRows Then
-            query = "Select ID, Convert(varchar,Data_Requisicao,103) As Data_Requisicao, Solicitante, idSetor, Assunto, b.FilialLista As Unidade From gerTemp.dbo.tblOcorrencias A Join gerCadastros.Cadastros.tblCadFiliais B On A.idFilial = b.Filial Where Status Not In ('Finalizado','Improcedente') Order By Data_Requisicao Asc"
+            query = "Select ID, Convert(varchar,Data_Requisicao,103) As Data_Requisicao, c.NomeUser as Solicitante, idSetor, Assunto, b.FilialLista As Unidade From gerTemp.dbo.tblOcorrencias A Join gerCadastros.Cadastros.tblCadFiliais B On A.idFilial = b.Filial Join Gertemp.dbo.[vw_OcorrenciaGestores] C On a.UserName = c.UserName Where Status Not In ('Finalizado','Improcedente') Order By Data_Requisicao Asc"
             btnAtend.Visible = True
+            divFiltros.Visible = True
         Else
-            query = "Select ID, Convert(varchar,Data_Requisicao,103) As Data_Requisicao, Solicitante, idSetor, Assunto, b.FilialLista As Unidade From gerTemp.dbo.tblOcorrencias A Join gerCadastros.Cadastros.tblCadFiliais B On A.idFilial = b.Filial Where Status Not In ('Finalizado','Improcedente') And Solicitante = '" + User.Identity.Name.ToString() + "' Order By Data_Requisicao Asc"
+            query = "Select ID, Convert(varchar,Data_Requisicao,103) As Data_Requisicao, c.NomeUser as Solicitante, idSetor, Assunto, b.FilialLista As Unidade From gerTemp.dbo.tblOcorrencias A Join gerCadastros.Cadastros.tblCadFiliais B On A.idFilial = b.Filial Join Gertemp.dbo.[vw_OcorrenciaGestores] C On a.UserName = c.UserName Where Status Not In ('Finalizado','Improcedente') And Solicitante = '" + User.Identity.Name.ToString() + "' Order By Data_Requisicao Asc"
             btnAtend.Visible = False
+            divFiltros.Visible = False
         End If
 
         command.Dispose()
         data.Close()
 
-        command = New SqlCommand(query, con)
+        If daterange.Value.Length > 0 Then
+            Mountquery += " And Data_Requisicao Between Convert(datetime,'" & Split(daterange.Value, " à ", 0)(0).ToString() & " 00:00',103) and Convert(datetime,'" & Split(daterange.Value, " à ", 0)(1).ToString() & " 23:59',103) "
+        End If
 
+        If selUnidade.Value.Length > 0 Then
+            Mountquery += " And idFilial = '" & selUnidade.Value.ToString() & "' "
+        End If
+
+        If selStatus.Value.Length > 0 Then
+            Mountquery += " And Status In ('" & selStatus.Value.ToString() & "') "
+        Else
+            Mountquery += " And Status Not In ('Finalizado','Improcedente') "
+        End If
+
+        Mountquery += " Order By Data_Requisicao Asc"
+
+        command = New SqlCommand(Mountquery, con)
         Dim idr As IDataReader = command.ExecuteReader()
         grvDados.DataSource = idr
         grvDados.DataBind()
@@ -76,6 +88,9 @@ Partial Class MemberPages_Ocorrencias_atendimentoOcorrencias
         Next
 
         grvDados.Columns(0).Visible = False
+        divDetalhes.Visible = False
+
+        divDesc.Focus()
 
         con.Close()
         idr.Close()
@@ -125,46 +140,10 @@ Partial Class MemberPages_Ocorrencias_atendimentoOcorrencias
     End Sub
 
     Protected Sub btnFiltrar_Click(sender As Object, e As EventArgs)
-        Dim constr As String = ConfigurationManager.ConnectionStrings("gerTempConnectionString").ConnectionString
-        Dim con As SqlConnection = New SqlConnection(constr)
-        Dim adapter As New SqlDataAdapter
-        Dim parameter As New SqlParameter
-        Dim Mountquery As String = "Select ID, Convert(varchar,Data_Requisicao,103) As Data_Requisicao, Solicitante, idSetor, Assunto, b.FilialLista As Unidade From gerTemp.dbo.tblOcorrencias A Join gerCadastros.Cadastros.tblCadFiliais B On A.idFilial = b.Filial Where 1=1 "
-        Dim command As SqlCommand
 
-        If daterange.Value.Length > 0 Then
+        lblID.InnerText = ""
 
-            Mountquery += " And Data_Requisicao Between Convert(datetime,'" & Split(daterange.Value, " à ", 0)(0).ToString() & "',103) and Convert(datetime,'" & Split(daterange.Value, " à ", 0)(1).ToString() & "',103) "
-        End If
-
-        If selUnidade.Value.Length > 0 Then
-            Mountquery += " And idFilial = '" & selUnidade.Value.ToString() & "' "
-        End If
-
-        If selStatus.Value.Length > 0 Then
-            Mountquery += " And Status In ('" & selStatus.Value.ToString() & "') "
-        Else
-            Mountquery += " And Status Not In ('Finalizado','Improcedente') "
-        End If
-
-        Mountquery += " Order By Data_Requisicao Asc"
-
-        grvDados.Columns(0).Visible = True
-
-        con.Open()
-        command = New SqlCommand(Mountquery, con)
-        Dim idr As IDataReader = command.ExecuteReader()
-        grvDados.DataSource = idr
-        grvDados.DataBind()
-
-        grvDados.Columns(0).Visible = False
-        divDetalhes.Visible = False
-
-        con.Close()
-        idr.Close()
-        command.Dispose()
-
-        divDesc.Focus()
+        carregaGrid()
 
     End Sub
 
@@ -177,7 +156,7 @@ Partial Class MemberPages_Ocorrencias_atendimentoOcorrencias
 
         Dim constr As String = ConfigurationManager.ConnectionStrings("gerTempConnectionString").ConnectionString
         Dim con As SqlConnection = New SqlConnection(constr)
-        Dim query As String = "Select ID, Data_Requisicao, Solicitante, b.nomeSetor As Setor, Descricao, Status, Classificacao, Upload, Observacao, convert(decimal(10,2),Custo) As Custo, Isnull(Upload_Atendimento,'') Upload_Atendimento From gerTemp.dbo.tblOcorrencias a Join gerCadastros.dbo.[tblCadSetor] b On a.idSetor = b.idSetor Where Id = @id "
+        Dim query As String = "Select ID, Data_Requisicao, Solicitante, b.nomeSetor As Setor, Descricao, Status, Classificacao, Upload, Observacao, convert(decimal(10,2),Custo) As Custo, Isnull(Upload_Atendimento,'') Upload_Atendimento, Matricula_Atendente From gerTemp.dbo.tblOcorrencias a Join gerCadastros.dbo.[tblCadSetor] b On a.idSetor = b.idSetor Where Id = @id "
 
         con.Open()
 
@@ -194,7 +173,7 @@ Partial Class MemberPages_Ocorrencias_atendimentoOcorrencias
         While data.Read
             If data.HasRows = True Then
                 divDetalhes.Visible = True
-                lblSol.InnerText = data(2).ToString()
+                'lblSol.InnerText = data(2).ToString()
                 lblSetor.InnerText = data(3).ToString()
                 divDesc.InnerHtml = Server.HtmlDecode(data(4).ToString())
                 ddlStatusAtend.SelectedValue = data(5).ToString()
@@ -217,10 +196,9 @@ Partial Class MemberPages_Ocorrencias_atendimentoOcorrencias
                     CKEditor1.Text = "<p style='text-align: center;'><span style='font-size: 20px;'><strong>Registro de Atendimento</strong></span></p><ul><li>&nbsp;</li></ul>"
                 End If
 
-                txtCusto.Attributes.Add("Text", data(9).ToString())
+                'txtCusto.Attributes.Add("Text", data(9).ToString())
 
-                txtCusto.Value = data(9)
-
+                txtCusto.Value = data(9).ToString()
 
                 divArquivosAtend.InnerText = ""
 
@@ -233,6 +211,15 @@ Partial Class MemberPages_Ocorrencias_atendimentoOcorrencias
                     End If
                 Next
 
+                If (data(5).ToString() = "Finalizado" Or data(5).ToString() = "Improcedente") Then
+                    btnChange.Enabled = False
+                    btnCancelar.InnerText = "Voltar"
+                Else
+                    btnChange.Enabled = True
+                    btnCancelar.InnerText = "Cancelar"
+                End If
+
+                lblAtendente.InnerText = data(11).ToString().ToUpper()
             Else
                 divDetalhes.Visible = False
             End If
@@ -255,12 +242,13 @@ Partial Class MemberPages_Ocorrencias_atendimentoOcorrencias
                 'Dim size = i.ContentLength
 
                 If i.ContentLength > 0 Then
-                    Dim SaveLocation As String = Server.MapPath("imgs_atend\") & "" & i.FileName
+                    Dim data = Now.ToString()
+                    Dim SaveLocation As String = Server.MapPath("imgs_atend\") & "" & Replace(data.Substring(0, 10), "/", "_") & "_" & Replace(data.Substring(11, 5), ":", "_") & "." & Split(i.ContentType, "/", -1)(1)
 
                     If arquivo <> "" Then
-                        arquivo += ";" & i.FileName
+                        arquivo += ";" & Replace(data.Substring(0, 10), "/", "_") & "_" & Replace(data.Substring(11, 5), ":", "_") & "." & Split(i.ContentType, "/", -1)(1)
                     Else
-                        arquivo = i.FileName
+                        arquivo = Replace(data.Substring(0, 10), "/", "_") & "_" & Replace(data.Substring(11, 5), ":", "_") & "." & Split(i.ContentType, "/", -1)(1)
                     End If
 
                     Try
@@ -291,6 +279,8 @@ Partial Class MemberPages_Ocorrencias_atendimentoOcorrencias
 
             End Using
         End Using
+
+
 
         carregaGrid()
 
