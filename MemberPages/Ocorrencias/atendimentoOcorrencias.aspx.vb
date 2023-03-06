@@ -233,6 +233,7 @@ Partial Class MemberPages_Ocorrencias_atendimentoOcorrencias
         Dim constr As String = ConfigurationManager.ConnectionStrings("gerTempConnectionString").ConnectionString
         Dim rowsAffected As Integer
         Dim arquivo = ""
+        Dim count = 1
 
         If uploadImage.PostedFiles.Count > 0 Then
 
@@ -243,12 +244,12 @@ Partial Class MemberPages_Ocorrencias_atendimentoOcorrencias
 
                 If i.ContentLength > 0 Then
                     Dim data = Now.ToString()
-                    Dim SaveLocation As String = Server.MapPath("imgs_atend\") & "" & Replace(data.Substring(0, 10), "/", "_") & "_" & Replace(data.Substring(11, 5), ":", "_") & "." & Split(i.ContentType, "/", -1)(1)
+                    Dim SaveLocation As String = Server.MapPath("imgs_atend\") & "id_" & lblID.InnerText & Replace(data.Substring(0, 10), "/", "_") & "_" & Replace(data.Substring(11, 5), ":", "_") & "_" & count.ToString() & "." & Split(i.ContentType, "/", -1)(1)
 
                     If arquivo <> "" Then
-                        arquivo += ";" & Replace(data.Substring(0, 10), "/", "_") & "_" & Replace(data.Substring(11, 5), ":", "_") & "." & Split(i.ContentType, "/", -1)(1)
+                        arquivo += ";" & "id_" & lblID.InnerText & Replace(data.Substring(0, 10), "/", "_") & "_" & Replace(data.Substring(11, 5), ":", "_") & "_" & count.ToString() & "." & Split(i.ContentType, "/", -1)(1)
                     Else
-                        arquivo = Replace(data.Substring(0, 10), "/", "_") & "_" & Replace(data.Substring(11, 5), ":", "_") & "." & Split(i.ContentType, "/", -1)(1)
+                        arquivo = "id_" & lblID.InnerText & Replace(data.Substring(0, 10), "/", "_") & "_" & Replace(data.Substring(11, 5), ":", "_") & "_" & count.ToString() & "." & Split(i.ContentType, "/", -1)(1)
                     End If
 
                     Try
@@ -258,11 +259,12 @@ Partial Class MemberPages_Ocorrencias_atendimentoOcorrencias
                         'lblStatus.InnerText = "Error: " & Exc.Message
                     End Try
                 End If
+                count = count + 1
             Next
         End If
 
         Using con As New SqlConnection(constr)
-            Using cmd As New SqlCommand("UPDATE tblOcorrencias Set  Classificacao = @classif , Status = @status , Matricula_Atendente = @atendente , Observacao = @obs , Custo = @custo , Upload_Atendimento = @upload , Data_Atendimento = Getdate() WHERE ID = @id", con)
+            Using cmd As New SqlCommand("UPDATE tblOcorrencias Set  Classificacao = @classif , Status = @status , Matricula_Atendente = @atendente , Observacao = @obs , Custo = @custo , Upload_Atendimento = Case When @upload = '' then Upload_Atendimento Else Concat(Upload_Atendimento,Concat(';',@upload)) End , Data_Atendimento = Getdate() WHERE ID = @id", con)
 
                 cmd.Parameters.Add("@classif", SqlDbType.VarChar).Value = ddlClassifcAtend.SelectedValue
                 cmd.Parameters.Add("@status", SqlDbType.VarChar).Value = ddlStatusAtend.SelectedValue
@@ -279,8 +281,6 @@ Partial Class MemberPages_Ocorrencias_atendimentoOcorrencias
 
             End Using
         End Using
-
-
 
         carregaGrid()
 

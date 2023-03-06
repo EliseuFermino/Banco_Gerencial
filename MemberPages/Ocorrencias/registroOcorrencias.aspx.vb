@@ -95,6 +95,7 @@ Partial Class MemberPages_Ocorrencias_registroOcorrencias
         Dim desc = CKEditor1.Text
         Dim classificacao As String
         Dim arquivo = ""
+        Dim count = 1
 
         Dim calc = ((rdlGravidade.SelectedValue * rdlUrgencia.SelectedValue) * rdlTendencia.SelectedValue)
 
@@ -124,12 +125,12 @@ Partial Class MemberPages_Ocorrencias_registroOcorrencias
 
                     If i.ContentLength > 0 Then
                         Dim data = Now.ToString()
-                        Dim SaveLocation As String = Server.MapPath("imgs_atend\") & "" & Replace(data.Substring(0, 10), "/", "_") & "_" & Replace(data.Substring(11, 5), ":", "_") & "." & Split(i.ContentType, "/", -1)(1)
+                        Dim SaveLocation As String = Server.MapPath("imgs\") & "" & Replace(data.Substring(0, 10), "/", "_") & "_" & Replace(data.Substring(11, 5), ":", "_") & "_" & count.ToString() & "." & Split(i.ContentType, "/", -1)(1)
 
                         If arquivo <> "" Then
-                            arquivo += ";" & Replace(data.Substring(0, 10), "/", "_") & "_" & Replace(data.Substring(11, 5), ":", "_") & "." & Split(i.ContentType, "/", -1)(1)
+                            arquivo += ";" & Replace(data.Substring(0, 10), "/", "_") & "_" & Replace(data.Substring(11, 5), ":", "_") & "_" & count.ToString() & "." & Split(i.ContentType, "/", -1)(1)
                         Else
-                            arquivo = Replace(data.Substring(0, 10), "/", "_") & "_" & Replace(data.Substring(11, 5), ":", "_") & "." & Split(i.ContentType, "/", -1)(1)
+                            arquivo = Replace(data.Substring(0, 10), "/", "_") & "_" & Replace(data.Substring(11, 5), ":", "_") & "_" & count.ToString() & "." & Split(i.ContentType, "/", -1)(1)
                         End If
 
                         Try
@@ -139,6 +140,7 @@ Partial Class MemberPages_Ocorrencias_registroOcorrencias
                             'lblStatus.InnerText = "Error: " & Exc.Message
                         End Try
                     End If
+                    count = count + 1
                 Next
             End If
 
