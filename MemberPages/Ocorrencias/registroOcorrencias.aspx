@@ -104,6 +104,7 @@
                 <hr class="mb-3">
                 <div class="mb-3">
                     <label for="descricao" class="input-group-text">Descrição da ocorrência:</label>
+                    <%--<input type="text" aria-multiline="true" rows="5" maxlength="1000" id="txtDescricao" runat="server" class="form-control" />--%>
                     <div>
                         <CKEditor:CKEditorControl Toolbar="Edit" ID="CKEditor1" BasePath="../../assets/CkEditor/ckeditor" runat="server"></CKEditor:CKEditorControl>
                     </div>
@@ -174,8 +175,8 @@
             //$(this).addClass('disabled');
             this.onclick = function (event) {
 
-            var assunto = document.getElementById("MainContent_lblAssunto");
-            var setor = document.getElementById("MainContent_lblSetor");
+                var assunto = document.getElementById("MainContent_lblAssunto");
+                var setor = document.getElementById("MainContent_lblSetor");
                 //Restrict click if it has disabled class:
                 if (assunto.value == "" || setor.value == "") {
                     return false;

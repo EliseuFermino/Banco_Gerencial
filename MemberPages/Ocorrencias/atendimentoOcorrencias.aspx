@@ -11,7 +11,7 @@
         <panelcollection>
             <panelcontent>
                 <div class="container justify-content-center" style="max-width: 98%">
-                   <%-- <div class="py-5 text-center">
+                    <%-- <div class="py-5 text-center">
                         <img class="d-block mx-auto mb-4" src="../../image/LogoCondor_Vermelho_25-sem-fundo.png" alt="" width="350" height="90">
                         <p class="lead">Formulário de registro de ocorrências.</p>
                     </div>--%>
@@ -181,7 +181,7 @@
                                         <span class="input-group-text justify-content-center">Registro da Ocorrência</span>
                                         <asp:FileUpload type="file" class="form-control justify-content-center" Style="height: auto" aria-label="file example" runat="server" ID="uploadImage" AllowMultiple="true" autopostback="false" />
                                     </div>
-                                     <div class="col-md-6">
+                                    <div class="col-md-6">
                                         <span class="input-group-text justify-content-center">Arquivos</span>
                                         <div class=" form-control justify-content-lg-center" runat="server" style="text-align: center;" id="divArquivosAtend">
                                         </div>
