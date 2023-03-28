@@ -2,141 +2,26 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
 
-    <div class="col-12" style="max-width: 80%" runat="server" id="divMenu">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
         <br />
         <br />
-        <div class="row justify-content-between" runat="server" id="divVoltar">
-            <br />
+    <div class="row col-12" runat="server" id="divMenu">
+        <div class="col-1"></div>
+        <div class="col-2">            
             <button type="button" class="btn btn-secondary btn-lg" onclick="createPDF();">Importar para PDF(Texto)</button>
+        </div>
+        <div class="col-6"></div>
+
+        <div class="col-2">
             <button type="button" class="btn btn-secondary btn-lg justify-content-end" onclick="createPDF2();">Importar para PDF(Imagem)</button>
         </div>
-
+        <div class="col-1"></div>
+        <br />
     </div>
 
     <div class="container" style="max-width: 80%; font-size: 12pt" id="renderRel" runat="server">
-        <br />
-        <br />
-        <div class="row justify-content-center" style="color: #008080; font-size: 25pt">
-            <strong>Relatório Diário - Cheklist</strong>
-        </div>
-        <br />
-        <div class="row row-cols-auto" style="align-content: center; align-items: center;">
-            <div class="col-1"></div>
-            <div class="col-6">
-                <div class="row justify-content-between">
-                    <div class="col-2">
-                        <strong>Filial:</strong>
-                    </div>
-                    <div class="col-4">
-                        03 - Felicidade
-                    </div>
-                    <div class="col-2">
-                        <strong>Dia:</strong>
-                    </div>
-                    <div class="col-4">
-                        02/04/2022 13:41:14
-                    </div>
-                </div>
-                <hr>
-                <div class="row justify-content-between">
-                    <div class="col-2">
-                        <strong>Grupo:</strong>
-                    </div>
-                    <div class="col-4">
-                        04 - Área de Vendas
-                    </div>
-                    <div class="col-2">
-                        <strong>SubGrupo:</strong>
-                    </div>
-                    <div class="col-4">
-                        01 - PAR
-                    </div>
-                </div>
-                <hr>
-                <div class="row justify-content-between">
-                    <div class="col-2">
-                        <strong>Pergunta:</strong>
-                    </div>
-                    <div class="col-10">
-                        4.2 - Os PAR possuem sensores e/ou alarmes em todas as unidades expostas?
-                    </div>
-                </div>
-                <hr>
-                <div class="row justify-content-between">
-                    <div class="col-2">
-                        <strong>Resposta:</strong>
-                    </div>
-                    <div class="col-10">
-                        Presença de creme de avelã expostos na área de venda sem sensor de alarme, facilitando possíveis ações de QRUs.	
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <img alt="" src="../../../image/acesso_negado.png" style="width: 380px; height: 380px;">
-            </div>
-            <div class="col-1"></div>
-        </div>
 
-        <div class="row row-cols-auto" style="align-content: center; align-items: center;">
-            <div class="col-1"></div>
-            <div class="col-6">
-                <div class="row justify-content-between">
-                    <div class="col-2">
-                        <strong>Filial:</strong>
-                    </div>
-                    <div class="col-4">
-                        03 - Felicidade
-                    </div>
-                    <div class="col-2">
-                        <strong>Dia:</strong>
-                    </div>
-                    <div class="col-4">
-                        02/04/2022 13:41:14
-                    </div>
-                </div>
-                <hr>
-                <div class="row justify-content-between">
-                    <div class="col-2">
-                        <strong>Grupo:</strong>
-                    </div>
-                    <div class="col-4">
-                        04 - Área de Vendas
-                    </div>
-                    <div class="col-2">
-                        <strong>SubGrupo:</strong>
-                    </div>
-                    <div class="col-4">
-                        01 - PAR
-                    </div>
-                </div>
-                <hr>
-                <div class="row justify-content-between">
-                    <div class="col-2">
-                        <strong>Pergunta:</strong>
-                    </div>
-                    <div class="col-10">
-                        4.2 - Os PAR possuem sensores e/ou alarmes em todas as unidades expostas?
-                    </div>
-                </div>
-                <hr>
-                <div class="row justify-content-between">
-                    <div class="col-2">
-                        <strong>Resposta:</strong>
-                    </div>
-                    <div class="col-10">
-                        Presença de creme de avelã expostos na área de venda sem sensor de alarme, facilitando possíveis ações de QRUs.	
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <img alt="" src="../../../image/acesso_negado.png" style="width: 380px; height: 380px;">
-            </div>
-            <div class="col-1"></div>
-        </div>
-    
- 
     </div>
 
     <script>
@@ -150,21 +35,21 @@
                     //! MAKE YOUR PDF
                     var pdf = new jsPDF('l', 'pt', 'a4');
 
-                    for (var i = 0; i <= quotes.clientHeight / 880; i++) {
+                    for (var i = 0; i <= quotes.clientHeight / 885; i++) {
                         //! This is all just html2canvas stuff
                         var srcImg = canvas;
                         var sX = 0;
-                        var sY = 880 * i; // start 980 pixels down for every new page
+                        var sY = 885 * i; // start 980 pixels down for every new page
                         var sWidth = 1350;
-                        var sHeight = 880;
+                        var sHeight = 885;
                         var dX = 0;
                         var dY = 0;
                         var dWidth = 1350;
-                        var dHeight = 880;
+                        var dHeight = 885;
 
                         window.onePageCanvas = document.createElement("canvas");
                         onePageCanvas.setAttribute('width', 1350);
-                        onePageCanvas.setAttribute('height', 880);
+                        onePageCanvas.setAttribute('height', 885);
                         var ctx = onePageCanvas.getContext('2d');
                         // details on this usage of this function: 
                         // https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images#Slicing
@@ -179,7 +64,7 @@
                         //! If we're on anything other than the first page,
                         // add another page
                         if (i > 0) {
-                            pdf.addPage(860, 700); //8.5" x 11" in pts (in*72)
+                            pdf.addPage(840, 590); //8.5" x 11" in pts (in*72)
                         }
                         //! now we declare that we're working on that page
                         pdf.setPage(i + 1);
