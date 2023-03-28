@@ -21,7 +21,7 @@ Partial Class MemberPages_Checklist_Reports_ReportViewer_Cheklist
         Dim html As String
         Dim constr As String = ConfigurationManager.ConnectionStrings("gerCheckListConnectionString").ConnectionString
         Dim selectSQL As String = <![CDATA[SELECT	Fil.FilialLista 
-			  ,CONCAT(Convert(varchar,a.Dia,103), ' - ', Hora) Dia
+			  ,CONCAT(Convert(varchar,a.Dia,103), ' ', Hora) Dia
 			  ,Gru.listaGrupo 
 			  ,Su.listaSubgrupo     
 			  ,Perg.descPergunta     
@@ -105,7 +105,7 @@ and LEN(CONVERT(VARCHAR(25),A.Descricao)) > 0]]>.Value()
                             html += <![CDATA[</div>
                             </div>
                             <hr>
-                            <div Class="row justify-content-between">
+                            <div Class="row justify-content-between" style="color: #0000FF">
                             <div Class="col-2">
                             <strong> Pergunta: </strong>
                             </div>
@@ -117,7 +117,7 @@ and LEN(CONVERT(VARCHAR(25),A.Descricao)) > 0]]>.Value()
                             html += <![CDATA[</div>
                             </div>
                             <hr>
-                            <div Class="row justify-content-between">
+                            <div Class="row justify-content-between" style="color: #FF0000">
                             <div Class="col-2">
                             <strong> Resposta: </strong>
                             </div>
