@@ -7,15 +7,23 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
     Dim oFun As New Funcoes
     Dim oVen As New VendaEmpresaMes
     Dim oPro As New Projeto
+    Dim oTime As New myDateTimes
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Session("sMERCADOLOGICO") = 1
+        Session("sOPCAO") = 1
+        Session("sFILIAL") = 99
+        Session("sDEPARTAMENTO") = Trim(oPro.BuscarDepartamentoDoUsuario(User.Identity.Name))
+        Session("sUSUARIO") = LCase(Page.User.Identity.Name)
+        Session("sMES_ANTERIOR") = 2
+        Session("sFILIAL_LUCRO_NEGATIVO") = 99
+
         If Not IsPostBack Then
 
+            carregaSelects()
+
             '#Region "Acompanhamento"
-            Session("sMERCADOLOGICO") = 1
-            Session("sOPCAO") = 1
-            Session("sFILIAL") = 99
-            Session("sDEPARTAMENTO") = Trim(oPro.BuscarDepartamentoDoUsuario(User.Identity.Name))
+
 
             If DateAndTime.Now.Month = 1 And (DateAndTime.Now.Day = 1 Or DateAndTime.Now.Day = 2) Then
                 If CInt(DateAndTime.Now.Hour) > 9 Then
@@ -35,47 +43,87 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
 
             Me.cboDia.CallDia = Session("sDIA")
 
-            Session("sUSUARIO") = LCase(Page.User.Identity.Name)
             '#End Region
 
             '#Region "Analise Hora"
-            Me.cboMes.AutoPostBack = False
-            Me.cboAno.AutoPostBack = False
             Me.cboFilial.cboFilial_AutoPostBack = False
             Me.cboFilial.cboFilial_Visible_Legenda = False
-            Me.cboSemana.AutoPostBack = False
 
-            Me.cboAno.AnoInicial = 2014
-            Me.cboAno.AnoFinal = Year(Now())
-            Me.cboAno.CallAno = Year(Now())
+            selAnoMenu1.SelectedValue = Year(Now())
 
             Call RotinaInicio()
             Call MudarTitulo()
 
             '#End Region
+
+            '#Region "Acumulado Mes"
+            If Month(DateAndTime.Now()) = 1 And (DateAndTime.Now.Day = 1 Or DateAndTime.Now.Day = 2 Or DateAndTime.Now.Day = 3) Then
+
+                selAnoMenu3.SelectedValue = myDateTimes.YearToday() - 1
+                selMesMenu3.SelectedValue = 12
+
+            Else
+                selAnoMenu3.SelectedValue = Year(Now())
+                selMesMenu3.SelectedValue = Month(DateAndTime.Now())
+            End If
+
+            BuscaTitulo()
+            MudarLegendaAnos()
+
+            '#End Region
+
         End If
 
     End Sub
 
     Protected Sub Page_PreRender(sender As Object, e As EventArgs) Handles Me.PreRender
+        'Analise Hora
         If Not IsPostBack Then
 
-            '#Region "Analise Hora"
             If DateAndTime.Now.Hour >= 10 And DateAndTime.Now.Hour <= 24 Then
-                Me.cboSemana.CallSemana = DateAndTime.Now.DayOfWeek + 1
+                selSemanaMenu1.SelectedValue = DateAndTime.Now.DayOfWeek + 1
             Else
-                Me.cboSemana.CallSemana = DateAndTime.Now.DayOfWeek
+                selSemanaMenu1.SelectedValue = DateAndTime.Now.DayOfWeek
             End If
             Call Atualizar()
+        End If
+
+        'Ranking Mes
+        If Not IsPostBack Then
+
+            'cboMes.Visible_Ano = False
+
+            If Month(DateAndTime.Now()) = 1 And (DateAndTime.Now.Day = 1 Or DateAndTime.Now.Day = 2 Or DateAndTime.Now.Day = 3) Then
+
+                selAnoMenu3.SelectedValue = myDateTimes.YearToday() - 1
+                selMesMenu3.SelectedValue = 12
+
+            Else
+                selAnoMenu3.SelectedValue = Year(Now())
+                selMesMenu3.SelectedValue = Month(DateAndTime.Now())
+            End If
+
+            Session("sANO") = selAnoMenu3.SelectedValue
+            Session("sMES") = selMesMenu3.SelectedValue
+
+            ' Atualiza Grids
+            ASPxGridView1.DataBind()
+            gridTotalizador.DataBind()
+
+            BuscaTitulo()
+            MudarLegendaAnos()
+
         End If
     End Sub
 
 #Region "Eventos Acompanhamento"
 
-    Protected Sub cboPanel_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase) Handles cboPanel.Callback
+    Protected Sub cbPanel_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase) Handles cbPanel.Callback
         Atualizar()
         gridRankingTotal.DataBind()
         ASPxGridView1.DataBind()
+        grid_Top30_Lucro_Negativo.DataBind()
+        grid_Top30_Lucro_Negativo_ate5.DataBind()
 
         'Session("sFILIAL_LUCRO_NEGATIVO") = cboFilial_ItensLucroNegativo.CallFilial
         'grid_Top30_Lucro_Negativo.DataBind()
@@ -243,9 +291,9 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         Dim vMes As Byte
 
         If DateAndTime.Now.Hour >= 10 And DateAndTime.Now.Hour <= 24 Then
-            Me.cboSemana.CallSemana = DateAndTime.Now.DayOfWeek + 1
+            selSemanaMenu1.SelectedValue = DateAndTime.Now.DayOfWeek + 1
         Else
-            Me.cboSemana.CallSemana = DateAndTime.Now.DayOfWeek
+            selSemanaMenu1.SelectedValue = DateAndTime.Now.DayOfWeek
         End If
 
         If DateAndTime.Now.Day = 1 Then
@@ -255,10 +303,10 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         End If
 
         Session("sMES") = vMes
-        cboMes.CallMes = Session("sMES")
+        selMesMenu1.SelectedValue = Session("sMES")
 
         Session("sUSUARIO") = User.Identity.Name
-        Session("sANO") = cboAno.CallAno
+        Session("sANO") = selAnoMenu1.SelectedValue
         Session("sLOJA_CORP") = 99
         Session("sMESMOSDIAS") = 1
         Session("sUSUARIO") = "Controladoria"
@@ -281,12 +329,12 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
             Session("sFILIAL") = 99
         End If
 
-        Session("sMES") = cboMes.CallMes
-        Session("sANO") = cboAno.CallAno
+        Session("sMES") = selMesMenu1.SelectedValue
+        Session("sANO") = selAnoMenu1.SelectedValue
         Session("sLOJA_CORP") = 99
         Session("sMESMOSDIAS") = 1
         Session("sUSUARIO") = "Controladoria"
-        Session("sDIASEMANA") = Me.cboSemana.CallSemana
+        Session("sDIASEMANA") = selSemanaMenu1.SelectedValue
 
 
         Me.ASPxGridView2.DataBind()
@@ -322,17 +370,17 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
     End Sub
 
     Private Sub MudarTitulo()
-        Me.ASPxGridView2.Columns("vlr1").Caption = Me.cboAno.CallAno - 1
-        Me.ASPxGridView2.Columns("vlr2").Caption = Me.cboAno.CallAno
+        Me.ASPxGridView2.Columns("vlr1").Caption = selAnoMenu1.SelectedValue - 1
+        Me.ASPxGridView2.Columns("vlr2").Caption = selAnoMenu1.SelectedValue
     End Sub
 
     Protected Sub ASPxGridView2_HtmlFooterCellPrepared(sender As Object, e As ASPxGridViewTableFooterCellEventArgs) Handles ASPxGridView2.HtmlFooterCellPrepared
         oFun.Grid_RedIsNegativeFooter(sender, e)
     End Sub
 
-    Protected Sub cboPanel2_Callback(sender As Object, e As CallbackEventArgsBase) Handles cboPanel2.Callback
+    Protected Sub cbPanel2_Callback(sender As Object, e As CallbackEventArgsBase) Handles cbPanel2.Callback
 
-        Session("sDIASEMANA") = Me.cboSemana.CallSemana
+        Session("sDIASEMANA") = selSemanaMenu1.SelectedValue
 
         Call MudarTitulo()
         Call AtualizarAnaliseHora()
@@ -341,6 +389,173 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         Me.grid.DataBind()
 
     End Sub
+
+#End Region
+
+#Region "Acumulado Mês"
+
+    Protected Sub gridRankingMensal_HtmlDataCellPrepared(ByVal sender As Object, ByVal e As DevExpress.Web.ASPxGridViewTableDataCellEventArgs) Handles gridRankingMensal.HtmlDataCellPrepared
+
+        oFun.Grid_RedIsNegative(e, "percMargemDif")
+        oFun.Grid_RedIsNegative(e, "percMA")
+        oFun.Grid_RedIsNegative(e, "percCresc_RealMeta")
+        oFun.Grid_RedIsNegative(e, "percCresc_RealAA1")
+        oFun.Grid_RedIsNegative(e, "percCresc_RealAA2")
+        oFun.Grid_RedIsNegative(e, "percCresc_RealAA3")
+        oFun.Grid_RedIsNegative(e, "percCresc_MetaAnual")
+        oFun.Grid_RedIsNegative(e, "percMargMetaFinalDif")
+
+    End Sub
+
+    Protected Sub gridTotalizador_HtmlDataCellPrepared(ByVal sender As Object, ByVal e As DevExpress.Web.ASPxGridViewTableDataCellEventArgs) Handles gridTotalizador.HtmlDataCellPrepared
+
+        oFun.Grid_RedIsNegative(e, "percMargemDif")
+        oFun.Grid_RedIsNegative(e, "percMA")
+        oFun.Grid_RedIsNegative(e, "percCresc_RealMeta")
+        oFun.Grid_RedIsNegative(e, "percCresc_RealAA1")
+        oFun.Grid_RedIsNegative(e, "percCresc_RealAA2")
+        oFun.Grid_RedIsNegative(e, "percCresc_RealAA3")
+        oFun.Grid_RedIsNegative(e, "percCresc_MetaAnual")
+
+        oFun.Grid_RedIsNegative(e, "percMargMetaFinalDif")
+
+    End Sub
+
+    Protected Sub gridRankingMensal_HtmlFooterCellPrepared(sender As Object, e As ASPxGridViewTableFooterCellEventArgs) Handles gridRankingMensal.HtmlFooterCellPrepared
+        oFun.Grid_RedIsNegativeFooter(sender, e)
+    End Sub
+
+    Protected Sub gridRankingMensal_HtmlRowPrepared(ByVal sender As Object, ByVal e As DevExpress.Web.ASPxGridViewTableRowEventArgs) Handles gridRankingMensal.HtmlRowPrepared
+        If e.RowType <> GridViewRowType.Data Then
+        End If
+
+        Dim NomeColuna As String = e.GetValue("idFilial")
+
+        Select Case NomeColuna
+            Case "207", "208", "251", "250", "6027", "6037"
+                e.Row.BackColor = System.Drawing.Color.LightGray
+                e.Row.Font.Bold = True
+            Case "240"
+                e.Row.BackColor = System.Drawing.Color.Lavender
+                e.Row.Font.Bold = True
+            Case "253"
+                e.Row.BackColor = System.Drawing.Color.Yellow
+                e.Row.Font.Bold = True
+            Case "254"
+                e.Row.BackColor = System.Drawing.Color.LightSteelBlue
+                e.Row.Font.Bold = True
+            Case "6099"
+                e.Row.BackColor = System.Drawing.Color.PeachPuff
+                e.Row.Font.Bold = True
+            Case "255"
+                e.Row.BackColor = System.Drawing.Color.LightGreen
+                e.Row.Font.Bold = True
+        End Select
+        'LightYellow
+        'Lavender
+    End Sub
+
+    Sub BuscaTitulo()
+        Dim vMes As Byte = Session("sMES")
+        If selAnoMenu3.SelectedValue = Session("sANO") And selMesMenu3.SelectedValue = vMes Then
+            If vMes < 10 Then
+                Me.gridRankingMensal.SettingsText.Title = "Ranking de Vendas Acumulado - Período de 01/0" & selMesMenu3.SelectedValue & "/" & selAnoMenu3.SelectedValue & " à " & DateAndTime.Today.AddDays(-1) & "."
+            Else
+                Me.gridRankingMensal.SettingsText.Title = "Ranking de Vendas Acumulado - Período de 01/" & selMesMenu3.SelectedValue & "/" & selAnoMenu3.SelectedValue & " à " & DateAndTime.Today.AddDays(-1) & "."
+            End If
+        Else
+            If vMes < 10 Then
+                Me.gridRankingMensal.SettingsText.Title = "Ranking de Vendas Acumulado - Período de 01/0" & selMesMenu3.SelectedValue & "/" & selAnoMenu3.SelectedValue & " à " & oTime.GetLastDayOfMonth_baseYearMonth(selMesMenu3.SelectedValue, selAnoMenu3.SelectedValue) & "."
+            Else
+                Me.gridRankingMensal.SettingsText.Title = "Ranking de Vendas Acumulado - Período de 01/" & selMesMenu3.SelectedValue & "/" & selAnoMenu3.SelectedValue & " à " & oTime.GetLastDayOfMonth_baseYearMonth(selMesMenu3.SelectedValue, selAnoMenu3.SelectedValue) & "."
+            End If
+        End If
+
+    End Sub
+
+    Private Sub ItensNegativeRed(e As ASPxGridViewTableDataCellEventArgs)
+        oFun.Grid_RedIsNegative(e, "LucroComercial")
+        oFun.Grid_RedIsNegative(e, "percMargem")
+        oFun.Grid_RedIsNegative(e, "vlrLucroFinal")
+        oFun.Grid_RedIsNegative(e, "percMargemFinal")
+    End Sub
+
+    Private Sub MudarLegendaAnos()
+        ' TOTALIZADOR ----
+        Me.gridTotalizador.Columns.Item("bandAtual").Caption = selAnoMenu3.SelectedValue
+
+        Me.gridTotalizador.Columns.Item("percCresc_RealAA2").Caption = selAnoMenu3.SelectedValue - 1
+
+        ' LOJAS ----
+        Me.gridRankingMensal.Columns.Item("bandAtual").Caption = selAnoMenu3.SelectedValue
+
+        Me.gridRankingMensal.Columns.Item("percCresc_RealAA2").Caption = selAnoMenu3.SelectedValue - 1
+
+
+    End Sub
+
+    Protected Sub cbPanel3_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase) Handles cbPanel3.Callback
+
+        Session("sANO") = selAnoMenu3.SelectedValue
+        Session("sMES") = selMesMenu3.SelectedValue
+
+        BuscaTitulo()
+        MudarLegendaAnos()
+
+        ' Atualiza Grids
+        ASPxGridView1.DataBind()
+        gridTotalizador.DataBind()
+
+    End Sub
+
+#End Region
+
+#Region "Lucro negativo"
+
+    Protected Sub grid_Top30_Lucro_Negativo_CustomUnboundColumnData(sender As Object, e As ASPxGridViewColumnDataEventArgs) Handles grid_Top30_Lucro_Negativo.CustomUnboundColumnData
+        oFun.Grid_Calculate(e, "precoVenda", "Venda", "QtdVendas", Funcoes.CalculateType.Division)
+    End Sub
+
+    Protected Sub grid_Top30_Lucro_Negativo_HtmlDataCellPrepared(sender As Object, e As ASPxGridViewTableDataCellEventArgs) Handles grid_Top30_Lucro_Negativo.HtmlDataCellPrepared
+        oFun.Grid_RedIsNegative(e, "LucroComercial")
+        oFun.Grid_RedIsNegative(e, "percMargem")
+        oFun.Grid_RedIsNegative(e, "vlrLucroFinal")
+        oFun.Grid_RedIsNegative(e, "percMargemFinal")
+    End Sub
+
+    Protected Sub grid_Top30_Lucro_Negativo_ate5_CustomSummaryCalculate(sender As Object, e As DevExpress.Data.CustomSummaryEventArgs) Handles grid_Top30_Lucro_Negativo_ate5.CustomSummaryCalculate
+        On Error Resume Next
+
+        oFun.Grid_Footer_Calculate(sender, e, grid_Top30_Lucro_Negativo_ate5, "percMargem", "LucroComercial", "Venda", Funcoes.CalculateType.ValueOverRevenue)
+        oFun.Grid_Footer_Calculate(sender, e, grid_Top30_Lucro_Negativo_ate5, "percMargemSellOut", "LucroSellOut", "Venda", Funcoes.CalculateType.ValueOverRevenue)
+        oFun.Grid_Footer_Calculate(sender, e, grid_Top30_Lucro_Negativo_ate5, "percMargemFinal", "vlrLucroFinal", "Venda", Funcoes.CalculateType.ValueOverRevenue)
+
+
+    End Sub
+
+    Protected Sub grid_Top30_Lucro_Negativo_ate5_HtmlFooterCellPrepared(sender As Object, e As ASPxGridViewTableFooterCellEventArgs) Handles grid_Top30_Lucro_Negativo_ate5.HtmlFooterCellPrepared
+        oFun.Grid_RedIsNegativeFooter(sender, e)
+    End Sub
+
+    Protected Sub grid_Top30_Lucro_Negativo_CustomSummaryCalculate(sender As Object, e As DevExpress.Data.CustomSummaryEventArgs) Handles grid_Top30_Lucro_Negativo.CustomSummaryCalculate
+        On Error Resume Next
+
+        oFun.Grid_Footer_Calculate(sender, e, grid_Top30_Lucro_Negativo, "percMargem", "LucroComercial", "Venda", Funcoes.CalculateType.ValueOverRevenue)
+        oFun.Grid_Footer_Calculate(sender, e, grid_Top30_Lucro_Negativo, "percMargemSellOut", "LucroSellOut", "Venda", Funcoes.CalculateType.ValueOverRevenue)
+        oFun.Grid_Footer_Calculate(sender, e, grid_Top30_Lucro_Negativo, "percMargemFinal", "vlrLucroFinal", "Venda", Funcoes.CalculateType.ValueOverRevenue)
+
+
+    End Sub
+
+    Protected Sub grid_Top30_Lucro_Negativo_HtmlFooterCellPrepared(sender As Object, e As ASPxGridViewTableFooterCellEventArgs) Handles grid_Top30_Lucro_Negativo.HtmlFooterCellPrepared
+        oFun.Grid_RedIsNegativeFooter(sender, e)
+    End Sub
+
+
+#End Region
+
+#Region "Margem Final"
+
 
 #End Region
 
@@ -362,6 +577,8 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
     Protected Sub btnMenu_2_Click(sender As Object, e As EventArgs)
         divAnalise.Visible = False
         divAcomp.Visible = True
+        divRankingMes.Visible = True
+        divLucroNegativo.Visible = False
         divAcumulado.Visible = False
         divMenu_1.Visible = True
         divMenu_2.Visible = False
@@ -380,6 +597,44 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
     End Sub
 
     Protected Sub btnMenu_4_Click(sender As Object, e As EventArgs)
+        divAnalise.Visible = False
+        divAcomp.Visible = True
+        divRankingMes.Visible = False
+        divLucroNegativo.Visible = True
+        divAcumulado.Visible = False
+        divMenu_1.Visible = True
+        divMenu_2.Visible = True
+        divMenu_3.Visible = True
+        divMenu_4.Visible = False
+    End Sub
+
+    Protected Sub btnMenu_5_Click(sender As Object, e As EventArgs)
+        divAnalise.Visible = False
+        divAcomp.Visible = True
+        divAcumulado.Visible = False
+        divMenu_1.Visible = True
+        divMenu_2.Visible = False
+        divMenu_3.Visible = True
+        'divMenu_4.Visible = True
+    End Sub
+
+#End Region
+
+#Region "Carrega Selects e Filtros"
+    Protected Sub carregaSelects()
+
+        'Ranking Mês
+        selAnoMenu1.Items.Add(New ListItem(DateTime.Today.AddYears(+1).Year).ToString())
+        selAnoMenu1.Items.Add(New ListItem(DateTime.Today.Year).ToString())
+        selAnoMenu1.Items.Add(New ListItem(DateTime.Today.AddYears(-1).Year).ToString())
+        selAnoMenu1.Items.Add(New ListItem(DateTime.Today.AddYears(-2).Year).ToString())
+        selAnoMenu1.SelectedIndex = 1
+
+        'Ranking Mês
+        selAnoMenu3.Items.Add(New ListItem(DateTime.Today.Year).ToString())
+        selAnoMenu3.Items.Add(New ListItem(DateTime.Today.AddYears(-1).Year).ToString())
+        selAnoMenu3.Items.Add(New ListItem(DateTime.Today.AddYears(-2).Year).ToString())
+        selAnoMenu3.SelectedIndex = 0
 
     End Sub
 
