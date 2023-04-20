@@ -4,11 +4,11 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-        <br />
-        <br />
+    <br />
+    <br />
     <div class="row col-12" runat="server" id="divMenu">
         <div class="col-1"></div>
-        <div class="col-2">            
+        <div class="col-2">
             <button type="button" class="btn btn-secondary btn-lg" onclick="createPDF();">Importar para PDF(Texto)</button>
         </div>
         <div class="col-6"></div>
@@ -20,9 +20,21 @@
         <br />
     </div>
 
-    <div class="container" style="max-width: 80%; font-size: 12pt" id="renderRel" runat="server">
-
+    <div class="container" style="max-width: 80%; font-size: 12pt;" id="renderRel" runat="server">
     </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                ...
+            </div>
+        </div>
+    </div>
+    <script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+    <link href="../../../assets/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="../../../../assets/bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas2image@1.0.5/canvas2image.min.js"></script>
 
     <script>
 
@@ -122,11 +134,6 @@
 
     </script>
 
-    <script src="../../assets/js/jquery-2.1.4.min.js"></script>
-    <link href="../../assets/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet" />
-    <script src="../../../assets/bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas2image@1.0.5/canvas2image.min.js"></script>
 </asp:Content>
 
 

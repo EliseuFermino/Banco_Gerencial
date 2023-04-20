@@ -3186,6 +3186,7 @@ Partial Class MemberPages_CheckListCondor
 
     Protected Sub btnPDF_Click(sender As Object, e As EventArgs) Handles btnPDF.Click
 
+        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
         Call carregaRelatorio()
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "createPDF();", True)
@@ -3756,7 +3757,7 @@ Partial Class MemberPages_CheckListCondor
         <div Class="row justify-content-center" style="color: #008080; font-size: 25pt">
         <strong> Relatório Diário - Cheklist</strong>
         </div>
-        <br /><br />]]>.Value()
+        <b style="color: white">------------------------------------------------------------------------</b>]]>.Value()
 
         Using con As New SqlConnection(constr)
             Using cmd As New SqlCommand(selectSQL)
@@ -3768,21 +3769,16 @@ Partial Class MemberPages_CheckListCondor
                         For Each tabela In ds.Tables(0).Rows
 
                             html += <![CDATA[<div Class="row row-cols-auto" style="align-content: center; align-items: center;">
-                            <div Class="col-1"></div>
+                            <div Class="col-1"><br /></div>
                             <div Class="col-6">
                             <div Class="row justify-content-between">
                             <div Class="col-2">
-                            <strong> Filial: </strong>
-                            </div>
-                            <div Class="col-4">]]>.Value()
+                            <strong> Filial: <b style="color: white">-----</b></strong>]]>.Value()
 
                             html += tabela(0)
 
-                            html += <![CDATA[</div>
-                            <div Class="col-2">
-                            <strong> Dia: </strong>
-                            </div>
-                            <div Class="col-4">]]>.Value()
+                            html += <![CDATA[<b style="color: white">-------</b>
+                            <strong> Dia: <b style="color: white">----</b></strong>]]>.Value()
 
                             html += tabela(1)
 
@@ -3791,17 +3787,13 @@ Partial Class MemberPages_CheckListCondor
                             <hr>
                             <div Class="row justify-content-between">
                             <div Class="col-2">
-                            <strong> Grupo: </strong>
-                            </div>
-                            <div Class="col-4">]]>.Value()
+                            <strong> Grupo: <b style="color: white">---</b></strong>]]>.Value()
 
                             html += tabela(2)
 
-                            html += <![CDATA[</div>
-                            <div Class="col-2">
-                            <strong> Sub-Grupo: </strong>
-                            </div>
-                            <div Class="col-4">]]>.Value()
+                            html += <![CDATA[
+                            <b style="color: white">-------</b>
+                            <strong> Sub-Grupo: <b style="color: white">-----</b></strong>]]>.Value()
 
                             html += tabela(3)
 
@@ -3811,35 +3803,31 @@ Partial Class MemberPages_CheckListCondor
                             <div Class="row justify-content-between">
                             <div Class="col-2" style="color: #0000FF">
                             <strong> Pergunta: </strong>
-                            </div>
-                            <div Class="col-10" style="color: #0001FF"> ]]>.Value().ToString()
+                            <a style="color: #0010FF"> ]]>.Value().ToString()
 
                             html += Replace(tabela(4), "–", "-")
 
-                            html += <![CDATA[</div>
+                            html += <![CDATA[</a>
                             </div>
                             <hr>
                             <div Class="row justify-content-between" >
                             <div Class="col-2" style="color: #FF0000">
                             <strong> Resposta: </strong>
-                            </div>
-                            <div Class="col-10" style="color: #FF0001"> ]]>.Value()
+                            <a style="color: #FF0001"> ]]>.Value()
 
                             html += tabela(5)
 
                             If (tabela(7).ToString.Length > 0) Then
-                                html += <![CDATA[<br /><b style="color: white">_</b></div>
-                                </div>
-                                </div>                                
+                                html += <![CDATA[</a><br /><b style="color: white">_</b>
+                                </div>                              
                                 <div Class="col-4">]]>.Value()
 
                                 Dim imageBytes() As Byte = tabela(6)
                                 html += "<img src='"
-                                html += String.Format("data:image/{0};base64,{1}", "jpg", Convert.ToBase64String(imageBytes))
-                                html += "' style='max-width: 380px; max-height: 380px; padding-top: 5px'>"
+                                html += String.Format("data:image/{0};base64,{1}", "png", Convert.ToBase64String(imageBytes))
+                                html += "' >"
                             Else
-                                html += <![CDATA[</div>
-                                </div>
+                                html += <![CDATA[</a>
                                 </div>
                                 <div Class="col-4">]]>.Value()
 
@@ -3848,8 +3836,7 @@ Partial Class MemberPages_CheckListCondor
                             html += <![CDATA[</div>
                             <div Class="col-1"></div>
                             </div>
-                            _____________________________________________________________________________
-                            <hr class="mb-3">]]>.Value()
+                            _____________________________________________________________________________]]>.Value()
 
                         Next
                     End Using

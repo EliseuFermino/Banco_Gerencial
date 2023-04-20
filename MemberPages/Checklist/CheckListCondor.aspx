@@ -7454,7 +7454,6 @@
 
         try {
             MainContent_txtData.max = new Date().toISOString().split("T")[0];
-            if()
             //document.getElementById('MainContent_txtData').valueAsDate = new Date();
 
         } catch (e) {
@@ -7508,8 +7507,8 @@
             margins = {
                 top: 15,
                 bottom: 15,
-                left: 40,
-                width: 542
+                left: 35,
+                width: 552
             };
             // all coords and widths are in jsPDF instance's declared units
             // 'inches' in this case
