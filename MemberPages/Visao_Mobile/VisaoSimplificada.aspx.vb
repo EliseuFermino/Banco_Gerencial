@@ -1,4 +1,7 @@
 ﻿
+Imports System.Data
+Imports System.Data.SqlClient
+Imports System.Drawing
 Imports DevExpress.Web
 
 Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
@@ -10,67 +13,36 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
     Dim oTime As New myDateTimes
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Session("sMERCADOLOGICO") = 1
-        Session("sOPCAO") = 1
-        Session("sFILIAL") = 99
-        Session("sDEPARTAMENTO") = Trim(oPro.BuscarDepartamentoDoUsuario(User.Identity.Name))
-        Session("sUSUARIO") = LCase(Page.User.Identity.Name)
-        Session("sMES_ANTERIOR") = 2
-        Session("sFILIAL_LUCRO_NEGATIVO") = 99
-
         If Not IsPostBack Then
+
+            'Verde
+            btnMenu_1.BackColor = Color.FromArgb(120, 167, 149)
+            'Azul
+            btnMenu_2.BackColor = Color.FromArgb(85, 134, 184)
+            btnMenu_3.BackColor = Color.FromArgb(85, 134, 184)
+            btnMenu_4.BackColor = Color.FromArgb(85, 134, 184)
+
+            Session("sMERCADOLOGICO") = 1
+            Session("sOPCAO") = 1
+            Session("sFILIAL") = 99
+            Session("sDEPARTAMENTO") = Trim(oPro.BuscarDepartamentoDoUsuario(User.Identity.Name))
+            Session("sUSUARIO") = LCase(Page.User.Identity.Name)
+            Session("sMES_ANTERIOR") = 2
+            Session("sFILIAL_LUCRO_NEGATIVO") = 99
 
             carregaSelects()
 
-            '#Region "Acompanhamento"
+            'Menu Acompanhamento
+            Call atualizaAcompanhamento()
 
+            'Menu Analise Hora
+            Call AtualizarAnaliseHora()
 
-            If DateAndTime.Now.Month = 1 And (DateAndTime.Now.Day = 1 Or DateAndTime.Now.Day = 2) Then
-                If CInt(DateAndTime.Now.Hour) > 9 Then
-                    Session("sDIA") = Me.cboDia.CallDia.Date
-                Else
-                    Session("sDIA") = myDateTimes.GetFirstDayOfYear_baseYear(myDateTimes.YearToday()).AddDays(-1)
-                End If
+            'Menu Acumulado Mes
+            Call AtualizarAcumuladoMes()
 
-            Else
-                If CInt(DateAndTime.Now.Hour) > 9 Then
-                    'If CInt(DateAndTime.Now.Hour) > 7 Then
-                    Session("sDIA") = Me.cboDia.CallDia.Date
-                Else
-                    Session("sDIA") = Me.cboDia.CallDia.Date.AddDays(-1)
-                End If
-            End If
-
-            Me.cboDia.CallDia = Session("sDIA")
-
-            '#End Region
-
-            '#Region "Analise Hora"
-            Me.cboFilial.cboFilial_AutoPostBack = False
-            Me.cboFilial.cboFilial_Visible_Legenda = False
-
-            selAnoMenu1.SelectedValue = Year(Now())
-
-            Call RotinaInicio()
-            Call MudarTitulo()
-
-            '#End Region
-
-            '#Region "Acumulado Mes"
-            If Month(DateAndTime.Now()) = 1 And (DateAndTime.Now.Day = 1 Or DateAndTime.Now.Day = 2 Or DateAndTime.Now.Day = 3) Then
-
-                selAnoMenu3.SelectedValue = myDateTimes.YearToday() - 1
-                selMesMenu3.SelectedValue = 12
-
-            Else
-                selAnoMenu3.SelectedValue = Year(Now())
-                selMesMenu3.SelectedValue = Month(DateAndTime.Now())
-            End If
-
-            BuscaTitulo()
-            MudarLegendaAnos()
-
-            '#End Region
+            'Menu Lucro Negativo
+            Call AtualizaLucroNegativo()
 
         End If
 
@@ -78,56 +50,172 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
 
     Protected Sub Page_PreRender(sender As Object, e As EventArgs) Handles Me.PreRender
         'Analise Hora
-        If Not IsPostBack Then
+        'If Not IsPostBack Then
+        '    'Call AtualizarAnaliseHora()
 
-            If DateAndTime.Now.Hour >= 10 And DateAndTime.Now.Hour <= 24 Then
-                selSemanaMenu1.SelectedValue = DateAndTime.Now.DayOfWeek + 1
-            Else
-                selSemanaMenu1.SelectedValue = DateAndTime.Now.DayOfWeek
-            End If
-            Call Atualizar()
+        '    ' Atualiza Grids
+        '    ASPxGridView1.DataBind()
+        '    gridTotalizador.DataBind()
+
+        '    BuscaTitulo()
+        '    MudarLegendaAnos()
+
+        'End If
+    End Sub
+
+
+#Region "Analise Hora"
+
+    Protected Sub grid_CustomCellStyle(sender As Object, e As DevExpress.Web.ASPxPivotGrid.PivotCustomCellStyleEventArgs) Handles grid.CustomCellStyle
+        If e.ColumnValueType <> DevExpress.XtraPivotGrid.PivotGridValueType.Value OrElse e.RowValueType <> DevExpress.XtraPivotGrid.PivotGridValueType.Value Then
+            Return
+        End If
+        If Convert.ToInt32(e.Value) < 0.0 Then
+            e.CellStyle.ForeColor = System.Drawing.Color.Red
+        Else
+            e.CellStyle.ForeColor = System.Drawing.Color.Blue
         End If
 
-        'Ranking Mes
-        If Not IsPostBack Then
+        If e.RowIndex Mod 2 = 0 Then
+            Return
+        End If
 
-            'cboMes.Visible_Ano = False
+        If e.ColumnValueType = DevExpress.XtraPivotGrid.PivotGridValueType.Value AndAlso e.RowValueType = DevExpress.XtraPivotGrid.PivotGridValueType.Value Then
+            e.CellStyle.BackColor = Drawing.Color.WhiteSmoke
+        End If
 
-            If Month(DateAndTime.Now()) = 1 And (DateAndTime.Now.Day = 1 Or DateAndTime.Now.Day = 2 Or DateAndTime.Now.Day = 3) Then
+    End Sub
 
-                selAnoMenu3.SelectedValue = myDateTimes.YearToday() - 1
-                selMesMenu3.SelectedValue = 12
+    Private Sub RotinaInicio()
 
-            Else
-                selAnoMenu3.SelectedValue = Year(Now())
-                selMesMenu3.SelectedValue = Month(DateAndTime.Now())
-            End If
+        Dim vMes As Byte
 
-            Session("sANO") = selAnoMenu3.SelectedValue
-            Session("sMES") = selMesMenu3.SelectedValue
+        If DateAndTime.Now.Hour >= 10 And DateAndTime.Now.Hour <= 24 Then
+            selSemanaMenu1.SelectedValue = DateAndTime.Now.DayOfWeek + 1
+        Else
+            selSemanaMenu1.SelectedValue = DateAndTime.Now.DayOfWeek
+        End If
 
-            ' Atualiza Grids
-            ASPxGridView1.DataBind()
-            gridTotalizador.DataBind()
+        If DateAndTime.Now.Day = 1 Then
+            vMes = Month(DateAndTime.Now().AddDays(-1))
+        Else
+            vMes = Month(DateAndTime.Now())
+        End If
 
-            BuscaTitulo()
-            MudarLegendaAnos()
+        Session("sMES") = vMes
+        selMesMenu1.SelectedValue = Session("sMES")
 
+        Session("sUSUARIO") = User.Identity.Name
+        Session("sANO") = selAnoMenu1.SelectedValue
+        Session("sLOJA_CORP") = 99
+        Session("sMESMOSDIAS") = 1
+        Session("sUSUARIO") = "Controladoria"
+
+    End Sub
+
+    Private Sub AtualizarAnaliseHora()
+
+        If Month(DateAndTime.Now()) = 1 And (DateAndTime.Now.Day = 1 Or DateAndTime.Now.Day = 2 Or DateAndTime.Now.Day = 3) Then
+            selAnoMenu3.SelectedValue = myDateTimes.YearToday() - 1
+            selMesMenu3.SelectedValue = 12
+        Else
+            selAnoMenu3.SelectedValue = Year(Now())
+            selMesMenu3.SelectedValue = Month(DateAndTime.Now())
+        End If
+
+        Me.cboFilial.cboFilial_AutoPostBack = False
+        Me.cboFilial.cboFilial_Visible_Legenda = False
+
+        selAnoMenu1.SelectedValue = Year(Now())
+
+        Call RotinaInicio()
+        Call MudarTitulo()
+
+        Dim varStatus, varFilial As Byte
+        If Me.rndEmpresa.Checked = True Then
+            varStatus = 2
+        Else
+            varStatus = 1
+        End If
+
+        If Me.cboFilial.Visible = True Then
+            varFilial = Me.cboFilial.CallFilial
+            Session("sFILIAL") = varFilial
+        Else
+            varFilial = 99
+            Session("sFILIAL") = 99
+        End If
+
+        Session("sMES") = selMesMenu1.SelectedValue
+        Session("sANO") = selAnoMenu1.SelectedValue
+        Session("sLOJA_CORP") = 99
+        Session("sMESMOSDIAS") = 1
+        Session("sUSUARIO") = "Controladoria"
+        Session("sDIASEMANA") = selSemanaMenu1.SelectedValue
+
+        Me.ASPxGridView2.DataBind()
+        Me.grid.DataBind()
+
+    End Sub
+
+    Protected Sub ASPxGridView2_CustomSummaryCalculate(sender As Object, e As DevExpress.Data.CustomSummaryEventArgs) Handles ASPxGridView2.CustomSummaryCalculate
+        oFun.Grid_Footer_Calculate(sender, e, ASPxGridView2, "vlr4", "vlr2", "vlr1", Funcoes.CalculateType.Growth)
+    End Sub
+
+    Protected Sub ASPxGridView2_HtmlDataCellPrepared(sender As Object, e As DevExpress.Web.ASPxGridViewTableDataCellEventArgs) Handles ASPxGridView2.HtmlDataCellPrepared
+        oFun.Grid_RedIsNegative(e, "vlr3")
+        oFun.Grid_RedIsNegative(e, "vlr4")
+    End Sub
+
+    Protected Sub rndEmpresa_CheckedChanged(sender As Object, e As EventArgs) Handles rndEmpresa.CheckedChanged
+        If Me.rndEmpresa.Checked = True Then
+            Me.cboFilial.Visible = False
+            Call AtualizarAnaliseHora()
         End If
     End Sub
+
+    Protected Sub rndFilial_CheckedChanged(sender As Object, e As EventArgs) Handles rndFilial.CheckedChanged
+        If Me.rndFilial.Checked = True Then
+            Me.cboFilial.Visible = True
+            Call AtualizarAnaliseHora()
+        End If
+    End Sub
+
+    Protected Sub cboFilial_ListFilialChanged(sender As Object, e As EventArgs) Handles cboFilial.ListFilialChanged
+        Call AtualizarAnaliseHora()
+    End Sub
+
+    Private Sub MudarTitulo()
+        Me.ASPxGridView2.Columns("vlr1").Caption = selAnoMenu1.SelectedValue - 1
+        Me.ASPxGridView2.Columns("vlr2").Caption = selAnoMenu1.SelectedValue
+    End Sub
+
+    Protected Sub ASPxGridView2_HtmlFooterCellPrepared(sender As Object, e As ASPxGridViewTableFooterCellEventArgs) Handles ASPxGridView2.HtmlFooterCellPrepared
+        oFun.Grid_RedIsNegativeFooter(sender, e)
+    End Sub
+
+    Protected Sub cbPanel2_Callback(sender As Object, e As CallbackEventArgsBase) Handles cbPanel2.Callback
+
+        Session("sDIASEMANA") = selSemanaMenu1.SelectedValue
+
+        Call MudarTitulo()
+        Call AtualizarAnaliseHora()
+
+        Me.ASPxGridView1.DataBind()
+        Me.grid.DataBind()
+
+    End Sub
+
+#End Region
 
 #Region "Eventos Acompanhamento"
 
     Protected Sub cbPanel_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase) Handles cbPanel.Callback
-        Atualizar()
+        Call atualizaAcompanhamento()
         gridRankingTotal.DataBind()
         ASPxGridView1.DataBind()
         grid_Top30_Lucro_Negativo.DataBind()
         grid_Top30_Lucro_Negativo_ate5.DataBind()
-
-        'Session("sFILIAL_LUCRO_NEGATIVO") = cboFilial_ItensLucroNegativo.CallFilial
-        'grid_Top30_Lucro_Negativo.DataBind()
-        'gridRankingTotal.DataBind()
 
     End Sub
 
@@ -243,150 +331,44 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
     End Sub
 
     Protected Sub cboDia_DiaVaiClick(sender As Object, e As EventArgs) Handles cboDia.DiaVaiClick
-        Call Atualizar()
+        Call atualizaAcompanhamento()
     End Sub
 
     Protected Sub cboDia_DiaVoltaClick(sender As Object, e As EventArgs) Handles cboDia.DiaVoltaClick
-        Call Atualizar()
+        Call atualizaAcompanhamento()
     End Sub
 
     Protected Sub cboDia_ListDiaChanged(sender As Object, e As EventArgs) Handles cboDia.ListDiaChanged
-        Call Atualizar()
+        Call atualizaAcompanhamento()
     End Sub
 
-    Private Sub Atualizar()
-        Session("sDIA") = Me.cboDia.CallDia
+    Protected Sub atualizaAcompanhamento()
+        Session("sDEPARTAMENTO") = Trim(oPro.BuscarDepartamentoDoUsuario(User.Identity.Name))
         Session("sFILIAL") = 99
 
-        Me.ASPxGridView1.DataBind()
+        If DateAndTime.Now.Month = 1 And (DateAndTime.Now.Day = 1 Or DateAndTime.Now.Day = 2) Then
+            If CInt(DateAndTime.Now.Hour) > 9 Then
+                Session("sDIA") = Me.cboDia.CallDia.Date
+            Else
+                Session("sDIA") = myDateTimes.GetFirstDayOfYear_baseYear(myDateTimes.YearToday()).AddDays(-1)
+            End If
 
-    End Sub
-
-#End Region
-
-#Region "Analise Hora"
-
-    Protected Sub grid_CustomCellStyle(sender As Object, e As DevExpress.Web.ASPxPivotGrid.PivotCustomCellStyleEventArgs) Handles grid.CustomCellStyle
-        If e.ColumnValueType <> DevExpress.XtraPivotGrid.PivotGridValueType.Value OrElse e.RowValueType <> DevExpress.XtraPivotGrid.PivotGridValueType.Value Then
-            Return
-        End If
-        If Convert.ToInt32(e.Value) < 0.0 Then
-            e.CellStyle.ForeColor = System.Drawing.Color.Red
         Else
-            e.CellStyle.ForeColor = System.Drawing.Color.Blue
+            If CInt(DateAndTime.Now.Hour) > 9 Then
+                'If CInt(DateAndTime.Now.Hour) > 7 Then
+                Session("sDIA") = Me.cboDia.CallDia.Date
+            Else
+                Session("sDIA") = Me.cboDia.CallDia.Date.AddDays(-1)
+            End If
         End If
 
-        If e.RowIndex Mod 2 = 0 Then
-            Return
-        End If
+        Me.cboDia.CallDia = Session("sDIA")
 
-        If e.ColumnValueType = DevExpress.XtraPivotGrid.PivotGridValueType.Value AndAlso e.RowValueType = DevExpress.XtraPivotGrid.PivotGridValueType.Value Then
-            e.CellStyle.BackColor = Drawing.Color.WhiteSmoke
-        End If
-
-    End Sub
-
-    Private Sub RotinaInicio()
-
-        Dim vMes As Byte
-
-        If DateAndTime.Now.Hour >= 10 And DateAndTime.Now.Hour <= 24 Then
-            selSemanaMenu1.SelectedValue = DateAndTime.Now.DayOfWeek + 1
-        Else
-            selSemanaMenu1.SelectedValue = DateAndTime.Now.DayOfWeek
-        End If
-
-        If DateAndTime.Now.Day = 1 Then
-            vMes = Month(DateAndTime.Now().AddDays(-1))
-        Else
-            vMes = Month(DateAndTime.Now())
-        End If
-
-        Session("sMES") = vMes
-        selMesMenu1.SelectedValue = Session("sMES")
-
-        Session("sUSUARIO") = User.Identity.Name
-        Session("sANO") = selAnoMenu1.SelectedValue
-        Session("sLOJA_CORP") = 99
-        Session("sMESMOSDIAS") = 1
-        Session("sUSUARIO") = "Controladoria"
-
-    End Sub
-
-    Private Sub AtualizarAnaliseHora()
-        Dim varStatus, varFilial As Byte
-        If Me.rndEmpresa.Checked = True Then
-            varStatus = 2
-        Else
-            varStatus = 1
-        End If
-
-        If Me.cboFilial.Visible = True Then
-            varFilial = Me.cboFilial.CallFilial
-            Session("sFILIAL") = varFilial
-        Else
-            varFilial = 99
-            Session("sFILIAL") = 99
-        End If
-
-        Session("sMES") = selMesMenu1.SelectedValue
-        Session("sANO") = selAnoMenu1.SelectedValue
-        Session("sLOJA_CORP") = 99
-        Session("sMESMOSDIAS") = 1
-        Session("sUSUARIO") = "Controladoria"
-        Session("sDIASEMANA") = selSemanaMenu1.SelectedValue
-
-
-        Me.ASPxGridView2.DataBind()
-        Me.grid.DataBind()
-
-    End Sub
-
-    Protected Sub ASPxGridView2_CustomSummaryCalculate(sender As Object, e As DevExpress.Data.CustomSummaryEventArgs) Handles ASPxGridView2.CustomSummaryCalculate
-        oFun.Grid_Footer_Calculate(sender, e, ASPxGridView2, "vlr4", "vlr2", "vlr1", Funcoes.CalculateType.Growth)
-    End Sub
-
-    Protected Sub ASPxGridView2_HtmlDataCellPrepared(sender As Object, e As DevExpress.Web.ASPxGridViewTableDataCellEventArgs) Handles ASPxGridView2.HtmlDataCellPrepared
-        oFun.Grid_RedIsNegative(e, "vlr3")
-        oFun.Grid_RedIsNegative(e, "vlr4")
-    End Sub
-
-    Protected Sub rndEmpresa_CheckedChanged(sender As Object, e As EventArgs) Handles rndEmpresa.CheckedChanged
-        If Me.rndEmpresa.Checked = True Then
-            Me.cboFilial.Visible = False
-            Call AtualizarAnaliseHora()
-        End If
-    End Sub
-
-    Protected Sub rndFilial_CheckedChanged(sender As Object, e As EventArgs) Handles rndFilial.CheckedChanged
-        If Me.rndFilial.Checked = True Then
-            Me.cboFilial.Visible = True
-            Call AtualizarAnaliseHora()
-        End If
-    End Sub
-
-    Protected Sub cboFilial_ListFilialChanged(sender As Object, e As EventArgs) Handles cboFilial.ListFilialChanged
-        Call AtualizarAnaliseHora()
-    End Sub
-
-    Private Sub MudarTitulo()
-        Me.ASPxGridView2.Columns("vlr1").Caption = selAnoMenu1.SelectedValue - 1
-        Me.ASPxGridView2.Columns("vlr2").Caption = selAnoMenu1.SelectedValue
-    End Sub
-
-    Protected Sub ASPxGridView2_HtmlFooterCellPrepared(sender As Object, e As ASPxGridViewTableFooterCellEventArgs) Handles ASPxGridView2.HtmlFooterCellPrepared
-        oFun.Grid_RedIsNegativeFooter(sender, e)
-    End Sub
-
-    Protected Sub cbPanel2_Callback(sender As Object, e As CallbackEventArgsBase) Handles cbPanel2.Callback
-
-        Session("sDIASEMANA") = selSemanaMenu1.SelectedValue
-
-        Call MudarTitulo()
-        Call AtualizarAnaliseHora()
-
-        Me.ASPxGridView1.DataBind()
-        Me.grid.DataBind()
+        Call BuscaTitulo()
+        Call MudarLegendaAnos()
+        gridRankingTotal.DataBind()
+        ASPxGridView1.DataBind()
+        gridProjecao.DataBind()
 
     End Sub
 
@@ -508,6 +490,24 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
 
     End Sub
 
+    Protected Sub AtualizarAcumuladoMes()
+        If Month(DateAndTime.Now()) = 1 And (DateAndTime.Now.Day = 1 Or DateAndTime.Now.Day = 2 Or DateAndTime.Now.Day = 3) Then
+
+            selAnoMenu3.SelectedValue = myDateTimes.YearToday() - 1
+            selMesMenu3.SelectedValue = 12
+
+        Else
+            selAnoMenu3.SelectedValue = Year(Now())
+            selMesMenu3.SelectedValue = Month(DateAndTime.Now())
+        End If
+
+        BuscaTitulo()
+        MudarLegendaAnos()
+
+        gridTotalizador.DataBind()
+        gridRankingMensal.DataBind()
+    End Sub
+
 #End Region
 
 #Region "Lucro negativo"
@@ -551,12 +551,34 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         oFun.Grid_RedIsNegativeFooter(sender, e)
     End Sub
 
+    Protected Sub grid_Top30_Lucro_Negativo_ate5_CustomUnboundColumnData(sender As Object, e As ASPxGridViewColumnDataEventArgs) Handles grid_Top30_Lucro_Negativo_ate5.CustomUnboundColumnData
+        oFun.Grid_Calculate(e, "precoVenda", "Venda", "QtdVendas", Funcoes.CalculateType.Division)
+    End Sub
 
-#End Region
+    Protected Sub AtualizaLucroNegativo()
+        Session("sFILIAL") = 99
 
-#Region "Margem Final"
+        If DateAndTime.Now.Month = 1 And (DateAndTime.Now.Day = 1 Or DateAndTime.Now.Day = 2) Then
+            If CInt(DateAndTime.Now.Hour) > 9 Then
+                Session("sDIA") = Me.cboDia.CallDia.Date
+            Else
+                Session("sDIA") = myDateTimes.GetFirstDayOfYear_baseYear(myDateTimes.YearToday()).AddDays(-1)
+            End If
 
+        Else
+            If CInt(DateAndTime.Now.Hour) > 9 Then
+                'If CInt(DateAndTime.Now.Hour) > 7 Then
+                Session("sDIA") = Me.cboDia.CallDia.Date
+            Else
+                Session("sDIA") = Me.cboDia.CallDia.Date.AddDays(-1)
+            End If
+        End If
 
+        Me.cboDia.CallDia = Session("sDIA")
+
+        grid_Top30_Lucro_Negativo.DataBind()
+        grid_Top30_Lucro_Negativo_ate5.DataBind()
+    End Sub
 #End Region
 
 #Region "Botões Menu"
@@ -568,10 +590,19 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         divAnalise.Visible = True
         divAcomp.Visible = False
         divAcumulado.Visible = False
-        divMenu_1.Visible = False
-        divMenu_2.Visible = True
-        divMenu_3.Visible = True
-        divMenu_4.Visible = True
+
+        'Verde
+        btnMenu_1.BackColor = Color.FromArgb(120, 167, 149)
+        'Azul
+        btnMenu_2.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_3.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_4.BackColor = Color.FromArgb(85, 134, 184)
+
+        oVen.AtualizarEstatisticaPrograma(439, User.Identity.Name)
+
+        ' Atualiza Grids
+        AtualizarAnaliseHora()
+
     End Sub
 
     Protected Sub btnMenu_2_Click(sender As Object, e As EventArgs)
@@ -580,20 +611,36 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         divRankingMes.Visible = True
         divLucroNegativo.Visible = False
         divAcumulado.Visible = False
-        divMenu_1.Visible = True
-        divMenu_2.Visible = False
-        divMenu_3.Visible = True
-        divMenu_4.Visible = True
+
+        'Verde
+        btnMenu_2.BackColor = Color.FromArgb(120, 167, 149)
+        'Azul
+        btnMenu_1.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_3.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_4.BackColor = Color.FromArgb(85, 134, 184)
+
+        oVen.AtualizarEstatisticaPrograma(438, User.Identity.Name)
+
+        Call atualizaAcompanhamento()
+
     End Sub
 
     Protected Sub btnMenu_3_Click(sender As Object, e As EventArgs)
         divAnalise.Visible = False
         divAcomp.Visible = False
         divAcumulado.Visible = True
-        divMenu_1.Visible = True
-        divMenu_2.Visible = True
-        divMenu_3.Visible = False
-        divMenu_4.Visible = True
+
+        'Verde
+        btnMenu_3.BackColor = Color.FromArgb(120, 167, 149)
+        'Azul
+        btnMenu_1.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_2.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_4.BackColor = Color.FromArgb(85, 134, 184)
+
+        oVen.AtualizarEstatisticaPrograma(440, User.Identity.Name)
+
+        Call AtualizarAcumuladoMes()
+
     End Sub
 
     Protected Sub btnMenu_4_Click(sender As Object, e As EventArgs)
@@ -602,10 +649,18 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         divRankingMes.Visible = False
         divLucroNegativo.Visible = True
         divAcumulado.Visible = False
-        divMenu_1.Visible = True
-        divMenu_2.Visible = True
-        divMenu_3.Visible = True
-        divMenu_4.Visible = False
+
+        'Verde
+        btnMenu_4.BackColor = Color.FromArgb(120, 167, 149)
+        'Azul
+        btnMenu_1.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_2.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_3.BackColor = Color.FromArgb(85, 134, 184)
+
+        oVen.AtualizarEstatisticaPrograma(441, User.Identity.Name)
+
+        Call AtualizaLucroNegativo()
+
     End Sub
 
     Protected Sub btnMenu_5_Click(sender As Object, e As EventArgs)

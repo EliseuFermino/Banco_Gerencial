@@ -35,22 +35,23 @@
     <div class="container justify-content-center">
         <div class="row col-md-12 justify-content-center text-center">
             <div class="row col-md-10 justify-content-center text-center" style="padding-bottom: 25px">
-                <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 1px; min-width: 60px" runat="server" id="divMenu_1" visible="false">
-                    <asp:Button ID="btnMenu_1" Height="30px" CssClass="btn btn-sm" Text="Análise Hora" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_1_Click" Style="background-color: #5586B8; background-repeat: round" />
+                <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 1px; min-width: 60px" runat="server" id="divMenu_1">
+                    <asp:Button ID="btnMenu_1" Height="30px" CssClass="btn btn-sm" Text="Análise Hora" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_1_Click" Style="background-repeat: round" />
+                    <%--#78A795 cor verde--%>
                 </div>
                 <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 1px" runat="server" id="divMenu_2">
-                    <asp:Button ID="btnMenu_2" Height="30px" CssClass="btn btn-sm" Text="Acompanhamento" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_2_Click" Style="background-color: #78A795; background-repeat: round" />
+                    <asp:Button ID="btnMenu_2" Height="30px" CssClass="btn btn-sm" Text="Acompanhamento" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_2_Click" Style="background-repeat: round" />
                 </div>
                 <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 1px" runat="server" id="divMenu_3">
-                    <asp:Button ID="btnMenu_3" Height="30px" CssClass="btn btn-sm" Text="Acumulado Mês" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_3_Click" Style="background-color: #5586B8; background-repeat: round" />
+                    <asp:Button ID="btnMenu_3" Height="30px" CssClass="btn btn-sm" Text="Acumulado Mês" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_3_Click" Style="background-repeat: round" />
                 </div>
                 <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 1px" runat="server" id="divMenu_4">
-                    <asp:Button ID="btnMenu_4" Height="30px" CssClass="btn btn-sm" Text="Lucro Negativo" ForeColor="White     " Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_4_Click" Style="background-color: #5586B8; background-repeat: round" />
+                    <asp:Button ID="btnMenu_4" Height="30px" CssClass="btn btn-sm" Text="Lucro Negativo" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_4_Click" Style="background-repeat: round" />
                 </div>
                 <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 1px" runat="server" id="divMenu_5" visible="false">
-                    <asp:Button ID="btnMenu_5" Height="30px" CssClass="btn btn-sm" Text="50 Itens mais vendidos" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_5_Click" Style="background-color: #5586B8; background-repeat: round" />
+                    <asp:Button ID="btnMenu_5" Height="30px" CssClass="btn btn-sm" Text="50 Itens mais vendidos" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_5_Click" Style="background-repeat: round" />
                 </div>
-                <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 15px">
+                <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 15px" runat="server" visible="false" id="divSair">
                     <asp:Button runat="server" ID="btnSair" Height="30px" OnClick="btnSair_Click" autopostback="false" Font-Size="X-Small" CssClass="btn btn-danger btn-sm" Text="Sair" />
                 </div>
             </div>
@@ -321,7 +322,7 @@
                         <div id="divRanking_Loja_Total" class="col-12">
 
                             <dx:ASPxGridView ID="gridRankingTotal" runat="server"
-                                AutoGenerateColumns="False"  Font-Size="X-Small" KeyFieldName="Descricao"
+                                AutoGenerateColumns="False" Font-Size="X-Small" KeyFieldName="Descricao"
                                 Theme="SoftOrange" EnableTheming="True" Width="100%" DataSourceID="dsVendaLojaTotal">
                                 <TotalSummary>
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrRealAA" SummaryType="Custom" />
@@ -789,13 +790,12 @@
                     </div>
 
                     <%-- ********************* L U C R O   N E G A T I V O ************************* --%>
-                     
 
                     <div id="divLucroNegativo" runat="server">
-                       
+
                         <div id="divTop30_Lucro_Negativo" class="Separacao_Separacao">
                             <dx:ASPxGridView ID="grid_Top30_Lucro_Negativo" ClientInstanceName="grid_Top30_Lucro_Negativo" runat="server" DataSourceID="ds_Top30_Lucro_Negativo"
-                                AutoGenerateColumns="False" Width="100%" Font-Size="X-Small" KeyFieldName="CodProduto" Theme="SoftOrange" EnableTheming="True" >
+                                AutoGenerateColumns="False" Width="100%" Font-Size="X-Small" KeyFieldName="CodProduto" Theme="SoftOrange" EnableTheming="True">
                                 <Toolbars>
                                     <dx:GridViewToolbar EnableAdaptivity="true">
                                         <Items>
@@ -806,24 +806,34 @@
                                     </dx:GridViewToolbar>
                                 </Toolbars>
                                 <Columns>
-                                    <dx:GridViewDataTextColumn Caption="Código" FieldName="CodProduto" ToolTip="Código do produto" VisibleIndex="3">
+
+                                    <dx:GridViewDataTextColumn Caption="Filial" FieldName="FilialDesc" ShowInCustomizationForm="True" ToolTip="Descrição da Filial" VisibleIndex="0" MinWidth="180">
                                         <Settings AllowAutoFilter="True" AutoFilterCondition="Contains" />
                                     </dx:GridViewDataTextColumn>
-                                    <dx:GridViewBandColumn Caption="Vendas" VisibleIndex="5">
+                                    <dx:GridViewDataTextColumn Caption="Código" FieldName="CodProduto" ToolTip="Código do produto" VisibleIndex="1">
+                                        <Settings AllowAutoFilter="True" AutoFilterCondition="Contains" />
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn Caption="Descrição do produto" FieldName="nomeProduto" ToolTip="Nome do produto" VisibleIndex="2" SortIndex="0" SortOrder="Ascending" MinWidth="250">
+                                        <Settings AllowAutoFilter="True" AutoFilterCondition="Contains" />
+                                        <CellStyle Wrap="False">
+                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                        </CellStyle>
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewBandColumn Caption="Vendas" VisibleIndex="3">
                                         <Columns>
-                                            <dx:GridViewDataTextColumn Caption="Volume" FieldName="QtdVendas" ToolTip="Volume ou quantidade dos itens vendidos" VisibleIndex="0" >
+                                            <dx:GridViewDataTextColumn Caption="Volume" FieldName="QtdVendas" ToolTip="Volume ou quantidade dos itens vendidos" VisibleIndex="0">
                                                 <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <Settings AllowAutoFilter="False" />
                                             </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="R$" FieldName="Venda" ToolTip="Valor da venda de cada item" VisibleIndex="1" >
+                                            <dx:GridViewDataTextColumn Caption="R$" FieldName="Venda" ToolTip="Valor da venda de cada item" VisibleIndex="1">
                                                 <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <Settings AllowAutoFilter="False" />
                                                 <CellStyle Font-Bold="True" ForeColor="Blue">
                                                 </CellStyle>
                                             </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="Preço Venda" FieldName="precoVenda" UnboundType="Decimal" VisibleIndex="2" >
+                                            <dx:GridViewDataTextColumn Caption="Preço Venda" FieldName="precoVenda" UnboundType="Decimal" VisibleIndex="2">
                                                 <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <Settings AllowAutoFilter="False" />
@@ -833,70 +843,15 @@
                                             </dx:GridViewDataTextColumn>
                                         </Columns>
                                     </dx:GridViewBandColumn>
-                                    <dx:GridViewBandColumn Caption="Margem Praticada" VisibleIndex="6">
+                                    <dx:GridViewBandColumn Caption="Margem Final" ShowInCustomizationForm="True" VisibleIndex="4">
                                         <Columns>
-                                            <dx:GridViewDataTextColumn Caption="R$" FieldName="LucroComercial" ToolTip="Valor do Lucro Praticado" VisibleIndex="0" >
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
-                                                </PropertiesTextEdit>
-                                                <Settings AllowAutoFilter="False" />
-                                            </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="%" FieldName="percMargem" ReadOnly="True" ToolTip="Percentual da Margem Praticada" VisibleIndex="1" >
-                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
-                                                </PropertiesTextEdit>
-                                                <Settings AllowAutoFilter="False" />
-                                                <CellStyle>
-                                                    <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                </CellStyle>
-                                            </dx:GridViewDataTextColumn>
-                                        </Columns>
-                                    </dx:GridViewBandColumn>
-                                    <dx:GridViewDataTextColumn Caption="Nº Cliente" FieldName="numCliente" ToolTip="Número de clientes que compraram o item." VisibleIndex="12">
-                                        <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
-                                        </PropertiesTextEdit>
-                                        <Settings AllowAutoFilter="False" />
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewBandColumn Caption="Sell Out" VisibleIndex="7">
-                                        <Columns>
-                                            <dx:GridViewDataTextColumn Caption="R$" FieldName="LucroSellOut" ToolTip="Valor do Sell Out" VisibleIndex="0">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
-                                                </PropertiesTextEdit>
-                                                <Settings AllowAutoFilter="False" />
-                                            </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="%" FieldName="percMargemSellOut" ReadOnly="True" ToolTip="Percentual do Sell Out" VisibleIndex="1">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
-                                                </PropertiesTextEdit>
-                                                <Settings AllowAutoFilter="False" />
-                                                <CellStyle>
-                                                    <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                </CellStyle>
-                                            </dx:GridViewDataTextColumn>
-                                        </Columns>
-                                    </dx:GridViewBandColumn>
-                                    <dx:GridViewDataTextColumn Caption="Descrição do produto" FieldName="nomeProduto" ToolTip="Nome do produto" VisibleIndex="4" SortIndex="0" SortOrder="Ascending" MinWidth="250">
-                                        <Settings AllowAutoFilter="True" AutoFilterCondition="Contains" />
-                                        <CellStyle Wrap="False">
-                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                        </CellStyle>
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewBandColumn Caption="Sell Out - Kit" VisibleIndex="9">
-                                        <Columns>
-                                            <dx:GridViewDataTextColumn Caption="R$" FieldName="LucroSellOut_Kit" VisibleIndex="0" >
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
-                                                </PropertiesTextEdit>
-                                            </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="%" VisibleIndex="1" Width="60px">
-                                            </dx:GridViewDataTextColumn>
-                                        </Columns>
-                                    </dx:GridViewBandColumn>
-                                    <dx:GridViewBandColumn Caption="Margem Final" ShowInCustomizationForm="True" VisibleIndex="10">
-                                        <Columns>
-                                            <dx:GridViewDataTextColumn Caption="R$" FieldName="vlrLucroFinal" ReadOnly="True" ShowInCustomizationForm="True" ToolTip="Valor do Lucro Final (Lucro Praticado + Lucro Sell Out)" VisibleIndex="0" >
+                                            <dx:GridViewDataTextColumn Caption="R$" FieldName="vlrLucroFinal" ReadOnly="True" ShowInCustomizationForm="True" ToolTip="Valor do Lucro Final (Lucro Praticado + Lucro Sell Out)" VisibleIndex="0">
                                                 <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <Settings AllowAutoFilter="False" />
                                                 <HeaderStyle BackColor="#999999" />
                                             </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="%" FieldName="percMargemFinal" ReadOnly="True" ShowInCustomizationForm="True" ToolTip="Percentual da Margem Final " VisibleIndex="1" >
+                                            <dx:GridViewDataTextColumn Caption="%" FieldName="percMargemFinal" ReadOnly="True" ShowInCustomizationForm="True" ToolTip="Percentual da Margem Final " VisibleIndex="1">
                                                 <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <Settings AllowAutoFilter="False" />
@@ -906,12 +861,7 @@
                                             </dx:GridViewDataTextColumn>
                                         </Columns>
                                     </dx:GridViewBandColumn>
-                                    <dx:GridViewDataTextColumn Caption="Nº" FieldName="rnk" ReadOnly="True" ToolTip="Posição no TOP 10" VisibleIndex="2" >
-                                        <Settings AllowAutoFilter="False" />
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn Caption="Filial" FieldName="FilialDesc" ShowInCustomizationForm="True" ToolTip="Descrição da Filial" VisibleIndex="1" MinWidth="180">
-                                        <Settings AllowAutoFilter="True" AutoFilterCondition="Contains" />
-                                    </dx:GridViewDataTextColumn>
+
                                 </Columns>
                                 <SettingsBehavior AllowFocusedRow="True" ColumnResizeMode="Control" />
                                 <SettingsPager Mode="ShowAllRecords">
@@ -967,26 +917,35 @@
                                         </Items>
                                     </dx:GridViewToolbar>
                                 </Toolbars>
-
                                 <Columns>
-                                    <dx:GridViewDataTextColumn Caption="Código" FieldName="CodProduto" ToolTip="Código do produto" VisibleIndex="3">
+
+                                    <dx:GridViewDataTextColumn Caption="Filial" FieldName="FilialDesc" ShowInCustomizationForm="True" ToolTip="Descrição da Filial" VisibleIndex="0" MinWidth="180">
                                         <Settings AllowAutoFilter="True" AutoFilterCondition="Contains" />
                                     </dx:GridViewDataTextColumn>
-                                    <dx:GridViewBandColumn Caption="Vendas" VisibleIndex="5">
+                                    <dx:GridViewDataTextColumn Caption="Código" FieldName="CodProduto" ToolTip="Código do produto" VisibleIndex="1">
+                                        <Settings AllowAutoFilter="True" AutoFilterCondition="Contains" />
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn Caption="Descrição do produto" FieldName="nomeProduto" ToolTip="Nome do produto" VisibleIndex="2" SortIndex="0" SortOrder="Ascending" MinWidth="250">
+                                        <Settings AllowAutoFilter="True" AutoFilterCondition="Contains" />
+                                        <CellStyle Wrap="False">
+                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                        </CellStyle>
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewBandColumn Caption="Vendas" VisibleIndex="3">
                                         <Columns>
                                             <dx:GridViewDataTextColumn Caption="Volume" FieldName="QtdVendas" ToolTip="Volume ou quantidade dos itens vendidos" VisibleIndex="0">
                                                 <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <Settings AllowAutoFilter="False" />
                                             </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="R$" FieldName="Venda" ToolTip="Valor da venda de cada item" VisibleIndex="1" >
+                                            <dx:GridViewDataTextColumn Caption="R$" FieldName="Venda" ToolTip="Valor da venda de cada item" VisibleIndex="1">
                                                 <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <Settings AllowAutoFilter="False" />
                                                 <CellStyle Font-Bold="True" ForeColor="Blue">
                                                 </CellStyle>
                                             </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="Preço Venda" FieldName="precoVenda" UnboundType="Decimal" VisibleIndex="2" >
+                                            <dx:GridViewDataTextColumn Caption="Preço Venda" FieldName="precoVenda" UnboundType="Decimal" VisibleIndex="2">
                                                 <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <Settings AllowAutoFilter="False" />
@@ -996,70 +955,15 @@
                                             </dx:GridViewDataTextColumn>
                                         </Columns>
                                     </dx:GridViewBandColumn>
-                                    <dx:GridViewBandColumn Caption="Margem Praticada" VisibleIndex="6">
+                                    <dx:GridViewBandColumn Caption="Margem Final" ShowInCustomizationForm="True" VisibleIndex="4">
                                         <Columns>
-                                            <dx:GridViewDataTextColumn Caption="R$" FieldName="LucroComercial" ToolTip="Valor do Lucro Praticado" VisibleIndex="0">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
-                                                </PropertiesTextEdit>
-                                                <Settings AllowAutoFilter="False" />
-                                            </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="%" FieldName="percMargem" ReadOnly="True" ToolTip="Percentual da Margem Praticada" VisibleIndex="1" Width="60px">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
-                                                </PropertiesTextEdit>
-                                                <Settings AllowAutoFilter="False" />
-                                                <CellStyle>
-                                                    <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                </CellStyle>
-                                            </dx:GridViewDataTextColumn>
-                                        </Columns>
-                                    </dx:GridViewBandColumn>
-                                    <dx:GridViewDataTextColumn Caption="Nº Cliente" FieldName="numCliente" ToolTip="Número de clientes que compraram o item." VisibleIndex="12" >
-                                        <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
-                                        </PropertiesTextEdit>
-                                        <Settings AllowAutoFilter="False" />
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewBandColumn Caption="Sell Out" VisibleIndex="7">
-                                        <Columns>
-                                            <dx:GridViewDataTextColumn Caption="R$" FieldName="LucroSellOut" ToolTip="Valor do Sell Out" VisibleIndex="0" >
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
-                                                </PropertiesTextEdit>
-                                                <Settings AllowAutoFilter="False" />
-                                            </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="%" FieldName="percMargemSellOut" ReadOnly="True" ToolTip="Percentual do Sell Out" VisibleIndex="1" >
-                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
-                                                </PropertiesTextEdit>
-                                                <Settings AllowAutoFilter="False" />
-                                                <CellStyle>
-                                                    <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                </CellStyle>
-                                            </dx:GridViewDataTextColumn>
-                                        </Columns>
-                                    </dx:GridViewBandColumn>
-                                    <dx:GridViewDataTextColumn Caption="Descrição do produto" FieldName="nomeProduto" ToolTip="Nome do produto" VisibleIndex="4" MinWidth="250">
-                                        <Settings AllowAutoFilter="True" AutoFilterCondition="Contains" />
-                                        <CellStyle Wrap="False">
-                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                        </CellStyle>
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewBandColumn Caption="Sell Out - Kit" VisibleIndex="9">
-                                        <Columns>
-                                            <dx:GridViewDataTextColumn Caption="R$" FieldName="LucroSellOut_Kit" VisibleIndex="0" >
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
-                                                </PropertiesTextEdit>
-                                            </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="%" VisibleIndex="1" Width="60px">
-                                            </dx:GridViewDataTextColumn>
-                                        </Columns>
-                                    </dx:GridViewBandColumn>
-                                    <dx:GridViewBandColumn Caption="Margem Final" ShowInCustomizationForm="True" VisibleIndex="10">
-                                        <Columns>
-                                            <dx:GridViewDataTextColumn Caption="R$" FieldName="vlrLucroFinal" ReadOnly="True" ShowInCustomizationForm="True" ToolTip="Valor do Lucro Final (Lucro Praticado + Lucro Sell Out)" VisibleIndex="0" >
+                                            <dx:GridViewDataTextColumn Caption="R$" FieldName="vlrLucroFinal" ReadOnly="True" ShowInCustomizationForm="True" ToolTip="Valor do Lucro Final (Lucro Praticado + Lucro Sell Out)" VisibleIndex="0">
                                                 <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <Settings AllowAutoFilter="False" />
                                                 <HeaderStyle BackColor="#999999" />
                                             </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="%" FieldName="percMargemFinal" ReadOnly="True" ShowInCustomizationForm="True" ToolTip="Percentual da Margem Final " VisibleIndex="1" SortIndex="0" SortOrder="Ascending">
+                                            <dx:GridViewDataTextColumn Caption="%" FieldName="percMargemFinal" ReadOnly="True" ShowInCustomizationForm="True" ToolTip="Percentual da Margem Final " VisibleIndex="1">
                                                 <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <Settings AllowAutoFilter="False" />
@@ -1069,12 +973,7 @@
                                             </dx:GridViewDataTextColumn>
                                         </Columns>
                                     </dx:GridViewBandColumn>
-                                    <dx:GridViewDataTextColumn Caption="Nº" FieldName="rnk" ReadOnly="True" ToolTip="Posição no TOP 10" VisibleIndex="2" >
-                                        <Settings AllowAutoFilter="False" />
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn Caption="Filial" FieldName="FilialDesc" ShowInCustomizationForm="True" ToolTip="Descrição da Filial" VisibleIndex="1" MinWidth="180" >
-                                        <Settings AllowAutoFilter="True" AutoFilterCondition="Contains" />
-                                    </dx:GridViewDataTextColumn>
+
                                 </Columns>
                                 <SettingsBehavior AllowFocusedRow="True" ColumnResizeMode="Control" />
                                 <SettingsPager Mode="ShowAllRecords">
@@ -1556,49 +1455,52 @@
 
     <script type="text/javascript"> 
 
-        $(function () {
-            var x = detectmob();
+        $("#cabecalho").hide();
+        $("#ASPxMenu1").hide();
 
-            if (x) {
-                $("#cabecalho").hide();
-                $("#ASPxMenu1").hide();
-            }
-            else {
-                $("#ASPxMenu1").show();
-                $("#cabecalho").show();
-            };
-        });
+        //$(function () {
+        //    var x = detectmob();
 
-        function detectmob() {
-            if (navigator.userAgent.includes("Android") ||
-                navigator.userAgent.includes("webOS") ||
-                navigator.userAgent.includes("iPhone") ||
-                navigator.userAgent.includes("iPad") ||
-                navigator.userAgent.includes("iPod") ||
-                navigator.userAgent.includes("BlackBerry") ||
-                navigator.userAgent.includes("Windows")) {
+        //    if (x) {
+        //        $("#cabecalho").hide();
+        //        $("#ASPxMenu1").hide();
+        //    }
+        //    else {
+        //        $("#ASPxMenu1").show();
+        //        $("#cabecalho").show();
+        //    };
+        //});
 
-                $("#ASPxMenu1").hide();
-                $("#cabecalho").hide();
+        //function detectmob() {
+        //    if (navigator.userAgent.includes("Android") ||
+        //        navigator.userAgent.includes("webOS") ||
+        //        navigator.userAgent.includes("iPhone") ||
+        //        navigator.userAgent.includes("iPad") ||
+        //        navigator.userAgent.includes("iPod") ||
+        //        navigator.userAgent.includes("BlackBerry") ||
+        //        navigator.userAgent.includes("Windows")) {
 
-                return true;
+        //        $("#ASPxMenu1").hide();
+        //        $("#cabecalho").hide();
 
-            } else {
+        //        return true;
 
-                return false;
-            }
-        };
+        //    } else {
 
-        var x = true;
+        //        return false;
+        //    }
+        //};
 
-        if (x) {
-            $("#cabecalho").hide();
-            $("#ASPxMenu1").hide();
-        }
-        else {
-            $("#ASPxMenu1").show();
-            $("#cabecalho").show();
-        };
+        //var x = true;
+
+        //if (x) {
+        //    $("#cabecalho").hide();
+        //    $("#ASPxMenu1").hide();
+        //}
+        //else {
+        //    $("#ASPxMenu1").show();
+        //    $("#cabecalho").show();
+        //};
 
     </script>
 
@@ -1611,7 +1513,7 @@
             float: left;
             margin-left: 5px;
         }
-/*
+        /*
         .divDados {
             clear: both;
             float: left;
