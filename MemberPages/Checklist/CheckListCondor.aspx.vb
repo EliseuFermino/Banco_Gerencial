@@ -2,6 +2,8 @@
 Imports System.Drawing.Imaging
 Imports System.Data.SqlClient
 Imports System.Data
+Imports DevExpress.XtraCharts.Native
+Imports DevExpress.Xpo.DB.Helpers
 
 Partial Class MemberPages_CheckListCondor
     Inherits System.Web.UI.Page
@@ -21,13 +23,15 @@ Partial Class MemberPages_CheckListCondor
             Dim oVem As New VendaEmpresaMes
 
             oVem.AtualizarEstatisticaPrograma(66, User.Identity.Name)
-            'txtData.Value = Now().Date
+
+            txtData.Value = DateTime.Now.ToString("yyyy-MM-dd")
+
             'Me.cboFilial.AutoPostBack = False
             'Me.cboFilial.Visible_cboCorporacao = True
             Call PadraoInicial()
-            Call HabilitarGerarRelatorio()
+                Call HabilitarGerarRelatorio()
 
-        End If
+            End If
     End Sub
 
     Protected Sub Page_LoadComplete(sender As Object, e As EventArgs) Handles Me.LoadComplete
@@ -141,12 +145,13 @@ Partial Class MemberPages_CheckListCondor
     Private Sub UploadImagem(ByVal oUpload As Object, ByVal iText As String, ByVal iGrupo As Byte, ByVal iSubgrupo As Byte, ByVal iCod As Byte)
 
         If oUpload.hasfile = False Then
-            lblStatus.Text = "Nenhuma imagem foi carregada!!!"
+            ScriptManager.RegisterStartupScript(oUpload, Me.GetType(), "Script", "alertErro();", True)
             Exit Sub
-        End If
 
+        Else
 
-        If oUpload.HasFile Then
+            'ScriptManager.RegisterStartupScript(oUpload, Me.GetType(), "Script", "alertSucessImg();", True)
+            'Exit Sub
 
             Dim intLength As Integer
             Dim arrContent As Byte()
@@ -203,11 +208,10 @@ Partial Class MemberPages_CheckListCondor
                     cmd.ExecuteNonQuery()
                     con.Close()
 
-                    lblStatus.Text = "A imagem foi carregada com sucesso!!!"
+                    ScriptManager.RegisterStartupScript(oUpload, Me.GetType(), "Script", "alertSucessImg();", True)
 
                 End Using
             End Using
-        Else
 
         End If
 
@@ -331,6 +335,8 @@ Partial Class MemberPages_CheckListCondor
             btnGrupo17.Enabled = True
 
         End If
+
+
 
     End Sub
 
@@ -1346,47 +1352,7 @@ Partial Class MemberPages_CheckListCondor
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
     End Sub   ' Bloco 2 - 1 a 14. Total de 14 Perguntas
 
-    Protected Sub btnGrupo19_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo19.Click
-        Dim userName As String
-        Dim varIssue(14) As Byte
-
-        userName = User.Identity.Name
-
-        varIssue(1) = DefinirPontuacao(rnd19_1_Sim, rnd19_1_Nao, rnd19_1_NA)
-        varIssue(2) = DefinirPontuacao(rnd19_2_Sim, rnd19_2_Nao, rnd19_2_NA)
-        varIssue(3) = DefinirPontuacao(rnd19_3_Sim, rnd19_3_Nao, rnd19_3_NA)
-        varIssue(4) = DefinirPontuacao(rnd19_4_Sim, rnd19_4_Nao, rnd19_4_NA)
-        varIssue(5) = DefinirPontuacao(rnd19_5_Sim, rnd19_5_Nao, rnd19_5_NA)
-        varIssue(6) = DefinirPontuacao(rnd19_6_Sim, rnd19_6_Nao, rnd19_6_NA)
-        varIssue(7) = DefinirPontuacao(rnd19_7_Sim, rnd19_7_Nao, rnd19_7_NA)
-        varIssue(8) = DefinirPontuacao(rnd19_8_Sim, rnd19_8_Nao, rnd19_8_NA)
-        varIssue(9) = DefinirPontuacao(rnd19_9_Sim, rnd19_9_Nao, rnd19_9_NA)
-        varIssue(10) = DefinirPontuacao(rnd19_10_Sim, rnd19_10_Nao, rnd19_10_NA)
-        varIssue(11) = DefinirPontuacao(rnd19_11_Sim, rnd19_11_Nao, rnd19_11_NA)
-        varIssue(12) = DefinirPontuacao(rnd19_12_Sim, rnd19_12_Nao, rnd19_12_NA)
-        varIssue(13) = DefinirPontuacao(rnd19_13_Sim, rnd19_13_Nao, rnd19_13_NA)
-        varIssue(14) = DefinirPontuacao(rnd19_14_Sim, rnd19_14_Nao, rnd19_14_NA)
-
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 1, varIssue(1), userName, Me.txt19_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 2, varIssue(1), userName, Me.txt19_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 3, varIssue(1), userName, Me.txt19_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 4, varIssue(1), userName, Me.txt19_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 5, varIssue(1), userName, Me.txt19_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 6, varIssue(1), userName, Me.txt19_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 7, varIssue(1), userName, Me.txt19_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 8, varIssue(1), userName, Me.txt19_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 9, varIssue(1), userName, Me.txt19_9.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 10, varIssue(1), userName, Me.txt19_10.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 11, varIssue(1), userName, Me.txt19_11.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 12, varIssue(1), userName, Me.txt19_12.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 13, varIssue(1), userName, Me.txt19_13.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 14, varIssue(1), userName, Me.txt19_14.Text)
-
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 19, 1)
-        'Me.panTitle19.CssClass = "pnl_Verde"
-
-        ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
-    End Sub   ' Bloco 2 - 1 a 14. Total de 14 Perguntas
+    ' Bloco 2 - 1 a 14. Total de 14 Perguntas
 
     Private Sub BCDet(ByVal myPontos As Byte, ByVal myText As TextBox, ByVal myDesc As String,
                                    ByVal rndSim As CheckBox, ByVal rndNao As CheckBox, ByVal rndNA As CheckBox)
@@ -3207,7 +3173,6 @@ Partial Class MemberPages_CheckListCondor
 
 #End Region
 
-
     Private Sub Linkar(ByVal link As String, ByVal iFilial As String)
         Dim url As String = link & "?iFilial=" & iFilial & ""
         Dim sb As New StringBuilder()
@@ -3221,167 +3186,172 @@ Partial Class MemberPages_CheckListCondor
 
     Protected Sub btnPDF_Click(sender As Object, e As EventArgs) Handles btnPDF.Click
 
-        Select Case Me.selFilial.SelectedValue
-            Case 3
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F003.aspx", Me.selFilial.SelectedValue)
-            Case 4
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F004.aspx", Me.selFilial.SelectedValue)
-            Case 5
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F005.aspx", Me.selFilial.SelectedValue)
-            Case 6
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F006.aspx", Me.selFilial.SelectedValue)
-            Case 7
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F007.aspx", Me.selFilial.SelectedValue)
-            Case 8
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F008.aspx", Me.selFilial.SelectedValue)
-            Case 9
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F009.aspx", Me.selFilial.SelectedValue)
-            Case 10
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F010.aspx", Me.selFilial.SelectedValue)
-            Case 11
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F011.aspx", Me.selFilial.SelectedValue)
-            Case 13
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F013.aspx", Me.selFilial.SelectedValue)
-            Case 14
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F014.aspx", Me.selFilial.SelectedValue)
-            Case 15
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F015.aspx", Me.selFilial.SelectedValue)
-            Case 17
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F017.aspx", Me.selFilial.SelectedValue)
-            Case 18
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F018.aspx", Me.selFilial.SelectedValue)
-            Case 19
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F019.aspx", Me.selFilial.SelectedValue)
-            Case 20
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F020.aspx", Me.selFilial.SelectedValue)
-            Case 21
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F021.aspx", Me.selFilial.SelectedValue)
-            Case 22
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F022.aspx", Me.selFilial.SelectedValue)
-            Case 23
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F023.aspx", Me.selFilial.SelectedValue)
-            Case 24
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F024.aspx", Me.selFilial.SelectedValue)
-            Case 25
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F025.aspx", Me.selFilial.SelectedValue)
-            Case 26
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F026.aspx", Me.selFilial.SelectedValue)
-            Case 27
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F027.aspx", Me.selFilial.SelectedValue)
-            Case 28
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F028.aspx", Me.selFilial.SelectedValue)
-            Case 29
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F029.aspx", Me.selFilial.SelectedValue)
-            Case 30
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F030.aspx", Me.selFilial.SelectedValue)
-            Case 31
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F031.aspx", Me.selFilial.SelectedValue)
-            Case 32
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F032.aspx", Me.selFilial.SelectedValue)
-            Case 33
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F033.aspx", Me.selFilial.SelectedValue)
-            Case 34
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F034.aspx", Me.selFilial.SelectedValue)
-            Case 36
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F036.aspx", Me.selFilial.SelectedValue)
-            Case 37
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F037.aspx", Me.selFilial.SelectedValue)
-            Case 38
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F038.aspx", Me.selFilial.SelectedValue)
-            Case 39
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F039.aspx", Me.selFilial.SelectedValue)
-            Case 40
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F040.aspx", Me.selFilial.SelectedValue)
-            Case 41
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F041.aspx", Me.selFilial.SelectedValue)
-            Case 42
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F042.aspx", Me.selFilial.SelectedValue)
-            Case 43
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F043.aspx", Me.selFilial.SelectedValue)
-            Case 44
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F044.aspx", Me.selFilial.SelectedValue)
-            Case 45
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F045.aspx", Me.selFilial.SelectedValue)
-            Case 46
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F046.aspx", Me.selFilial.SelectedValue)
-            Case 47
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F047.aspx", Me.selFilial.SelectedValue)
-            Case 48
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F048.aspx", Me.selFilial.SelectedValue)
-            Case 49
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F049.aspx", Me.selFilial.SelectedValue)
-            Case 50
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F050.aspx", Me.selFilial.SelectedValue)
-            Case 51
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F051.aspx", Me.selFilial.SelectedValue)
-            Case 52
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F052.aspx", Me.selFilial.SelectedValue)
-            Case 53
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F053.aspx", Me.selFilial.SelectedValue)
-            Case 54
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F054.aspx", Me.selFilial.SelectedValue)
-            Case 55
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F055.aspx", Me.selFilial.SelectedValue)
-            Case 56
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F056.aspx", Me.selFilial.SelectedValue)
-            Case 57
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F057.aspx", Me.selFilial.SelectedValue)
-            Case 58
-                oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
-                Call Linkar("RelatorioChecklist_F058.aspx", Me.selFilial.SelectedValue)
-        End Select
+        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        Call carregaRelatorio()
+
+        ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "createPDF();", True)
+
+        'Select Case Me.selFilial.SelectedValue
+        '    Case 3
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F003.aspx", Me.selFilial.SelectedValue)
+        '    Case 4
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F004.aspx", Me.selFilial.SelectedValue)
+        '    Case 5
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F005.aspx", Me.selFilial.SelectedValue)
+        '    Case 6
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F006.aspx", Me.selFilial.SelectedValue)
+        '    Case 7
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F007.aspx", Me.selFilial.SelectedValue)
+        '    Case 8
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F008.aspx", Me.selFilial.SelectedValue)
+        '    Case 9
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F009.aspx", Me.selFilial.SelectedValue)
+        '    Case 10
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F010.aspx", Me.selFilial.SelectedValue)
+        '    Case 11
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F011.aspx", Me.selFilial.SelectedValue)
+        '    Case 13
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F013.aspx", Me.selFilial.SelectedValue)
+        '    Case 14
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F014.aspx", Me.selFilial.SelectedValue)
+        '    Case 15
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F015.aspx", Me.selFilial.SelectedValue)
+        '    Case 17
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F017.aspx", Me.selFilial.SelectedValue)
+        '    Case 18
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F018.aspx", Me.selFilial.SelectedValue)
+        '    Case 19
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F019.aspx", Me.selFilial.SelectedValue)
+        '    Case 20
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F020.aspx", Me.selFilial.SelectedValue)
+        '    Case 21
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F021.aspx", Me.selFilial.SelectedValue)
+        '    Case 22
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F022.aspx", Me.selFilial.SelectedValue)
+        '    Case 23
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F023.aspx", Me.selFilial.SelectedValue)
+        '    Case 24
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F024.aspx", Me.selFilial.SelectedValue)
+        '    Case 25
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F025.aspx", Me.selFilial.SelectedValue)
+        '    Case 26
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F026.aspx", Me.selFilial.SelectedValue)
+        '    Case 27
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F027.aspx", Me.selFilial.SelectedValue)
+        '    Case 28
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F028.aspx", Me.selFilial.SelectedValue)
+        '    Case 29
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F029.aspx", Me.selFilial.SelectedValue)
+        '    Case 30
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F030.aspx", Me.selFilial.SelectedValue)
+        '    Case 31
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F031.aspx", Me.selFilial.SelectedValue)
+        '    Case 32
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F032.aspx", Me.selFilial.SelectedValue)
+        '    Case 33
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F033.aspx", Me.selFilial.SelectedValue)
+        '    Case 34
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F034.aspx", Me.selFilial.SelectedValue)
+        '    Case 36
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F036.aspx", Me.selFilial.SelectedValue)
+        '    Case 37
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F037.aspx", Me.selFilial.SelectedValue)
+        '    Case 38
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F038.aspx", Me.selFilial.SelectedValue)
+        '    Case 39
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F039.aspx", Me.selFilial.SelectedValue)
+        '    Case 40
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F040.aspx", Me.selFilial.SelectedValue)
+        '    Case 41
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F041.aspx", Me.selFilial.SelectedValue)
+        '    Case 42
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F042.aspx", Me.selFilial.SelectedValue)
+        '    Case 43
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F043.aspx", Me.selFilial.SelectedValue)
+        '    Case 44
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F044.aspx", Me.selFilial.SelectedValue)
+        '    Case 45
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F045.aspx", Me.selFilial.SelectedValue)
+        '    Case 46
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F046.aspx", Me.selFilial.SelectedValue)
+        '    Case 47
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F047.aspx", Me.selFilial.SelectedValue)
+        '    Case 48
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F048.aspx", Me.selFilial.SelectedValue)
+        '    Case 49
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F049.aspx", Me.selFilial.SelectedValue)
+        '    Case 50
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F050.aspx", Me.selFilial.SelectedValue)
+        '    Case 51
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F051.aspx", Me.selFilial.SelectedValue)
+        '    Case 52
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F052.aspx", Me.selFilial.SelectedValue)
+        '    Case 53
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F053.aspx", Me.selFilial.SelectedValue)
+        '    Case 54
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F054.aspx", Me.selFilial.SelectedValue)
+        '    Case 55
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F055.aspx", Me.selFilial.SelectedValue)
+        '    Case 56
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F056.aspx", Me.selFilial.SelectedValue)
+        '    Case 57
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F057.aspx", Me.selFilial.SelectedValue)
+        '    Case 58
+        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        Call Linkar("RelatorioChecklist_F058.aspx", Me.selFilial.SelectedValue)
+        'End Select
 
     End Sub
 
@@ -3396,7 +3366,6 @@ Partial Class MemberPages_CheckListCondor
     End Sub
 
     Protected Sub UpdatePanel1_PreRender(sender As Object, e As EventArgs) Handles UpdatePanel1.PreRender
-
 
         Select Case (selFilial.SelectedValue)
             Case 3, 8, 13, 15, 17, 18, 28, 34
@@ -3741,6 +3710,145 @@ Partial Class MemberPages_CheckListCondor
     End Sub
 
 
+
+#End Region
+
+#Region "Evento Gerar Relatório"
+
+    Private Sub carregaRelatorio()
+        Dim html As String
+        Dim constr As String = ConfigurationManager.ConnectionStrings("gerCheckListConnectionString").ConnectionString
+        Dim selectSQL As String = <![CDATA[SELECT	Fil.FilialLista 
+			    ,CONCAT(Convert(varchar,a.Dia,103), ' ', Hora) Dia
+			    ,Gru.listaGrupo 
+			    ,Su.listaSubgrupo     
+			    ,Perg.descPergunta     
+			    ,a.Descricao
+			    ,im.imgData
+			    ,im.imgTitle
+		    FROM Dados.tblFilial_]]>.Value()
+
+        selectSQL += selFilial.SelectedValue.ToString()
+
+        selectSQL += <![CDATA[ AS a JOIN Cadastro.tblCadGrupo AS Gru
+		    ON a.idGrupo = Gru.idGrupo JOIN Cadastro.tblCadSubgrupo AS Su
+		    ON a.idGrupo = Su.idGrupo
+		    AND a.idSubgrupo = Su.idSubgrupo JOIN Cadastro.tblCadPerguntas AS Perg
+		    ON a.idGrupo = Perg.idGrupo 
+		    AND a.idSubgrupo = Perg.idSubgrupo 
+		    AND a.idCod = Perg.idPergunta JOIN gerManager.Cadastros.tblCadFiliais AS Fil
+		    ON a.idFilial = Fil.Filial LEFT JOIN Fotos.tblFilial_]]>.Value()
+
+        selectSQL += selFilial.SelectedValue.ToString()
+
+        selectSQL += <![CDATA[ AS Im
+                    ON a.Dia = im.Dia 
+                    And a.idFilial = im.idFilial 
+                    And a.idGrupo = im.idGrupo 
+                    And a.idSubgrupo = im.idSubgrupo 
+                    And a.idCod = im.idCod    
+                    WHERE a.Dia = ']]>.Value()
+
+        selectSQL += txtData.Value
+        'selectSQL += "2022-04-02"
+
+        selectSQL += <![CDATA[' And LEN(CONVERT(VARCHAR(25),A.Descricao)) > 0]]>.Value()
+
+        html = <![CDATA[<br />
+        <br />
+        <div Class="row justify-content-center" style="color: #008080; font-size: 25pt">
+        <strong> Relatório Diário - Cheklist</strong>
+        </div>
+        <b style="color: white">------------------------------------------------------------------------</b>]]>.Value()
+
+        Using con As New SqlConnection(constr)
+            Using cmd As New SqlCommand(selectSQL)
+                Using sda As New SqlDataAdapter()
+                    cmd.Connection = con
+                    sda.SelectCommand = cmd
+                    Using ds As New DataSet()
+                        sda.Fill(ds)
+                        For Each tabela In ds.Tables(0).Rows
+
+                            html += <![CDATA[<div Class="row row-cols-auto" style="align-content: center; align-items: center;">
+                            <div Class="col-1"><br /></div>
+                            <div Class="col-6">
+                            <div Class="row justify-content-between">
+                            <div Class="col-2">
+                            <strong> Filial: <b style="color: white">-----</b></strong>]]>.Value()
+
+                            html += tabela(0)
+
+                            html += <![CDATA[<b style="color: white">-------</b>
+                            <strong> Dia: <b style="color: white">----</b></strong>]]>.Value()
+
+                            html += tabela(1)
+
+                            html += <![CDATA[</div>
+                            </div>
+                            <hr>
+                            <div Class="row justify-content-between">
+                            <div Class="col-2">
+                            <strong> Grupo: <b style="color: white">---</b></strong>]]>.Value()
+
+                            html += tabela(2)
+
+                            html += <![CDATA[
+                            <b style="color: white">-------</b>
+                            <strong> Sub-Grupo: <b style="color: white">-----</b></strong>]]>.Value()
+
+                            html += tabela(3)
+
+                            html += <![CDATA[</div>
+                            </div>
+                            <hr>
+                            <div Class="row justify-content-between">
+                            <div Class="col-2" style="color: #0000FF">
+                            <strong> Pergunta: </strong>
+                            <a style="color: #0010FF"> ]]>.Value().ToString()
+
+                            html += Replace(tabela(4), "–", "-")
+
+                            html += <![CDATA[</a>
+                            </div>
+                            <hr>
+                            <div Class="row justify-content-between" >
+                            <div Class="col-2" style="color: #FF0000">
+                            <strong> Resposta: </strong>
+                            <a style="color: #FF0001"> ]]>.Value()
+
+                            html += tabela(5)
+
+                            If (tabela(7).ToString.Length > 0) Then
+                                html += <![CDATA[</a><br /><b style="color: white">_</b>
+                                </div>                              
+                                <div Class="col-4">]]>.Value()
+
+                                Dim imageBytes() As Byte = tabela(6)
+                                html += "<img src='"
+                                html += String.Format("data:image/{0};base64,{1}", "png", Convert.ToBase64String(imageBytes))
+                                html += "' >"
+                            Else
+                                html += <![CDATA[</a>
+                                </div>
+                                <div Class="col-4">]]>.Value()
+
+                            End If
+
+                            html += <![CDATA[</div>
+                            <div Class="col-1"></div>
+                            </div>
+                            _____________________________________________________________________________]]>.Value()
+
+                        Next
+                    End Using
+                End Using
+            End Using
+        End Using
+
+        renderRel.InnerHtml = html
+
+    End Sub
 
 #End Region
 
@@ -5242,3 +5350,4 @@ End Class
 '#End Region
 
 #End Region
+

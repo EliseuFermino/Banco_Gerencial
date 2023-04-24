@@ -11,6 +11,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 
+
     <style type="text/css">
         .fileEscondido {
             overflow: hidden;
@@ -24,30 +25,20 @@
                 right: 0px;
                 top: 0px;
                 opacity: 0;
-                filter: alpha(opacity=0);
-                -ms-filter: "alpha(opacity=0)";
-                -khtml-opacity: 0;
-                -moz-opacity: 0;
                 cursor: pointer;
             }
-
-        .botaoBlock {
-            width: 32px;
-            height: 32px;
-            position: absolute;
-            top: 0px;
-            line-height: 42px;
-            background: url(http://blog.paulomontoya.com.br/wp-content/uploads/2012/01/1326736657_Add-button.png) top no-repeat;
-            padding: 0;
-            border: 0;
-            outline: none;
-        }
     </style>
 
     <link href="../../css/bootstrap.min.css" rel="stylesheet" />
     <script src="../../Scripts/jquery-2.2.3.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../Styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../Styles/style.css" /> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas2image@1.0.5/canvas2image.min.js"></script>
+
+    <%--<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
+    <link href="../../../assets/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="../../../../assets/bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>--%>
 
 </asp:Content>
 
@@ -358,7 +349,9 @@
                         </dx:ASPxButton>
                     </div>
                     <div class="col-auto">
-                        <dx:ASPxButton ID="btnPDF" runat="server" Enabled="false" Text="Relatório" CssClass="btn-sm"></dx:ASPxButton>
+                        <dx:ASPxButton ID="btnPDF" runat="server" Enabled="false" Text="Relatório" CssClass="btn-sm">                            
+                            <ClientSideEvents Click="function(s, e) {Callback.PerformCallback(); LoadingPanel.Show(); LoadingPanel.SetText('Aguarde. Buscando informações...');}" />
+                        </dx:ASPxButton>
                     </div>
                 </div>
                 <div class="row col-md-12 justify-content-center text-center">
@@ -502,7 +495,7 @@
                                         <td align="center">
                                             <div class="fileEscondido">
                                                 <asp:ImageButton ID="imgFoto1_1" runat="server" ImageUrl="~/image/camera-icon_32.png" ToolTip="Clique aqui para salvar uma foto." />
-                                                <asp:FileUpload ID="upFile1_1" runat="server" />
+                                                <asp:FileUpload type="image" runat="server" ID="upFile1_1" autopostback="false" />
                                             </div>
                                         </td>
                                         <td align="center">
@@ -7017,7 +7010,7 @@
                                 <tbody>
                                     <thead>
                                         <tr>
-                                            <td colspan="8" align="center">                                                
+                                            <td colspan="8" align="center">
                                                 <b>Frente de Caixa</b>
                                             </td>
                                         </tr>
@@ -7390,15 +7383,62 @@
                             <br />
                             <strong>Os dados foram gravados com sucesso!</strong>
                             <br />
+                            <br />
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-success btn-md" data-dismiss="modal" id="btnCancelar">Ok</button>
+                    <button type="button" class="btn btn-success btn-md" data-dismiss="modal">Ok</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Modal Erro Imagem-->
+    <div class="modal fade w-auto h-auto" id="ModalErro" tabindex="-1" role="dialog" aria-labelledby="ModalErro" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="alert alert-danger" role="alert" style="text-align: center">
+                        <div style="text-align: center">
+                            <br />
+                            <strong>Nenhuma imagem foi carregada!!!</strong>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-warning btn-md" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Sucesso -->
+    <div class="modal fade w-auto h-auto" id="ModalSucessImg" tabindex="-1" role="dialog" aria-labelledby="ModalSucessImg" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="alert alert-success" role="alert" style="text-align: center">
+                        <div style="text-align: center">
+                            <br />
+                            <strong>A imagem foi carregada com sucesso!!!</strong>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-success btn-md" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+
+    <div class="container" style="max-width: 80%; font-size: 12pt; display: none" id="renderRel" runat="server">
+
+    </div>
+
 
     <%--    <div class="alert alert-success" id="success-alert" style="text-align: center">
         <button type="button" class="close" data-dismiss="alert">x</button>
@@ -7414,7 +7454,7 @@
 
         try {
             MainContent_txtData.max = new Date().toISOString().split("T")[0];
-            document.getElementById('MainContent_txtData').valueAsDate = new Date();
+            //document.getElementById('MainContent_txtData').valueAsDate = new Date();
 
         } catch (e) {
             console.log(e.message)
@@ -7435,7 +7475,56 @@
             //$("#dangerAlert").fadeTo(8000, 500).slideUp(500, function () {
             //$("#dangerAlert").slideUp(500);
             //});
-            //$('#ModalSucess').modal('show');
+            $('#ModalErro').modal('show');
+        }
+
+        function alertSucessImg() {
+            //    $("#success-alert").fadeTo(8000, 500).slideUp(500, function () {
+            //        $("#success-alert").slideUp(500);
+            //    });
+            $('#ModalSucessImg').modal('show');
+        }
+
+        function createPDF() {
+            var pdf = new jsPDF('p', 'pt', 'a4');
+            var d = new Date().toISOString().slice(0, 19).replace(/-/g, "");
+            filename = 'report_' + d + '.pdf';
+            // source can be HTML-formatted string, or a reference
+            // to an actual DOM element from which the text will be scraped.
+            source = document.getElementById('MainContent_renderRel');
+
+            // we support special element handlers. Register them with jQuery-style 
+            // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
+            // There is no support for any other type of selectors 
+            // (class, of compound) at this time.
+            specialElementHandlers = {
+                // element with id of "bypass" - jQuery style selector
+                '#bypassme': function (element, renderer) {
+                    // true = "handled elsewhere, bypass text extraction"
+                    return true
+                }
+            };
+            margins = {
+                top: 15,
+                bottom: 15,
+                left: 35,
+                width: 552
+            };
+            // all coords and widths are in jsPDF instance's declared units
+            // 'inches' in this case
+            pdf.fromHTML(
+                source, // HTML string or DOM elem ref.
+                margins.left, // x coord
+                margins.top, { // y coord
+                'width': margins.width, // max width of content on PDF
+                'elementHandlers': specialElementHandlers
+            },
+
+                function (dispose) {
+                    // dispose: object with X, Y of the last line add to the PDF 
+                    //          this allow the insertion of new lines after html
+                    pdf.save(filename);
+                }, margins);
         }
 
     </script>

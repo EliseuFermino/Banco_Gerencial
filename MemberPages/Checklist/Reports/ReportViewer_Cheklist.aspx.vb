@@ -1,4 +1,5 @@
 ﻿Imports DevExpress.Web.ASPxHtmlEditor.Internal
+Imports DevExpress.Xpf.Docking.VisualElements
 Imports GeniusCode.Framework.Support
 Imports Microsoft.Reporting.WebForms.ReportViewer
 Imports System.Data
@@ -70,7 +71,6 @@ and LEN(CONVERT(VARCHAR(25),A.Descricao)) > 0]]>.Value()
                             <div Class="col-4">]]>.Value()
 
                             html += tabela(0)
-                            '03 - Felicidade
 
                             html += <![CDATA[</div>
                             <div Class="col-2">
@@ -79,7 +79,6 @@ and LEN(CONVERT(VARCHAR(25),A.Descricao)) > 0]]>.Value()
                             <div Class="col-4">]]>.Value()
 
                             html += tabela(1)
-                            '02/04/2022 13:41:14
 
                             html += <![CDATA[</div>
                             </div>
@@ -90,56 +89,56 @@ and LEN(CONVERT(VARCHAR(25),A.Descricao)) > 0]]>.Value()
                             </div>
                             <div Class="col-4">]]>.Value()
 
-                            '04 - Área de Vendas
                             html += tabela(2)
 
                             html += <![CDATA[</div>
                             <div Class="col-2">
-                            <strong> SubGrupo: </strong>
+                            <strong> Sub-Grupo: </strong>
                             </div>
                             <div Class="col-4">]]>.Value()
 
-                            '01 - PAR
                             html += tabela(3)
 
                             html += <![CDATA[</div>
                             </div>
                             <hr>
-                            <div Class="row justify-content-between" style="color: #0000FF">
-                            <div Class="col-2">
+                            <div Class="row justify-content-between">
+                            <div Class="col-2" style="color: #0000FF">
                             <strong> Pergunta: </strong>
                             </div>
-                            <div Class="col-10">]]>.Value()
+                            <div Class="col-10" style="color: #0001FF"> ]]>.Value().ToString()
 
-                            '4.2 - Os PAR possuem sensores e/ou alarmes em todas as unidades expostas?
-                            html += tabela(4)
+                            html += Replace(tabela(4), "–", "-")
 
                             html += <![CDATA[</div>
                             </div>
                             <hr>
-                            <div Class="row justify-content-between" style="color: #FF0000">
-                            <div Class="col-2">
+                            <div Class="row justify-content-between" >
+                            <div Class="col-2" style="color: #FF0000">
                             <strong> Resposta: </strong>
                             </div>
-                            <div Class="col-10">]]>.Value()
+                            <div Class="col-10" style="color: #FF0001"> ]]>.Value()
 
-                            'Presença de creme de avelã expostos na área de venda sem sensor de alarme, facilitando possíveis ações de QRUs.	
                             html += tabela(5)
 
-                            html += <![CDATA[ </div>
-                            </div>
-                            </div>
-                            <div Class="col-4">]]>.Value()
-
                             If (tabela(7).ToString.Length > 0) Then
+                                html += <![CDATA[<br /><b style="color: white">_</b></div>
+                                </div>
+                                </div>                                
+                                <div Class="col-4">]]>.Value()
+
                                 Dim imageBytes() As Byte = tabela(6)
 
                                 html += "<img src='"
-                                html += String.Format("data:image/{0};base64,{1}", "jpg", Convert.ToBase64String(imageBytes))
-                                html += "' style='max-width: 380px; max-height: 380px;'>"
-                                '<img alt = "" src="../../../image/acesso_negado.png" style="width: 580px; height: 400px;">
-                            End If
+                                html += String.Format("data:image/{0};base64,{1}", "png", Convert.ToBase64String(imageBytes))
+                                html += "'>"
+                            Else
+                                html += <![CDATA[</div>
+                                </div>
+                                </div>
+                                <div Class="col-4">]]>.Value()
 
+                            End If
 
                             html += <![CDATA[</div>
                             <div Class="col-1"></div>
