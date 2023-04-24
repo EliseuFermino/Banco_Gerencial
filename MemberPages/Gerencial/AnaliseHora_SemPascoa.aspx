@@ -271,15 +271,9 @@
                      <td align="left" valign="top">&nbsp;</td>
                  </tr>
         </table>
-    <uc1:wucObsPrograma style="clear :both " runat="server" ID="idOBS" Anotacao1="Produtos que compõem a cesta de Páscoa e foram excluidos"
-         Anotacao2="Bombons Caixa Tradicionais
-                     - Bombons Diversos
-                     - Bombons Especiais
-                     - Chocolate Tablete Ate 200g
-                     - Ovos De Pascoa
-                     - Coelhinhos De Chocolate
-                     - Bacalhau
-                     - Colombas" />
+    <uc1:wucObsPrograma style="clear :both " runat="server" ID="idOBS" Anotacao1="Produtos que compõem a cesta de Páscoa e foram excluidos"      />
+            <br />
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/image/Lista_Pascoa.png" />
 
         </ContentTemplate>
     </asp:UpdatePanel>

@@ -20,7 +20,7 @@ Partial Class MemberPages_Replanejamento_webReplanPartic
 
             oVEM.AtualizarEstatisticaPrograma(20, User.Identity.Name)   '20 - CMV Replanejamento Vendas
 
-            Dim meuDia As Date = "01/10/2022"
+            Dim meuDia As Date = "01/02/2023"
             cboMes.Date = meuDia
             cboAno.CallAno = Year(meuDia)
 
@@ -315,5 +315,27 @@ Partial Class MemberPages_Replanejamento_webReplanPartic
 
     Protected Sub grid_BatchUpdate(sender As Object, e As DevExpress.Web.Data.ASPxDataBatchUpdateEventArgs) Handles grid.BatchUpdate
         grid_Departamento.DataBind()
+    End Sub
+
+    Protected Sub Page_PreRender(sender As Object, e As EventArgs) Handles Me.PreRender
+        If Not IsPostBack Then
+
+            Session("sANO") = cboAno.CallAno
+            Session("sMES") = cboMes.Date.Month
+            Session("sFILIAL") = cboFilial.CallFilial
+
+            grid.DataBind()
+            grid_Departamento.DataBind()
+
+            AlterarCabecalhos()
+            AlterarCabecalhos_Departamento()
+
+            oFun.Grid_Title(grid, "Meta de Venda por Seção")
+            oFun.Grid_Title(grid_Departamento, "Meta de Venda por Departamento")
+
+            LiberarSalvar()
+
+
+        End If
     End Sub
 End Class

@@ -70,7 +70,13 @@ Imports System.IO
 
             Me.optLojaSelecionada.Checked = True
 
-            vAno_Orcamento = Year(Now()) + 1
+            If Month(Now()) > 2 Then
+                vAno_Orcamento = Year(Now()) + 1
+            Else
+                vAno_Orcamento = Year(Now())
+            End If
+
+
 
             Me.cboAno.AnoInicial = 2015
             Me.cboAno.AnoFinal = Year(Now()) + 1

@@ -39,6 +39,7 @@ Public Class VendaEmpresaMes
     Private vDia7 As String
     Private vDia8 As String
     Private vDia9 As String
+    Private vNumDesc As String
 
     Private vLiberaReplanejamento As Boolean
     Private vLiberaParticipacao As Boolean
@@ -128,7 +129,7 @@ Public Class VendaEmpresaMes
 
     End Sub
 
-    Public Sub AtualizaLiberaProgramaReplanejamento(ByVal iAno As Int16, ByVal iMes As Byte, ByVal iFilial As Int16, _
+    Public Sub AtualizaLiberaProgramaReplanejamento(ByVal iAno As Int16, ByVal iMes As Byte, ByVal iFilial As Int16,
                                                     ByVal iTipo As Byte, ByVal iLiberado As Boolean)
         ' 0 = False   1= True
         Dim con As New SqlConnection(connManager)
@@ -266,6 +267,16 @@ Public Class VendaEmpresaMes
             vDia9 = value
         End Set
     End Property
+
+    Public Property NumDesc() As String
+        Get
+            NumDesc = vNumDesc
+        End Get
+        Set(ByVal value As String)
+            vNumDesc = value
+        End Set
+    End Property
+
     Public Property varDesc() As String
         Get
             varDesc = vDesc
@@ -1134,19 +1145,19 @@ Public Class VendaEmpresaMes
     Public Sub Salvar_Rev_Empresa(ByVal iCod As Int16, ByVal iAno As Int16, ByVal iMes As Byte, ByVal iUserName As String)
         Dim strSQL As String
         If iCod = 1 Then    'Elimina as lojas do Apoio para poder salvar
-            strSQL = "INSERT INTO gerManager.Metas.tblRevCorp (idCod, Ano, Mes, vlr, idFilial, perc, CatCod, dataAtu, horaAtu, UserName) " & _
-                        "SELECT a.idCod, a.Ano, a.Mes, SUM(a.vlr), 199, 0, 1,  CONVERT(char,getDate(),103), CONVERT(char,getDate(),108), '" & iUserName & "' " & _
-                                   "FROM gerMetas.Filial.tblRev AS a INNER JOIN DW.dbo.DimFilial AS b " & _
-                                   "ON a.idFilial = b.Filial " & _
-                                   "WHERE a.idCod = " & iCod & " And a.Ano = " & iAno & " And a.Mes = " & iMes & " And b.isLoja = 1 " & _
+            strSQL = "INSERT INTO gerManager.Metas.tblRevCorp (idCod, Ano, Mes, vlr, idFilial, perc, CatCod, dataAtu, horaAtu, UserName) " &
+                        "SELECT a.idCod, a.Ano, a.Mes, SUM(a.vlr), 199, 0, 1,  CONVERT(char,getDate(),103), CONVERT(char,getDate(),108), '" & iUserName & "' " &
+                                   "FROM gerMetas.Filial.tblRev AS a INNER JOIN DW.dbo.DimFilial AS b " &
+                                   "ON a.idFilial = b.Filial " &
+                                   "WHERE a.idCod = " & iCod & " And a.Ano = " & iAno & " And a.Mes = " & iMes & " And b.isLoja = 1 " &
                                    "GROUP BY a.idCod, a.Ano, a.Mes "
         Else
-            strSQL = "INSERT INTO gerMetas.Metas.tblRevCorp (idCod, Ano, Mes, vlr, idFilial, perc, CatCod, dataAtu, horaAtu, UserName) " & _
-                                   "SELECT a.idCod, a.Ano, a.Mes, SUM(a.vlr), 199, 0, c.idGrupo,  CONVERT(char,getDate(),103), CONVERT(char,getDate(),108), '" & iUserName & "' " & _
-                                   "FROM gerMetas.Filial.tblRev AS a INNER JOIN DW.dbo.DimFilial AS b  " & _
-                                   "ON a.idFilial = b.idFilial INNER JOIN gerDespesas.Cadastros.tblCategoriaLinha AS c  " & _
-                                   "ON a.idCod = c.idGrupo  " & _
-                                   "WHERE a.idCod = " & iCod & " And a.Ano = " & iAno & " And a.Mes = " & iMes & " " & _
+            strSQL = "INSERT INTO gerMetas.Metas.tblRevCorp (idCod, Ano, Mes, vlr, idFilial, perc, CatCod, dataAtu, horaAtu, UserName) " &
+                                   "SELECT a.idCod, a.Ano, a.Mes, SUM(a.vlr), 199, 0, c.idGrupo,  CONVERT(char,getDate(),103), CONVERT(char,getDate(),108), '" & iUserName & "' " &
+                                   "FROM gerMetas.Filial.tblRev AS a INNER JOIN DW.dbo.DimFilial AS b  " &
+                                   "ON a.idFilial = b.idFilial INNER JOIN gerDespesas.Cadastros.tblCategoriaLinha AS c  " &
+                                   "ON a.idCod = c.idGrupo  " &
+                                   "WHERE a.idCod = " & iCod & " And a.Ano = " & iAno & " And a.Mes = " & iMes & " " &
                                    "GROUP BY a.idCod, a.Ano, a.Mes, c.idGrupo "
         End If
 
@@ -1168,11 +1179,11 @@ Public Class VendaEmpresaMes
     End Sub
 
     Public Sub Salvar_Rev_SuperHiper(ByVal iCod As Int16, ByVal iAno As Int16, ByVal iMes As Byte, ByVal iUserName As String)
-        Dim strSQL As String = "INSERT INTO gerManager.Metas.tblRevCorp (idCod, Ano, Mes, vlr, idFilial, perc, CatCod, dataAtu, horaAtu, UserName) " & _
-                                   "SELECT a.idCod, a.Ano, a.Mes, SUM(a.vlr), b.CodigoSuperHiper, 0, c.idGrupo,  CONVERT(char,getDate(),103), CONVERT(char,getDate(),108), '" & iUserName & "' " & _
-                                   "FROM gerManager.Metas.tblRev AS a INNER JOIN gerManager.Cadastros.tblCadFiliais AS b " & _
-                                   "ON a.idFilial = b.Filial INNER JOIN gerManager.Cadastros.tblCategoriaLinha AS c ON a.idCod = c.idGrupoSub " & _
-                                   "GROUP BY a.idCod, a.Ano, a.Mes, b.CodigoSuperHiper, c.idGrupo " & _
+        Dim strSQL As String = "INSERT INTO gerManager.Metas.tblRevCorp (idCod, Ano, Mes, vlr, idFilial, perc, CatCod, dataAtu, horaAtu, UserName) " &
+                                   "SELECT a.idCod, a.Ano, a.Mes, SUM(a.vlr), b.CodigoSuperHiper, 0, c.idGrupo,  CONVERT(char,getDate(),103), CONVERT(char,getDate(),108), '" & iUserName & "' " &
+                                   "FROM gerManager.Metas.tblRev AS a INNER JOIN gerManager.Cadastros.tblCadFiliais AS b " &
+                                   "ON a.idFilial = b.Filial INNER JOIN gerManager.Cadastros.tblCategoriaLinha AS c ON a.idCod = c.idGrupoSub " &
+                                   "GROUP BY a.idCod, a.Ano, a.Mes, b.CodigoSuperHiper, c.idGrupo " &
                                    "HAVING a.idCod=" & iCod & " AND a.Ano=" & iAno & " AND a.Mes=" & iMes & " AND b.CodigoSuperHiper <> 0"
 
         Dim Conn As New SqlConnection(connManager)
@@ -1193,11 +1204,11 @@ Public Class VendaEmpresaMes
     End Sub
 
     Public Sub Salvar_Rev_Regional(ByVal iCod As Int16, ByVal iAno As Int16, ByVal iMes As Byte, ByVal iUserName As String)
-        Dim strSQL As String = "INSERT INTO gerManager.Metas.tblRevCorp (idCod, Ano, Mes, vlr, idFilial, perc, CatCod, dataAtu, horaAtu, UserName) " & _
-                                   "SELECT a.idCod, a.Ano, a.Mes, SUM(a.vlr), b.CodigoRegional, 0, c.idGrupo,  CONVERT(char,getDate(),103), CONVERT(char,getDate(),108), '" & iUserName & "' " & _
-                                   "FROM gerManager.Metas.tblRev AS a INNER JOIN gerManager.Cadastros.tblCadFiliais AS b " & _
-                                   "ON a.idFilial = b.Filial INNER JOIN gerManager.Cadastros.tblCategoriaLinha AS c ON a.idCod = c.idGrupoSub " & _
-                                   "GROUP BY a.idCod, a.Ano, a.Mes, b.CodigoRegional, c.idGrupo " & _
+        Dim strSQL As String = "INSERT INTO gerManager.Metas.tblRevCorp (idCod, Ano, Mes, vlr, idFilial, perc, CatCod, dataAtu, horaAtu, UserName) " &
+                                   "SELECT a.idCod, a.Ano, a.Mes, SUM(a.vlr), b.CodigoRegional, 0, c.idGrupo,  CONVERT(char,getDate(),103), CONVERT(char,getDate(),108), '" & iUserName & "' " &
+                                   "FROM gerManager.Metas.tblRev AS a INNER JOIN gerManager.Cadastros.tblCadFiliais AS b " &
+                                   "ON a.idFilial = b.Filial INNER JOIN gerManager.Cadastros.tblCategoriaLinha AS c ON a.idCod = c.idGrupoSub " &
+                                   "GROUP BY a.idCod, a.Ano, a.Mes, b.CodigoRegional, c.idGrupo " &
                                    "HAVING a.idCod=" & iCod & " AND a.Ano=" & iAno & " AND a.Mes=" & iMes & " AND b.CodigoRegional <> 0"
 
         Dim Conn As New SqlConnection(connManager)
@@ -1326,20 +1337,20 @@ Public Class VendaEmpresaMes
         strDel = "DELETE FROM gerManager.Metas.tblRevCorp WHERE Ano=" & iAno & " AND Mes=" & iMes & " AND idFilial=198 AND CatCod=7"
         strDelTotalDesp = "DELETE FROM gerManager.Metas.tblRevCorp WHERE idCod=14 AND Ano=" & iAno & " AND Mes=" & iMes & " AND idFilial=198"
 
-        strAdd = "INSERT INTO gerManager.Metas.tblRevCorp(idCod, Ano, Mes, vlr, idFilial, perc, CatCod, dataAtu, horaAtu, userName) " & _
-                               "SELECT a.idCod, a.Ano, a.Mes, SUM(a.vlr), b.CodigoApoio, 0, c.idCat, CONVERT(char,getDate(),103), CONVERT(char,getDate(),108), '" & iUserName & "' " & _
-                               "FROM gerManager.Metas.tblRev AS a INNER JOIN gerManager.Cadastros.tblCadFiliais AS b ON a.idFilial = b.Filial INNER JOIN gerManager.Cadastros.tblCategoriaLinha AS c ON a.idCod = c.idGrupo " & _
-                               "GROUP BY a.idCod, a.Ano, a.Mes, b.CodigoApoio, c.idCat " & _
+        strAdd = "INSERT INTO gerManager.Metas.tblRevCorp(idCod, Ano, Mes, vlr, idFilial, perc, CatCod, dataAtu, horaAtu, userName) " &
+                               "SELECT a.idCod, a.Ano, a.Mes, SUM(a.vlr), b.CodigoApoio, 0, c.idCat, CONVERT(char,getDate(),103), CONVERT(char,getDate(),108), '" & iUserName & "' " &
+                               "FROM gerManager.Metas.tblRev AS a INNER JOIN gerManager.Cadastros.tblCadFiliais AS b ON a.idFilial = b.Filial INNER JOIN gerManager.Cadastros.tblCategoriaLinha AS c ON a.idCod = c.idGrupo " &
+                               "GROUP BY a.idCod, a.Ano, a.Mes, b.CodigoApoio, c.idCat " &
                                "HAVING(a.Ano=" & iAno & " And a.Mes=" & iMes & " And b.CodigoApoio <> 0 And idCat=7)"
 
-        strTotalApoio = "INSERT INTO gerManager.Metas.tblRevCorp(idCod, Ano, Mes, vlr, idFilial, perc, CatCod, dataAtu, horaAtu, userName) " & _
-                               "SELECT 14, a.Ano, a.Mes, SUM(a.vlr), a.idFilial, 0, 99, CONVERT(char,getDate(),103), CONVERT(char,getDate(),108), '" & iUserName & "' " & _
-                               "FROM gerManager.Metas.tblRevCorp AS a " & _
-                               "GROUP BY a.Ano, a.Mes, a.idFilial, a.CatCod " & _
+        strTotalApoio = "INSERT INTO gerManager.Metas.tblRevCorp(idCod, Ano, Mes, vlr, idFilial, perc, CatCod, dataAtu, horaAtu, userName) " &
+                               "SELECT 14, a.Ano, a.Mes, SUM(a.vlr), a.idFilial, 0, 99, CONVERT(char,getDate(),103), CONVERT(char,getDate(),108), '" & iUserName & "' " &
+                               "FROM gerManager.Metas.tblRevCorp AS a " &
+                               "GROUP BY a.Ano, a.Mes, a.idFilial, a.CatCod " &
                                "HAVING(a.Ano=" & iAno & " And a.Mes=" & iMes & " And a.idFilial = 198 And CatCod=7)"
 
-        strAtuPerc = "UPDATE gerManager.Metas.tblRevCorp " & _
-                     "SET perc = CASE WHEN " & vlrVenda & "=0 THEN 0 WHEN vlr=0 THEN 0 ELSE CAST(vlr AS FLOAT) / CAST(" & vlrVenda & " AS FLOAT) * 100 END " & _
+        strAtuPerc = "UPDATE gerManager.Metas.tblRevCorp " &
+                     "SET perc = CASE WHEN " & vlrVenda & "=0 THEN 0 WHEN vlr=0 THEN 0 ELSE CAST(vlr AS FLOAT) / CAST(" & vlrVenda & " AS FLOAT) * 100 END " &
                      "WHERE Ano=" & iAno & " AND Mes=" & iMes & " AND idFilial=198"
 
         Call AtualizarSQL(strDel, "Apoio_Rev_Atualizar - strDel")
@@ -1427,13 +1438,13 @@ Public Class VendaEmpresaMes
         'e alterações das contas que tem variação em função do %.
         Dim strAtuPerc As String
 
-        strAtuPerc = "UPDATE m " & _
-                     "SET m.vlr=CASE WHEN v.vlr=0 THEN 0 WHEN m.perc=0 THEN 0 ELSE CAST(v.vlr AS FLOAT) * CAST(m.perc AS FLOAT) / 100 END, userName='" & iUserName & "' " & _
-                     "FROM viewVendaRevistaLojas AS v JOIN tblRev As m " & _
-                     "ON v.Ano = m.Ano " & _
-                     "AND v.Mes = m.Mes " & _
-                     "AND v.idFilial = m.idFilial " & _
-                     "WHERE(m.idCod = 38 And m.Ano = " & iAno & " And m.Mes = " & iMes & ") " & _
+        strAtuPerc = "UPDATE m " &
+                     "SET m.vlr=CASE WHEN v.vlr=0 THEN 0 WHEN m.perc=0 THEN 0 ELSE CAST(v.vlr AS FLOAT) * CAST(m.perc AS FLOAT) / 100 END, userName='" & iUserName & "' " &
+                     "FROM viewVendaRevistaLojas AS v JOIN tblRev As m " &
+                     "ON v.Ano = m.Ano " &
+                     "AND v.Mes = m.Mes " &
+                     "AND v.idFilial = m.idFilial " &
+                     "WHERE(m.idCod = 38 And m.Ano = " & iAno & " And m.Mes = " & iMes & ") " &
                      "AND (m.idFilial<>1 AND m.idFilial<>12 AND m.idFilial<>16 AND m.idFilial<>100)"
 
         Call AtualizarSQL(strAtuPerc, "Apoio_Rev_AtualizarValorNaslojas")
@@ -1933,8 +1944,8 @@ Public Class VendaEmpresaMes
         End Try
     End Function
 
-    Public Function Salvar_Ori_Grupo_Mes(ByVal iPosicao As String, ByVal iCod As String, ByVal iAno As String, _
-                            ByVal iMes As String, ByVal iFilial As String, ByVal iVlr As Double, _
+    Public Function Salvar_Ori_Grupo_Mes(ByVal iPosicao As String, ByVal iCod As String, ByVal iAno As String,
+                            ByVal iMes As String, ByVal iFilial As String, ByVal iVlr As Double,
                             ByVal iPerc As Double, ByVal iUser As String, ByVal iCatCod As String) As Boolean
         Dim gravou As Boolean
         Using con As New SqlConnection(connManager)
@@ -1965,8 +1976,8 @@ Public Class VendaEmpresaMes
         End Using
     End Function
 
-    Public Function Salvar_Ori_Grupo_Ano(ByVal iPosicao As String, ByVal iCod As String, ByVal iAno As String, _
-                                         ByVal iFilial As String, ByVal iVlr As Double, ByVal iPerc As Double, _
+    Public Function Salvar_Ori_Grupo_Ano(ByVal iPosicao As String, ByVal iCod As String, ByVal iAno As String,
+                                         ByVal iFilial As String, ByVal iVlr As Double, ByVal iPerc As Double,
                                          ByVal iUser As String, ByVal iCatCod As String) As Boolean
 
         Dim gravou As Boolean
@@ -1995,8 +2006,8 @@ Public Class VendaEmpresaMes
         End Using
     End Function
 
-    Public Function Salvar_Ori_Secao_Mes(ByVal iPosicao As String, ByVal iTipoSecao As String, ByVal iAno As String, _
-                                         ByVal iMes As String, ByVal iFilial As String, ByVal iSecao As String, ByVal iUser As String, _
+    Public Function Salvar_Ori_Secao_Mes(ByVal iPosicao As String, ByVal iTipoSecao As String, ByVal iAno As String,
+                                         ByVal iMes As String, ByVal iFilial As String, ByVal iSecao As String, ByVal iUser As String,
                                           ByVal iVlr As Double, ByVal iPerc As Double) As Boolean
 
         Dim gravou As Boolean
@@ -2029,8 +2040,8 @@ Public Class VendaEmpresaMes
         End Using
     End Function
 
-    Public Function Salvar_Ori_Secao_Ano(ByVal iPosicao As Int16, ByVal iTipoSecao As Int16, ByVal iAno As Int32, _
-                                         ByVal iFilial As Int16, ByVal iSecao As Int32, ByVal iUser As String, _
+    Public Function Salvar_Ori_Secao_Ano(ByVal iPosicao As Int16, ByVal iTipoSecao As Int16, ByVal iAno As Int32,
+                                         ByVal iFilial As Int16, ByVal iSecao As Int32, ByVal iUser As String,
                                          ByVal iDepto As Int32, ByVal iVlr As Double, ByVal iPerc As Double, ByVal iMemo As String) As Boolean
 
         Dim gravou As Boolean
@@ -2064,7 +2075,7 @@ Public Class VendaEmpresaMes
         End Using
     End Function
 
-    Public Function SalvarCorporacao_Ori_Grupo_Mes(ByVal iPosicao As String, ByVal idCod As String, ByVal iAno As String, _
+    Public Function SalvarCorporacao_Ori_Grupo_Mes(ByVal iPosicao As String, ByVal idCod As String, ByVal iAno As String,
                                      ByVal iMes As String, ByVal iGrupoSub As String) As Boolean
         Dim gravou As Boolean
         Using con As New SqlConnection(connManager)
@@ -2127,8 +2138,8 @@ Public Class VendaEmpresaMes
 
     End Function
 
-    Public Function BuscaVendaSecaoComprador_Rea(ByVal iAno As String, ByVal iMes As String, _
-                                    ByVal iFilial As String, ByVal iSecao As String, _
+    Public Function BuscaVendaSecaoComprador_Rea(ByVal iAno As String, ByVal iMes As String,
+                                    ByVal iFilial As String, ByVal iSecao As String,
                                     ByVal iStatus As String) As Double
         'Busca a Venda, Participação, Margem por Seção e por Comprador
         '*************************************************************************************************************************
@@ -2188,7 +2199,7 @@ Public Class VendaEmpresaMes
 
     End Function
 
-    Public Function BuscaOri_Comprador_VendaTotal_Mes(ByVal iAno As String, ByVal iMes As String, _
+    Public Function BuscaOri_Comprador_VendaTotal_Mes(ByVal iAno As String, ByVal iMes As String,
                                                       ByVal iFilial As String, ByVal iComprador As String) As Double
 
         Dim con As New SqlConnection(connManager)
@@ -2226,8 +2237,8 @@ Public Class VendaEmpresaMes
         End Try
     End Function
 
-    Sub BuscaOri_Comprador_VendaSecao_Mes(ByVal iAno As String, ByVal iMes As String, ByVal iFilial As String, _
-                                           ByVal iSecao As String, ByVal iPosicao As String, _
+    Sub BuscaOri_Comprador_VendaSecao_Mes(ByVal iAno As String, ByVal iMes As String, ByVal iFilial As String,
+                                           ByVal iSecao As String, ByVal iPosicao As String,
                                           ByVal iTipoSecao As String, ByVal iComprador As String)
 
         Dim con As New SqlConnection(connManager)
@@ -2276,7 +2287,7 @@ Public Class VendaEmpresaMes
 
     End Sub
 
-    Public Function AtualizarVendaRankingSecao(ByVal iFilial As String, ByVal iUser As String, _
+    Public Function AtualizarVendaRankingSecao(ByVal iFilial As String, ByVal iUser As String,
                                       ByVal iDataInicial As Date, ByVal iDataFinal As Date) As Boolean
 
         Dim gravou As Boolean
@@ -2304,9 +2315,9 @@ Public Class VendaEmpresaMes
         End Using
     End Function
 
-    Public Function AtualizarVendaItem(ByVal iFilial As String, ByVal iUser As String, _
-                                   ByVal iDataInicial As Date, ByVal iDataFinal As Date, _
-                                   ByVal iDepto As String, ByVal iSecao As String, _
+    Public Function AtualizarVendaItem(ByVal iFilial As String, ByVal iUser As String,
+                                   ByVal iDataInicial As Date, ByVal iDataFinal As Date,
+                                   ByVal iDepto As String, ByVal iSecao As String,
                                    ByVal iGrupo As String, ByVal iSubgrupo As String) As Boolean
 
         Dim gravou As Boolean
@@ -2412,7 +2423,7 @@ Public Class VendaEmpresaMes
 
     End Sub
 
-    Public Function BuscaProgramaStatus(ByVal iAno As String, ByVal iMes As String, _
+    Public Function BuscaProgramaStatus(ByVal iAno As String, ByVal iMes As String,
                                 ByVal iPrograma As String) As Double
 
         Dim con As New SqlConnection(connManager)
@@ -2445,8 +2456,8 @@ Public Class VendaEmpresaMes
         End Try
     End Function
 
-    Public Function Salvar_Ori_Subgrupo_Mes(ByVal iPosicao As String, ByVal iCod As String, ByVal iAno As String, _
-                         ByVal iMes As String, ByVal iFilial As String, ByVal iVlr As Double, _
+    Public Function Salvar_Ori_Subgrupo_Mes(ByVal iPosicao As String, ByVal iCod As String, ByVal iAno As String,
+                         ByVal iMes As String, ByVal iFilial As String, ByVal iVlr As Double,
                          ByVal iPerc As Double, ByVal iUser As String, ByVal idGrupo As String) As Boolean
         Dim gravou As Boolean
         Using con As New SqlConnection(connManager)
@@ -2478,8 +2489,8 @@ Public Class VendaEmpresaMes
         End Using
     End Function
 
-    Public Function Salvar_Ori_Subgrupo_Ano(ByVal iPosicao As String, ByVal iCod As String, ByVal iAno As String, _
-                     ByVal iFilial As String, ByVal iVlr As Double, _
+    Public Function Salvar_Ori_Subgrupo_Ano(ByVal iPosicao As String, ByVal iCod As String, ByVal iAno As String,
+                     ByVal iFilial As String, ByVal iVlr As Double,
                      ByVal iPerc As Double, ByVal iUser As String, ByVal idGrupo As String) As Boolean
         Dim gravou As Boolean
         Using con As New SqlConnection(connManager)
@@ -2510,8 +2521,8 @@ Public Class VendaEmpresaMes
         End Using
     End Function
 
-    Public Sub Salvar_Ori_Grupo_Mes_BaseSubgrupo(ByVal iPosicao As String, ByVal iCod As String, ByVal iAno As String, _
-                        ByVal iFilial As String, _
+    Public Sub Salvar_Ori_Grupo_Mes_BaseSubgrupo(ByVal iPosicao As String, ByVal iCod As String, ByVal iAno As String,
+                        ByVal iFilial As String,
                         ByVal iUser As String, ByVal iCatCod As String)
 
         Dim con As New SqlConnection(connManager)
@@ -2549,8 +2560,8 @@ Public Class VendaEmpresaMes
 
     End Sub
 
-    Public Function Salvar_Ori_Grupo_Ano_BaseGrupo(ByVal iPosicao As String, ByVal iCod As String, ByVal iAno As String, _
-                                     ByVal iFilial As String, _
+    Public Function Salvar_Ori_Grupo_Ano_BaseGrupo(ByVal iPosicao As String, ByVal iCod As String, ByVal iAno As String,
+                                     ByVal iFilial As String,
                                      ByVal iUser As String, ByVal iCatCod As String) As Boolean
 
         Dim gravou As Boolean
@@ -2657,7 +2668,7 @@ Public Class VendaEmpresaMes
         comando.Parameters.Add(New SqlParameter("@Ano", SqlDbType.SmallInt))
         comando.Parameters("@Ano").Value = iAno
 
-        comando.Parameters.Add(New SqlParameter("@idFilial", SqlDbType.TinyInt))
+        comando.Parameters.Add(New SqlParameter("@idFilial", SqlDbType.SmallInt))
         comando.Parameters("@idFilial").Value = iFilial
 
         comando.Parameters.Add(New SqlParameter("@idSecao", SqlDbType.SmallInt))
@@ -2789,6 +2800,7 @@ Public Class VendaEmpresaMes
         Dia7 = ""
         Dia8 = ""
         Dia9 = ""
+        NumDesc = ""
 
         Try
             con.Open()
@@ -2804,6 +2816,7 @@ Public Class VendaEmpresaMes
                 Dia7 = ""
                 Dia8 = ""
                 Dia9 = ""
+                NumDesc = ""
 
                 Dia1 = reader5.GetSqlString(0).ToString()
                 Dia2 = reader5.GetSqlString(1).ToString()
@@ -2814,7 +2827,7 @@ Public Class VendaEmpresaMes
                 Dia7 = reader5.GetSqlValue(6).ToString()
                 Dia8 = reader5.GetSqlValue(7).ToString()
                 Dia9 = reader5.GetSqlValue(8).ToString()
-
+                NumDesc = reader5.GetSqlValue(9).ToString()
 
             End While
 
