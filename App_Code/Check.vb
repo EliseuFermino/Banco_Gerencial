@@ -179,47 +179,45 @@ Public Class Check
         End Using
     End Function
 
-    Public Sub BuscarCheckList(ByVal iDia As Date, ByVal iFilial As Byte, ByVal iGrupo As Byte, _
+    Public Sub BuscarCheckList(ByVal iDia As String, ByVal iFilial As Byte, ByVal iGrupo As Byte,
                          ByVal iSubgrupo As Byte, ByVal iCod As Byte)
-
-        Dim con As New SqlConnection(connCheckList)
-        Dim comando As New SqlCommand("dbo.usp_BuscarChecklist", con)
-        comando.CommandType = CommandType.StoredProcedure
-
-        comando.Parameters.Add(New SqlParameter("@dia", SqlDbType.Date))
-        comando.Parameters("@dia").Value = iDia
-
-        comando.Parameters.Add(New SqlParameter("@idFilial", SqlDbType.TinyInt))
-        comando.Parameters("@idFilial").Value = iFilial
-
-        comando.Parameters.Add(New SqlParameter("@idGrupo", SqlDbType.TinyInt))
-        comando.Parameters("@idGrupo").Value = iGrupo
-
-        comando.Parameters.Add(New SqlParameter("@idSubgrupo", SqlDbType.TinyInt))
-        comando.Parameters("@idSubgrupo").Value = iSubgrupo
-
-        comando.Parameters.Add(New SqlParameter("@idCod", SqlDbType.TinyInt))
-        comando.Parameters("@idCod").Value = iCod
 
         Pontos = 2
         Descricao = ""
 
         Try
-            con.Open()
-            Dim reader5 As SqlDataReader
-            reader5 = comando.ExecuteReader()
-            While reader5.Read
+            Using con As New SqlConnection(connCheckList)
+                Using cmd As New SqlCommand("dbo.usp_BuscarChecklist")
 
-                Pontos = reader5.GetSqlByte(0)
-                Descricao = reader5.GetSqlString(1)
+                    cmd.CommandType = CommandType.StoredProcedure
 
-            End While
+                    cmd.Parameters.Add(New SqlParameter("@dia", SqlDbType.VarChar))
+                    cmd.Parameters("@dia").Value = iDia
+                    cmd.Parameters.Add(New SqlParameter("@idFilial", SqlDbType.TinyInt))
+                    cmd.Parameters("@idFilial").Value = iFilial
+                    cmd.Parameters.Add(New SqlParameter("@idGrupo", SqlDbType.TinyInt))
+                    cmd.Parameters("@idGrupo").Value = iGrupo
+                    cmd.Parameters.Add(New SqlParameter("@idSubgrupo", SqlDbType.TinyInt))
+                    cmd.Parameters("@idSubgrupo").Value = iSubgrupo
+                    cmd.Parameters.Add(New SqlParameter("@idCod", SqlDbType.TinyInt))
+                    cmd.Parameters("@idCod").Value = iCod
+
+                    Using sda As New SqlDataAdapter()
+                        cmd.Connection = con
+                        sda.SelectCommand = cmd
+                        Using ds As New DataSet()
+                            sda.Fill(ds)
+                            For Each tabela In ds.Tables(0).Rows
+                                Pontos = tabela(0)
+                                Descricao = tabela(1)
+                            Next
+                        End Using
+                    End Using
+                End Using
+            End Using
 
         Catch ex As Exception
             varDesc = "Classe BuscarCheckList " & ex.Message
-
-        Finally
-            con.Close()
         End Try
 
     End Sub

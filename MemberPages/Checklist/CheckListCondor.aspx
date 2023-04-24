@@ -32,14 +32,13 @@
     <link href="../../css/bootstrap.min.css" rel="stylesheet" />
     <script src="../../Scripts/jquery-2.2.3.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../Styles/style.css" /> 
+    <link rel="stylesheet" type="text/css" href="../../Styles/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas2image@1.0.5/canvas2image.min.js"></script>
 
     <%--<script src="../../../assets/js/jquery-2.1.4.min.js"></script>
     <link href="../../../assets/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="../../../../assets/bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>--%>
-
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
@@ -304,6 +303,9 @@
             <asp:PostBackTrigger ControlID="btnSalvarFoto19_12" />
             <asp:PostBackTrigger ControlID="btnSalvarFoto19_13" />
             <asp:PostBackTrigger ControlID="btnSalvarFoto19_14" />
+            <asp:PostBackTrigger ControlID="btnSalvarFoto20_1" />
+            <asp:PostBackTrigger ControlID="btnSalvarFoto20_2" />
+            <asp:PostBackTrigger ControlID="btnSalvarFoto20_3" />
 
             <asp:PostBackTrigger ControlID="btnPDF" />
 
@@ -349,7 +351,7 @@
                         </dx:ASPxButton>
                     </div>
                     <div class="col-auto">
-                        <dx:ASPxButton ID="btnPDF" runat="server" Enabled="false" Text="Relatório" CssClass="btn-sm">                            
+                        <dx:ASPxButton ID="btnPDF" runat="server" Enabled="false" Text="Relatório" CssClass="btn-sm">
                             <ClientSideEvents Click="function(s, e) {Callback.PerformCallback(); LoadingPanel.Show(); LoadingPanel.SetText('Aguarde. Buscando informações...');}" />
                         </dx:ASPxButton>
                     </div>
@@ -364,73 +366,76 @@
 
                 <div class="row col-md-12 justify-content-center text-center" style="padding-bottom: 25px">
                     <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_1" Width="220px" Height="80px" CssClass="btn btn-lg" Text="Recebimento" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_1_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
+                        <asp:Button ID="btnMenu_1" Width="220px" Height="80px" CssClass="btn btn-lg" Text="Recebimento" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_1_Click" Style="background-repeat: round" />
                     </div>
                     <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_2" Width="220px" Height="80px" CssClass="btn btn-lg" Text="Depósito - Mercearia" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_2_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
+                        <asp:Button ID="btnMenu_2" Width="220px" Height="80px" CssClass="btn btn-lg" Text="Depósito - Mercearia" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_2_Click" Style="background-repeat: round" />
                     </div>
                     <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_3" Width="220px" Height="80px" CssClass="btn btn-lg" Text="Depósito - Bazar" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_3_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
+                        <asp:Button ID="btnMenu_3" Width="220px" Height="80px" CssClass="btn btn-lg" Text="Depósito - Bazar" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_3_Click" Style="background-repeat: round" />
                     </div>
                     <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_4" Width="220px" Height="80px" CssClass="btn btn-lg" Text="Depósito - Têxtil" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_4_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
-                    </div>
-                </div>
-                <p></p>
-                <div class="row col-md-12 justify-content-center text-center" style="padding-bottom: 25px">
-                    <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_5" Width="220px" Height="80px" CssClass="btn btn-lg" Text="Depósito - Eletro" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_5_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
-                    </div>
-                    <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_6" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Corredor Perecíveis (Armanezamento)" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_6_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
-                    </div>
-                    <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_7" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Hortifruti (Armanezamento)" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_7_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
-                    </div>
-                    <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_8" Width="220px" Height="80px" CssClass="btn btn-lg" Text="Açougue" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_8_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
+                        <asp:Button ID="btnMenu_4" Width="220px" Height="80px" CssClass="btn btn-lg" Text="Depósito - Têxtil" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_4_Click" Style="background-repeat: round" />
                     </div>
                 </div>
                 <p></p>
                 <div class="row col-md-12 justify-content-center text-center" style="padding-bottom: 25px">
                     <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_9" Width="220px" Height="80px" CssClass="btn btn-lg" Text="Fiambreria" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_9_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
+                        <asp:Button ID="btnMenu_5" Width="220px" Height="80px" CssClass="btn btn-lg" Text="Depósito - Eletro" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_5_Click" Style="background-repeat: round" />
                     </div>
                     <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_10" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="OPLS" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_10_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
+                        <asp:Button ID="btnMenu_20" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Câmara de Congelados" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_20_Click" Style="background-repeat: round" />
                     </div>
                     <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_11" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Padaria e Confeitaria" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_11_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
+                        <asp:Button ID="btnMenu_6" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Corredor Perecíveis (Armanezamento)" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_6_Click" Style="background-repeat: round" />
                     </div>
                     <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_12" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Cozinha / Rotisseria / Refeitório" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_12_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
+                        <asp:Button ID="btnMenu_7" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Hortifruti (Armanezamento)" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_7_Click" Style="background-repeat: round" />
                     </div>
                 </div>
                 <p></p>
                 <div class="row col-md-12 justify-content-center text-center" style="padding-bottom: 25px">
                     <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_13" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Hortifruti - Área de Vendas" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_13_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
+                        <asp:Button ID="btnMenu_8" Width="220px" Height="80px" CssClass="btn btn-lg" Text="Açougue" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_8_Click" Style="background-repeat: round" />
                     </div>
                     <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_14" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Area de Vendas" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_14_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
+                        <asp:Button ID="btnMenu_9" Width="220px" Height="80px" CssClass="btn btn-lg" Text="Fiambreria" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_9_Click" Style="background-repeat: round" />
                     </div>
                     <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_15" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Area de Vendas - (PAR)" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_15_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
+                        <asp:Button ID="btnMenu_10" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="OPLS" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_10_Click" Style="background-repeat: round" />
                     </div>
                     <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_16" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Administrativo" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_16_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
+                        <asp:Button ID="btnMenu_11" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Padaria e Confeitaria" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_11_Click" Style="background-repeat: round" />
+                    </div>
+                </div>
+                <p></p>
+                <div class="row col-md-12 justify-content-center text-center" style="padding-bottom: 25px">
+                    <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
+                        <asp:Button ID="btnMenu_12" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Cozinha / Rotisseria / Refeitório" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_12_Click" Style="background-repeat: round" />
+                    </div>
+                    <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
+                        <asp:Button ID="btnMenu_13" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Hortifruti - Área de Vendas" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_13_Click" Style="background-repeat: round" />
+                    </div>
+                    <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
+                        <asp:Button ID="btnMenu_14" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Area de Vendas" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_14_Click" Style="background-repeat: round" />
+                    </div>
+                    <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
+                        <asp:Button ID="btnMenu_15" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Area de Vendas - (PAR)" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_15_Click" Style="background-repeat: round" />
                     </div>
                 </div>
                 <p></p>
                 <div class="row col-md-12 justify-content-center text-center">
                     <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_17" Width="220px" Height="80px" CssClass="btn btn-lg" Text="Banheiro" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_17_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
+                        <asp:Button ID="btnMenu_16" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Administrativo" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_16_Click" Style="background-repeat: round" />
                     </div>
                     <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_18" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Segurança Patrimonial" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_18_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
+                        <asp:Button ID="btnMenu_17" Width="220px" Height="80px" CssClass="btn btn-lg" Text="Banheiro" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_17_Click" Style="background-repeat: round" />
                     </div>
                     <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
-                        <asp:Button ID="btnMenu_19" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Frente de Caixa" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_19_Click" Style="background-color: #2E4D7B; background-repeat: round" ToolTip="Registrar nova Ata" />
+                        <asp:Button ID="btnMenu_18" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Segurança Patrimonial" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_18_Click" Style="background-repeat: round" />
+                    </div>
+                    <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 0 25px 0 25px">
+                        <asp:Button ID="btnMenu_19" Width="220px" Height="80px" CssClass="btn btn-lg btn-wrap-text" Text="Frente de Caixa" ForeColor="White" AutoPostBack="False" runat="server" OnClick="btnMenu_19_Click" Style="background-repeat: round" />
                     </div>
                 </div>
             </div>
@@ -2656,6 +2661,54 @@
                                         </td>
                                     </tr>
                                     <%--PERGUNTA 7.8--%>
+                                    <tr>
+                                        <td align="center">7.9</td>
+                                        <td>A planilha de higienização  e rastreabilidade do setor está sendo preenchida corretamente e na frequência adequada?
+                                            <asp:TextBox
+                                                ID="txt7_9" runat="server" Width="500" TextMode="MultiLine" Height="50"></asp:TextBox></td>
+                                        <td align="center">
+                                            <asp:RadioButton ID="rnd7_9_Sim" runat="server" GroupName="grupo7_9" /></td>
+                                        <td align="center">
+                                            <asp:RadioButton ID="rnd7_9_Nao" runat="server" GroupName="grupo7_9" /></td>
+                                        <td align="center">
+                                            <asp:RadioButton ID="rnd7_9_NA" runat="server" GroupName="grupo7_9" /></td>
+                                        <td align="center">
+                                            <div class="fileEscondido">
+                                                <asp:ImageButton ID="imgFoto7_9" runat="server" ImageUrl="~/image/camera-icon_32.png" ToolTip="Clique aqui para salvar uma foto." />
+                                                <asp:FileUpload ID="upFile7_9" runat="server" />
+                                            </div>
+                                        </td>
+                                        <td align="center">
+                                            <div class="fileEscondido">
+                                                <asp:ImageButton ID="btnSalvarFoto7_9" runat="server" ImageUrl="~/image/camera-icon-save_32.png" ToolTip="Clique aqui para salvar uma foto." />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <%--PERGUNTA 7.9--%>
+                                    <tr>
+                                        <td align="center">7.10</td>
+                                        <td>As papeleiras, saboneteiras, pias de higienização e lixeiras estão limpas, íntegras e corretamente abastecidas?
+                                            <asp:TextBox
+                                                ID="txt7_10" runat="server" Width="500" TextMode="MultiLine" Height="50"></asp:TextBox></td>
+                                        <td align="center">
+                                            <asp:RadioButton ID="rnd7_10_Sim" runat="server" GroupName="grupo7_10" /></td>
+                                        <td align="center">
+                                            <asp:RadioButton ID="rnd7_10_Nao" runat="server" GroupName="grupo7_10" /></td>
+                                        <td align="center">
+                                            <asp:RadioButton ID="rnd7_10_NA" runat="server" GroupName="grupo7_10" /></td>
+                                        <td align="center">
+                                            <div class="fileEscondido">
+                                                <asp:ImageButton ID="imgFoto7_10" runat="server" ImageUrl="~/image/camera-icon_32.png" ToolTip="Clique aqui para salvar uma foto." />
+                                                <asp:FileUpload ID="upFile7_10" runat="server" />
+                                            </div>
+                                        </td>
+                                        <td align="center">
+                                            <div class="fileEscondido">
+                                                <asp:ImageButton ID="btnSalvarFoto7_10" runat="server" ImageUrl="~/image/camera-icon-save_32.png" ToolTip="Clique aqui para salvar uma foto." />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <%--PERGUNTA 7.10--%>
 
                                     <thead>
                                         <tr>
@@ -7368,6 +7421,122 @@
                         </p>
                     </asp:Panel>
                     <%--19 - Frente de Caixa--%>
+
+                    <asp:Panel ID="panDados20" runat="server" Visible="false" Style="border: solid 1px #c0c0c0; padding: 5px;">
+                        <p>
+                            <table id="gradient-style" summary="Meeting Results">
+                                <thead>
+                                    <tr>
+                                        <th align="center" scope="col">Nº</th>
+                                        <th scope="col">Pergunta</th>
+                                        <th align="center" scope="col" width="25px">Sim</th>
+                                        <th align="center" scope="col" width="25px">Não</th>
+                                        <th align="center" scope="col" width="25px">N.A.</th>
+                                        <th align="center" scope="col" width="25px" colspan="2">Foto</th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <thead>
+                                        <tr>
+                                            <td colspan="8" align="center">
+                                                <b>Câmara de Congelados</b>
+                                            </td>
+                                        </tr>
+                                    </thead>
+
+                                    <tr>
+                                        <td align="center">20.1</td>
+                                        <td>A câmara e/ou local de armazenamento está limpo e organizado, sem odores que caracterizem produtos impróprios para venda?
+                                            <asp:TextBox
+                                                ID="txt20_1" runat="server" Width="500" TextMode="MultiLine" Height="50"></asp:TextBox></td>
+                                        <td align="center">
+                                            <asp:RadioButton ID="rnd20_1_Sim" runat="server" GroupName="grupo20_1" /></td>
+                                        <td align="center">
+                                            <asp:RadioButton ID="rnd20_1_Nao" runat="server" GroupName="grupo20_1" /></td>
+                                        <td align="center">
+                                            <asp:RadioButton ID="rnd20_1_NA" runat="server" GroupName="grupo20_1" /></td>
+                                        <td align="center">
+                                            <div class="fileEscondido">
+                                                <asp:ImageButton ID="imgFoto20_1" runat="server" ImageUrl="~/image/camera-icon_32.png" ToolTip="Clique aqui para salvar uma foto." />
+                                                <asp:FileUpload ID="upFile20_1" runat="server" />
+                                            </div>
+                                        </td>
+                                        <td align="center">
+                                            <div class="fileEscondido">
+                                                <asp:ImageButton ID="btnSalvarFoto20_1" runat="server" ImageUrl="~/image/camera-icon-save_32.png" ToolTip="Clique aqui para salvar uma foto." />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <%--PERGUNTA 20.1--%>
+
+                                    <tr>
+                                        <td align="center">20.2</td>
+                                        <td>A câmara e/ou local de armazenamento está em perfeitas condições de manutenção para o uso?
+                                            <asp:TextBox
+                                                ID="txt20_2" runat="server" Width="500" TextMode="MultiLine" Height="50"></asp:TextBox></td>
+                                        <td align="center">
+                                            <asp:RadioButton ID="rnd20_2_Sim" runat="server" GroupName="grupo20_2" /></td>
+                                        <td align="center">
+                                            <asp:RadioButton ID="rnd20_2_Nao" runat="server" GroupName="grupo20_2" /></td>
+                                        <td align="center">
+                                            <asp:RadioButton ID="rnd20_2_NA" runat="server" GroupName="grupo20_2" /></td>
+                                        <td align="center">
+                                            <div class="fileEscondido">
+                                                <asp:ImageButton ID="imgFoto20_2" runat="server" ImageUrl="~/image/camera-icon_32.png" ToolTip="Clique aqui para salvar uma foto." />
+                                                <asp:FileUpload ID="upFile20_2" runat="server" />
+                                            </div>
+                                        </td>
+                                        <td align="center">
+                                            <div class="fileEscondido">
+                                                <asp:ImageButton ID="btnSalvarFoto20_2" runat="server" ImageUrl="~/image/camera-icon-save_32.png" ToolTip="Clique aqui para salvar uma foto." />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <%--PERGUNTA 20.2--%>
+
+                                    <tr>
+                                        <td align="center">20.3</td>
+                                        <td>O limite máximo de empilhamento é respeitado de modo a não existir risco de desabamento nem de ficar próximos a fiação elétrica?
+                                            <asp:TextBox
+                                                ID="txt20_3" runat="server" Width="500" TextMode="MultiLine" Height="50"></asp:TextBox></td>
+                                        <td align="center">
+                                            <asp:RadioButton ID="rnd20_3_Sim" runat="server" GroupName="grupo20_3" /></td>
+                                        <td align="center">
+                                            <asp:RadioButton ID="rnd20_3_Nao" runat="server" GroupName="grupo20_3" /></td>
+                                        <td align="center">
+                                            <asp:RadioButton ID="rnd20_3_NA" runat="server" GroupName="grupo20_3" /></td>
+                                        <td align="center">
+                                            <div class="fileEscondido">
+                                                <asp:ImageButton ID="imgFoto20_3" runat="server" ImageUrl="~/image/camera-icon_32.png" ToolTip="Clique aqui para salvar uma foto." />
+                                                <asp:FileUpload ID="upFile20_3" runat="server" />
+                                            </div>
+                                        </td>
+                                        <td align="center">
+                                            <div class="fileEscondido">
+                                                <asp:ImageButton ID="btnSalvarFoto20_3" runat="server" ImageUrl="~/image/camera-icon-save_32.png" ToolTip="Clique aqui para salvar uma foto." />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <%--PERGUNTA 20.3--%>
+
+
+                                    <thead>
+                                        <tr>
+                                            <td></td>
+                                            <td colspan="8" align="center">
+                                                <dx:ASPxButton ID="btnGrupo20" runat="server" Text="Enviar" AutoPostBack="True">
+                                                    <ClientSideEvents Click="function(s, e) {Callback.PerformCallback(); LoadingPanel.Show(); LoadingPanel.SetText('Aguarde. Enviando...');}" />
+                                                </dx:ASPxButton>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                </tbody>
+                            </table>
+                        </p>
+                    </asp:Panel>
+                    <%--20 - Câmara de Congelados--%>
                 </div>
             </div>
         </ContentTemplate>
@@ -7435,12 +7604,11 @@
             </div>
         </div>
 
-    <div class="container" style="max-width: 80%; font-size: 12pt; display: none" id="renderRel" runat="server">
+        <div class="container" style="max-width: 80%; font-size: 12pt; display: none" id="renderRel" runat="server">
+        </div>
 
-    </div>
 
-
-    <%--    <div class="alert alert-success" id="success-alert" style="text-align: center">
+        <%--    <div class="alert alert-success" id="success-alert" style="text-align: center">
         <button type="button" class="close" data-dismiss="alert">x</button>
         <strong>Successo! </strong>Os dados foram gravados com sucesso!
     </div>
@@ -7450,92 +7618,91 @@
         <strong>Erro! </strong>Contate o suporte. 
     </div>--%>
 
-    <script>
+        <script>
 
-        try {
-            MainContent_txtData.max = new Date().toISOString().split("T")[0];
-            //document.getElementById('MainContent_txtData').valueAsDate = new Date();
+            try {
+                MainContent_txtData.max = new Date().toISOString().split("T")[0];
+                //document.getElementById('MainContent_txtData').valueAsDate = new Date();
 
-        } catch (e) {
-            console.log(e.message)
-            // Unexpected token n in JSON at position 2
-        }
+            } catch (e) {
+                console.log(e.message)
+                // Unexpected token n in JSON at position 2
+            }
 
-        //$("#success-alert").hide();
-        //$("#dangerAlert").hide();
+            //$("#success-alert").hide();
+            //$("#dangerAlert").hide();
 
-        function alertSucess() {
-            //    $("#success-alert").fadeTo(8000, 500).slideUp(500, function () {
-            //        $("#success-alert").slideUp(500);
-            //    });
-            $('#ModalSucess').modal('show');
-        }
+            function alertSucess() {
+                //    $("#success-alert").fadeTo(8000, 500).slideUp(500, function () {
+                //        $("#success-alert").slideUp(500);
+                //    });
+                $('#ModalSucess').modal('show');
+            }
 
-        function alertErro() {
-            //$("#dangerAlert").fadeTo(8000, 500).slideUp(500, function () {
-            //$("#dangerAlert").slideUp(500);
-            //});
-            $('#ModalErro').modal('show');
-        }
+            function alertErro() {
+                //$("#dangerAlert").fadeTo(8000, 500).slideUp(500, function () {
+                //$("#dangerAlert").slideUp(500);
+                //});
+                $('#ModalErro').modal('show');
+            }
 
-        function alertSucessImg() {
-            //    $("#success-alert").fadeTo(8000, 500).slideUp(500, function () {
-            //        $("#success-alert").slideUp(500);
-            //    });
-            $('#ModalSucessImg').modal('show');
-        }
+            function alertSucessImg() {
+                //    $("#success-alert").fadeTo(8000, 500).slideUp(500, function () {
+                //        $("#success-alert").slideUp(500);
+                //    });
+                $('#ModalSucessImg').modal('show');
+            }
 
-        function createPDF() {
-            var pdf = new jsPDF('p', 'pt', 'a4');
-            var d = new Date().toISOString().slice(0, 19).replace(/-/g, "");
-            filename = 'report_' + d + '.pdf';
-            // source can be HTML-formatted string, or a reference
-            // to an actual DOM element from which the text will be scraped.
-            source = document.getElementById('MainContent_renderRel');
+            function createPDF() {
+                var pdf = new jsPDF('p', 'pt', 'a4');
+                var d = new Date().toISOString().slice(0, 19).replace(/-/g, "");
+                filename = 'report_' + d + '.pdf';
+                // source can be HTML-formatted string, or a reference
+                // to an actual DOM element from which the text will be scraped.
+                source = document.getElementById('MainContent_renderRel');
 
-            // we support special element handlers. Register them with jQuery-style 
-            // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
-            // There is no support for any other type of selectors 
-            // (class, of compound) at this time.
-            specialElementHandlers = {
-                // element with id of "bypass" - jQuery style selector
-                '#bypassme': function (element, renderer) {
-                    // true = "handled elsewhere, bypass text extraction"
-                    return true
-                }
-            };
-            margins = {
-                top: 15,
-                bottom: 15,
-                left: 35,
-                width: 552
-            };
-            // all coords and widths are in jsPDF instance's declared units
-            // 'inches' in this case
-            pdf.fromHTML(
-                source, // HTML string or DOM elem ref.
-                margins.left, // x coord
-                margins.top, { // y coord
-                'width': margins.width, // max width of content on PDF
-                'elementHandlers': specialElementHandlers
-            },
+                // we support special element handlers. Register them with jQuery-style 
+                // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
+                // There is no support for any other type of selectors 
+                // (class, of compound) at this time.
+                specialElementHandlers = {
+                    // element with id of "bypass" - jQuery style selector
+                    '#bypassme': function (element, renderer) {
+                        // true = "handled elsewhere, bypass text extraction"
+                        return true
+                    }
+                };
+                margins = {
+                    top: 15,
+                    bottom: 15,
+                    left: 35,
+                    width: 552
+                };
+                // all coords and widths are in jsPDF instance's declared units
+                // 'inches' in this case
+                pdf.fromHTML(
+                    source, // HTML string or DOM elem ref.
+                    margins.left, // x coord
+                    margins.top, { // y coord
+                    'width': margins.width, // max width of content on PDF
+                    'elementHandlers': specialElementHandlers
+                },
 
-                function (dispose) {
-                    // dispose: object with X, Y of the last line add to the PDF 
-                    //          this allow the insertion of new lines after html
-                    pdf.save(filename);
-                }, margins);
-        }
+                    function (dispose) {
+                        // dispose: object with X, Y of the last line add to the PDF 
+                        //          this allow the insertion of new lines after html
+                        pdf.save(filename);
+                    }, margins);
+            }
 
-    </script>
+        </script>
 
-    <style>
-        .btn-wrap-text {
-            white-space: normal !important;
-            word-wrap: break-word !important;
-        }
-    </style>
-
+        <style>
+            .btn-wrap-text {
+                white-space: normal !important;
+                word-wrap: break-word !important;
+            }
+        </style>
 </asp:Content>
 
 

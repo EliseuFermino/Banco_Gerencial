@@ -4,6 +4,7 @@ Imports System.Data.SqlClient
 Imports System.Data
 Imports DevExpress.XtraCharts.Native
 Imports DevExpress.Xpo.DB.Helpers
+Imports System.Drawing
 
 Partial Class MemberPages_CheckListCondor
     Inherits System.Web.UI.Page
@@ -29,9 +30,11 @@ Partial Class MemberPages_CheckListCondor
             'Me.cboFilial.AutoPostBack = False
             'Me.cboFilial.Visible_cboCorporacao = True
             Call PadraoInicial()
-                Call HabilitarGerarRelatorio()
+            Call HabilitarGerarRelatorio()
 
-            End If
+            Call colorMenu()
+
+        End If
     End Sub
 
     Protected Sub Page_LoadComplete(sender As Object, e As EventArgs) Handles Me.LoadComplete
@@ -131,6 +134,31 @@ Partial Class MemberPages_CheckListCondor
 
 
 #End Region
+    Private Sub colorMenu()
+
+        btnMenu_1.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_2.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_3.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_4.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_5.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_6.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_7.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_8.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_9.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_10.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_11.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_12.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_13.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_14.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_15.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_16.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_17.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_18.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_19.BackColor = Color.FromArgb(46, 77, 123)
+        btnMenu_20.BackColor = Color.FromArgb(46, 77, 123)
+
+
+    End Sub
 
     Private Sub EnabledControls(ByVal rndSim As CheckBox, ByVal rndNao As CheckBox, ByVal rndNA As CheckBox, ByVal txtDesc As TextBox, ByVal myAchar As ImageButton, ByVal mySalvar As ImageButton, ByVal myBoolean As Boolean)
         rndSim.Enabled = myBoolean
@@ -294,6 +322,7 @@ Partial Class MemberPages_CheckListCondor
         Call LimparTextBox()
         Call BuscarChecklist()
         Call HabilitarGerarRelatorio()
+        Call colorMenu()
 
         If txtData.Value < DateAndTime.Today Then
 
@@ -432,6 +461,8 @@ Partial Class MemberPages_CheckListCondor
         Call fLimparTextBox(txt7_6)
         Call fLimparTextBox(txt7_7)
         Call fLimparTextBox(txt7_8)
+        Call fLimparTextBox(txt7_9)
+        Call fLimparTextBox(txt7_10)
 
         Call fLimparTextBox(txt8_1)
         Call fLimparTextBox(txt8_2)
@@ -619,6 +650,9 @@ Partial Class MemberPages_CheckListCondor
         Call fLimparTextBox(txt19_13)
         Call fLimparTextBox(txt19_14)
 
+        Call fLimparTextBox(txt20_1)
+        Call fLimparTextBox(txt20_2)
+        Call fLimparTextBox(txt20_3)
 
     End Sub
 
@@ -687,6 +721,8 @@ Partial Class MemberPages_CheckListCondor
         'ScriptManager.RegisterStartupScript(Me, Page.GetType, "Script", "alertErro();", True)
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_1.BackColor = Color.FromArgb(120, 167, 149)
     End Sub
 
     Protected Sub btnGrupo2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo2.Click
@@ -731,6 +767,8 @@ Partial Class MemberPages_CheckListCondor
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 2, 1)
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_2.BackColor = Color.FromArgb(120, 167, 149)
     End Sub
 
     Protected Sub btnGrupo3_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo3.Click
@@ -764,6 +802,8 @@ Partial Class MemberPages_CheckListCondor
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 3, 1)
         'Me.panTitle3.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_3.BackColor = Color.FromArgb(120, 167, 149)
     End Sub   ' Bloco 2 - 14 a 22. Total de 9 Perguntas
 
     Protected Sub btnGrupo4_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo4.Click
@@ -793,6 +833,8 @@ Partial Class MemberPages_CheckListCondor
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 4, 1)
         'Me.panTitle4.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_4.BackColor = Color.FromArgb(120, 167, 149)
     End Sub  ' Bloco 2 - 23 a 29. Total de 7 Perguntas
 
     Protected Sub btnGrupo5_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo5.Click
@@ -830,6 +872,8 @@ Partial Class MemberPages_CheckListCondor
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 5, 1)
         'Me.panTitle5.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_5.BackColor = Color.FromArgb(120, 167, 149)
     End Sub  ' Bloco 2 - 30 a 42. Total de 11 Perguntas
 
     Protected Sub btnGrupo6_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo6.Click
@@ -857,6 +901,8 @@ Partial Class MemberPages_CheckListCondor
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 6, 1)
         'Me.panTitle6.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_6.BackColor = Color.FromArgb(120, 167, 149)
     End Sub  ' Bloco 3 - 1 a 14. Total de 14 Perguntas
 
     Protected Sub btnGrupo7_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo7.Click
@@ -875,6 +921,8 @@ Partial Class MemberPages_CheckListCondor
         varIssue(6) = DefinirPontuacao(rnd7_6_Sim, rnd7_6_Nao, rnd7_6_NA)
         varIssue(7) = DefinirPontuacao(rnd7_7_Sim, rnd7_7_Nao, rnd7_7_NA)
         varIssue(8) = DefinirPontuacao(rnd7_8_Sim, rnd7_8_Nao, rnd7_8_NA)
+        varIssue(9) = DefinirPontuacao(rnd7_9_Sim, rnd7_9_Nao, rnd7_9_NA)
+        varIssue(10) = DefinirPontuacao(rnd7_10_Sim, rnd7_10_Nao, rnd7_10_NA)
 
         oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 7, 1, 1, varIssue(1), userName, Me.txt7_1.Text)
         oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 7, 1, 2, varIssue(1), userName, Me.txt7_2.Text)
@@ -884,10 +932,14 @@ Partial Class MemberPages_CheckListCondor
         oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 7, 1, 6, varIssue(1), userName, Me.txt7_6.Text)
         oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 7, 1, 7, varIssue(1), userName, Me.txt7_7.Text)
         oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 7, 1, 8, varIssue(1), userName, Me.txt7_8.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 7, 1, 9, varIssue(1), userName, Me.txt7_9.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 7, 1, 10, varIssue(1), userName, Me.txt7_10.Text)
 
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 7, 1)
         'Me.panTitle7.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_7.BackColor = Color.FromArgb(120, 167, 149)
     End Sub  ' Bloco 3 - 15 a 25. Total de 10 Perguntas
 
     Protected Sub btnGrupo8_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo8.Click
@@ -960,6 +1012,8 @@ Partial Class MemberPages_CheckListCondor
         'Me.panTitle8.CssClass = "pnl_Verde"
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_8.BackColor = Color.FromArgb(120, 167, 149)
     End Sub  ' Bloco 3 - 26 a 34. Total de 9 Perguntas
 
     Protected Sub btnGrupo9_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo9.Click
@@ -1021,6 +1075,8 @@ Partial Class MemberPages_CheckListCondor
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 9, 1)
         'Me.panTitle9.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_9.BackColor = Color.FromArgb(120, 167, 149)
     End Sub  ' Bloco 3 - 35 a 42. Total de 8 Perguntas
 
     Protected Sub btnGrupo10_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo10.Click
@@ -1054,6 +1110,8 @@ Partial Class MemberPages_CheckListCondor
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 10, 1)
         'Me.panTitle10.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_10.BackColor = Color.FromArgb(120, 167, 149)
     End Sub  ' Bloco 3 - 43 a 54. Total de 10 Perguntas
 
     Protected Sub btnGrupo11_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo11.Click
@@ -1115,6 +1173,8 @@ Partial Class MemberPages_CheckListCondor
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 11, 1)
         'Me.panTitle11.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_11.BackColor = Color.FromArgb(120, 167, 149)
     End Sub  ' Bloco 4 - 1 a 3. Total de 3 Perguntasrnd8
 
     Protected Sub btnGrupo12_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo12.Click
@@ -1163,6 +1223,8 @@ Partial Class MemberPages_CheckListCondor
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 12, 1)
         'Me.panTitle12.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_12.BackColor = Color.FromArgb(120, 167, 149)
     End Sub  ' Bloco 4 - 4 a 10. Total de 7 Perguntas
 
     Protected Sub btnGrupo13_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo13.Click
@@ -1201,6 +1263,8 @@ Partial Class MemberPages_CheckListCondor
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 13, 1)
         'Me.panTitle13.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_13.BackColor = Color.FromArgb(120, 167, 149)
     End Sub  ' Bloco 4 - 11 a 13. Total de 3 Perguntas
 
     Protected Sub btnGrupo14_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo14.Click
@@ -1231,6 +1295,8 @@ Partial Class MemberPages_CheckListCondor
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 14, 1)
         'Me.panTitle14.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_14.BackColor = Color.FromArgb(120, 167, 149)
     End Sub  ' Bloco 4 - 14 a 20. Total de 7 Perguntas
 
     Protected Sub btnGrupo15_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo15.Click
@@ -1249,6 +1315,8 @@ Partial Class MemberPages_CheckListCondor
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 15, 1)
         'Me.panTitle15.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_15.BackColor = Color.FromArgb(120, 167, 149)
     End Sub  ' Bloco 5 - 1 a 12. Total de 12 Perguntas
 
     Protected Sub btnGrupo16_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo16.Click
@@ -1278,6 +1346,8 @@ Partial Class MemberPages_CheckListCondor
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 16, 1)
         'Me.panTitle16.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_16.BackColor = Color.FromArgb(120, 167, 149)
     End Sub  ' Bloco 6 - 1 a 6. Total de 6 Perguntas
 
     Protected Sub btnGrupo17_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo17.Click
@@ -1300,6 +1370,8 @@ Partial Class MemberPages_CheckListCondor
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 17, 1)
         'Me.panTitle17.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_17.BackColor = Color.FromArgb(120, 167, 149)
     End Sub  ' Bloco 7 - 1 a 12. Total de 6 Perguntas
 
     Protected Sub btnGrupo18_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo18.Click
@@ -1350,9 +1422,73 @@ Partial Class MemberPages_CheckListCondor
         'Me.panTitle18.CssClass = "pnl_Verde"
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_18.BackColor = Color.FromArgb(120, 167, 149)
     End Sub   ' Bloco 2 - 1 a 14. Total de 14 Perguntas
 
-    ' Bloco 2 - 1 a 14. Total de 14 Perguntas
+    Protected Sub btnGrupo19_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo19.Click
+        Dim userName As String
+        Dim varIssue(19) As Byte
+        userName = User.Identity.Name
+
+        varIssue(1) = DefinirPontuacao(rnd19_1_Sim, rnd19_1_Nao, rnd19_1_NA)
+        varIssue(2) = DefinirPontuacao(rnd19_2_Sim, rnd19_2_Nao, rnd19_2_NA)
+        varIssue(3) = DefinirPontuacao(rnd19_3_Sim, rnd19_3_Nao, rnd19_3_NA)
+        varIssue(4) = DefinirPontuacao(rnd19_4_Sim, rnd19_4_Nao, rnd19_4_NA)
+        varIssue(5) = DefinirPontuacao(rnd19_5_Sim, rnd19_5_Nao, rnd19_5_NA)
+        varIssue(6) = DefinirPontuacao(rnd19_6_Sim, rnd19_6_Nao, rnd19_6_NA)
+        varIssue(7) = DefinirPontuacao(rnd19_7_Sim, rnd19_7_Nao, rnd19_7_NA)
+        varIssue(8) = DefinirPontuacao(rnd19_8_Sim, rnd19_8_Nao, rnd19_8_NA)
+        varIssue(9) = DefinirPontuacao(rnd19_9_Sim, rnd19_9_Nao, rnd19_9_NA)
+        varIssue(10) = DefinirPontuacao(rnd19_10_Sim, rnd19_10_Nao, rnd19_10_NA)
+        varIssue(11) = DefinirPontuacao(rnd19_11_Sim, rnd19_11_Nao, rnd19_11_NA)
+        varIssue(12) = DefinirPontuacao(rnd19_12_Sim, rnd19_12_Nao, rnd19_12_NA)
+        varIssue(13) = DefinirPontuacao(rnd19_13_Sim, rnd19_13_Nao, rnd19_13_NA)
+        varIssue(14) = DefinirPontuacao(rnd19_14_Sim, rnd19_14_Nao, rnd19_14_NA)
+
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 1, varIssue(1), userName, Me.txt19_1.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 2, varIssue(1), userName, Me.txt19_2.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 3, varIssue(1), userName, Me.txt19_3.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 4, varIssue(1), userName, Me.txt19_4.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 5, varIssue(1), userName, Me.txt19_5.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 6, varIssue(1), userName, Me.txt19_6.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 7, varIssue(1), userName, Me.txt19_7.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 8, varIssue(1), userName, Me.txt19_8.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 9, varIssue(1), userName, Me.txt19_9.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 10, varIssue(1), userName, Me.txt19_10.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 11, varIssue(1), userName, Me.txt19_11.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 12, varIssue(1), userName, Me.txt19_12.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 13, varIssue(1), userName, Me.txt19_13.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 14, varIssue(1), userName, Me.txt19_14.Text)
+
+        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 19, 1)
+        'Me.panTitle18.CssClass = "pnl_Verde"
+
+        ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_19.BackColor = Color.FromArgb(120, 167, 149)
+    End Sub   ' Bloco 2 - 1 a 14. Total de 14 Perguntas
+
+    Protected Sub btnGrupo20_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo20.Click
+        Dim userName As String
+        Dim varIssue(20) As Byte
+        userName = User.Identity.Name
+
+        varIssue(1) = DefinirPontuacao(rnd20_1_Sim, rnd20_1_Nao, rnd20_1_NA)
+        varIssue(2) = DefinirPontuacao(rnd20_2_Sim, rnd20_2_Nao, rnd20_2_NA)
+        varIssue(3) = DefinirPontuacao(rnd20_3_Sim, rnd20_3_Nao, rnd20_3_NA)
+
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 20, 1, 1, varIssue(1), userName, Me.txt20_1.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 20, 1, 2, varIssue(1), userName, Me.txt20_2.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 20, 1, 3, varIssue(1), userName, Me.txt20_3.Text)
+
+        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 20, 1)
+        'Me.panTitle18.CssClass = "pnl_Verde"
+
+        ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
+        btnMenu_20.BackColor = Color.FromArgb(120, 167, 149)
+    End Sub   ' Bloco 2 - 1 a 14. Total de 14 Perguntas
 
     Private Sub BCDet(ByVal myPontos As Byte, ByVal myText As TextBox, ByVal myDesc As String,
                                    ByVal rndSim As CheckBox, ByVal rndNao As CheckBox, ByVal rndNA As CheckBox)
@@ -1378,16 +1514,17 @@ Partial Class MemberPages_CheckListCondor
     End Sub
 
     Private Sub BuscarChecklist()
+
         'Call TudoAzul()
         Call BuscarChecklist_Grupo1(1)
-        Call BuscarChecklist_Grupo2(2)
-        Call BuscarChecklist_Grupo3(3)
-        Call BuscarChecklist_Grupo4(4)
-        Call BuscarChecklist_Grupo5(5)
-        Call BuscarChecklist_Grupo6(6)
-        Call BuscarChecklist_Grupo7(7)
-        Call BuscarChecklist_Grupo8(8)
-        Call BuscarChecklist_Grupo9(9)
+        'Call BuscarChecklist_Grupo2(2)
+        'Call BuscarChecklist_Grupo3(3)
+        'Call BuscarChecklist_Grupo4(4)
+        'Call BuscarChecklist_Grupo5(5)
+        'Call BuscarChecklist_Grupo6(6)
+        'Call BuscarChecklist_Grupo7(7)
+        'Call BuscarChecklist_Grupo8(8)
+        'Call BuscarChecklist_Grupo9(9)
         'Call BuscarChecklist_Grupo10(10)
         'Call BuscarChecklist_Grupo11(11)
         'Call BuscarChecklist_Grupo12(12)
@@ -1398,7 +1535,6 @@ Partial Class MemberPages_CheckListCondor
         'Call BuscarChecklist_Grupo17(17)
         'Call BuscarChecklist_Grupo18(18)
         'Call BuscarChecklist_Grupo19(19)
-
         Call BuscarChecklist_GrupoCor()
     End Sub
 
@@ -2209,6 +2345,8 @@ Partial Class MemberPages_CheckListCondor
         Call fPadraoInicial(rnd7_6_NA)
         Call fPadraoInicial(rnd7_7_NA)
         Call fPadraoInicial(rnd7_8_NA)
+        Call fPadraoInicial(rnd7_9_NA)
+        Call fPadraoInicial(rnd7_10_NA)
 
         Call fPadraoInicial(rnd8_1_NA)
         Call fPadraoInicial(rnd8_2_NA)
@@ -2381,7 +2519,25 @@ Partial Class MemberPages_CheckListCondor
         Call fPadraoInicial(rnd18_17_NA)
         Call fPadraoInicial(rnd18_18_NA)
 
-        'Call fPadraoInicial(rnd19.1_NA)
+        Call fPadraoInicial(rnd19_1_NA)
+        Call fPadraoInicial(rnd19_2_NA)
+        Call fPadraoInicial(rnd19_3_NA)
+        Call fPadraoInicial(rnd19_4_NA)
+        Call fPadraoInicial(rnd19_5_NA)
+        Call fPadraoInicial(rnd19_6_NA)
+        Call fPadraoInicial(rnd19_7_NA)
+        Call fPadraoInicial(rnd19_8_NA)
+        Call fPadraoInicial(rnd19_9_NA)
+        Call fPadraoInicial(rnd19_10_NA)
+        Call fPadraoInicial(rnd19_11_NA)
+        Call fPadraoInicial(rnd19_12_NA)
+        Call fPadraoInicial(rnd19_13_NA)
+        Call fPadraoInicial(rnd19_14_NA)
+
+        Call fPadraoInicial(rnd20_1_NA)
+        Call fPadraoInicial(rnd20_2_NA)
+        Call fPadraoInicial(rnd20_3_NA)
+
 
 
 
@@ -2635,6 +2791,13 @@ Partial Class MemberPages_CheckListCondor
     Protected Sub btnSalvarFoto7_8_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btnSalvarFoto7_8.Click
         Call UploadImagem(Me.upFile7_8, Me.txt7_8.Text, 7, 1, 8)
     End Sub
+    Protected Sub btnSalvarFoto7_9_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btnSalvarFoto7_9.Click
+        Call UploadImagem(Me.upFile7_9, Me.txt7_9.Text, 7, 1, 9)
+    End Sub
+    Protected Sub btnSalvarFoto7_10_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btnSalvarFoto7_10.Click
+        Call UploadImagem(Me.upFile7_10, Me.txt7_10.Text, 7, 1, 10)
+    End Sub
+
 
     Protected Sub btnSalvarFoto8_1_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btnSalvarFoto8_1.Click
         Call UploadImagem(Me.upFile8_1, Me.txt8_1.Text, 8, 1, 1)
@@ -3126,7 +3289,6 @@ Partial Class MemberPages_CheckListCondor
     Protected Sub btnSalvarFoto18_18_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btnSalvarFoto18_18.Click
         Call UploadImagem(Me.upFile18_18, Me.txt18_18.Text, 18, 1, 18)
     End Sub
-
     Protected Sub btnSalvarFoto19_1_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btnSalvarFoto19_1.Click
         Call UploadImagem(Me.upFile19_1, Me.txt19_1.Text, 19, 1, 1)
     End Sub
@@ -3168,6 +3330,15 @@ Partial Class MemberPages_CheckListCondor
     End Sub
     Protected Sub btnSalvarFoto19_14_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btnSalvarFoto19_14.Click
         Call UploadImagem(Me.upFile19_14, Me.txt19_14.Text, 19, 1, 14)
+    End Sub
+    Protected Sub btnSalvarFoto20_1_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btnSalvarFoto20_1.Click
+        Call UploadImagem(Me.upFile20_1, Me.txt20_1.Text, 20, 1, 1)
+    End Sub
+    Protected Sub btnSalvarFoto20_2_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btnSalvarFoto20_2.Click
+        Call UploadImagem(Me.upFile20_2, Me.txt20_2.Text, 20, 1, 2)
+    End Sub
+    Protected Sub btnSalvarFoto20_3_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btnSalvarFoto20_3.Click
+        Call UploadImagem(Me.upFile20_3, Me.txt20_3.Text, 20, 1, 3)
     End Sub
 
 
@@ -3577,6 +3748,7 @@ Partial Class MemberPages_CheckListCondor
         divMenu.Visible = False
         divVoltar.Visible = True
     End Sub
+
     Protected Sub btnMenu_2_Click(sender As Object, e As EventArgs)
         panDados2.Visible = True
         divMenu.Visible = False
@@ -3685,6 +3857,12 @@ Partial Class MemberPages_CheckListCondor
         divVoltar.Visible = True
     End Sub
 
+    Protected Sub btnMenu_20_Click(sender As Object, e As EventArgs)
+        panDados20.Visible = True
+        divMenu.Visible = False
+        divVoltar.Visible = True
+    End Sub
+
     Protected Sub btnVoltar_Click(sender As Object, e As EventArgs)
         panDados1.Visible = False
         panDados2.Visible = False
@@ -3705,6 +3883,7 @@ Partial Class MemberPages_CheckListCondor
         panDados17.Visible = False
         panDados18.Visible = False
         panDados19.Visible = False
+        panDados20.Visible = False
         divVoltar.Visible = False
         divMenu.Visible = True
     End Sub
@@ -3716,51 +3895,17 @@ Partial Class MemberPages_CheckListCondor
     Private Sub carregaRelatorio()
         Dim html As String
         Dim constr As String = ConfigurationManager.ConnectionStrings("gerCheckListConnectionString").ConnectionString
-        Dim selectSQL As String = <![CDATA[SELECT	Fil.FilialLista 
-			    ,CONCAT(Convert(varchar,a.Dia,103), ' ', Hora) Dia
-			    ,Gru.listaGrupo 
-			    ,Su.listaSubgrupo     
-			    ,Perg.descPergunta     
-			    ,a.Descricao
-			    ,im.imgData
-			    ,im.imgTitle
-		    FROM Dados.tblFilial_]]>.Value()
-
-        selectSQL += selFilial.SelectedValue.ToString()
-
-        selectSQL += <![CDATA[ AS a JOIN Cadastro.tblCadGrupo AS Gru
-		    ON a.idGrupo = Gru.idGrupo JOIN Cadastro.tblCadSubgrupo AS Su
-		    ON a.idGrupo = Su.idGrupo
-		    AND a.idSubgrupo = Su.idSubgrupo JOIN Cadastro.tblCadPerguntas AS Perg
-		    ON a.idGrupo = Perg.idGrupo 
-		    AND a.idSubgrupo = Perg.idSubgrupo 
-		    AND a.idCod = Perg.idPergunta JOIN gerManager.Cadastros.tblCadFiliais AS Fil
-		    ON a.idFilial = Fil.Filial LEFT JOIN Fotos.tblFilial_]]>.Value()
-
-        selectSQL += selFilial.SelectedValue.ToString()
-
-        selectSQL += <![CDATA[ AS Im
-                    ON a.Dia = im.Dia 
-                    And a.idFilial = im.idFilial 
-                    And a.idGrupo = im.idGrupo 
-                    And a.idSubgrupo = im.idSubgrupo 
-                    And a.idCod = im.idCod    
-                    WHERE a.Dia = ']]>.Value()
-
-        selectSQL += txtData.Value
-        'selectSQL += "2022-04-02"
-
-        selectSQL += <![CDATA[' And LEN(CONVERT(VARCHAR(25),A.Descricao)) > 0]]>.Value()
-
-        html = <![CDATA[<br />
-        <br />
-        <div Class="row justify-content-center" style="color: #008080; font-size: 25pt">
-        <strong> Relatório Diário - Cheklist</strong>
-        </div>
-        <b style="color: white">------------------------------------------------------------------------</b>]]>.Value()
-
         Using con As New SqlConnection(constr)
-            Using cmd As New SqlCommand(selectSQL)
+            Using cmd As New SqlCommand("SP_GERA_RELATORIO_CHEKLIST")
+
+                cmd.CommandType = CommandType.StoredProcedure
+
+                cmd.Parameters.Add(New SqlParameter("@dia", SqlDbType.VarChar))
+                cmd.Parameters("@dia").Value = txtData.Value
+
+                cmd.Parameters.Add(New SqlParameter("@idFilial", SqlDbType.VarChar))
+                cmd.Parameters("@idFilial").Value = selFilial.SelectedValue.ToString()
+
                 Using sda As New SqlDataAdapter()
                     cmd.Connection = con
                     sda.SelectCommand = cmd
