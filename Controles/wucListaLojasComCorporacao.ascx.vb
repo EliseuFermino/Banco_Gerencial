@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports DevExpress.CodeParser
 
 Partial Class wucListaLojasComCorporacao
     Inherits System.Web.UI.UserControl
@@ -17,8 +18,6 @@ Partial Class wucListaLojasComCorporacao
 
 #Region " Property"
 
-    
-
     Public Property CallFilial() As String
         Get
             Return cboFilial.Value
@@ -33,7 +32,7 @@ Partial Class wucListaLojasComCorporacao
             Return cboFilial.Text
         End Get
         Set(ByVal value As String)
-            cboFilial.Value = value
+            cboFilial.Text = value
         End Set
     End Property
 
@@ -208,11 +207,14 @@ Partial Class wucListaLojasComCorporacao
                         ElseIf Session("sUSUARIO") = "100400" Then   ' João Carlos
                             Call Preenche_cboFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1015 ORDER BY nomeFilial")
                             cboFilial.SelectedIndex = 0
+                        ElseIf Session("sUSUARIO") = "207888" Then   ' Domingos
+                            Call Preenche_cboFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1018 ORDER BY nomeFilial")
+                            cboFilial.SelectedIndex = 0
                         ElseIf Session("sUSUARIO") = "388690" Then   ' Samoel
                             Call Preenche_cboFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1016 ORDER BY nomeFilial")
                             cboFilial.SelectedIndex = 0
                         ElseIf Session("sUSUARIO") = "774" Then   ' Usuario Supervisor (Esta setado para Atacarejo)
-                            Call Preenche_cboFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1016 ORDER BY nomeFilial")
+                            Call Preenche_cboFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1018 ORDER BY nomeFilial")
                             cboFilial.SelectedIndex = 0
                         ElseIf Session("sUSUARIO") = "supervisor" Then
                             Call Preenche_cboFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1015 ORDER BY nomeFilial")

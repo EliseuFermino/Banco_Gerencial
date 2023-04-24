@@ -17,7 +17,7 @@
             </dxe:ASPxButton>
         </td>
         <td >
-            <dxe:ASPxDateEdit ID="cboDia" runat="server" Theme="DevEx" Width="100px" 
+            <dxe:ASPxDateEdit ID="cboDia" runat="server" Theme="DevEx" Width="120px" 
                 AutoPostBack="True">                
             </dxe:ASPxDateEdit>
         </td>

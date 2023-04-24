@@ -3740,6 +3740,8 @@ Partial Class MemberPages_CheckListCondor
         divMenu.Visible = True
     End Sub
 
+
+
 #End Region
 
 End Class

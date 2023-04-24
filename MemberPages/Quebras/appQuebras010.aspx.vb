@@ -29,26 +29,31 @@ Partial Class MemberPages_Quebras_appQuebras010
         If Me.cboMercadologico.Checked_rdTotal = True Then    'Total - Exibe todos os departamento
             Me.grid1.Settings.ShowFilterRow = False
             oVem.AtualizarEstatisticaPrograma(108, User.Identity.Name)
+            oFun.Grid_Title(grid1, "Visualização por Total")
         End If
 
         If Me.cboMercadologico.Checked_rdDepartamento = True Then    'Total - Exibe todos os departamento
             Me.grid1.Settings.ShowFilterRow = False
             oVem.AtualizarEstatisticaPrograma(107, User.Identity.Name)
+            oFun.Grid_Title(grid1, "Visualização do Departamento " & cboMercadologico.CallDeptoDescricao)
         End If
 
         If Me.cboMercadologico.Checked_rdSecao = True Then    'Departamento - Exibe todas as seções do Departamento selecionado
             Me.grid1.Settings.ShowFilterRow = False
             oVem.AtualizarEstatisticaPrograma(106, User.Identity.Name)
+            oFun.Grid_Title(grid1, "Visualização do Departamento " & cboMercadologico.CallDeptoDescricao & " | Seção " & cboMercadologico.CallSecaoDescricao)
         End If
 
         If Me.cboMercadologico.Checked_rdGrupo = True Then    'Seção - Exibe todos os grupos da seção selecionada 
             Me.grid1.Settings.ShowFilterRow = False
             oVem.AtualizarEstatisticaPrograma(105, User.Identity.Name)
+            oFun.Grid_Title(grid1, "Visualização do Departamento " & cboMercadologico.CallDeptoDescricao & " | Seção " & cboMercadologico.CallSecaoDescricao & " | Grupo " & cboMercadologico.CallGrupoDescricao)
         End If
 
         If Me.cboMercadologico.Checked_rdSubgrupo = True Then    'Grupo - Exibe todos os subgrupos do grupo selecionado
             Me.grid1.Settings.ShowFilterRow = False
             oVem.AtualizarEstatisticaPrograma(104, User.Identity.Name)
+            oFun.Grid_Title(grid1, "Visualização do Departamento " & cboMercadologico.CallDeptoDescricao & " | Seção " & cboMercadologico.CallSecaoDescricao & " | Grupo " & cboMercadologico.CallGrupoDescricao & " | Subgrupo " & cboMercadologico.CallSubgrupoDescricao)
         End If
 
         

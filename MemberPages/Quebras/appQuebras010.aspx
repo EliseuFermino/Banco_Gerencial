@@ -7,6 +7,8 @@
 <%@ Register Src="~/Controles/wucMercadologicoNew.ascx" TagPrefix="uc1" TagName="wucMercadologicoNew" %>
 <%@ Register Src="~/Controles/wucSize.ascx" TagPrefix="uc1" TagName="wucSize" %>
 <%@ Register Src="~/Controles/wucObsPrograma.ascx" TagPrefix="uc1" TagName="wucObsPrograma" %>
+<%@ Register Src="~/Controles/wuc_Exibir_Lojas_Atacarejos_Todos.ascx" TagPrefix="uc1" TagName="wuc_Exibir_Lojas_Atacarejos_Todos" %>
+
 
 
 
@@ -75,7 +77,11 @@
  
         <div id="divFornecedor"    >           
             <uc1:wucMercadologicoNew runat="server" ID="cboMercadologico" />
-        </div>        
+        </div>    
+    
+        <div id="divExibir_Loja_Atacarejo">
+            <uc1:wuc_Exibir_Lojas_Atacarejos_Todos runat="server" ID="cboLoja_Atacarejo" />
+        </div>
     
         <div id="divPeriodo">
             <uc1:wucListaDiaIniFin runat="server" ID="cboDia" />

@@ -2,6 +2,7 @@
 Imports DevExpress.Web
 Imports System.Data
 Imports System.Data.SqlClient
+Imports System.Drawing
 
 Partial Class MemberPages_Campanhas_Pascoa_Analise_Pascoa
     Inherits System.Web.UI.Page
@@ -13,6 +14,7 @@ Partial Class MemberPages_Campanhas_Pascoa_Analise_Pascoa
 
     Dim oVem As New VendaEmpresaMes
     Dim oFun As New Funcoes
+    Dim oProj As New Projeto
     Private connManager As String = clData_gerManager.dbConnect
 
 #Region " Variables"
@@ -75,6 +77,14 @@ Partial Class MemberPages_Campanhas_Pascoa_Analise_Pascoa
                 varTitle = " Ops! Dia com problema!"
                 CType(Master.FindControl("lblTitle"), Label).Text = varTitle
             End If
+
+            If oProj.BuscarLocalDoUsuario(User.Identity.Name) <> "Loja" Then
+
+                cboFilial.CallFilialNome = " Empresa"
+
+            End If
+
+
         End If
     End Sub
 
@@ -98,16 +108,12 @@ Partial Class MemberPages_Campanhas_Pascoa_Analise_Pascoa
             oVem.AtualizarEstatisticaPrograma(101, User.Identity.Name)
 
             cboFilial.AutoPostBack = False
-            If cboFilial.IsLoja = False Then
-                cboFilial.CallCorporacao = 199
-                
-            End If
 
             oVem.Campanha_BuscarPeriodo(1, varAno)
 
-            Me.lblPeriodo1.Text = "Período:  " & varAno & ": " & oVem.Dia3 & " a " & oVem.Dia4 & " - " & oVem.Dia6 & " de 60 dias."
-            Me.lblPeriodo2.Text = "Período:  " & varAno - 1 & ": " & oVem.Dia1 & " a " & oVem.Dia2 & " - " & oVem.Dia5 & " de 60 dias."
-            Me.lblPeriodo3.Text = "Período:  " & varAno - 2 & ": " & oVem.Dia7 & " a " & oVem.Dia8 & " - " & oVem.Dia9 & " de 60 dias."
+            Me.lblPeriodo1.Text = "Período:  " & varAno & ": " & oVem.Dia3 & " a " & oVem.Dia4 & " - " & oVem.Dia6 & " de " & oVem.NumDesc & " dias."
+            Me.lblPeriodo2.Text = "Período:  " & varAno - 1 & ": " & oVem.Dia1 & " a " & oVem.Dia2 & " - " & oVem.Dia5 & " de " & oVem.NumDesc & " dias."
+            Me.lblPeriodo3.Text = "Período:  " & varAno - 2 & ": " & oVem.Dia7 & " a " & oVem.Dia8 & " - " & oVem.Dia9 & " de " & oVem.NumDesc & " dias."
 
             Me.lblAnoAT.Text = varAno
             Me.lblAnoAA.Text = varAno - 1
@@ -123,6 +129,13 @@ Partial Class MemberPages_Campanhas_Pascoa_Analise_Pascoa
             gridTodosItens.DataBind()
             gridParticipacao.DataBind()
 
+            oFun.Grid_Column_BorderRight(ASPxGridView1, "BarrasMargem", Color.Gray, BorderStyle.Solid, 2)
+            oFun.Grid_Column_BorderRight(ASPxGridView1, "ChocolatePresenteMargem", Color.Gray, BorderStyle.Solid, 2)
+            oFun.Grid_Column_BorderRight(ASPxGridView1, "AzeitonaMargem", Color.Gray, BorderStyle.Solid, 2)
+            oFun.Grid_Column_BorderRight(ASPxGridView1, "PeixeEnlatadoMargem", Color.Gray, BorderStyle.Solid, 2)
+            oFun.Grid_Column_BorderRight(ASPxGridView1, "AzeiteMargem", Color.Gray, BorderStyle.Solid, 2)
+
+
             ' Grid_Total_Dia
 
             oVem.Campanha_BuscarPeriodo(1, Year(Now()))
@@ -132,8 +145,30 @@ Partial Class MemberPages_Campanhas_Pascoa_Analise_Pascoa
 
             Call myLegendas()
 
-           
 
+
+            If oProj.BuscarLocalDoUsuario(User.Identity.Name) <> "Loja" Then
+                cboFilial.CallCorporacao = 199
+                Session("sFILIAL") = 99
+            Else
+                gridMeta.Visible = False
+                grid_Total.Visible = False
+                gridParticipacao.Visible = False
+
+
+            End If
+
+            'If cboFilial.IsLoja = True Then
+            '    Session("sFILIAL") = cboFilial.CallFilial
+            'Else
+            '    cboFilial.CallCorporacao = "Corporação"
+            '    cboFilial.CallFilial = 99
+            '    Session("sFILIAL") = 99
+            'End If
+
+            Session("sCOD") = Me.cboCod.Value
+
+            Atualizar()
         End If
     End Sub
 
@@ -141,16 +176,13 @@ Partial Class MemberPages_Campanhas_Pascoa_Analise_Pascoa
     Protected Sub Page_PreRender(sender As Object, e As EventArgs) Handles Me.PreRender
         If Not IsPostBack Then
 
+            If oProj.BuscarLocalDoUsuario(User.Identity.Name) <> "Loja" Then
 
-            If cboFilial.IsLoja = True Then
-                Session("sFILIAL") = cboFilial.CallFilial
-            Else
                 cboFilial.CallCorporacao = "Corporação"
                 cboFilial.CallFilial = 99
                 Session("sFILIAL") = 99
             End If
 
-            Session("sCOD") = Me.cboCod.Value
             Atualizar()
         End If
     End Sub
@@ -201,7 +233,8 @@ Partial Class MemberPages_Campanhas_Pascoa_Analise_Pascoa
         End Try
     End Function
 
-    Public Sub Pascoa_BuscarTotalRealizadoPascoa(ByVal iAno As Int32, ByVal iCod As Byte, ByVal iFilial As Byte, ByVal iRealizadoPascoa As Label, ByVal iPercCresc As Label)
+    Public Sub Pascoa_BuscarTotalRealizadoPascoa(ByVal iAno As Int32, ByVal iCod As Byte, ByVal iFilial As Byte, ByVal iRealizadoPascoa As Label,
+                                                 ByVal iPercCresc As Label)
 
         Dim con As New SqlConnection(connManager)
         Dim comando As New SqlCommand("Gerencial.BuscarTotalRealizadoPascoa", con)
@@ -223,6 +256,7 @@ Partial Class MemberPages_Campanhas_Pascoa_Analise_Pascoa
             While reader5.Read
                 iRealizadoPascoa.Text = CDbl(reader5.GetSqlMoney(0)).ToString("n0")
                 iPercCresc.Text = CDbl(reader5.GetSqlMoney(1)).ToString("n2")
+               
             End While
 
         Catch ex As Exception
@@ -269,7 +303,8 @@ Partial Class MemberPages_Campanhas_Pascoa_Analise_Pascoa
                                              ByVal iRealPascoa As Label, ByVal iRealPascoaAA As Label, ByVal iMargemRealizadaAA As Label,
                                              ByVal iParticipacaoAA As Label, iLucratividadeAT As Label, iLucratividadeAA As Label,
                                              ByVal iRealPascoaAA1 As Label, ByVal iMargemRealizadaAA1 As Label, ByVal iLucratividadeAA1 As Label,
-                                             ByVal iParticipacaoAA1 As Label, iPercMargemFinal As Label, iPercMargemFinal_AA As Label, iPercMargemFinal_AA1 As Label) As Double
+                                             ByVal iParticipacaoAA1 As Label, iPercMargemFinal As Label, iPercMargemFinal_AA As Label, iPercMargemFinal_AA1 As Label,
+                                             ByVal iQtdeAT As Label, ByVal iQtdeAA As Label, ByVal iQtdeAA1 As Label) As Double
 
         Dim con As New SqlConnection(connManager)
         Dim comando As New SqlCommand("gerencial.uspPascoaDadosAtuais_Buscar", con)
@@ -289,6 +324,10 @@ Partial Class MemberPages_Campanhas_Pascoa_Analise_Pascoa
             Dim reader5 As SqlDataReader
             reader5 = comando.ExecuteReader()
             While reader5.Read
+
+                iQtdeAT.Text = CDbl(reader5.GetSqlMoney(5)).ToString("n0")
+                iQtdeAA.Text = CDbl(reader5.GetSqlMoney(4)).ToString("n0")
+                iQtdeAA1.Text = CDbl(reader5.GetSqlMoney(16)).ToString("n0")
 
                 iMargemRealizada.Text = CDbl(reader5.GetSqlMoney(10)).ToString("n2")
                 iCrescimento.Text = CDbl(reader5.GetSqlMoney(11)).ToString("n2")
@@ -361,7 +400,11 @@ Partial Class MemberPages_Campanhas_Pascoa_Analise_Pascoa
         Call Pascoa_BuscarMeta(varAno, Session("sCOD"), Session("sFILIAL"), Me.lblMetaPascoa, Me.lblCrescimento)
 
         ' MARGEM REALIZADA
-        Call Pascoa_BuscarDadosAtuais(varAno, Session("sCOD"), Session("sFILIAL"), Me.lblMargemPDV, Me.lblCrescimento, Me.lblParticipacao, Me.lblRealPascoa, Me.lblRealPascoaAA, Me.lblMargemPDV_AA, Me.lblParticipacaoAA, Me.lblLucratividade, Me.lblLucratividadeAA, Me.lblRealPascoaAA1, Me.lblMargemPDV_AA1, Me.lblLucratividadeAA1, Me.lblParticipacaoAA1, Me.lblMargemFinal, Me.lblMargemFinal_AA, Me.lblMargemFinal_AA1)
+        Call Pascoa_BuscarDadosAtuais(varAno, Session("sCOD"), Session("sFILIAL"), Me.lblMargemPDV, Me.lblCrescimento, Me.lblParticipacao, Me.lblRealPascoa, Me.lblRealPascoaAA,
+                                      Me.lblMargemPDV_AA, Me.lblParticipacaoAA, Me.lblLucratividade, Me.lblLucratividadeAA, Me.lblRealPascoaAA1, Me.lblMargemPDV_AA1,
+                                      Me.lblLucratividadeAA1, Me.lblParticipacaoAA1, Me.lblMargemFinal, Me.lblMargemFinal_AA, Me.lblMargemFinal_AA1,
+                                      lblVolumePascoaAT, lblVolumePascoaAA, lblVolumePascoaAA1)
+
         'Call Pascoa_BuscarDadosAtuais(2012, Session("sCOD"), 99, Me.lblMargemRealizadaAA, Me.lblCrescimentoAA, Me.lblParticipacaoAA, Me.lblRealPascoaAA)
 
         'Atualizar Realizado do Periodo Total. Ano 2014
@@ -381,12 +424,19 @@ Partial Class MemberPages_Campanhas_Pascoa_Analise_Pascoa
         Me.lblPercentualAtingimentoDif.Text = CDbl(Me.lblPercentualAtingimento.Text - Me.lblPercentualAtingimentoAA.Text).ToString("n2")
         Me.lblMargemPDV_Dif.Text = CDbl(Me.lblMargemPDV.Text - Me.lblMargemPDV_AA.Text).ToString("n2")
         Me.lblMargemFinal_Dif.Text = CDbl(Me.lblMargemFinal.Text - Me.lblMargemFinal_AA.Text).ToString("n2")
-        Me.lblParticipacaoDif.Text = CDbl(((Me.lblParticipacao.Text / Me.lblParticipacaoAA.Text) * 100) - 100).ToString("n2")
+        Me.lblParticipacaoDif.Text = oFun.Calculate(lblParticipacao.Text, lblParticipacaoAA.Text, Funcoes.CalculateType.Decrease).ToString("n2") ' CDbl(((Me.lblParticipacao.Text / Me.lblParticipacaoAA.Text) * 100) - 100).ToString("n2")
         Me.lblMetaPascoaDif.Text = CDbl(Me.lblMetaPascoa.Text - Me.lblMetaPascoaAA.Text).ToString("n0")
-        ' Me.lblCrescimentoDif.Text = CDbl(((Me.lblCrescimento.Text / Me.lblCrescimentoAA.Text) * 100) - 100).ToString("n2")
+        'Me.lblCrescimentoDif.Text = CDbl(((Me.lblCrescimento.Text / Me.lblCrescimentoAA.Text) * 100) - 100).ToString("n2")
         Me.lblLucratividadeDif.Text = CDbl(Me.lblLucratividade.Text - Me.lblLucratividadeAA.Text).ToString("n0")
 
         lblCrescimentoAA.Text = oFun.Calculate(lblRealPascoaAA.Text, lblRealPascoaAA1.Text, Funcoes.CalculateType.Growth).ToString("n2")
+
+        lblCrescimentoVolumeAT.Text = oFun.Calculate(lblVolumePascoaAT.Text, lblVolumePascoaAA.Text, Funcoes.CalculateType.Growth).ToString("n2")
+        lblCrescimentoVolumeAA.Text = oFun.Calculate(lblVolumePascoaAA.Text, lblVolumePascoaAA1.Text, Funcoes.CalculateType.Growth).ToString("n2")
+
+        lblVolumeCrescimentoDif.Text = oFun.Calculate(lblCrescimentoVolumeAT.Text, lblCrescimentoVolumeAA.Text, Funcoes.CalculateType.Decrease).ToString("n2")
+
+        Me.lblVolumeDif.Text = CDbl(lblVolumePascoaAT.Text - lblVolumePascoaAA.Text).ToString("n0")
 
 
         'Formatar se Negativo
@@ -403,11 +453,11 @@ Partial Class MemberPages_Campanhas_Pascoa_Analise_Pascoa
         graf_Participacao.DataBind()
         graph_Mundo_Chocolate.DataBind()
 
-        Session("sCOD") = 2
+        'Session("sCOD") = 2
         gridParticipacao.DataBind()
 
-        'lblError.Visible = True
-        'lblError.Text = "Cod: " & Session("sCOD") & "Filial: " & Session("sFILIAL") & " Ano: " & Session("sANO") & " Campanha: " & Session("sCAMPANHA")
+        lblError.Visible = True
+        lblError.Text = "Cod: " & Session("sCOD") & "Filial: " & Session("sFILIAL") & " Ano: " & Session("sANO") & " Campanha: " & Session("sCAMPANHA")
 
 
 
@@ -436,28 +486,39 @@ Partial Class MemberPages_Campanhas_Pascoa_Analise_Pascoa
 
     Private Sub myLegendas()
 
-        oFun.Grid_Title(Me.grid_Total, "Análise Total da Páscoa " & Session("sANO"))
+        Dim anoAtual As Int16 = Session("sANO")
+        Dim anoAnterior As Int16 = Session("sANO") - 1
+        Dim anoComparativo As String = anoAnterior & " x " & anoAtual
+
+        oFun.Grid_Title(Me.grid_Total, "Análise Total da Páscoa " & anoAtual)
 
         'Colunas
-        oFun.Grid_ColumnTitle(Me.grid_Total, "QtdeAA", Session("sANO") - 1)
-        oFun.Grid_ColumnTitle(Me.grid_Total, "Qtde", Session("sANO"))
-        oFun.Grid_ColumnTitle(Me.grid_Total, "Venda", Session("sANO"))
-        oFun.Grid_ColumnTitle(Me.grid_Total, "VendaAA", Session("sANO") - 1)
+        oFun.Grid_ColumnTitle(Me.grid_Total, "QtdeAA", anoAnterior)
+        oFun.Grid_ColumnTitle(Me.grid_Total, "Qtde", anoAtual)
+        oFun.Grid_ColumnTitle(Me.grid_Total, "Venda", anoAtual)
+        oFun.Grid_ColumnTitle(Me.grid_Total, "VendaAA", anoAnterior)
 
-        oFun.Grid_ColumnTitle(Me.grid_Total, "Margem", Session("sANO"))
-        oFun.Grid_ColumnTitle(Me.grid_Total, "MargemAA", Session("sANO") - 1)
+        oFun.Grid_ColumnTitle(Me.grid_Total, "Margem", anoAtual)
+        oFun.Grid_ColumnTitle(Me.grid_Total, "MargemAA", anoAnterior)
 
-        oFun.Grid_ColumnTitle(Me.grid_Total, "Lucro", Session("sANO"))
-        oFun.Grid_ColumnTitle(Me.grid_Total, "LucroAA", Session("sANO") - 1)
+        oFun.Grid_ColumnTitle(Me.grid_Total, "Lucro", anoAtual)
+        oFun.Grid_ColumnTitle(Me.grid_Total, "LucroAA", anoAnterior)
 
-        oFun.Grid_ColumnTitle(Me.grid_Total, "numCliente", Session("sANO"))
-        oFun.Grid_ColumnTitle(Me.grid_Total, "numClienteAA", Session("sANO") - 1)
+        oFun.Grid_ColumnTitle(Me.grid_Total, "numCliente", anoAtual)
+        oFun.Grid_ColumnTitle(Me.grid_Total, "numClienteAA", anoAnterior)
 
         oFun.Grid_ColumnTitle(Me.grid_Total, "bandMargem", "Margem com Sell-Out")
         oFun.Grid_ColumnTitle(Me.grid_Total, "bandLucro", "Lucro")
 
-        oFun.Grid_ColumnTitle(Me.gridMeta, "VendaAA", Session("sANO") - 1)
-        oFun.Grid_ColumnTitle(Me.gridMeta, "Meta", "Meta " & Session("sANO"))
+        oFun.Grid_ColumnTitle(Me.gridParticipacao, "gridParticipacao_AA", anoAnterior)
+        oFun.Grid_ColumnTitle(Me.gridParticipacao, "gridParticipacao_AT", anoAtual)
+
+        oFun.Grid_ColumnTitle(Me.gridParticipacao, "gridParticipacao_Diferenca", anoComparativo)
+        oFun.Grid_ColumnTitle(Me.gridParticipacao, "running_vlrVendaAA", anoAnterior)
+        oFun.Grid_ColumnTitle(Me.gridParticipacao, "running_vlrVendaAT", anoAtual)
+        oFun.Grid_ColumnTitle(Me.gridParticipacao, "running_percPartVendaAA", anoAnterior)
+        oFun.Grid_ColumnTitle(Me.gridParticipacao, "running_percPartVendaAT", anoAtual)
+
 
     End Sub
 
@@ -597,7 +658,7 @@ Partial Class MemberPages_Campanhas_Pascoa_Analise_Pascoa
 
         If e.SummaryProcess = DevExpress.Data.CustomSummaryProcess.Calculate Then
             Dim myFilter As String = Convert.ToString(e.GetValue("Descricao"))
-            If myFilter = "Empresa Total" Then
+            If myFilter = "99 - Empresa sem Apoio" Then
                 VendaAA += Convert.ToDecimal(e.GetValue("VendaAA"))
                 Meta += Convert.ToDecimal(e.GetValue("Meta"))
                 Real += Convert.ToDecimal(e.GetValue("Real"))
@@ -783,6 +844,73 @@ Partial Class MemberPages_Campanhas_Pascoa_Analise_Pascoa
        
     End Sub
 
+    Protected Sub ASPxGridView1_CustomSummaryCalculate(sender As Object, e As CustomSummaryEventArgs) Handles ASPxGridView1.CustomSummaryCalculate
+
+        oFun.Grid_Footer_Calculate(sender, e, ASPxGridView1, "TotalMargem", "TotalMargemVlr", "TotalVlr", Funcoes.CalculateType.ValueOverRevenue)
+        oFun.Grid_Footer_Calculate(sender, e, ASPxGridView1, "OvosMargem", "OvosMargemVlr", "OvosVlr", Funcoes.CalculateType.ValueOverRevenue)
+
+        oFun.Grid_Footer_Calculate(sender, e, ASPxGridView1, "CaixaMargem", "CaixaMargemVlr", "CaixaVlr", Funcoes.CalculateType.ValueOverRevenue)
+        oFun.Grid_Footer_Calculate(sender, e, ASPxGridView1, "OutrosChocolatesMargem", "OutrosChocolatesMargemVlr", "OutrosChocolatesVlr", Funcoes.CalculateType.ValueOverRevenue)
+        oFun.Grid_Footer_Calculate(sender, e, ASPxGridView1, "BacalhauMargem", "BacalhauMargemVlr", "BacalhauVlr", Funcoes.CalculateType.ValueOverRevenue)
+        oFun.Grid_Footer_Calculate(sender, e, ASPxGridView1, "ColombaMargem", "ColombaMargemVlr", "ColombaVlr", Funcoes.CalculateType.ValueOverRevenue)
+        oFun.Grid_Footer_Calculate(sender, e, ASPxGridView1, "BarrasMargem", "BarrasMargemVlr", "BarrasVlr", Funcoes.CalculateType.ValueOverRevenue)
+        oFun.Grid_Footer_Calculate(sender, e, ASPxGridView1, "ChocolatePresenteMargem", "ChocolatePresenteMargemVlr", "ChocolatePresenteVlr", Funcoes.CalculateType.ValueOverRevenue)
+        oFun.Grid_Footer_Calculate(sender, e, ASPxGridView1, "AzeitonaMargem", "AzeitonaMargemVlr", "AzeitonaVlr", Funcoes.CalculateType.ValueOverRevenue)
+        oFun.Grid_Footer_Calculate(sender, e, ASPxGridView1, "PeixeEnlatadoMargem", "PeixeEnlatadoMargemVlr", "PeixeEnlatadoVlr", Funcoes.CalculateType.ValueOverRevenue)
+        oFun.Grid_Footer_Calculate(sender, e, ASPxGridView1, "CaixaMargem", "CaixaMargemVlr", "CaixaVlr", Funcoes.CalculateType.ValueOverRevenue)
+
+        oFun.Grid_Footer_Calculate(sender, e, ASPxGridView1, "AzeiteMargem", "AzeiteMargemVlr", "AzeiteVlr", Funcoes.CalculateType.ValueOverRevenue)
+
+
+    End Sub
+
    
+    Protected Sub ASPxGridView1_HtmlDataCellPrepared(sender As Object, e As ASPxGridViewTableDataCellEventArgs) Handles ASPxGridView1.HtmlDataCellPrepared
+        oFun.Grid_RedIsNegative(e, "CaixaMargemVlr")
+        oFun.Grid_RedIsNegative(e, "CaixaMargem")
+
+        oFun.Grid_RedIsNegative(e, "OutrosChocolatesMargemVlr")
+        oFun.Grid_RedIsNegative(e, "OvosMargemVlr")
+        oFun.Grid_RedIsNegative(e, "BacalhauMargemVlr")
+        oFun.Grid_RedIsNegative(e, "ColombaMargemVlr")
+        oFun.Grid_RedIsNegative(e, "BarrasMargemVlr")
+        oFun.Grid_RedIsNegative(e, "ChocolatePresenteMargemVlr")
+        oFun.Grid_RedIsNegative(e, "AzeitonaMargemVlr")
+        oFun.Grid_RedIsNegative(e, "PeixeEnlatadoMargemVlr")
+        oFun.Grid_RedIsNegative(e, "AzeiteMargemVlr")
+
+        oFun.Grid_RedIsNegative(e, "OutrosChocolatesMargem")
+        oFun.Grid_RedIsNegative(e, "OvosMargem")
+        oFun.Grid_RedIsNegative(e, "BacalhauMargem")
+        oFun.Grid_RedIsNegative(e, "ColombaMargem")
+        oFun.Grid_RedIsNegative(e, "BarrasMargem")
+        oFun.Grid_RedIsNegative(e, "ChocolatePresenteMargem")
+        oFun.Grid_RedIsNegative(e, "AzeitonaMargem")
+        oFun.Grid_RedIsNegative(e, "PeixeEnlatadoMargem")
+        oFun.Grid_RedIsNegative(e, "AzeiteMargem")
+
+    End Sub
+
+    Protected Sub gridParticipacao_CustomSummaryCalculate(sender As Object, e As CustomSummaryEventArgs) Handles gridParticipacao.CustomSummaryCalculate
+        oFun.Grid_Footer_Calculate(sender, e, gridParticipacao, "percCrescVolume", "VolumeAT", "VolumeAA", Funcoes.CalculateType.Growth)
+        oFun.Grid_Footer_Calculate(sender, e, gridParticipacao, "percAtingMeta", "vlrVendaAT", "vlrMeta", Funcoes.CalculateType.Growth)
+        oFun.Grid_Footer_Calculate(sender, e, gridParticipacao, "percCresc", "vlrVendaAT", "vlrVendaAA", Funcoes.CalculateType.Growth)
+
+
+    End Sub
+
+    Protected Sub gridParticipacao_HtmlDataCellPrepared(sender As Object, e As ASPxGridViewTableDataCellEventArgs) Handles gridParticipacao.HtmlDataCellPrepared
+
+        oFun.Grid_RedIsNegative(e, "percCrescVolume")
+        oFun.Grid_RedIsNegative(e, "difVenda")
+        oFun.Grid_RedIsNegative(e, "percCresc")
+        oFun.Grid_RedIsNegative(e, "difMeta")
+        oFun.Grid_RedIsNegative(e, "percAtingMeta")
+
+    End Sub
+
+    Protected Sub gridParticipacao_HtmlFooterCellPrepared(sender As Object, e As ASPxGridViewTableFooterCellEventArgs) Handles gridParticipacao.HtmlFooterCellPrepared
+        oFun.Grid_RedIsNegativeFooter(sender, e)
+    End Sub
 End Class
 
