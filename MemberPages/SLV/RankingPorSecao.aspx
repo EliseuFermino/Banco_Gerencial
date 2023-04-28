@@ -8,6 +8,8 @@
 
 <%@ Register src="../../Controles/wucListaLojasComCorporacao.ascx" tagname="wucListaLojasComCorporacao" tagprefix="uc2" %>
 <%@ Register Src="~/Controles/wucMercadologicoNew.ascx" TagPrefix="uc1" TagName="wucMercadologicoNew" %>
+<%@ Register Src="~/Controles/wucObsPrograma.ascx" TagPrefix="uc1" TagName="wucObsPrograma" %>
+
 
 
 
@@ -396,6 +398,8 @@
             </PanelCollection>
         </dx:ASPxCallbackPanel>
     </div>
+
+    <uc1:wucObsPrograma runat="server" ID="wucObsPrograma" Anotacao1="Banco: DW_Condor_One" Anotacao2="Stored: Analises.usp_RankingPorSecao" />
     
 </asp:Content>
 
