@@ -393,7 +393,7 @@
                         </SelectParameters>
                     </asp:SqlDataSource>
 
-                    <asp:Label ID="lblError" runat="server" Text="" ForeColor ="Red" ></asp:Label>
+                    <asp:Label ID="lblError" runat="server" Text="" ForeColor ="Red" Visible="false" ></asp:Label>
                 </dx:PanelContent>
             </PanelCollection>
         </dx:ASPxCallbackPanel>
