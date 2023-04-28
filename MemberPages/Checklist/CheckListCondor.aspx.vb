@@ -27,11 +27,10 @@ Partial Class MemberPages_CheckListCondor
 
             txtData.Value = DateTime.Now.ToString("yyyy-MM-dd")
 
-            'Me.cboFilial.AutoPostBack = False
-            'Me.cboFilial.Visible_cboCorporacao = True
             Call PadraoInicial()
             Call HabilitarGerarRelatorio()
 
+            Call BuscarChecklist()
             Call colorMenu()
 
         End If
@@ -101,20 +100,6 @@ Partial Class MemberPages_CheckListCondor
             EnabledControls(rnd4_3_Sim, rnd4_3_Nao, rnd4_3_NA, txt4_3, imgFoto4_3, btnSalvarFoto4_3, True)
         End If
 
-        ' LOJAS QUE NÃO TEM CFTV
-        'If oDa.ExecuteStoredProcedure_Scalar("uspBuscarStatusLoja_CFTV", Conexao.gerCheckList, "@idFilial", selFilial.SelectedValue) = 3 Then
-        'EnabledControls(rnd7_10_Sim, rnd7_10_Nao, rnd7_10_NA, txt7_10, imgFoto7_10, btnSalvarFoto7_10, False)
-        'Else
-        'EnabledControls(rnd7_10_Sim, rnd7_10_Nao, rnd7_10_NA, txt7_10, imgFoto7_10, btnSalvarFoto7_10, True)
-        'End If
-
-        ' HSA - Pergunta 15.3
-        'If selFilial.SelectedValue = 3 Or selFilial.SelectedValue = 9 Or selFilial.SelectedValue = 13 Or selFilial.SelectedValue = 14 Or selFilial.SelectedValue = 15 Or selFilial.SelectedValue = 18 Or selFilial.SelectedValue = 19 Or selFilial.SelectedValue = 20 Or selFilial.SelectedValue = 24 Or selFilial.SelectedValue = 25 Then
-        '    EnabledControls(rnd15_3_Sim, rnd15_3_Nao, rnd15_3_NA, txt15_3, imgFoto15_3, btnSalvarFoto15_3, False)
-        'Else
-        '    EnabledControls(rnd15_3_Sim, rnd15_3_Nao, rnd15_3_NA, txt15_3, imgFoto15_3, btnSalvarFoto15_3, True)
-        'End If
-
     End Sub
 
     Protected Sub Page_Init(sender As Object, e As EventArgs) Handles Me.Init
@@ -134,29 +119,31 @@ Partial Class MemberPages_CheckListCondor
 
 
 #End Region
+
     Private Sub colorMenu()
+        Dim arrayColors(20) As Integer
+        arrayColors = Session("sMenuColor")
 
-        btnMenu_1.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_2.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_3.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_4.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_5.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_6.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_7.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_8.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_9.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_10.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_11.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_12.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_13.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_14.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_15.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_16.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_17.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_18.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_19.BackColor = Color.FromArgb(46, 77, 123)
-        btnMenu_20.BackColor = Color.FromArgb(46, 77, 123)
-
+        If (arrayColors(0) = 23) Then btnMenu_1.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_1.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(1) = 15) Then btnMenu_2.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_2.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(2) = 10) Then btnMenu_3.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_3.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(3) = 7) Then btnMenu_4.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_4.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(4) = 11) Then btnMenu_5.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_5.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(5) = 6) Then btnMenu_6.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_6.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(6) = 10) Then btnMenu_7.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_7.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(7) = 28) Then btnMenu_8.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_8.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(8) = 24) Then btnMenu_9.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_9.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(9) = 10) Then btnMenu_10.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_10.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(10) = 24) Then btnMenu_11.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_11.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(11) = 18) Then btnMenu_12.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_12.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(12) = 13) Then btnMenu_13.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_13.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(13) = 9) Then btnMenu_14.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_14.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(14) = 3) Then btnMenu_15.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_15.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(15) = 8) Then btnMenu_16.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_16.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(16) = 5) Then btnMenu_17.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_17.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(17) = 18) Then btnMenu_18.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_18.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(18) = 14) Then btnMenu_19.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_19.BackColor = Color.FromArgb(46, 77, 123)
+        If (arrayColors(19) = 3) Then btnMenu_20.BackColor = Color.FromArgb(120, 167, 149) Else btnMenu_20.BackColor = Color.FromArgb(46, 77, 123)
 
     End Sub
 
@@ -343,6 +330,9 @@ Partial Class MemberPages_CheckListCondor
             btnGrupo15.Enabled = False
             btnGrupo16.Enabled = False
             btnGrupo17.Enabled = False
+            btnGrupo18.Enabled = False
+            btnGrupo19.Enabled = False
+            btnGrupo20.Enabled = False
 
         Else
             btnGrupo1.Enabled = True
@@ -362,6 +352,9 @@ Partial Class MemberPages_CheckListCondor
             btnGrupo15.Enabled = True
             btnGrupo16.Enabled = True
             btnGrupo17.Enabled = True
+            btnGrupo18.Enabled = True
+            btnGrupo19.Enabled = True
+            btnGrupo20.Enabled = True
 
         End If
 
@@ -1514,28 +1507,315 @@ Partial Class MemberPages_CheckListCondor
     End Sub
 
     Private Sub BuscarChecklist()
+        Dim arrayTotal(20) As Integer
+        Dim constr As String = ConfigurationManager.ConnectionStrings("gerCheckListConnectionString").ConnectionString
+        Using con As New SqlConnection(constr)
+            Using cmd As New SqlCommand("SP_GERA_RELATORIO_CHEKLIST")
 
-        'Call TudoAzul()
-        Call BuscarChecklist_Grupo1(1)
-        'Call BuscarChecklist_Grupo2(2)
-        'Call BuscarChecklist_Grupo3(3)
-        'Call BuscarChecklist_Grupo4(4)
-        'Call BuscarChecklist_Grupo5(5)
-        'Call BuscarChecklist_Grupo6(6)
-        'Call BuscarChecklist_Grupo7(7)
-        'Call BuscarChecklist_Grupo8(8)
-        'Call BuscarChecklist_Grupo9(9)
-        'Call BuscarChecklist_Grupo10(10)
-        'Call BuscarChecklist_Grupo11(11)
-        'Call BuscarChecklist_Grupo12(12)
-        'Call BuscarChecklist_Grupo13(13)
-        'Call BuscarChecklist_Grupo14(14)
-        'Call BuscarChecklist_Grupo15(15)
-        'Call BuscarChecklist_Grupo16(16)
-        'Call BuscarChecklist_Grupo17(17)
-        'Call BuscarChecklist_Grupo18(18)
-        'Call BuscarChecklist_Grupo19(19)
-        Call BuscarChecklist_GrupoCor()
+                cmd.CommandType = CommandType.StoredProcedure
+
+                cmd.Parameters.Add(New SqlParameter("@dia", SqlDbType.VarChar))
+                cmd.Parameters("@dia").Value = txtData.Value
+
+                cmd.Parameters.Add(New SqlParameter("@idFilial", SqlDbType.VarChar))
+                cmd.Parameters("@idFilial").Value = selFilial.SelectedValue.ToString()
+
+                Using sda As New SqlDataAdapter()
+                    cmd.Connection = con
+                    sda.SelectCommand = cmd
+                    Using ds As New DataSet()
+                        sda.Fill(ds)
+                        For Each tabela In ds.Tables(0).Rows
+
+                            If (tabela(9) = 1 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt1_1, tabela(5), Me.rnd1_1_Sim, rnd1_1_Nao, Me.rnd1_1_NA)
+                            If (tabela(9) = 1 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt1_2, tabela(5), Me.rnd1_2_Sim, rnd1_2_Nao, Me.rnd1_2_NA)
+                            If (tabela(9) = 1 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt1_3, tabela(5), Me.rnd1_3_Sim, rnd1_3_Nao, Me.rnd1_3_NA)
+                            If (tabela(9) = 1 And tabela(10) = 4) Then Call BCDet(tabela(8), Me.txt1_4, tabela(5), Me.rnd1_4_Sim, rnd1_4_Nao, Me.rnd1_4_NA)
+                            If (tabela(9) = 1 And tabela(10) = 5) Then Call BCDet(tabela(8), Me.txt1_5, tabela(5), Me.rnd1_5_Sim, rnd1_5_Nao, Me.rnd1_5_NA)
+                            If (tabela(9) = 1 And tabela(10) = 6) Then Call BCDet(tabela(8), Me.txt1_6, tabela(5), Me.rnd1_6_Sim, rnd1_6_Nao, Me.rnd1_6_NA)
+                            If (tabela(9) = 1 And tabela(10) = 7) Then Call BCDet(tabela(8), Me.txt1_7, tabela(5), Me.rnd1_7_Sim, rnd1_7_Nao, Me.rnd1_7_NA)
+                            If (tabela(9) = 1 And tabela(10) = 8) Then Call BCDet(tabela(8), Me.txt1_8, tabela(5), Me.rnd1_8_Sim, rnd1_8_Nao, Me.rnd1_8_NA)
+                            If (tabela(9) = 1 And tabela(10) = 9) Then Call BCDet(tabela(8), Me.txt1_9, tabela(5), Me.rnd1_9_Sim, rnd1_9_Nao, Me.rnd1_9_NA)
+                            If (tabela(9) = 1 And tabela(10) = 10) Then Call BCDet(tabela(8), Me.txt1_10, tabela(5), Me.rnd1_10_Sim, rnd1_10_Nao, Me.rnd1_10_NA)
+                            If (tabela(9) = 1 And tabela(10) = 11) Then Call BCDet(tabela(8), Me.txt1_11, tabela(5), Me.rnd1_11_Sim, rnd1_11_Nao, Me.rnd1_11_NA)
+                            If (tabela(9) = 1 And tabela(10) = 12) Then Call BCDet(tabela(8), Me.txt1_12, tabela(5), Me.rnd1_12_Sim, rnd1_12_Nao, Me.rnd1_12_NA)
+                            If (tabela(9) = 1 And tabela(10) = 13) Then Call BCDet(tabela(8), Me.txt1_13, tabela(5), Me.rnd1_13_Sim, rnd1_13_Nao, Me.rnd1_13_NA)
+                            If (tabela(9) = 1 And tabela(10) = 14) Then Call BCDet(tabela(8), Me.txt1_14, tabela(5), Me.rnd1_14_Sim, rnd1_14_Nao, Me.rnd1_14_NA)
+                            If (tabela(9) = 1 And tabela(10) = 15) Then Call BCDet(tabela(8), Me.txt1_15, tabela(5), Me.rnd1_15_Sim, rnd1_15_Nao, Me.rnd1_15_NA)
+                            If (tabela(9) = 1 And tabela(10) = 16) Then Call BCDet(tabela(8), Me.txt1_16, tabela(5), Me.rnd1_16_Sim, rnd1_16_Nao, Me.rnd1_16_NA)
+                            If (tabela(9) = 1 And tabela(10) = 17) Then Call BCDet(tabela(8), Me.txt1_17, tabela(5), Me.rnd1_17_Sim, rnd1_17_Nao, Me.rnd1_17_NA)
+                            If (tabela(9) = 1 And tabela(10) = 18) Then Call BCDet(tabela(8), Me.txt1_18, tabela(5), Me.rnd1_18_Sim, rnd1_18_Nao, Me.rnd1_18_NA)
+                            If (tabela(9) = 1 And tabela(10) = 19) Then Call BCDet(tabela(8), Me.txt1_19, tabela(5), Me.rnd1_19_Sim, rnd1_19_Nao, Me.rnd1_19_NA)
+                            If (tabela(9) = 1 And tabela(10) = 20) Then Call BCDet(tabela(8), Me.txt1_20, tabela(5), Me.rnd1_20_Sim, rnd1_20_Nao, Me.rnd1_20_NA)
+                            If (tabela(9) = 1 And tabela(10) = 21) Then Call BCDet(tabela(8), Me.txt1_21, tabela(5), Me.rnd1_21_Sim, rnd1_21_Nao, Me.rnd1_21_NA)
+                            If (tabela(9) = 1 And tabela(10) = 22) Then Call BCDet(tabela(8), Me.txt1_22, tabela(5), Me.rnd1_22_Sim, rnd1_22_Nao, Me.rnd1_22_NA)
+                            If (tabela(9) = 1 And tabela(10) = 23) Then Call BCDet(tabela(8), Me.txt1_23, tabela(5), Me.rnd1_23_Sim, rnd1_23_Nao, Me.rnd1_23_NA)
+                            If (tabela(9) = 2 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt2_1, tabela(5), Me.rnd2_1_Sim, rnd2_1_Nao, Me.rnd2_1_NA)
+                            If (tabela(9) = 2 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt2_2, tabela(5), Me.rnd2_2_Sim, rnd2_2_Nao, Me.rnd2_2_NA)
+                            If (tabela(9) = 2 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt2_3, tabela(5), Me.rnd2_3_Sim, rnd2_3_Nao, Me.rnd2_3_NA)
+                            If (tabela(9) = 2 And tabela(10) = 4) Then Call BCDet(tabela(8), Me.txt2_4, tabela(5), Me.rnd2_4_Sim, rnd2_4_Nao, Me.rnd2_4_NA)
+                            If (tabela(9) = 2 And tabela(10) = 5) Then Call BCDet(tabela(8), Me.txt2_5, tabela(5), Me.rnd2_5_Sim, rnd2_5_Nao, Me.rnd2_5_NA)
+                            If (tabela(9) = 2 And tabela(10) = 6) Then Call BCDet(tabela(8), Me.txt2_6, tabela(5), Me.rnd2_6_Sim, rnd2_6_Nao, Me.rnd2_6_NA)
+                            If (tabela(9) = 2 And tabela(10) = 7) Then Call BCDet(tabela(8), Me.txt2_7, tabela(5), Me.rnd2_7_Sim, rnd2_7_Nao, Me.rnd2_7_NA)
+                            If (tabela(9) = 2 And tabela(10) = 8) Then Call BCDet(tabela(8), Me.txt2_8, tabela(5), Me.rnd2_8_Sim, rnd2_8_Nao, Me.rnd2_8_NA)
+                            If (tabela(9) = 2 And tabela(10) = 9) Then Call BCDet(tabela(8), Me.txt2_9, tabela(5), Me.rnd2_9_Sim, rnd2_9_Nao, Me.rnd2_9_NA)
+                            If (tabela(9) = 2 And tabela(10) = 10) Then Call BCDet(tabela(8), Me.txt2_10, tabela(5), Me.rnd2_10_Sim, rnd2_10_Nao, Me.rnd2_10_NA)
+                            If (tabela(9) = 2 And tabela(10) = 11) Then Call BCDet(tabela(8), Me.txt2_11, tabela(5), Me.rnd2_11_Sim, rnd2_11_Nao, Me.rnd2_11_NA)
+                            If (tabela(9) = 2 And tabela(10) = 12) Then Call BCDet(tabela(8), Me.txt2_12, tabela(5), Me.rnd2_12_Sim, rnd2_12_Nao, Me.rnd2_12_NA)
+                            If (tabela(9) = 2 And tabela(10) = 13) Then Call BCDet(tabela(8), Me.txt2_13, tabela(5), Me.rnd2_13_Sim, rnd2_13_Nao, Me.rnd2_13_NA)
+                            If (tabela(9) = 2 And tabela(10) = 14) Then Call BCDet(tabela(8), Me.txt2_14, tabela(5), Me.rnd2_14_Sim, rnd2_14_Nao, Me.rnd2_14_NA)
+                            If (tabela(9) = 2 And tabela(10) = 15) Then Call BCDet(tabela(8), Me.txt2_15, tabela(5), Me.rnd2_15_Sim, rnd2_15_Nao, Me.rnd2_15_NA)
+                            If (tabela(9) = 3 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt3_1, tabela(5), Me.rnd3_1_Sim, rnd3_1_Nao, Me.rnd3_1_NA)
+                            If (tabela(9) = 3 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt3_2, tabela(5), Me.rnd3_2_Sim, rnd3_2_Nao, Me.rnd3_2_NA)
+                            If (tabela(9) = 3 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt3_3, tabela(5), Me.rnd3_3_Sim, rnd3_3_Nao, Me.rnd3_3_NA)
+                            If (tabela(9) = 3 And tabela(10) = 4) Then Call BCDet(tabela(8), Me.txt3_4, tabela(5), Me.rnd3_4_Sim, rnd3_4_Nao, Me.rnd3_4_NA)
+                            If (tabela(9) = 3 And tabela(10) = 5) Then Call BCDet(tabela(8), Me.txt3_5, tabela(5), Me.rnd3_5_Sim, rnd3_5_Nao, Me.rnd3_5_NA)
+                            If (tabela(9) = 3 And tabela(10) = 6) Then Call BCDet(tabela(8), Me.txt3_6, tabela(5), Me.rnd3_6_Sim, rnd3_6_Nao, Me.rnd3_6_NA)
+                            If (tabela(9) = 3 And tabela(10) = 7) Then Call BCDet(tabela(8), Me.txt3_7, tabela(5), Me.rnd3_7_Sim, rnd3_7_Nao, Me.rnd3_7_NA)
+                            If (tabela(9) = 3 And tabela(10) = 8) Then Call BCDet(tabela(8), Me.txt3_8, tabela(5), Me.rnd3_8_Sim, rnd3_8_Nao, Me.rnd3_8_NA)
+                            If (tabela(9) = 3 And tabela(10) = 9) Then Call BCDet(tabela(8), Me.txt3_9, tabela(5), Me.rnd3_9_Sim, rnd3_9_Nao, Me.rnd3_9_NA)
+                            If (tabela(9) = 3 And tabela(10) = 10) Then Call BCDet(tabela(8), Me.txt3_10, tabela(5), Me.rnd3_10_Sim, rnd3_10_Nao, Me.rnd3_10_NA)
+                            If (tabela(9) = 4 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt4_1, tabela(5), Me.rnd4_1_Sim, rnd4_1_Nao, Me.rnd4_1_NA)
+                            If (tabela(9) = 4 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt4_2, tabela(5), Me.rnd4_2_Sim, rnd4_2_Nao, Me.rnd4_2_NA)
+                            If (tabela(9) = 4 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt4_3, tabela(5), Me.rnd4_3_Sim, rnd4_3_Nao, Me.rnd4_3_NA)
+                            If (tabela(9) = 4 And tabela(10) = 4) Then Call BCDet(tabela(8), Me.txt4_4, tabela(5), Me.rnd4_4_Sim, rnd4_4_Nao, Me.rnd4_4_NA)
+                            If (tabela(9) = 4 And tabela(10) = 5) Then Call BCDet(tabela(8), Me.txt4_5, tabela(5), Me.rnd4_5_Sim, rnd4_5_Nao, Me.rnd4_5_NA)
+                            If (tabela(9) = 4 And tabela(10) = 6) Then Call BCDet(tabela(8), Me.txt4_6, tabela(5), Me.rnd4_6_Sim, rnd4_6_Nao, Me.rnd4_6_NA)
+                            If (tabela(9) = 4 And tabela(10) = 7) Then Call BCDet(tabela(8), Me.txt4_7, tabela(5), Me.rnd4_7_Sim, rnd4_7_Nao, Me.rnd4_7_NA)
+                            If (tabela(9) = 5 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt5_1, tabela(5), Me.rnd5_1_Sim, rnd5_1_Nao, Me.rnd5_1_NA)
+                            If (tabela(9) = 5 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt5_2, tabela(5), Me.rnd5_2_Sim, rnd5_2_Nao, Me.rnd5_2_NA)
+                            If (tabela(9) = 5 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt5_3, tabela(5), Me.rnd5_3_Sim, rnd5_3_Nao, Me.rnd5_3_NA)
+                            If (tabela(9) = 5 And tabela(10) = 4) Then Call BCDet(tabela(8), Me.txt5_4, tabela(5), Me.rnd5_4_Sim, rnd5_4_Nao, Me.rnd5_4_NA)
+                            If (tabela(9) = 5 And tabela(10) = 5) Then Call BCDet(tabela(8), Me.txt5_5, tabela(5), Me.rnd5_5_Sim, rnd5_5_Nao, Me.rnd5_5_NA)
+                            If (tabela(9) = 5 And tabela(10) = 6) Then Call BCDet(tabela(8), Me.txt5_6, tabela(5), Me.rnd5_6_Sim, rnd5_6_Nao, Me.rnd5_6_NA)
+                            If (tabela(9) = 5 And tabela(10) = 7) Then Call BCDet(tabela(8), Me.txt5_7, tabela(5), Me.rnd5_7_Sim, rnd5_7_Nao, Me.rnd5_7_NA)
+                            If (tabela(9) = 5 And tabela(10) = 8) Then Call BCDet(tabela(8), Me.txt5_8, tabela(5), Me.rnd5_8_Sim, rnd5_8_Nao, Me.rnd5_8_NA)
+                            If (tabela(9) = 5 And tabela(10) = 9) Then Call BCDet(tabela(8), Me.txt5_9, tabela(5), Me.rnd5_9_Sim, rnd5_9_Nao, Me.rnd5_9_NA)
+                            If (tabela(9) = 5 And tabela(10) = 10) Then Call BCDet(tabela(8), Me.txt5_10, tabela(5), Me.rnd5_10_Sim, rnd5_10_Nao, Me.rnd5_10_NA)
+                            If (tabela(9) = 5 And tabela(10) = 11) Then Call BCDet(tabela(8), Me.txt5_11, tabela(5), Me.rnd5_11_Sim, rnd5_11_Nao, Me.rnd5_11_NA)
+                            If (tabela(9) = 6 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt6_1, tabela(5), Me.rnd6_1_Sim, rnd6_1_Nao, Me.rnd6_1_NA)
+                            If (tabela(9) = 6 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt6_2, tabela(5), Me.rnd6_2_Sim, rnd6_2_Nao, Me.rnd6_2_NA)
+                            If (tabela(9) = 6 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt6_3, tabela(5), Me.rnd6_3_Sim, rnd6_3_Nao, Me.rnd6_3_NA)
+                            If (tabela(9) = 6 And tabela(10) = 4) Then Call BCDet(tabela(8), Me.txt6_4, tabela(5), Me.rnd6_4_Sim, rnd6_4_Nao, Me.rnd6_4_NA)
+                            If (tabela(9) = 6 And tabela(10) = 5) Then Call BCDet(tabela(8), Me.txt6_5, tabela(5), Me.rnd6_5_Sim, rnd6_5_Nao, Me.rnd6_5_NA)
+                            If (tabela(9) = 6 And tabela(10) = 6) Then Call BCDet(tabela(8), Me.txt6_6, tabela(5), Me.rnd6_6_Sim, rnd6_6_Nao, Me.rnd6_6_NA)
+                            If (tabela(9) = 7 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt7_1, tabela(5), Me.rnd7_1_Sim, rnd7_1_Nao, Me.rnd7_1_NA)
+                            If (tabela(9) = 7 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt7_2, tabela(5), Me.rnd7_2_Sim, rnd7_2_Nao, Me.rnd7_2_NA)
+                            If (tabela(9) = 7 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt7_3, tabela(5), Me.rnd7_3_Sim, rnd7_3_Nao, Me.rnd7_3_NA)
+                            If (tabela(9) = 7 And tabela(10) = 4) Then Call BCDet(tabela(8), Me.txt7_4, tabela(5), Me.rnd7_4_Sim, rnd7_4_Nao, Me.rnd7_4_NA)
+                            If (tabela(9) = 7 And tabela(10) = 5) Then Call BCDet(tabela(8), Me.txt7_5, tabela(5), Me.rnd7_5_Sim, rnd7_5_Nao, Me.rnd7_5_NA)
+                            If (tabela(9) = 7 And tabela(10) = 6) Then Call BCDet(tabela(8), Me.txt7_6, tabela(5), Me.rnd7_6_Sim, rnd7_6_Nao, Me.rnd7_6_NA)
+                            If (tabela(9) = 7 And tabela(10) = 7) Then Call BCDet(tabela(8), Me.txt7_7, tabela(5), Me.rnd7_7_Sim, rnd7_7_Nao, Me.rnd7_7_NA)
+                            If (tabela(9) = 7 And tabela(10) = 8) Then Call BCDet(tabela(8), Me.txt7_8, tabela(5), Me.rnd7_8_Sim, rnd7_8_Nao, Me.rnd7_8_NA)
+                            If (tabela(9) = 7 And tabela(10) = 9) Then Call BCDet(tabela(8), Me.txt7_9, tabela(5), Me.rnd7_9_Sim, rnd7_9_Nao, Me.rnd7_9_NA)
+                            If (tabela(9) = 7 And tabela(10) = 10) Then Call BCDet(tabela(8), Me.txt7_10, tabela(5), Me.rnd7_10_Sim, rnd7_10_Nao, Me.rnd7_10_NA)
+                            If (tabela(9) = 8 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt8_1, tabela(5), Me.rnd8_1_Sim, rnd8_1_Nao, Me.rnd8_1_NA)
+                            If (tabela(9) = 8 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt8_2, tabela(5), Me.rnd8_2_Sim, rnd8_2_Nao, Me.rnd8_2_NA)
+                            If (tabela(9) = 8 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt8_3, tabela(5), Me.rnd8_3_Sim, rnd8_3_Nao, Me.rnd8_3_NA)
+                            If (tabela(9) = 8 And tabela(10) = 4) Then Call BCDet(tabela(8), Me.txt8_4, tabela(5), Me.rnd8_4_Sim, rnd8_4_Nao, Me.rnd8_4_NA)
+                            If (tabela(9) = 8 And tabela(10) = 5) Then Call BCDet(tabela(8), Me.txt8_5, tabela(5), Me.rnd8_5_Sim, rnd8_5_Nao, Me.rnd8_5_NA)
+                            If (tabela(9) = 8 And tabela(10) = 6) Then Call BCDet(tabela(8), Me.txt8_6, tabela(5), Me.rnd8_6_Sim, rnd8_6_Nao, Me.rnd8_6_NA)
+                            If (tabela(9) = 8 And tabela(10) = 7) Then Call BCDet(tabela(8), Me.txt8_7, tabela(5), Me.rnd8_7_Sim, rnd8_7_Nao, Me.rnd8_7_NA)
+                            If (tabela(9) = 8 And tabela(10) = 8) Then Call BCDet(tabela(8), Me.txt8_8, tabela(5), Me.rnd8_8_Sim, rnd8_8_Nao, Me.rnd8_8_NA)
+                            If (tabela(9) = 8 And tabela(10) = 9) Then Call BCDet(tabela(8), Me.txt8_9, tabela(5), Me.rnd8_9_Sim, rnd8_9_Nao, Me.rnd8_9_NA)
+                            If (tabela(9) = 8 And tabela(10) = 10) Then Call BCDet(tabela(8), Me.txt8_10, tabela(5), Me.rnd8_10_Sim, rnd8_10_Nao, Me.rnd8_10_NA)
+                            If (tabela(9) = 8 And tabela(10) = 11) Then Call BCDet(tabela(8), Me.txt8_11, tabela(5), Me.rnd8_11_Sim, rnd8_11_Nao, Me.rnd8_11_NA)
+                            If (tabela(9) = 8 And tabela(10) = 12) Then Call BCDet(tabela(8), Me.txt8_12, tabela(5), Me.rnd8_12_Sim, rnd8_12_Nao, Me.rnd8_12_NA)
+                            If (tabela(9) = 8 And tabela(10) = 13) Then Call BCDet(tabela(8), Me.txt8_13, tabela(5), Me.rnd8_13_Sim, rnd8_13_Nao, Me.rnd8_13_NA)
+                            If (tabela(9) = 8 And tabela(10) = 14) Then Call BCDet(tabela(8), Me.txt8_14, tabela(5), Me.rnd8_14_Sim, rnd8_14_Nao, Me.rnd8_14_NA)
+                            If (tabela(9) = 8 And tabela(10) = 15) Then Call BCDet(tabela(8), Me.txt8_15, tabela(5), Me.rnd8_15_Sim, rnd8_15_Nao, Me.rnd8_15_NA)
+                            If (tabela(9) = 8 And tabela(10) = 16) Then Call BCDet(tabela(8), Me.txt8_16, tabela(5), Me.rnd8_16_Sim, rnd8_16_Nao, Me.rnd8_16_NA)
+                            If (tabela(9) = 8 And tabela(10) = 17) Then Call BCDet(tabela(8), Me.txt8_17, tabela(5), Me.rnd8_17_Sim, rnd8_17_Nao, Me.rnd8_17_NA)
+                            If (tabela(9) = 8 And tabela(10) = 18) Then Call BCDet(tabela(8), Me.txt8_18, tabela(5), Me.rnd8_18_Sim, rnd8_18_Nao, Me.rnd8_18_NA)
+                            If (tabela(9) = 8 And tabela(10) = 19) Then Call BCDet(tabela(8), Me.txt8_19, tabela(5), Me.rnd8_19_Sim, rnd8_19_Nao, Me.rnd8_19_NA)
+                            If (tabela(9) = 8 And tabela(10) = 20) Then Call BCDet(tabela(8), Me.txt8_20, tabela(5), Me.rnd8_20_Sim, rnd8_20_Nao, Me.rnd8_20_NA)
+                            If (tabela(9) = 8 And tabela(10) = 21) Then Call BCDet(tabela(8), Me.txt8_21, tabela(5), Me.rnd8_21_Sim, rnd8_21_Nao, Me.rnd8_21_NA)
+                            If (tabela(9) = 8 And tabela(10) = 22) Then Call BCDet(tabela(8), Me.txt8_22, tabela(5), Me.rnd8_22_Sim, rnd8_22_Nao, Me.rnd8_22_NA)
+                            If (tabela(9) = 8 And tabela(10) = 23) Then Call BCDet(tabela(8), Me.txt8_23, tabela(5), Me.rnd8_23_Sim, rnd8_23_Nao, Me.rnd8_23_NA)
+                            If (tabela(9) = 8 And tabela(10) = 24) Then Call BCDet(tabela(8), Me.txt8_24, tabela(5), Me.rnd8_24_Sim, rnd8_24_Nao, Me.rnd8_24_NA)
+                            If (tabela(9) = 8 And tabela(10) = 25) Then Call BCDet(tabela(8), Me.txt8_25, tabela(5), Me.rnd8_25_Sim, rnd8_25_Nao, Me.rnd8_25_NA)
+                            If (tabela(9) = 8 And tabela(10) = 26) Then Call BCDet(tabela(8), Me.txt8_26, tabela(5), Me.rnd8_26_Sim, rnd8_26_Nao, Me.rnd8_26_NA)
+                            If (tabela(9) = 8 And tabela(10) = 27) Then Call BCDet(tabela(8), Me.txt8_27, tabela(5), Me.rnd8_27_Sim, rnd8_27_Nao, Me.rnd8_27_NA)
+                            If (tabela(9) = 8 And tabela(10) = 28) Then Call BCDet(tabela(8), Me.txt8_28, tabela(5), Me.rnd8_28_Sim, rnd8_28_Nao, Me.rnd8_28_NA)
+                            If (tabela(9) = 9 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt9_1, tabela(5), Me.rnd9_1_Sim, rnd9_1_Nao, Me.rnd9_1_NA)
+                            If (tabela(9) = 9 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt9_2, tabela(5), Me.rnd9_2_Sim, rnd9_2_Nao, Me.rnd9_2_NA)
+                            If (tabela(9) = 9 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt9_3, tabela(5), Me.rnd9_3_Sim, rnd9_3_Nao, Me.rnd9_3_NA)
+                            If (tabela(9) = 9 And tabela(10) = 4) Then Call BCDet(tabela(8), Me.txt9_4, tabela(5), Me.rnd9_4_Sim, rnd9_4_Nao, Me.rnd9_4_NA)
+                            If (tabela(9) = 9 And tabela(10) = 5) Then Call BCDet(tabela(8), Me.txt9_5, tabela(5), Me.rnd9_5_Sim, rnd9_5_Nao, Me.rnd9_5_NA)
+                            If (tabela(9) = 9 And tabela(10) = 6) Then Call BCDet(tabela(8), Me.txt9_6, tabela(5), Me.rnd9_6_Sim, rnd9_6_Nao, Me.rnd9_6_NA)
+                            If (tabela(9) = 9 And tabela(10) = 7) Then Call BCDet(tabela(8), Me.txt9_7, tabela(5), Me.rnd9_7_Sim, rnd9_7_Nao, Me.rnd9_7_NA)
+                            If (tabela(9) = 9 And tabela(10) = 8) Then Call BCDet(tabela(8), Me.txt9_8, tabela(5), Me.rnd9_8_Sim, rnd9_8_Nao, Me.rnd9_8_NA)
+                            If (tabela(9) = 9 And tabela(10) = 9) Then Call BCDet(tabela(8), Me.txt9_9, tabela(5), Me.rnd9_9_Sim, rnd9_9_Nao, Me.rnd9_9_NA)
+                            If (tabela(9) = 9 And tabela(10) = 10) Then Call BCDet(tabela(8), Me.txt9_10, tabela(5), Me.rnd9_10_Sim, rnd9_10_Nao, Me.rnd9_10_NA)
+                            If (tabela(9) = 9 And tabela(10) = 11) Then Call BCDet(tabela(8), Me.txt9_11, tabela(5), Me.rnd9_11_Sim, rnd9_11_Nao, Me.rnd9_11_NA)
+                            If (tabela(9) = 9 And tabela(10) = 12) Then Call BCDet(tabela(8), Me.txt9_12, tabela(5), Me.rnd9_12_Sim, rnd9_12_Nao, Me.rnd9_12_NA)
+                            If (tabela(9) = 9 And tabela(10) = 13) Then Call BCDet(tabela(8), Me.txt9_13, tabela(5), Me.rnd9_13_Sim, rnd9_13_Nao, Me.rnd9_13_NA)
+                            If (tabela(9) = 9 And tabela(10) = 14) Then Call BCDet(tabela(8), Me.txt9_14, tabela(5), Me.rnd9_14_Sim, rnd9_14_Nao, Me.rnd9_14_NA)
+                            If (tabela(9) = 9 And tabela(10) = 15) Then Call BCDet(tabela(8), Me.txt9_15, tabela(5), Me.rnd9_15_Sim, rnd9_15_Nao, Me.rnd9_15_NA)
+                            If (tabela(9) = 9 And tabela(10) = 16) Then Call BCDet(tabela(8), Me.txt9_16, tabela(5), Me.rnd9_16_Sim, rnd9_16_Nao, Me.rnd9_16_NA)
+                            If (tabela(9) = 9 And tabela(10) = 17) Then Call BCDet(tabela(8), Me.txt9_17, tabela(5), Me.rnd9_17_Sim, rnd9_17_Nao, Me.rnd9_17_NA)
+                            If (tabela(9) = 9 And tabela(10) = 18) Then Call BCDet(tabela(8), Me.txt9_18, tabela(5), Me.rnd9_18_Sim, rnd9_18_Nao, Me.rnd9_18_NA)
+                            If (tabela(9) = 9 And tabela(10) = 19) Then Call BCDet(tabela(8), Me.txt9_19, tabela(5), Me.rnd9_19_Sim, rnd9_19_Nao, Me.rnd9_19_NA)
+                            If (tabela(9) = 9 And tabela(10) = 20) Then Call BCDet(tabela(8), Me.txt9_20, tabela(5), Me.rnd9_20_Sim, rnd9_20_Nao, Me.rnd9_20_NA)
+                            If (tabela(9) = 9 And tabela(10) = 21) Then Call BCDet(tabela(8), Me.txt9_21, tabela(5), Me.rnd9_21_Sim, rnd9_21_Nao, Me.rnd9_21_NA)
+                            If (tabela(9) = 9 And tabela(10) = 22) Then Call BCDet(tabela(8), Me.txt9_22, tabela(5), Me.rnd9_22_Sim, rnd9_22_Nao, Me.rnd9_22_NA)
+                            If (tabela(9) = 9 And tabela(10) = 23) Then Call BCDet(tabela(8), Me.txt9_23, tabela(5), Me.rnd9_23_Sim, rnd9_23_Nao, Me.rnd9_23_NA)
+                            If (tabela(9) = 9 And tabela(10) = 24) Then Call BCDet(tabela(8), Me.txt9_24, tabela(5), Me.rnd9_24_Sim, rnd9_24_Nao, Me.rnd9_24_NA)
+                            If (tabela(9) = 10 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt10_1, tabela(5), Me.rnd10_1_Sim, rnd10_1_Nao, Me.rnd10_1_NA)
+                            If (tabela(9) = 10 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt10_2, tabela(5), Me.rnd10_2_Sim, rnd10_2_Nao, Me.rnd10_2_NA)
+                            If (tabela(9) = 10 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt10_3, tabela(5), Me.rnd10_3_Sim, rnd10_3_Nao, Me.rnd10_3_NA)
+                            If (tabela(9) = 10 And tabela(10) = 4) Then Call BCDet(tabela(8), Me.txt10_4, tabela(5), Me.rnd10_4_Sim, rnd10_4_Nao, Me.rnd10_4_NA)
+                            If (tabela(9) = 10 And tabela(10) = 5) Then Call BCDet(tabela(8), Me.txt10_5, tabela(5), Me.rnd10_5_Sim, rnd10_5_Nao, Me.rnd10_5_NA)
+                            If (tabela(9) = 10 And tabela(10) = 6) Then Call BCDet(tabela(8), Me.txt10_6, tabela(5), Me.rnd10_6_Sim, rnd10_6_Nao, Me.rnd10_6_NA)
+                            If (tabela(9) = 10 And tabela(10) = 7) Then Call BCDet(tabela(8), Me.txt10_7, tabela(5), Me.rnd10_7_Sim, rnd10_7_Nao, Me.rnd10_7_NA)
+                            If (tabela(9) = 10 And tabela(10) = 8) Then Call BCDet(tabela(8), Me.txt10_8, tabela(5), Me.rnd10_8_Sim, rnd10_8_Nao, Me.rnd10_8_NA)
+                            If (tabela(9) = 10 And tabela(10) = 9) Then Call BCDet(tabela(8), Me.txt10_9, tabela(5), Me.rnd10_9_Sim, rnd10_9_Nao, Me.rnd10_9_NA)
+                            If (tabela(9) = 10 And tabela(10) = 10) Then Call BCDet(tabela(8), Me.txt10_10, tabela(5), Me.rnd10_10_Sim, rnd10_10_Nao, Me.rnd10_10_NA)
+                            If (tabela(9) = 11 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt11_1, tabela(5), Me.rnd11_1_Sim, rnd11_1_Nao, Me.rnd11_1_NA)
+                            If (tabela(9) = 11 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt11_2, tabela(5), Me.rnd11_2_Sim, rnd11_2_Nao, Me.rnd11_2_NA)
+                            If (tabela(9) = 11 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt11_3, tabela(5), Me.rnd11_3_Sim, rnd11_3_Nao, Me.rnd11_3_NA)
+                            If (tabela(9) = 11 And tabela(10) = 4) Then Call BCDet(tabela(8), Me.txt11_4, tabela(5), Me.rnd11_4_Sim, rnd11_4_Nao, Me.rnd11_4_NA)
+                            If (tabela(9) = 11 And tabela(10) = 5) Then Call BCDet(tabela(8), Me.txt11_5, tabela(5), Me.rnd11_5_Sim, rnd11_5_Nao, Me.rnd11_5_NA)
+                            If (tabela(9) = 11 And tabela(10) = 6) Then Call BCDet(tabela(8), Me.txt11_6, tabela(5), Me.rnd11_6_Sim, rnd11_6_Nao, Me.rnd11_6_NA)
+                            If (tabela(9) = 11 And tabela(10) = 7) Then Call BCDet(tabela(8), Me.txt11_7, tabela(5), Me.rnd11_7_Sim, rnd11_7_Nao, Me.rnd11_7_NA)
+                            If (tabela(9) = 11 And tabela(10) = 8) Then Call BCDet(tabela(8), Me.txt11_8, tabela(5), Me.rnd11_8_Sim, rnd11_8_Nao, Me.rnd11_8_NA)
+                            If (tabela(9) = 11 And tabela(10) = 9) Then Call BCDet(tabela(8), Me.txt11_9, tabela(5), Me.rnd11_9_Sim, rnd11_9_Nao, Me.rnd11_9_NA)
+                            If (tabela(9) = 11 And tabela(10) = 10) Then Call BCDet(tabela(8), Me.txt11_10, tabela(5), Me.rnd11_10_Sim, rnd11_10_Nao, Me.rnd11_10_NA)
+                            If (tabela(9) = 11 And tabela(10) = 11) Then Call BCDet(tabela(8), Me.txt11_11, tabela(5), Me.rnd11_11_Sim, rnd11_11_Nao, Me.rnd11_11_NA)
+                            If (tabela(9) = 11 And tabela(10) = 12) Then Call BCDet(tabela(8), Me.txt11_12, tabela(5), Me.rnd11_12_Sim, rnd11_12_Nao, Me.rnd11_12_NA)
+                            If (tabela(9) = 11 And tabela(10) = 13) Then Call BCDet(tabela(8), Me.txt11_13, tabela(5), Me.rnd11_13_Sim, rnd11_13_Nao, Me.rnd11_13_NA)
+                            If (tabela(9) = 11 And tabela(10) = 14) Then Call BCDet(tabela(8), Me.txt11_14, tabela(5), Me.rnd11_14_Sim, rnd11_14_Nao, Me.rnd11_14_NA)
+                            If (tabela(9) = 11 And tabela(10) = 15) Then Call BCDet(tabela(8), Me.txt11_15, tabela(5), Me.rnd11_15_Sim, rnd11_15_Nao, Me.rnd11_15_NA)
+                            If (tabela(9) = 11 And tabela(10) = 16) Then Call BCDet(tabela(8), Me.txt11_16, tabela(5), Me.rnd11_16_Sim, rnd11_16_Nao, Me.rnd11_16_NA)
+                            If (tabela(9) = 11 And tabela(10) = 17) Then Call BCDet(tabela(8), Me.txt11_17, tabela(5), Me.rnd11_17_Sim, rnd11_17_Nao, Me.rnd11_17_NA)
+                            If (tabela(9) = 11 And tabela(10) = 18) Then Call BCDet(tabela(8), Me.txt11_18, tabela(5), Me.rnd11_18_Sim, rnd11_18_Nao, Me.rnd11_18_NA)
+                            If (tabela(9) = 11 And tabela(10) = 19) Then Call BCDet(tabela(8), Me.txt11_19, tabela(5), Me.rnd11_19_Sim, rnd11_19_Nao, Me.rnd11_19_NA)
+                            If (tabela(9) = 11 And tabela(10) = 20) Then Call BCDet(tabela(8), Me.txt11_20, tabela(5), Me.rnd11_20_Sim, rnd11_20_Nao, Me.rnd11_20_NA)
+                            If (tabela(9) = 11 And tabela(10) = 21) Then Call BCDet(tabela(8), Me.txt11_21, tabela(5), Me.rnd11_21_Sim, rnd11_21_Nao, Me.rnd11_21_NA)
+                            If (tabela(9) = 11 And tabela(10) = 22) Then Call BCDet(tabela(8), Me.txt11_22, tabela(5), Me.rnd11_22_Sim, rnd11_22_Nao, Me.rnd11_22_NA)
+                            If (tabela(9) = 11 And tabela(10) = 23) Then Call BCDet(tabela(8), Me.txt11_23, tabela(5), Me.rnd11_23_Sim, rnd11_23_Nao, Me.rnd11_23_NA)
+                            If (tabela(9) = 11 And tabela(10) = 24) Then Call BCDet(tabela(8), Me.txt11_24, tabela(5), Me.rnd11_24_Sim, rnd11_24_Nao, Me.rnd11_24_NA)
+                            If (tabela(9) = 12 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt12_1, tabela(5), Me.rnd12_1_Sim, rnd12_1_Nao, Me.rnd12_1_NA)
+                            If (tabela(9) = 12 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt12_2, tabela(5), Me.rnd12_2_Sim, rnd12_2_Nao, Me.rnd12_2_NA)
+                            If (tabela(9) = 12 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt12_3, tabela(5), Me.rnd12_3_Sim, rnd12_3_Nao, Me.rnd12_3_NA)
+                            If (tabela(9) = 12 And tabela(10) = 4) Then Call BCDet(tabela(8), Me.txt12_4, tabela(5), Me.rnd12_4_Sim, rnd12_4_Nao, Me.rnd12_4_NA)
+                            If (tabela(9) = 12 And tabela(10) = 5) Then Call BCDet(tabela(8), Me.txt12_5, tabela(5), Me.rnd12_5_Sim, rnd12_5_Nao, Me.rnd12_5_NA)
+                            If (tabela(9) = 12 And tabela(10) = 6) Then Call BCDet(tabela(8), Me.txt12_6, tabela(5), Me.rnd12_6_Sim, rnd12_6_Nao, Me.rnd12_6_NA)
+                            If (tabela(9) = 12 And tabela(10) = 7) Then Call BCDet(tabela(8), Me.txt12_7, tabela(5), Me.rnd12_7_Sim, rnd12_7_Nao, Me.rnd12_7_NA)
+                            If (tabela(9) = 12 And tabela(10) = 8) Then Call BCDet(tabela(8), Me.txt12_8, tabela(5), Me.rnd12_8_Sim, rnd12_8_Nao, Me.rnd12_8_NA)
+                            If (tabela(9) = 12 And tabela(10) = 9) Then Call BCDet(tabela(8), Me.txt12_9, tabela(5), Me.rnd12_9_Sim, rnd12_9_Nao, Me.rnd12_9_NA)
+                            If (tabela(9) = 12 And tabela(10) = 10) Then Call BCDet(tabela(8), Me.txt12_10, tabela(5), Me.rnd12_10_Sim, rnd12_10_Nao, Me.rnd12_10_NA)
+                            If (tabela(9) = 12 And tabela(10) = 11) Then Call BCDet(tabela(8), Me.txt12_11, tabela(5), Me.rnd12_11_Sim, rnd12_11_Nao, Me.rnd12_11_NA)
+                            If (tabela(9) = 12 And tabela(10) = 12) Then Call BCDet(tabela(8), Me.txt12_12, tabela(5), Me.rnd12_12_Sim, rnd12_12_Nao, Me.rnd12_12_NA)
+                            If (tabela(9) = 12 And tabela(10) = 13) Then Call BCDet(tabela(8), Me.txt12_13, tabela(5), Me.rnd12_13_Sim, rnd12_13_Nao, Me.rnd12_13_NA)
+                            If (tabela(9) = 12 And tabela(10) = 14) Then Call BCDet(tabela(8), Me.txt12_14, tabela(5), Me.rnd12_14_Sim, rnd12_14_Nao, Me.rnd12_14_NA)
+                            If (tabela(9) = 12 And tabela(10) = 15) Then Call BCDet(tabela(8), Me.txt12_15, tabela(5), Me.rnd12_15_Sim, rnd12_15_Nao, Me.rnd12_15_NA)
+                            If (tabela(9) = 12 And tabela(10) = 16) Then Call BCDet(tabela(8), Me.txt12_16, tabela(5), Me.rnd12_16_Sim, rnd12_16_Nao, Me.rnd12_16_NA)
+                            If (tabela(9) = 12 And tabela(10) = 17) Then Call BCDet(tabela(8), Me.txt12_17, tabela(5), Me.rnd12_17_Sim, rnd12_17_Nao, Me.rnd12_17_NA)
+                            If (tabela(9) = 12 And tabela(10) = 18) Then Call BCDet(tabela(8), Me.txt12_18, tabela(5), Me.rnd12_18_Sim, rnd12_18_Nao, Me.rnd12_18_NA)
+                            If (tabela(9) = 13 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt13_1, tabela(5), Me.rnd13_1_Sim, rnd13_1_Nao, Me.rnd13_1_NA)
+                            If (tabela(9) = 13 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt13_2, tabela(5), Me.rnd13_2_Sim, rnd13_2_Nao, Me.rnd13_2_NA)
+                            If (tabela(9) = 13 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt13_3, tabela(5), Me.rnd13_3_Sim, rnd13_3_Nao, Me.rnd13_3_NA)
+                            If (tabela(9) = 13 And tabela(10) = 4) Then Call BCDet(tabela(8), Me.txt13_4, tabela(5), Me.rnd13_4_Sim, rnd13_4_Nao, Me.rnd13_4_NA)
+                            If (tabela(9) = 13 And tabela(10) = 5) Then Call BCDet(tabela(8), Me.txt13_5, tabela(5), Me.rnd13_5_Sim, rnd13_5_Nao, Me.rnd13_5_NA)
+                            If (tabela(9) = 13 And tabela(10) = 6) Then Call BCDet(tabela(8), Me.txt13_6, tabela(5), Me.rnd13_6_Sim, rnd13_6_Nao, Me.rnd13_6_NA)
+                            If (tabela(9) = 13 And tabela(10) = 7) Then Call BCDet(tabela(8), Me.txt13_7, tabela(5), Me.rnd13_7_Sim, rnd13_7_Nao, Me.rnd13_7_NA)
+                            If (tabela(9) = 13 And tabela(10) = 8) Then Call BCDet(tabela(8), Me.txt13_8, tabela(5), Me.rnd13_8_Sim, rnd13_8_Nao, Me.rnd13_8_NA)
+                            If (tabela(9) = 13 And tabela(10) = 9) Then Call BCDet(tabela(8), Me.txt13_9, tabela(5), Me.rnd13_9_Sim, rnd13_9_Nao, Me.rnd13_9_NA)
+                            If (tabela(9) = 13 And tabela(10) = 10) Then Call BCDet(tabela(8), Me.txt13_10, tabela(5), Me.rnd13_10_Sim, rnd13_10_Nao, Me.rnd13_10_NA)
+                            If (tabela(9) = 13 And tabela(10) = 11) Then Call BCDet(tabela(8), Me.txt13_11, tabela(5), Me.rnd13_11_Sim, rnd13_11_Nao, Me.rnd13_11_NA)
+                            If (tabela(9) = 13 And tabela(10) = 12) Then Call BCDet(tabela(8), Me.txt13_12, tabela(5), Me.rnd13_12_Sim, rnd13_12_Nao, Me.rnd13_12_NA)
+                            If (tabela(9) = 13 And tabela(10) = 13) Then Call BCDet(tabela(8), Me.txt13_13, tabela(5), Me.rnd13_13_Sim, rnd13_13_Nao, Me.rnd13_13_NA)
+                            If (tabela(9) = 14 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt14_1, tabela(5), Me.rnd14_1_Sim, rnd14_1_Nao, Me.rnd14_1_NA)
+                            If (tabela(9) = 14 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt14_2, tabela(5), Me.rnd14_2_Sim, rnd14_2_Nao, Me.rnd14_2_NA)
+                            If (tabela(9) = 14 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt14_3, tabela(5), Me.rnd14_3_Sim, rnd14_3_Nao, Me.rnd14_3_NA)
+                            If (tabela(9) = 14 And tabela(10) = 4) Then Call BCDet(tabela(8), Me.txt14_4, tabela(5), Me.rnd14_4_Sim, rnd14_4_Nao, Me.rnd14_4_NA)
+                            If (tabela(9) = 14 And tabela(10) = 5) Then Call BCDet(tabela(8), Me.txt14_5, tabela(5), Me.rnd14_5_Sim, rnd14_5_Nao, Me.rnd14_5_NA)
+                            If (tabela(9) = 14 And tabela(10) = 6) Then Call BCDet(tabela(8), Me.txt14_6, tabela(5), Me.rnd14_6_Sim, rnd14_6_Nao, Me.rnd14_6_NA)
+                            If (tabela(9) = 14 And tabela(10) = 7) Then Call BCDet(tabela(8), Me.txt14_7, tabela(5), Me.rnd14_7_Sim, rnd14_7_Nao, Me.rnd14_7_NA)
+                            If (tabela(9) = 14 And tabela(10) = 8) Then Call BCDet(tabela(8), Me.txt14_8, tabela(5), Me.rnd14_8_Sim, rnd14_8_Nao, Me.rnd14_8_NA)
+                            If (tabela(9) = 14 And tabela(10) = 9) Then Call BCDet(tabela(8), Me.txt14_9, tabela(5), Me.rnd14_9_Sim, rnd14_9_Nao, Me.rnd14_9_NA)
+                            If (tabela(9) = 15 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt15_1, tabela(5), Me.rnd15_1_Sim, rnd15_1_Nao, Me.rnd15_1_NA)
+                            If (tabela(9) = 15 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt15_2, tabela(5), Me.rnd15_2_Sim, rnd15_2_Nao, Me.rnd15_2_NA)
+                            If (tabela(9) = 15 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt15_3, tabela(5), Me.rnd15_3_Sim, rnd15_3_Nao, Me.rnd15_3_NA)
+                            If (tabela(9) = 16 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt16_1, tabela(5), Me.rnd16_1_Sim, rnd16_1_Nao, Me.rnd16_1_NA)
+                            If (tabela(9) = 16 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt16_2, tabela(5), Me.rnd16_2_Sim, rnd16_2_Nao, Me.rnd16_2_NA)
+                            If (tabela(9) = 16 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt16_3, tabela(5), Me.rnd16_3_Sim, rnd16_3_Nao, Me.rnd16_3_NA)
+                            If (tabela(9) = 16 And tabela(10) = 4) Then Call BCDet(tabela(8), Me.txt16_4, tabela(5), Me.rnd16_4_Sim, rnd16_4_Nao, Me.rnd16_4_NA)
+                            If (tabela(9) = 16 And tabela(10) = 5) Then Call BCDet(tabela(8), Me.txt16_5, tabela(5), Me.rnd16_5_Sim, rnd16_5_Nao, Me.rnd16_5_NA)
+                            If (tabela(9) = 16 And tabela(10) = 6) Then Call BCDet(tabela(8), Me.txt16_6, tabela(5), Me.rnd16_6_Sim, rnd16_6_Nao, Me.rnd16_6_NA)
+                            If (tabela(9) = 16 And tabela(10) = 7) Then Call BCDet(tabela(8), Me.txt16_7, tabela(5), Me.rnd16_7_Sim, rnd16_7_Nao, Me.rnd16_7_NA)
+                            If (tabela(9) = 16 And tabela(10) = 8) Then Call BCDet(tabela(8), Me.txt16_8, tabela(5), Me.rnd16_8_Sim, rnd16_8_Nao, Me.rnd16_8_NA)
+                            If (tabela(9) = 17 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt17_1, tabela(5), Me.rnd17_1_Sim, rnd17_1_Nao, Me.rnd17_1_NA)
+                            If (tabela(9) = 17 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt17_2, tabela(5), Me.rnd17_2_Sim, rnd17_2_Nao, Me.rnd17_2_NA)
+                            If (tabela(9) = 17 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt17_3, tabela(5), Me.rnd17_3_Sim, rnd17_3_Nao, Me.rnd17_3_NA)
+                            If (tabela(9) = 17 And tabela(10) = 4) Then Call BCDet(tabela(8), Me.txt17_4, tabela(5), Me.rnd17_4_Sim, rnd17_4_Nao, Me.rnd17_4_NA)
+                            If (tabela(9) = 17 And tabela(10) = 5) Then Call BCDet(tabela(8), Me.txt17_5, tabela(5), Me.rnd17_5_Sim, rnd17_5_Nao, Me.rnd17_5_NA)
+                            If (tabela(9) = 18 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt18_1, tabela(5), Me.rnd18_1_Sim, rnd18_1_Nao, Me.rnd18_1_NA)
+                            If (tabela(9) = 18 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt18_2, tabela(5), Me.rnd18_2_Sim, rnd18_2_Nao, Me.rnd18_2_NA)
+                            If (tabela(9) = 18 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt18_3, tabela(5), Me.rnd18_3_Sim, rnd18_3_Nao, Me.rnd18_3_NA)
+                            If (tabela(9) = 18 And tabela(10) = 4) Then Call BCDet(tabela(8), Me.txt18_4, tabela(5), Me.rnd18_4_Sim, rnd18_4_Nao, Me.rnd18_4_NA)
+                            If (tabela(9) = 18 And tabela(10) = 5) Then Call BCDet(tabela(8), Me.txt18_5, tabela(5), Me.rnd18_5_Sim, rnd18_5_Nao, Me.rnd18_5_NA)
+                            If (tabela(9) = 18 And tabela(10) = 6) Then Call BCDet(tabela(8), Me.txt18_6, tabela(5), Me.rnd18_6_Sim, rnd18_6_Nao, Me.rnd18_6_NA)
+                            If (tabela(9) = 18 And tabela(10) = 7) Then Call BCDet(tabela(8), Me.txt18_7, tabela(5), Me.rnd18_7_Sim, rnd18_7_Nao, Me.rnd18_7_NA)
+                            If (tabela(9) = 18 And tabela(10) = 8) Then Call BCDet(tabela(8), Me.txt18_8, tabela(5), Me.rnd18_8_Sim, rnd18_8_Nao, Me.rnd18_8_NA)
+                            If (tabela(9) = 18 And tabela(10) = 9) Then Call BCDet(tabela(8), Me.txt18_9, tabela(5), Me.rnd18_9_Sim, rnd18_9_Nao, Me.rnd18_9_NA)
+                            If (tabela(9) = 18 And tabela(10) = 10) Then Call BCDet(tabela(8), Me.txt18_10, tabela(5), Me.rnd18_10_Sim, rnd18_10_Nao, Me.rnd18_10_NA)
+                            If (tabela(9) = 18 And tabela(10) = 11) Then Call BCDet(tabela(8), Me.txt18_11, tabela(5), Me.rnd18_11_Sim, rnd18_11_Nao, Me.rnd18_11_NA)
+                            If (tabela(9) = 18 And tabela(10) = 12) Then Call BCDet(tabela(8), Me.txt18_12, tabela(5), Me.rnd18_12_Sim, rnd18_12_Nao, Me.rnd18_12_NA)
+                            If (tabela(9) = 18 And tabela(10) = 13) Then Call BCDet(tabela(8), Me.txt18_13, tabela(5), Me.rnd18_13_Sim, rnd18_13_Nao, Me.rnd18_13_NA)
+                            If (tabela(9) = 18 And tabela(10) = 14) Then Call BCDet(tabela(8), Me.txt18_14, tabela(5), Me.rnd18_14_Sim, rnd18_14_Nao, Me.rnd18_14_NA)
+                            If (tabela(9) = 18 And tabela(10) = 15) Then Call BCDet(tabela(8), Me.txt18_15, tabela(5), Me.rnd18_15_Sim, rnd18_15_Nao, Me.rnd18_15_NA)
+                            If (tabela(9) = 18 And tabela(10) = 16) Then Call BCDet(tabela(8), Me.txt18_16, tabela(5), Me.rnd18_16_Sim, rnd18_16_Nao, Me.rnd18_16_NA)
+                            If (tabela(9) = 18 And tabela(10) = 17) Then Call BCDet(tabela(8), Me.txt18_17, tabela(5), Me.rnd18_17_Sim, rnd18_17_Nao, Me.rnd18_17_NA)
+                            If (tabela(9) = 18 And tabela(10) = 18) Then Call BCDet(tabela(8), Me.txt18_18, tabela(5), Me.rnd18_18_Sim, rnd18_18_Nao, Me.rnd18_18_NA)
+                            If (tabela(9) = 19 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt19_1, tabela(5), Me.rnd19_1_Sim, rnd19_1_Nao, Me.rnd19_1_NA)
+                            If (tabela(9) = 19 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt19_2, tabela(5), Me.rnd19_2_Sim, rnd19_2_Nao, Me.rnd19_2_NA)
+                            If (tabela(9) = 19 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt19_3, tabela(5), Me.rnd19_3_Sim, rnd19_3_Nao, Me.rnd19_3_NA)
+                            If (tabela(9) = 19 And tabela(10) = 4) Then Call BCDet(tabela(8), Me.txt19_4, tabela(5), Me.rnd19_4_Sim, rnd19_4_Nao, Me.rnd19_4_NA)
+                            If (tabela(9) = 19 And tabela(10) = 5) Then Call BCDet(tabela(8), Me.txt19_5, tabela(5), Me.rnd19_5_Sim, rnd19_5_Nao, Me.rnd19_5_NA)
+                            If (tabela(9) = 19 And tabela(10) = 6) Then Call BCDet(tabela(8), Me.txt19_6, tabela(5), Me.rnd19_6_Sim, rnd19_6_Nao, Me.rnd19_6_NA)
+                            If (tabela(9) = 19 And tabela(10) = 7) Then Call BCDet(tabela(8), Me.txt19_7, tabela(5), Me.rnd19_7_Sim, rnd19_7_Nao, Me.rnd19_7_NA)
+                            If (tabela(9) = 19 And tabela(10) = 8) Then Call BCDet(tabela(8), Me.txt19_8, tabela(5), Me.rnd19_8_Sim, rnd19_8_Nao, Me.rnd19_8_NA)
+                            If (tabela(9) = 19 And tabela(10) = 9) Then Call BCDet(tabela(8), Me.txt19_9, tabela(5), Me.rnd19_9_Sim, rnd19_9_Nao, Me.rnd19_9_NA)
+                            If (tabela(9) = 19 And tabela(10) = 10) Then Call BCDet(tabela(8), Me.txt19_10, tabela(5), Me.rnd19_10_Sim, rnd19_10_Nao, Me.rnd19_10_NA)
+                            If (tabela(9) = 19 And tabela(10) = 11) Then Call BCDet(tabela(8), Me.txt19_11, tabela(5), Me.rnd19_11_Sim, rnd19_11_Nao, Me.rnd19_11_NA)
+                            If (tabela(9) = 19 And tabela(10) = 12) Then Call BCDet(tabela(8), Me.txt19_12, tabela(5), Me.rnd19_12_Sim, rnd19_12_Nao, Me.rnd19_12_NA)
+                            If (tabela(9) = 19 And tabela(10) = 13) Then Call BCDet(tabela(8), Me.txt19_13, tabela(5), Me.rnd19_13_Sim, rnd19_13_Nao, Me.rnd19_13_NA)
+                            If (tabela(9) = 19 And tabela(10) = 14) Then Call BCDet(tabela(8), Me.txt19_14, tabela(5), Me.rnd19_14_Sim, rnd19_14_Nao, Me.rnd19_14_NA)
+                            If (tabela(9) = 20 And tabela(10) = 1) Then Call BCDet(tabela(8), Me.txt20_1, tabela(5), Me.rnd20_1_Sim, rnd20_1_Nao, Me.rnd20_1_NA)
+                            If (tabela(9) = 20 And tabela(10) = 2) Then Call BCDet(tabela(8), Me.txt20_2, tabela(5), Me.rnd20_2_Sim, rnd20_2_Nao, Me.rnd20_2_NA)
+                            If (tabela(9) = 20 And tabela(10) = 3) Then Call BCDet(tabela(8), Me.txt20_3, tabela(5), Me.rnd20_3_Sim, rnd20_3_Nao, Me.rnd20_3_NA)
+
+                            If (tabela(9) = 1) Then arrayTotal(0) = arrayTotal(0) + 1
+                            If (tabela(9) = 2) Then arrayTotal(1) = arrayTotal(1) + 1
+                            If (tabela(9) = 3) Then arrayTotal(2) = arrayTotal(2) + 1
+                            If (tabela(9) = 4) Then arrayTotal(3) = arrayTotal(3) + 1
+                            If (tabela(9) = 5) Then arrayTotal(4) = arrayTotal(4) + 1
+                            If (tabela(9) = 6) Then arrayTotal(5) = arrayTotal(5) + 1
+                            If (tabela(9) = 7) Then arrayTotal(6) = arrayTotal(6) + 1
+                            If (tabela(9) = 8) Then arrayTotal(7) = arrayTotal(7) + 1
+                            If (tabela(9) = 9) Then arrayTotal(8) = arrayTotal(8) + 1
+                            If (tabela(9) = 10) Then arrayTotal(9) = arrayTotal(9) + 1
+                            If (tabela(9) = 11) Then arrayTotal(10) = arrayTotal(10) + 1
+                            If (tabela(9) = 12) Then arrayTotal(11) = arrayTotal(11) + 1
+                            If (tabela(9) = 13) Then arrayTotal(12) = arrayTotal(12) + 1
+                            If (tabela(9) = 14) Then arrayTotal(13) = arrayTotal(13) + 1
+                            If (tabela(9) = 15) Then arrayTotal(14) = arrayTotal(14) + 1
+                            If (tabela(9) = 16) Then arrayTotal(15) = arrayTotal(15) + 1
+                            If (tabela(9) = 17) Then arrayTotal(16) = arrayTotal(16) + 1
+                            If (tabela(9) = 18) Then arrayTotal(17) = arrayTotal(17) + 1
+                            If (tabela(9) = 19) Then arrayTotal(18) = arrayTotal(18) + 1
+                            If (tabela(9) = 20) Then arrayTotal(19) = arrayTotal(19) + 1
+
+                        Next
+                    End Using
+                End Using
+            End Using
+        End Using
+
+        Session("sMenuColor") = arrayTotal
+
     End Sub
 
     Private Sub BuscarChecklist_Grupo1(ByVal iGrupo As Byte)
@@ -3544,6 +3824,9 @@ Partial Class MemberPages_CheckListCondor
             Case Else
                 EnabledControls(rnd4_3_Sim, rnd4_3_Nao, rnd4_3_NA, txt4_3, imgFoto4_3, btnSalvarFoto4_3, True)
         End Select
+
+        Call BuscarChecklist()
+        Call colorMenu()
 
     End Sub
 
