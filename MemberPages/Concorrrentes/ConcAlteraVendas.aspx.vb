@@ -3,9 +3,9 @@ Partial Class MemberPages_ConcAlteraVendas
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
-        Me.cboAno.Value = 2018
-        Me.cboMes.Value = 8
-        Me.cboMes.Text = "Agosto"
+        Me.cboAno.Value = 2023
+        Me.cboMes.Value = 1
+        Me.cboMes.Text = "Janeiro"
     End Sub
 
 
