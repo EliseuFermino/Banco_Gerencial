@@ -138,7 +138,7 @@
 
           <asp:SqlDataSource ID="dsData" runat="server" ConnectionString="<%$ ConnectionStrings:DW_Condor_One_ConnectionString %>" SelectCommand="Validade.uspListaProdutosVencerPorDia" SelectCommandType="StoredProcedure">
                 <SelectParameters>
-                    <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                    <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                     <asp:SessionParameter DbType="Date" Name="Dia" SessionField="sDIA" />
                 </SelectParameters>
           </asp:SqlDataSource>
@@ -230,7 +230,7 @@
 
           <asp:SqlDataSource ID="dsData2" runat="server" ConnectionString="<%$ ConnectionStrings:DW_Condor_One_ConnectionString %>" SelectCommand="Validade.uspListaProdutosVencerPorDia" SelectCommandType="StoredProcedure">
                 <SelectParameters>
-                    <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                    <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                     <asp:SessionParameter Name="Dia" SessionField="sDIA2" Type="DateTime" />
                 </SelectParameters>
           </asp:SqlDataSource>
@@ -323,7 +323,7 @@
 
           <asp:SqlDataSource ID="dsData3" runat="server" ConnectionString="<%$ ConnectionStrings:DW_Condor_One_ConnectionString %>" SelectCommand="Validade.uspListaProdutosVencerPorDia" SelectCommandType="StoredProcedure">
                 <SelectParameters>
-                    <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                    <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                     <asp:SessionParameter Name="Dia" SessionField="sDIA5" Type="DateTime" />
                 </SelectParameters>
           </asp:SqlDataSource>
