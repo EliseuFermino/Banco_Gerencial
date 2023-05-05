@@ -307,8 +307,9 @@ Partial Class MemberPages_CheckListCondor
 
     Protected Sub btnAtualizar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnAtualizar.Click
         Call LimparTextBox()
-        Call BuscarChecklist()
+        Call PadraoInicial()
         Call HabilitarGerarRelatorio()
+        Call BuscarChecklist()
         Call colorMenu()
 
         If txtData.Value < DateAndTime.Today Then
