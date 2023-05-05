@@ -25,7 +25,7 @@ Partial Class MemberPages_CheckListCondor
 
             oVem.AtualizarEstatisticaPrograma(66, User.Identity.Name)
 
-            txtData.Value = DateTime.Now.ToString("yyyy-MM-dd")
+            txtData.Text = DateTime.Now.ToString("yyyy-MM-dd")
 
             Call PadraoInicial()
             Call HabilitarGerarRelatorio()
@@ -213,7 +213,7 @@ Partial Class MemberPages_CheckListCondor
                     cmd.Parameters.AddWithValue("@type", contentType)
 
                     cmd.Parameters.AddWithValue("@length", intLength)
-                    cmd.Parameters.AddWithValue("@dia", txtData.Value)
+                    cmd.Parameters.AddWithValue("@dia", txtData.Text)
                     cmd.Parameters.AddWithValue("@idFilial", selFilial.SelectedValue)
                     cmd.Parameters.AddWithValue("@idGrupo", iGrupo)
                     cmd.Parameters.AddWithValue("@idSubgrupo", iSubgrupo)
@@ -312,7 +312,7 @@ Partial Class MemberPages_CheckListCondor
         Call BuscarChecklist()
         Call colorMenu()
 
-        If txtData.Value < DateAndTime.Today Then
+        If txtData.Text < DateAndTime.Today Then
 
             btnGrupo1.Enabled = False
             btnGrupo2.Enabled = False
@@ -359,7 +359,7 @@ Partial Class MemberPages_CheckListCondor
 
         End If
 
-
+        ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "maxData();", True)
 
     End Sub
 
@@ -611,7 +611,7 @@ Partial Class MemberPages_CheckListCondor
     Protected Sub btnGrupo1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo1.Click
 
         Dim userName As String
-        Dim varIssue(23) As Byte
+        Dim varIssue(19) As Byte
         userName = User.Identity.Name
 
         varIssue(1) = DefinirPontuacao(rnd1_1_Sim, rnd1_1_Nao, rnd1_1_NA)
@@ -634,27 +634,27 @@ Partial Class MemberPages_CheckListCondor
         varIssue(18) = DefinirPontuacao(rnd1_18_Sim, rnd1_18_Nao, rnd1_18_NA)
         varIssue(19) = DefinirPontuacao(rnd1_19_Sim, rnd1_19_Nao, rnd1_19_NA)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 1, varIssue(1), userName, Me.txt1_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 2, varIssue(2), userName, Me.txt1_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 3, varIssue(3), userName, Me.txt1_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 4, varIssue(4), userName, Me.txt1_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 5, varIssue(5), userName, Me.txt1_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 6, varIssue(6), userName, Me.txt1_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 7, varIssue(7), userName, Me.txt1_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 8, varIssue(8), userName, Me.txt1_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 9, varIssue(9), userName, Me.txt1_9.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 10, varIssue(10), userName, Me.txt1_10.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 11, varIssue(11), userName, Me.txt1_11.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 12, varIssue(12), userName, Me.txt1_12.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 13, varIssue(13), userName, Me.txt1_13.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 14, varIssue(14), userName, Me.txt1_14.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 15, varIssue(15), userName, Me.txt1_15.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 16, varIssue(16), userName, Me.txt1_16.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 17, varIssue(17), userName, Me.txt1_17.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 18, varIssue(18), userName, Me.txt1_18.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 1, 1, 19, varIssue(19), userName, Me.txt1_19.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 1, varIssue(1), userName, Me.txt1_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 2, varIssue(2), userName, Me.txt1_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 3, varIssue(3), userName, Me.txt1_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 4, varIssue(4), userName, Me.txt1_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 5, varIssue(5), userName, Me.txt1_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 6, varIssue(6), userName, Me.txt1_6.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 7, varIssue(7), userName, Me.txt1_7.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 8, varIssue(8), userName, Me.txt1_8.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 9, varIssue(9), userName, Me.txt1_9.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 10, varIssue(10), userName, Me.txt1_10.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 11, varIssue(11), userName, Me.txt1_11.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 12, varIssue(12), userName, Me.txt1_12.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 13, varIssue(13), userName, Me.txt1_13.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 14, varIssue(14), userName, Me.txt1_14.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 15, varIssue(15), userName, Me.txt1_15.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 16, varIssue(16), userName, Me.txt1_16.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 17, varIssue(17), userName, Me.txt1_17.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 18, varIssue(18), userName, Me.txt1_18.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 1, 1, 19, varIssue(19), userName, Me.txt1_19.Text)
 
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 1, 1)
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 1, 1)
         'ScriptManager.RegisterStartupScript(Me, Page.GetType, "Script", "alertErro();", True)
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
@@ -666,7 +666,7 @@ Partial Class MemberPages_CheckListCondor
     Protected Sub btnGrupo2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo2.Click
 
         Dim userName As String
-        Dim varIssue(15) As Byte
+        Dim varIssue(12) As Byte
 
         userName = User.Identity.Name
 
@@ -683,20 +683,20 @@ Partial Class MemberPages_CheckListCondor
         varIssue(11) = DefinirPontuacao(rnd2_11_Sim, rnd2_11_Nao, rnd2_11_NA)
         varIssue(12) = DefinirPontuacao(rnd2_12_Sim, rnd2_12_Nao, rnd2_12_NA)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 2, 1, 1, varIssue(1), userName, Me.txt2_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 2, 1, 2, varIssue(2), userName, Me.txt2_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 2, 1, 3, varIssue(3), userName, Me.txt2_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 2, 1, 4, varIssue(4), userName, Me.txt2_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 2, 1, 5, varIssue(5), userName, Me.txt2_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 2, 1, 6, varIssue(6), userName, Me.txt2_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 2, 1, 7, varIssue(7), userName, Me.txt2_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 2, 1, 8, varIssue(8), userName, Me.txt2_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 2, 1, 9, varIssue(9), userName, Me.txt2_9.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 2, 1, 10, varIssue(10), userName, Me.txt2_10.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 2, 1, 11, varIssue(11), userName, Me.txt2_11.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 2, 1, 12, varIssue(12), userName, Me.txt2_12.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 2, 1, 1, varIssue(1), userName, Me.txt2_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 2, 1, 2, varIssue(2), userName, Me.txt2_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 2, 1, 3, varIssue(3), userName, Me.txt2_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 2, 1, 4, varIssue(4), userName, Me.txt2_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 2, 1, 5, varIssue(5), userName, Me.txt2_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 2, 1, 6, varIssue(6), userName, Me.txt2_6.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 2, 1, 7, varIssue(7), userName, Me.txt2_7.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 2, 1, 8, varIssue(8), userName, Me.txt2_8.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 2, 1, 9, varIssue(9), userName, Me.txt2_9.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 2, 1, 10, varIssue(10), userName, Me.txt2_10.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 2, 1, 11, varIssue(11), userName, Me.txt2_11.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 2, 1, 12, varIssue(12), userName, Me.txt2_12.Text)
 
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 2, 1)
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 2, 1)
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
@@ -705,7 +705,7 @@ Partial Class MemberPages_CheckListCondor
     End Sub
 
     Protected Sub btnGrupo3_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo3.Click
-        Dim varIssue(10) As Byte
+        Dim varIssue(9) As Byte
         Dim userName As String
 
         userName = User.Identity.Name
@@ -720,17 +720,17 @@ Partial Class MemberPages_CheckListCondor
         varIssue(8) = DefinirPontuacao(rnd3_8_Sim, rnd3_8_Nao, rnd3_8_NA)
         varIssue(9) = DefinirPontuacao(rnd3_9_Sim, rnd3_9_Nao, rnd3_9_NA)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 3, 1, 1, varIssue(1), userName, Me.txt3_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 3, 1, 2, varIssue(1), userName, Me.txt3_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 3, 1, 3, varIssue(1), userName, Me.txt3_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 3, 1, 4, varIssue(1), userName, Me.txt3_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 3, 1, 5, varIssue(1), userName, Me.txt3_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 3, 1, 6, varIssue(1), userName, Me.txt3_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 3, 1, 7, varIssue(1), userName, Me.txt3_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 3, 1, 8, varIssue(1), userName, Me.txt3_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 3, 1, 9, varIssue(1), userName, Me.txt3_9.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 3, 1, 1, varIssue(1), userName, Me.txt3_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 3, 1, 2, varIssue(2), userName, Me.txt3_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 3, 1, 3, varIssue(3), userName, Me.txt3_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 3, 1, 4, varIssue(4), userName, Me.txt3_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 3, 1, 5, varIssue(5), userName, Me.txt3_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 3, 1, 6, varIssue(6), userName, Me.txt3_6.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 3, 1, 7, varIssue(7), userName, Me.txt3_7.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 3, 1, 8, varIssue(8), userName, Me.txt3_8.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 3, 1, 9, varIssue(9), userName, Me.txt3_9.Text)
 
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 3, 1)
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 3, 1)
         'Me.panTitle3.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
@@ -741,7 +741,7 @@ Partial Class MemberPages_CheckListCondor
     Protected Sub btnGrupo4_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo4.Click
 
         Dim userName As String
-        Dim varIssue(7) As Byte
+        Dim varIssue(6) As Byte
 
         userName = User.Identity.Name
 
@@ -752,15 +752,15 @@ Partial Class MemberPages_CheckListCondor
         varIssue(5) = DefinirPontuacao(rnd4_5_Sim, rnd4_5_Nao, rnd4_5_NA)
         varIssue(6) = DefinirPontuacao(rnd4_6_Sim, rnd4_6_Nao, rnd4_6_NA)
 
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 4, 1, 1, varIssue(1), userName, Me.txt4_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 4, 1, 2, varIssue(2), userName, Me.txt4_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 4, 1, 3, varIssue(3), userName, Me.txt4_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 4, 1, 4, varIssue(4), userName, Me.txt4_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 4, 1, 5, varIssue(5), userName, Me.txt4_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 4, 1, 6, varIssue(6), userName, Me.txt4_6.Text)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 1, varIssue(1), userName, Me.txt4_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 2, varIssue(1), userName, Me.txt4_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 3, varIssue(1), userName, Me.txt4_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 4, varIssue(1), userName, Me.txt4_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 5, varIssue(1), userName, Me.txt4_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 6, varIssue(1), userName, Me.txt4_6.Text)
 
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 4, 1)
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 4, 1)
         'Me.panTitle4.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
@@ -771,7 +771,7 @@ Partial Class MemberPages_CheckListCondor
     Protected Sub btnGrupo5_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo5.Click
 
         Dim userName As String
-        Dim varIssue(11) As Byte
+        Dim varIssue(9) As Byte
 
         userName = User.Identity.Name
 
@@ -785,18 +785,19 @@ Partial Class MemberPages_CheckListCondor
         varIssue(8) = DefinirPontuacao(rnd5_8_Sim, rnd5_8_Nao, rnd5_8_NA)
         varIssue(9) = DefinirPontuacao(rnd5_9_Sim, rnd5_9_Nao, rnd5_9_NA)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 5, 1, 1, varIssue(1), userName, Me.txt5_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 5, 1, 2, varIssue(1), userName, Me.txt5_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 5, 1, 3, varIssue(1), userName, Me.txt5_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 5, 1, 4, varIssue(1), userName, Me.txt5_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 5, 1, 5, varIssue(1), userName, Me.txt5_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 5, 1, 6, varIssue(1), userName, Me.txt5_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 5, 1, 7, varIssue(1), userName, Me.txt5_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 5, 1, 8, varIssue(1), userName, Me.txt5_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 5, 1, 9, varIssue(1), userName, Me.txt5_9.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 5, 1, 1, varIssue(1), userName, Me.txt5_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 5, 1, 2, varIssue(2), userName, Me.txt5_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 5, 1, 3, varIssue(3), userName, Me.txt5_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 5, 1, 4, varIssue(4), userName, Me.txt5_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 5, 1, 5, varIssue(5), userName, Me.txt5_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 5, 1, 6, varIssue(6), userName, Me.txt5_6.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 5, 1, 7, varIssue(7), userName, Me.txt5_7.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 5, 1, 8, varIssue(8), userName, Me.txt5_8.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 5, 1, 9, varIssue(9), userName, Me.txt5_9.Text)
 
 
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 5, 1)
+
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 5, 1)
         'Me.panTitle5.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
@@ -807,7 +808,7 @@ Partial Class MemberPages_CheckListCondor
     Protected Sub btnGrupo6_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo6.Click
 
         Dim userName As String
-        Dim varIssue(6) As Byte
+        Dim varIssue(9) As Byte
 
         userName = User.Identity.Name
 
@@ -821,17 +822,18 @@ Partial Class MemberPages_CheckListCondor
         varIssue(8) = DefinirPontuacao(rnd6_8_Sim, rnd6_8_Nao, rnd6_8_NA)
         varIssue(9) = DefinirPontuacao(rnd6_9_Sim, rnd6_9_Nao, rnd6_9_NA)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 1, varIssue(1), userName, Me.txt6_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 2, varIssue(1), userName, Me.txt6_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 3, varIssue(1), userName, Me.txt6_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 4, varIssue(1), userName, Me.txt6_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 5, varIssue(1), userName, Me.txt6_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 6, varIssue(1), userName, Me.txt6_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 7, varIssue(1), userName, Me.txt6_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 8, varIssue(1), userName, Me.txt6_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 9, varIssue(1), userName, Me.txt6_9.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 6, 1, 1, varIssue(1), userName, Me.txt6_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 6, 1, 2, varIssue(2), userName, Me.txt6_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 6, 1, 3, varIssue(3), userName, Me.txt6_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 6, 1, 4, varIssue(4), userName, Me.txt6_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 6, 1, 5, varIssue(5), userName, Me.txt6_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 6, 1, 6, varIssue(6), userName, Me.txt6_6.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 6, 1, 7, varIssue(7), userName, Me.txt6_7.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 6, 1, 8, varIssue(8), userName, Me.txt6_8.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 6, 1, 9, varIssue(9), userName, Me.txt6_9.Text)
 
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 6, 1)
+
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 6, 1)
         'Me.panTitle6.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
@@ -843,7 +845,7 @@ Partial Class MemberPages_CheckListCondor
         ' Botão Salvar
         ' Salvar os itens do 3.10 ao 3.17 que esta no Grupo 3 - Armazenamento(Câmaras) - Fiambreria e Laticinios - Grupo 2 - (8 perguntas, 10 a 17)
         Dim userName As String
-        Dim varIssue(8) As Byte
+        Dim varIssue(10) As Byte
 
         userName = User.Identity.Name
 
@@ -858,18 +860,19 @@ Partial Class MemberPages_CheckListCondor
         varIssue(9) = DefinirPontuacao(rnd7_9_Sim, rnd7_9_Nao, rnd7_9_NA)
         varIssue(10) = DefinirPontuacao(rnd7_10_Sim, rnd7_10_Nao, rnd7_10_NA)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 7, 1, 1, varIssue(1), userName, Me.txt7_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 7, 1, 2, varIssue(1), userName, Me.txt7_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 7, 1, 3, varIssue(1), userName, Me.txt7_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 7, 1, 4, varIssue(1), userName, Me.txt7_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 7, 1, 5, varIssue(1), userName, Me.txt7_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 7, 1, 6, varIssue(1), userName, Me.txt7_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 7, 1, 7, varIssue(1), userName, Me.txt7_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 7, 1, 8, varIssue(1), userName, Me.txt7_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 7, 1, 9, varIssue(1), userName, Me.txt7_9.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 7, 1, 10, varIssue(1), userName, Me.txt7_10.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 7, 1, 1, varIssue(1), userName, Me.txt7_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 7, 1, 2, varIssue(2), userName, Me.txt7_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 7, 1, 3, varIssue(3), userName, Me.txt7_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 7, 1, 4, varIssue(4), userName, Me.txt7_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 7, 1, 5, varIssue(5), userName, Me.txt7_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 7, 1, 6, varIssue(6), userName, Me.txt7_6.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 7, 1, 7, varIssue(7), userName, Me.txt7_7.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 7, 1, 8, varIssue(8), userName, Me.txt7_8.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 7, 1, 9, varIssue(9), userName, Me.txt7_9.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 7, 1, 10, varIssue(10), userName, Me.txt7_10.Text)
 
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 7, 1)
+
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 7, 1)
         'Me.panTitle7.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
@@ -879,7 +882,7 @@ Partial Class MemberPages_CheckListCondor
 
     Protected Sub btnGrupo8_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo8.Click
         Dim userName As String
-        Dim varIssue(28) As Byte
+        Dim varIssue(24) As Byte
 
         userName = User.Identity.Name
 
@@ -908,34 +911,32 @@ Partial Class MemberPages_CheckListCondor
         varIssue(23) = DefinirPontuacao(rnd8_23_Sim, rnd8_23_Nao, rnd8_23_NA)
         varIssue(24) = DefinirPontuacao(rnd8_24_Sim, rnd8_24_Nao, rnd8_24_NA)
 
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 1, varIssue(1), userName, Me.txt8_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 2, varIssue(2), userName, Me.txt8_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 3, varIssue(3), userName, Me.txt8_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 4, varIssue(4), userName, Me.txt8_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 5, varIssue(5), userName, Me.txt8_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 6, varIssue(6), userName, Me.txt8_6.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 7, varIssue(7), userName, Me.txt8_7.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 8, varIssue(8), userName, Me.txt8_8.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 9, varIssue(9), userName, Me.txt8_9.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 10, varIssue(10), userName, Me.txt8_10.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 11, varIssue(11), userName, Me.txt8_11.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 12, varIssue(12), userName, Me.txt8_12.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 13, varIssue(13), userName, Me.txt8_13.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 14, varIssue(14), userName, Me.txt8_14.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 15, varIssue(15), userName, Me.txt8_15.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 16, varIssue(16), userName, Me.txt8_16.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 17, varIssue(17), userName, Me.txt8_17.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 18, varIssue(18), userName, Me.txt8_18.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 19, varIssue(19), userName, Me.txt8_19.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 20, varIssue(20), userName, Me.txt8_20.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 21, varIssue(21), userName, Me.txt8_21.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 22, varIssue(22), userName, Me.txt8_22.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 23, varIssue(23), userName, Me.txt8_23.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 8, 1, 24, varIssue(24), userName, Me.txt8_24.Text)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 1, varIssue(1), userName, Me.txt8_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 2, varIssue(1), userName, Me.txt8_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 3, varIssue(1), userName, Me.txt8_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 4, varIssue(1), userName, Me.txt8_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 5, varIssue(1), userName, Me.txt8_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 6, varIssue(1), userName, Me.txt8_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 7, varIssue(1), userName, Me.txt8_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 8, varIssue(1), userName, Me.txt8_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 9, varIssue(1), userName, Me.txt8_9.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 10, varIssue(1), userName, Me.txt8_10.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 11, varIssue(1), userName, Me.txt8_11.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 12, varIssue(1), userName, Me.txt8_12.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 13, varIssue(1), userName, Me.txt8_13.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 14, varIssue(1), userName, Me.txt8_14.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 15, varIssue(1), userName, Me.txt8_15.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 16, varIssue(1), userName, Me.txt8_16.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 17, varIssue(1), userName, Me.txt8_17.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 18, varIssue(1), userName, Me.txt8_18.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 19, varIssue(1), userName, Me.txt8_19.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 20, varIssue(1), userName, Me.txt8_20.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 21, varIssue(1), userName, Me.txt8_21.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 22, varIssue(1), userName, Me.txt8_22.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 23, varIssue(1), userName, Me.txt8_23.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 8, 1, 24, varIssue(1), userName, Me.txt8_24.Text)
-
-
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 8, 1)
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 8, 1)
         'Me.panTitle8.CssClass = "pnl_Verde"
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
@@ -946,7 +947,7 @@ Partial Class MemberPages_CheckListCondor
 
     Protected Sub btnGrupo9_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo9.Click
         Dim userName As String
-        Dim varIssue(24) As Byte
+        Dim varIssue(21) As Byte
 
         userName = User.Identity.Name
 
@@ -972,29 +973,29 @@ Partial Class MemberPages_CheckListCondor
         varIssue(20) = DefinirPontuacao(rnd9_20_Sim, rnd9_20_Nao, rnd9_20_NA)
         varIssue(21) = DefinirPontuacao(rnd9_21_Sim, rnd9_21_Nao, rnd9_21_NA)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 1, varIssue(1), userName, Me.txt9_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 2, varIssue(1), userName, Me.txt9_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 3, varIssue(1), userName, Me.txt9_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 4, varIssue(1), userName, Me.txt9_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 5, varIssue(1), userName, Me.txt9_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 6, varIssue(1), userName, Me.txt9_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 7, varIssue(1), userName, Me.txt9_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 8, varIssue(1), userName, Me.txt9_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 9, varIssue(1), userName, Me.txt9_9.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 10, varIssue(1), userName, Me.txt9_10.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 11, varIssue(1), userName, Me.txt9_11.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 12, varIssue(1), userName, Me.txt9_12.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 13, varIssue(1), userName, Me.txt9_13.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 14, varIssue(1), userName, Me.txt9_14.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 15, varIssue(1), userName, Me.txt9_15.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 16, varIssue(1), userName, Me.txt9_16.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 17, varIssue(1), userName, Me.txt9_17.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 18, varIssue(1), userName, Me.txt9_18.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 19, varIssue(1), userName, Me.txt9_19.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 20, varIssue(1), userName, Me.txt9_20.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 9, 1, 21, varIssue(1), userName, Me.txt9_21.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 1, varIssue(1), userName, Me.txt9_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 2, varIssue(2), userName, Me.txt9_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 3, varIssue(3), userName, Me.txt9_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 4, varIssue(4), userName, Me.txt9_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 5, varIssue(5), userName, Me.txt9_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 6, varIssue(6), userName, Me.txt9_6.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 7, varIssue(7), userName, Me.txt9_7.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 8, varIssue(8), userName, Me.txt9_8.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 9, varIssue(9), userName, Me.txt9_9.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 10, varIssue(10), userName, Me.txt9_10.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 11, varIssue(11), userName, Me.txt9_11.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 12, varIssue(12), userName, Me.txt9_12.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 13, varIssue(13), userName, Me.txt9_13.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 14, varIssue(14), userName, Me.txt9_14.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 15, varIssue(15), userName, Me.txt9_15.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 16, varIssue(16), userName, Me.txt9_16.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 17, varIssue(17), userName, Me.txt9_17.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 18, varIssue(18), userName, Me.txt9_18.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 19, varIssue(19), userName, Me.txt9_19.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 20, varIssue(20), userName, Me.txt9_20.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 9, 1, 21, varIssue(21), userName, Me.txt9_21.Text)
 
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 9, 1)
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 9, 1)
         'Me.panTitle9.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
@@ -1004,7 +1005,7 @@ Partial Class MemberPages_CheckListCondor
 
     Protected Sub btnGrupo10_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo10.Click
         Dim userName As String
-        Dim varIssue(10) As Byte
+        Dim varIssue(8) As Byte
 
         userName = User.Identity.Name
 
@@ -1017,16 +1018,16 @@ Partial Class MemberPages_CheckListCondor
         varIssue(7) = DefinirPontuacao(rnd10_7_Sim, rnd10_7_Nao, rnd10_7_NA)
         varIssue(8) = DefinirPontuacao(rnd10_8_Sim, rnd10_8_Nao, rnd10_8_NA)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 1, varIssue(1), userName, Me.txt10_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 2, varIssue(1), userName, Me.txt10_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 3, varIssue(1), userName, Me.txt10_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 4, varIssue(1), userName, Me.txt10_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 5, varIssue(1), userName, Me.txt10_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 6, varIssue(1), userName, Me.txt10_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 7, varIssue(1), userName, Me.txt10_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 8, varIssue(1), userName, Me.txt10_8.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 1, varIssue(1), userName, Me.txt10_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 2, varIssue(2), userName, Me.txt10_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 3, varIssue(3), userName, Me.txt10_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 4, varIssue(4), userName, Me.txt10_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 5, varIssue(5), userName, Me.txt10_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 6, varIssue(6), userName, Me.txt10_6.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 7, varIssue(7), userName, Me.txt10_7.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 8, varIssue(8), userName, Me.txt10_8.Text)
 
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 10, 1)
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 10, 1)
         'Me.panTitle10.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
@@ -1036,7 +1037,7 @@ Partial Class MemberPages_CheckListCondor
 
     Protected Sub btnGrupo11_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo11.Click
         Dim userName As String
-        Dim varIssue(24) As Byte
+        Dim varIssue(21) As Byte
 
         userName = User.Identity.Name
 
@@ -1062,29 +1063,29 @@ Partial Class MemberPages_CheckListCondor
         varIssue(20) = DefinirPontuacao(rnd11_20_Sim, rnd11_20_Nao, rnd11_20_NA)
         varIssue(21) = DefinirPontuacao(rnd11_21_Sim, rnd11_21_Nao, rnd11_21_NA)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 1, varIssue(1), userName, Me.txt11_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 2, varIssue(1), userName, Me.txt11_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 3, varIssue(1), userName, Me.txt11_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 4, varIssue(1), userName, Me.txt11_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 5, varIssue(1), userName, Me.txt11_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 6, varIssue(1), userName, Me.txt11_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 7, varIssue(1), userName, Me.txt11_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 8, varIssue(1), userName, Me.txt11_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 9, varIssue(1), userName, Me.txt11_9.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 10, varIssue(1), userName, Me.txt11_10.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 11, varIssue(1), userName, Me.txt11_11.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 12, varIssue(1), userName, Me.txt11_12.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 13, varIssue(1), userName, Me.txt11_13.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 14, varIssue(1), userName, Me.txt11_14.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 15, varIssue(1), userName, Me.txt11_15.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 16, varIssue(1), userName, Me.txt11_16.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 17, varIssue(1), userName, Me.txt11_17.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 18, varIssue(1), userName, Me.txt11_18.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 19, varIssue(1), userName, Me.txt11_19.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 20, varIssue(1), userName, Me.txt11_20.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 21, varIssue(1), userName, Me.txt11_21.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 1, varIssue(1), userName, Me.txt11_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 2, varIssue(2), userName, Me.txt11_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 3, varIssue(3), userName, Me.txt11_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 4, varIssue(4), userName, Me.txt11_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 5, varIssue(5), userName, Me.txt11_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 6, varIssue(6), userName, Me.txt11_6.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 7, varIssue(7), userName, Me.txt11_7.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 8, varIssue(8), userName, Me.txt11_8.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 9, varIssue(9), userName, Me.txt11_9.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 10, varIssue(10), userName, Me.txt11_10.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 11, varIssue(11), userName, Me.txt11_11.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 12, varIssue(12), userName, Me.txt11_12.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 13, varIssue(13), userName, Me.txt11_13.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 14, varIssue(14), userName, Me.txt11_14.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 15, varIssue(15), userName, Me.txt11_15.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 16, varIssue(16), userName, Me.txt11_16.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 17, varIssue(17), userName, Me.txt11_17.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 18, varIssue(18), userName, Me.txt11_18.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 19, varIssue(19), userName, Me.txt11_19.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 20, varIssue(20), userName, Me.txt11_20.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 21, varIssue(21), userName, Me.txt11_21.Text)
 
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 11, 1)
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 11, 1)
         'Me.panTitle11.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
@@ -1116,26 +1117,26 @@ Partial Class MemberPages_CheckListCondor
         varIssue(17) = DefinirPontuacao(rnd12_17_Sim, rnd12_17_Nao, rnd12_17_NA)
         varIssue(18) = DefinirPontuacao(rnd12_18_Sim, rnd12_18_Nao, rnd12_18_NA)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 1, varIssue(1), userName, Me.txt12_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 2, varIssue(1), userName, Me.txt12_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 3, varIssue(1), userName, Me.txt12_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 4, varIssue(1), userName, Me.txt12_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 5, varIssue(1), userName, Me.txt12_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 6, varIssue(1), userName, Me.txt12_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 7, varIssue(1), userName, Me.txt12_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 8, varIssue(1), userName, Me.txt12_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 9, varIssue(1), userName, Me.txt12_9.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 10, varIssue(1), userName, Me.txt12_10.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 11, varIssue(1), userName, Me.txt12_11.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 12, varIssue(1), userName, Me.txt12_12.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 13, varIssue(1), userName, Me.txt12_13.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 14, varIssue(1), userName, Me.txt12_14.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 15, varIssue(1), userName, Me.txt12_15.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 16, varIssue(1), userName, Me.txt12_16.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 17, varIssue(1), userName, Me.txt12_17.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 18, varIssue(1), userName, Me.txt12_18.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 1, varIssue(1), userName, Me.txt12_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 2, varIssue(2), userName, Me.txt12_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 3, varIssue(3), userName, Me.txt12_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 4, varIssue(4), userName, Me.txt12_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 5, varIssue(5), userName, Me.txt12_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 6, varIssue(6), userName, Me.txt12_6.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 7, varIssue(7), userName, Me.txt12_7.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 8, varIssue(8), userName, Me.txt12_8.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 9, varIssue(9), userName, Me.txt12_9.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 10, varIssue(10), userName, Me.txt12_10.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 11, varIssue(11), userName, Me.txt12_11.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 12, varIssue(12), userName, Me.txt12_12.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 13, varIssue(13), userName, Me.txt12_13.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 14, varIssue(14), userName, Me.txt12_14.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 15, varIssue(15), userName, Me.txt12_15.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 16, varIssue(16), userName, Me.txt12_16.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 17, varIssue(17), userName, Me.txt12_17.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 18, varIssue(18), userName, Me.txt12_18.Text)
 
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 12, 1)
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 12, 1)
         'Me.panTitle12.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
@@ -1145,7 +1146,7 @@ Partial Class MemberPages_CheckListCondor
 
     Protected Sub btnGrupo13_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo13.Click
         Dim userName As String
-        Dim varIssue(13) As Byte
+        Dim varIssue(10) As Byte
         userName = User.Identity.Name
 
         varIssue(1) = DefinirPontuacao(rnd13_1_Sim, rnd13_1_Nao, rnd13_1_NA)
@@ -1159,18 +1160,18 @@ Partial Class MemberPages_CheckListCondor
         varIssue(9) = DefinirPontuacao(rnd13_9_Sim, rnd13_9_Nao, rnd13_9_NA)
         varIssue(10) = DefinirPontuacao(rnd13_10_Sim, rnd13_10_Nao, rnd13_10_NA)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 1, varIssue(1), userName, Me.txt13_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 2, varIssue(1), userName, Me.txt13_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 3, varIssue(1), userName, Me.txt13_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 4, varIssue(1), userName, Me.txt13_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 5, varIssue(1), userName, Me.txt13_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 6, varIssue(1), userName, Me.txt13_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 7, varIssue(1), userName, Me.txt13_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 8, varIssue(1), userName, Me.txt13_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 9, varIssue(1), userName, Me.txt13_9.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 10, varIssue(1), userName, Me.txt13_10.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 13, 1, 1, varIssue(1), userName, Me.txt13_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 13, 1, 2, varIssue(2), userName, Me.txt13_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 13, 1, 3, varIssue(3), userName, Me.txt13_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 13, 1, 4, varIssue(4), userName, Me.txt13_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 13, 1, 5, varIssue(5), userName, Me.txt13_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 13, 1, 6, varIssue(6), userName, Me.txt13_6.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 13, 1, 7, varIssue(7), userName, Me.txt13_7.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 13, 1, 8, varIssue(8), userName, Me.txt13_8.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 13, 1, 9, varIssue(9), userName, Me.txt13_9.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 13, 1, 10, varIssue(10), userName, Me.txt13_10.Text)
 
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 13, 1)
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 13, 1)
         'Me.panTitle13.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
@@ -1192,16 +1193,16 @@ Partial Class MemberPages_CheckListCondor
         varIssue(7) = DefinirPontuacao(rnd14_7_Sim, rnd14_7_Nao, rnd14_7_NA)
         varIssue(8) = DefinirPontuacao(rnd14_8_Sim, rnd14_8_Nao, rnd14_8_NA)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 1, varIssue(1), userName, Me.txt14_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 2, varIssue(1), userName, Me.txt14_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 3, varIssue(1), userName, Me.txt14_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 4, varIssue(1), userName, Me.txt14_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 5, varIssue(1), userName, Me.txt14_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 6, varIssue(1), userName, Me.txt14_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 7, varIssue(1), userName, Me.txt14_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 8, varIssue(1), userName, Me.txt14_8.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 14, 1, 1, varIssue(1), userName, Me.txt14_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 14, 1, 2, varIssue(2), userName, Me.txt14_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 14, 1, 3, varIssue(3), userName, Me.txt14_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 14, 1, 4, varIssue(4), userName, Me.txt14_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 14, 1, 5, varIssue(5), userName, Me.txt14_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 14, 1, 6, varIssue(6), userName, Me.txt14_6.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 14, 1, 7, varIssue(7), userName, Me.txt14_7.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 14, 1, 8, varIssue(8), userName, Me.txt14_8.Text)
 
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 14, 1)
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 14, 1)
         'Me.panTitle14.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
@@ -1218,11 +1219,11 @@ Partial Class MemberPages_CheckListCondor
         varIssue(2) = DefinirPontuacao(rnd15_2_Sim, rnd15_2_Nao, rnd15_2_NA)
         varIssue(3) = DefinirPontuacao(rnd15_3_Sim, rnd15_3_Nao, rnd15_3_NA)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 15, 1, 1, varIssue(1), userName, Me.txt15_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 15, 1, 2, varIssue(1), userName, Me.txt15_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 15, 1, 3, varIssue(1), userName, Me.txt15_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 15, 1, 1, varIssue(1), userName, Me.txt15_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 15, 1, 2, varIssue(2), userName, Me.txt15_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 15, 1, 3, varIssue(3), userName, Me.txt15_3.Text)
 
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 15, 1)
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 15, 1)
         'Me.panTitle15.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
@@ -1232,7 +1233,7 @@ Partial Class MemberPages_CheckListCondor
 
     Protected Sub btnGrupo16_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo16.Click
         Dim userName As String
-        Dim varIssue(8) As Byte
+        Dim varIssue(7) As Byte
         userName = User.Identity.Name
 
         varIssue(1) = DefinirPontuacao(rnd16_1_Sim, rnd16_1_Nao, rnd16_1_NA)
@@ -1243,16 +1244,15 @@ Partial Class MemberPages_CheckListCondor
         varIssue(6) = DefinirPontuacao(rnd16_6_Sim, rnd16_6_Nao, rnd16_6_NA)
         varIssue(7) = DefinirPontuacao(rnd16_7_Sim, rnd16_7_Nao, rnd16_7_NA)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 1, varIssue(1), userName, Me.txt16_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 2, varIssue(1), userName, Me.txt16_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 3, varIssue(1), userName, Me.txt16_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 4, varIssue(1), userName, Me.txt16_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 5, varIssue(1), userName, Me.txt16_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 6, varIssue(1), userName, Me.txt16_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 7, varIssue(1), userName, Me.txt16_7.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 16, 1, 1, varIssue(1), userName, Me.txt16_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 16, 1, 2, varIssue(2), userName, Me.txt16_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 16, 1, 3, varIssue(3), userName, Me.txt16_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 16, 1, 4, varIssue(4), userName, Me.txt16_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 16, 1, 5, varIssue(5), userName, Me.txt16_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 16, 1, 6, varIssue(6), userName, Me.txt16_6.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 16, 1, 7, varIssue(7), userName, Me.txt16_7.Text)
 
-
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 16, 1)
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 16, 1)
         'Me.panTitle16.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
@@ -1271,13 +1271,13 @@ Partial Class MemberPages_CheckListCondor
         varIssue(4) = DefinirPontuacao(rnd17_4_Sim, rnd17_4_Nao, rnd17_4_NA)
         varIssue(5) = DefinirPontuacao(rnd17_5_Sim, rnd17_5_Nao, rnd17_5_NA)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 1, varIssue(1), userName, Me.txt17_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 2, varIssue(1), userName, Me.txt17_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 3, varIssue(1), userName, Me.txt17_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 4, varIssue(1), userName, Me.txt17_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 5, varIssue(1), userName, Me.txt17_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 17, 1, 1, varIssue(1), userName, Me.txt17_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 17, 1, 2, varIssue(2), userName, Me.txt17_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 17, 1, 3, varIssue(3), userName, Me.txt17_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 17, 1, 4, varIssue(4), userName, Me.txt17_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 17, 1, 5, varIssue(5), userName, Me.txt17_5.Text)
 
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 17, 1)
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 17, 1)
         'Me.panTitle17.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
@@ -1287,7 +1287,7 @@ Partial Class MemberPages_CheckListCondor
 
     Protected Sub btnGrupo18_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo18.Click
         Dim userName As String
-        Dim varIssue(18) As Byte
+        Dim varIssue(8) As Byte
 
         userName = User.Identity.Name
 
@@ -1300,16 +1300,16 @@ Partial Class MemberPages_CheckListCondor
         varIssue(7) = DefinirPontuacao(rnd18_7_Sim, rnd18_7_Nao, rnd18_7_NA)
         varIssue(8) = DefinirPontuacao(rnd18_8_Sim, rnd18_8_Nao, rnd18_8_NA)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 18, 1, 1, varIssue(1), userName, Me.txt18_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 18, 1, 2, varIssue(1), userName, Me.txt18_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 18, 1, 3, varIssue(1), userName, Me.txt18_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 18, 1, 4, varIssue(1), userName, Me.txt18_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 18, 1, 5, varIssue(1), userName, Me.txt18_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 18, 1, 6, varIssue(1), userName, Me.txt18_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 18, 1, 7, varIssue(1), userName, Me.txt18_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 18, 1, 8, varIssue(1), userName, Me.txt18_8.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 18, 1, 1, varIssue(1), userName, Me.txt18_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 18, 1, 2, varIssue(2), userName, Me.txt18_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 18, 1, 3, varIssue(3), userName, Me.txt18_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 18, 1, 4, varIssue(4), userName, Me.txt18_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 18, 1, 5, varIssue(5), userName, Me.txt18_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 18, 1, 6, varIssue(6), userName, Me.txt18_6.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 18, 1, 7, varIssue(7), userName, Me.txt18_7.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 18, 1, 8, varIssue(8), userName, Me.txt18_8.Text)
 
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 18, 1)
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 18, 1)
         'Me.panTitle18.CssClass = "pnl_Verde"
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
@@ -1320,7 +1320,7 @@ Partial Class MemberPages_CheckListCondor
 
     Protected Sub btnGrupo19_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo19.Click
         Dim userName As String
-        Dim varIssue(19) As Byte
+        Dim varIssue(7) As Byte
         userName = User.Identity.Name
 
         varIssue(1) = DefinirPontuacao(rnd19_1_Sim, rnd19_1_Nao, rnd19_1_NA)
@@ -1331,15 +1331,15 @@ Partial Class MemberPages_CheckListCondor
         varIssue(6) = DefinirPontuacao(rnd19_6_Sim, rnd19_6_Nao, rnd19_6_NA)
         varIssue(7) = DefinirPontuacao(rnd19_7_Sim, rnd19_7_Nao, rnd19_7_NA)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 1, varIssue(1), userName, Me.txt19_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 2, varIssue(1), userName, Me.txt19_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 3, varIssue(1), userName, Me.txt19_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 4, varIssue(1), userName, Me.txt19_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 5, varIssue(1), userName, Me.txt19_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 6, varIssue(1), userName, Me.txt19_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 19, 1, 7, varIssue(1), userName, Me.txt19_7.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 19, 1, 1, varIssue(1), userName, Me.txt19_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 19, 1, 2, varIssue(2), userName, Me.txt19_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 19, 1, 3, varIssue(3), userName, Me.txt19_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 19, 1, 4, varIssue(4), userName, Me.txt19_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 19, 1, 5, varIssue(5), userName, Me.txt19_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 19, 1, 6, varIssue(6), userName, Me.txt19_6.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 19, 1, 7, varIssue(7), userName, Me.txt19_7.Text)
 
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 19, 1)
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 19, 1)
         'Me.panTitle18.CssClass = "pnl_Verde"
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
@@ -1368,22 +1368,22 @@ Partial Class MemberPages_CheckListCondor
         varIssue(13) = DefinirPontuacao(rnd20_13_Sim, rnd20_13_Nao, rnd20_13_NA)
         varIssue(14) = DefinirPontuacao(rnd20_14_Sim, rnd20_14_Nao, rnd20_14_NA)
 
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 20, 1, 1, varIssue(1), userName, Me.txt20_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 20, 1, 2, varIssue(1), userName, Me.txt20_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 20, 1, 3, varIssue(1), userName, Me.txt20_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 20, 1, 4, varIssue(1), userName, Me.txt20_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 20, 1, 5, varIssue(1), userName, Me.txt20_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 20, 1, 6, varIssue(1), userName, Me.txt20_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 20, 1, 7, varIssue(1), userName, Me.txt20_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 20, 1, 8, varIssue(1), userName, Me.txt20_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 20, 1, 9, varIssue(1), userName, Me.txt20_9.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 20, 1, 10, varIssue(1), userName, Me.txt20_10.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 20, 1, 11, varIssue(1), userName, Me.txt20_11.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 20, 1, 12, varIssue(1), userName, Me.txt20_12.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 20, 1, 13, varIssue(1), userName, Me.txt20_13.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 20, 1, 14, varIssue(1), userName, Me.txt20_14.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 20, 1, 1, varIssue(1), userName, Me.txt20_1.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 20, 1, 2, varIssue(2), userName, Me.txt20_2.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 20, 1, 3, varIssue(3), userName, Me.txt20_3.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 20, 1, 4, varIssue(4), userName, Me.txt20_4.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 20, 1, 5, varIssue(5), userName, Me.txt20_5.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 20, 1, 6, varIssue(6), userName, Me.txt20_6.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 20, 1, 7, varIssue(7), userName, Me.txt20_7.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 20, 1, 8, varIssue(8), userName, Me.txt20_8.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 20, 1, 9, varIssue(9), userName, Me.txt20_9.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 20, 1, 10, varIssue(10), userName, Me.txt20_10.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 20, 1, 11, varIssue(11), userName, Me.txt20_11.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 20, 1, 12, varIssue(12), userName, Me.txt20_12.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 20, 1, 13, varIssue(13), userName, Me.txt20_13.Text)
+        oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 20, 1, 14, varIssue(14), userName, Me.txt20_14.Text)
 
-        oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 20, 1)
+        oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 20, 1)
         'Me.panTitle18.CssClass = "pnl_Verde"
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
@@ -1424,7 +1424,7 @@ Partial Class MemberPages_CheckListCondor
                 cmd.CommandType = CommandType.StoredProcedure
 
                 cmd.Parameters.Add(New SqlParameter("@dia", SqlDbType.VarChar))
-                cmd.Parameters("@dia").Value = txtData.Value
+                cmd.Parameters("@dia").Value = txtData.Text
 
                 cmd.Parameters.Add(New SqlParameter("@idFilial", SqlDbType.VarChar))
                 cmd.Parameters("@idFilial").Value = selFilial.SelectedValue.ToString()
@@ -2639,170 +2639,170 @@ Partial Class MemberPages_CheckListCondor
 
     Protected Sub btnPDF_Click(sender As Object, e As EventArgs) Handles btnPDF.Click
 
-        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         Call carregaRelatorio()
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "createPDF();", True)
 
         'Select Case Me.selFilial.SelectedValue
         '    Case 3
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F003.aspx", Me.selFilial.SelectedValue)
         '    Case 4
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F004.aspx", Me.selFilial.SelectedValue)
         '    Case 5
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F005.aspx", Me.selFilial.SelectedValue)
         '    Case 6
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F006.aspx", Me.selFilial.SelectedValue)
         '    Case 7
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F007.aspx", Me.selFilial.SelectedValue)
         '    Case 8
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F008.aspx", Me.selFilial.SelectedValue)
         '    Case 9
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F009.aspx", Me.selFilial.SelectedValue)
         '    Case 10
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F010.aspx", Me.selFilial.SelectedValue)
         '    Case 11
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F011.aspx", Me.selFilial.SelectedValue)
         '    Case 13
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F013.aspx", Me.selFilial.SelectedValue)
         '    Case 14
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F014.aspx", Me.selFilial.SelectedValue)
         '    Case 15
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F015.aspx", Me.selFilial.SelectedValue)
         '    Case 17
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F017.aspx", Me.selFilial.SelectedValue)
         '    Case 18
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F018.aspx", Me.selFilial.SelectedValue)
         '    Case 19
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F019.aspx", Me.selFilial.SelectedValue)
         '    Case 20
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F020.aspx", Me.selFilial.SelectedValue)
         '    Case 21
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F021.aspx", Me.selFilial.SelectedValue)
         '    Case 22
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F022.aspx", Me.selFilial.SelectedValue)
         '    Case 23
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F023.aspx", Me.selFilial.SelectedValue)
         '    Case 24
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F024.aspx", Me.selFilial.SelectedValue)
         '    Case 25
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F025.aspx", Me.selFilial.SelectedValue)
         '    Case 26
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F026.aspx", Me.selFilial.SelectedValue)
         '    Case 27
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F027.aspx", Me.selFilial.SelectedValue)
         '    Case 28
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F028.aspx", Me.selFilial.SelectedValue)
         '    Case 29
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F029.aspx", Me.selFilial.SelectedValue)
         '    Case 30
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F030.aspx", Me.selFilial.SelectedValue)
         '    Case 31
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F031.aspx", Me.selFilial.SelectedValue)
         '    Case 32
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F032.aspx", Me.selFilial.SelectedValue)
         '    Case 33
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F033.aspx", Me.selFilial.SelectedValue)
         '    Case 34
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F034.aspx", Me.selFilial.SelectedValue)
         '    Case 36
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F036.aspx", Me.selFilial.SelectedValue)
         '    Case 37
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F037.aspx", Me.selFilial.SelectedValue)
         '    Case 38
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F038.aspx", Me.selFilial.SelectedValue)
         '    Case 39
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F039.aspx", Me.selFilial.SelectedValue)
         '    Case 40
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F040.aspx", Me.selFilial.SelectedValue)
         '    Case 41
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F041.aspx", Me.selFilial.SelectedValue)
         '    Case 42
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F042.aspx", Me.selFilial.SelectedValue)
         '    Case 43
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F043.aspx", Me.selFilial.SelectedValue)
         '    Case 44
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F044.aspx", Me.selFilial.SelectedValue)
         '    Case 45
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F045.aspx", Me.selFilial.SelectedValue)
         '    Case 46
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F046.aspx", Me.selFilial.SelectedValue)
         '    Case 47
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F047.aspx", Me.selFilial.SelectedValue)
         '    Case 48
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F048.aspx", Me.selFilial.SelectedValue)
         '    Case 49
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F049.aspx", Me.selFilial.SelectedValue)
         '    Case 50
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F050.aspx", Me.selFilial.SelectedValue)
         '    Case 51
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F051.aspx", Me.selFilial.SelectedValue)
         '    Case 52
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F052.aspx", Me.selFilial.SelectedValue)
         '    Case 53
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F053.aspx", Me.selFilial.SelectedValue)
         '    Case 54
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F054.aspx", Me.selFilial.SelectedValue)
         '    Case 55
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F055.aspx", Me.selFilial.SelectedValue)
         '    Case 56
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F056.aspx", Me.selFilial.SelectedValue)
         '    Case 57
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F057.aspx", Me.selFilial.SelectedValue)
         '    Case 58
-        '        oCh.GerarRelatorio(txtData.Value, Me.selFilial.SelectedValue)
+        '        oCh.GerarRelatorio(txtData.Text, Me.selFilial.SelectedValue)
         '        Call Linkar("RelatorioChecklist_F058.aspx", Me.selFilial.SelectedValue)
         'End Select
 
@@ -3187,7 +3187,7 @@ Partial Class MemberPages_CheckListCondor
                 cmd.CommandType = CommandType.StoredProcedure
 
                 cmd.Parameters.Add(New SqlParameter("@dia", SqlDbType.VarChar))
-                cmd.Parameters("@dia").Value = txtData.Value
+                cmd.Parameters("@dia").Value = txtData.Text
 
                 cmd.Parameters.Add(New SqlParameter("@idFilial", SqlDbType.VarChar))
                 cmd.Parameters("@idFilial").Value = selFilial.SelectedValue.ToString()
@@ -3307,22 +3307,22 @@ End Class
 '    varIssue(13) = DefinirPontuacao(rnd10_13_Sim, rnd10_13_Nao, rnd10_13_NA)
 '    varIssue(14) = DefinirPontuacao(rnd10_14_Sim, rnd10_14_Nao, rnd10_14_NA)
 
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 1, varIssue(1), userName, Me.txt10_1.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 2, varIssue(2), userName, Me.txt10_2.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 3, varIssue(3), userName, Me.txt10_3.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 4, varIssue(4), userName, Me.txt10_4.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 5, varIssue(5), userName, Me.txt10_5.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 6, varIssue(6), userName, Me.txt10_6.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 7, varIssue(7), userName, Me.txt10_7.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 8, varIssue(8), userName, Me.txt10_8.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 9, varIssue(9), userName, Me.txt10_9.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 10, varIssue(10), userName, Me.txt10_10.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 11, varIssue(11), userName, Me.txt10_11.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 12, varIssue(12), userName, Me.txt10_12.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 13, varIssue(13), userName, Me.txt10_13.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 10, 1, 14, varIssue(14), userName, Me.txt10_14.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 1, varIssue(1), userName, Me.txt10_1.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 2, varIssue(2), userName, Me.txt10_2.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 3, varIssue(3), userName, Me.txt10_3.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 4, varIssue(4), userName, Me.txt10_4.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 5, varIssue(5), userName, Me.txt10_5.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 6, varIssue(6), userName, Me.txt10_6.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 7, varIssue(7), userName, Me.txt10_7.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 8, varIssue(8), userName, Me.txt10_8.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 9, varIssue(9), userName, Me.txt10_9.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 10, varIssue(10), userName, Me.txt10_10.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 11, varIssue(11), userName, Me.txt10_11.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 12, varIssue(12), userName, Me.txt10_12.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 13, varIssue(13), userName, Me.txt10_13.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 10, 1, 14, varIssue(14), userName, Me.txt10_14.Text)
 
-'    oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 10, 1)
+'    oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 10, 1)
 '    Me.panTitle20.CssClass = "pnl_Verde"
 
 'End Sub   ' Bloco 2 - 1 a 14. Total de 14 Perguntas
@@ -3349,22 +3349,22 @@ End Class
 '    varIssue(13) = DefinirPontuacao(rnd11_13_Sim, rnd11_13_Nao, rnd11_13_NA)
 
 
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 1, varIssue(1), userName, Me.txt11_1.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 2, varIssue(2), userName, Me.txt11_2.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 3, varIssue(3), userName, Me.txt11_3.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 4, varIssue(4), userName, Me.txt11_4.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 5, varIssue(5), userName, Me.txt11_5.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 6, varIssue(6), userName, Me.txt11_6.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 7, varIssue(7), userName, Me.txt11_7.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 8, varIssue(8), userName, Me.txt11_8.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 9, varIssue(9), userName, Me.txt11_9.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 10, varIssue(10), userName, Me.txt11_10.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 11, varIssue(11), userName, Me.txt11_11.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 12, varIssue(12), userName, Me.txt11_12.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 11, 1, 13, varIssue(13), userName, Me.txt11_13.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 1, varIssue(1), userName, Me.txt11_1.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 2, varIssue(2), userName, Me.txt11_2.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 3, varIssue(3), userName, Me.txt11_3.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 4, varIssue(4), userName, Me.txt11_4.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 5, varIssue(5), userName, Me.txt11_5.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 6, varIssue(6), userName, Me.txt11_6.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 7, varIssue(7), userName, Me.txt11_7.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 8, varIssue(8), userName, Me.txt11_8.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 9, varIssue(9), userName, Me.txt11_9.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 10, varIssue(10), userName, Me.txt11_10.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 11, varIssue(11), userName, Me.txt11_11.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 12, varIssue(12), userName, Me.txt11_12.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 11, 1, 13, varIssue(13), userName, Me.txt11_13.Text)
 
 
-'    oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 11, 1)
+'    oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 11, 1)
 '    Me.panTitle21.CssClass = "pnl_Verde"
 
 'End Sub   ' Bloco 2 - 1 a 14. Total de 14 Perguntas
@@ -3383,14 +3383,14 @@ End Class
 '    varIssue(5) = DefinirPontuacao(rnd12_5_Sim, rnd12_5_Nao, rnd12_5_NA)
 
 
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 1, varIssue(1), userName, Me.txt12_1.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 2, varIssue(2), userName, Me.txt12_2.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 3, varIssue(3), userName, Me.txt12_3.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 4, varIssue(4), userName, Me.txt12_4.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 12, 1, 5, varIssue(5), userName, Me.txt12_5.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 1, varIssue(1), userName, Me.txt12_1.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 2, varIssue(2), userName, Me.txt12_2.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 3, varIssue(3), userName, Me.txt12_3.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 4, varIssue(4), userName, Me.txt12_4.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 12, 1, 5, varIssue(5), userName, Me.txt12_5.Text)
 
 
-'    oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 12, 1)
+'    oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 12, 1)
 '    Me.panTitle22.CssClass = "pnl_Verde"
 
 'End Sub   ' Bloco 2 - 1 a 14. Total de 14 Perguntas
@@ -3404,9 +3404,9 @@ End Class
 
 '    varIssue(1) = DefinirPontuacao(rnd13_1_Sim, rnd13_1_Nao, rnd13_1_NA)
 
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 1, varIssue(1), userName, Me.txt13_1.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 13, 1, 1, varIssue(1), userName, Me.txt13_1.Text)
 
-'    oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 13, 1)
+'    oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 13, 1)
 '    Me.panTitle23.CssClass = "pnl_Verde"
 
 'End Sub   ' Bloco 2 - 1 a 14. Total de 14 Perguntas
@@ -3424,12 +3424,12 @@ End Class
 
 
 
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 1, varIssue(1), userName, Me.txt14_1.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 2, varIssue(2), userName, Me.txt14_2.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 3, varIssue(3), userName, Me.txt14_3.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 14, 1, 1, varIssue(1), userName, Me.txt14_1.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 14, 1, 2, varIssue(2), userName, Me.txt14_2.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 14, 1, 3, varIssue(3), userName, Me.txt14_3.Text)
 
 
-'    oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 14, 1)
+'    oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 14, 1)
 '    Me.panTitle24.CssClass = "pnl_Verde"
 
 'End Sub   ' Bloco 2 - 1 a 14. Total de 14 Perguntas
@@ -3448,14 +3448,14 @@ End Class
 '    varIssue(5) = DefinirPontuacao(rnd15_5_Sim, rnd15_5_Nao, rnd15_5_NA)
 
 
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 15, 1, 1, varIssue(1), userName, Me.txt15_1.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 15, 1, 2, varIssue(2), userName, Me.txt15_2.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 15, 1, 3, varIssue(3), userName, Me.txt15_3.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 15, 1, 4, varIssue(4), userName, Me.txt15_4.Text)
-'    oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 15, 1, 5, varIssue(5), userName, Me.txt15_5.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 15, 1, 1, varIssue(1), userName, Me.txt15_1.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 15, 1, 2, varIssue(2), userName, Me.txt15_2.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 15, 1, 3, varIssue(3), userName, Me.txt15_3.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 15, 1, 4, varIssue(4), userName, Me.txt15_4.Text)
+'    oCh.SalvarChecklist(txtData.Text, Me.selFilial.SelectedValue, 15, 1, 5, varIssue(5), userName, Me.txt15_5.Text)
 
 
-'    oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 15, 1)
+'    oCh.SalvarChecklistGrupo(txtData.Text, Me.selFilial.SelectedValue, 15, 1)
 '    Me.panTitle25.CssClass = "pnl_Verde"
 
 'End Sub   ' Bloco 2 - 1 a 14. Total de 14 Perguntas
@@ -3493,46 +3493,46 @@ End Class
 
 'Private Sub BuscarChecklist_Grupo10(ByVal iGrupo As Byte)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 1)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 1)
 '    Call BCDet(oCh.Pontos, Me.txt10_1, oCh.Descricao, Me.rnd10_1_Sim, rnd10_1_Nao, Me.rnd10_1_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 2)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 2)
 '    Call BCDet(oCh.Pontos, Me.txt10_2, oCh.Descricao, Me.rnd10_2_Sim, rnd10_2_Nao, Me.rnd10_2_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 3)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 3)
 '    Call BCDet(oCh.Pontos, Me.txt10_3, oCh.Descricao, Me.rnd10_3_Sim, rnd10_3_Nao, Me.rnd10_3_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 4)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 4)
 '    Call BCDet(oCh.Pontos, Me.txt10_4, oCh.Descricao, Me.rnd10_4_Sim, rnd10_4_Nao, Me.rnd10_4_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 5)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 5)
 '    Call BCDet(oCh.Pontos, Me.txt10_5, oCh.Descricao, Me.rnd10_5_Sim, rnd10_5_Nao, Me.rnd10_5_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 6)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 6)
 '    Call BCDet(oCh.Pontos, Me.txt10_6, oCh.Descricao, Me.rnd10_6_Sim, rnd10_6_Nao, Me.rnd10_6_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 7)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 7)
 '    Call BCDet(oCh.Pontos, Me.txt10_7, oCh.Descricao, Me.rnd10_7_Sim, rnd10_7_Nao, Me.rnd10_7_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 8)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 8)
 '    Call BCDet(oCh.Pontos, Me.txt10_8, oCh.Descricao, Me.rnd10_8_Sim, rnd10_8_Nao, Me.rnd10_8_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 9)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 9)
 '    Call BCDet(oCh.Pontos, Me.txt10_9, oCh.Descricao, Me.rnd10_9_Sim, rnd10_9_Nao, Me.rnd10_9_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 10)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 10)
 '    Call BCDet(oCh.Pontos, Me.txt10_10, oCh.Descricao, Me.rnd10_10_Sim, rnd10_10_Nao, Me.rnd10_10_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 11)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 11)
 '    Call BCDet(oCh.Pontos, Me.txt10_11, oCh.Descricao, Me.rnd10_11_Sim, rnd10_11_Nao, Me.rnd10_11_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 12)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 12)
 '    Call BCDet(oCh.Pontos, Me.txt10_12, oCh.Descricao, Me.rnd10_12_Sim, rnd10_12_Nao, Me.rnd10_12_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 13)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 13)
 '    Call BCDet(oCh.Pontos, Me.txt10_13, oCh.Descricao, Me.rnd10_13_Sim, rnd10_13_Nao, Me.rnd10_13_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 14)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 14)
 '    Call BCDet(oCh.Pontos, Me.txt10_14, oCh.Descricao, Me.rnd10_14_Sim, rnd10_14_Nao, Me.rnd10_14_NA)
 
 
@@ -3540,43 +3540,43 @@ End Class
 
 'Private Sub BuscarChecklist_Grupo11(ByVal iGrupo As Byte)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 1)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 1)
 '    Call BCDet(oCh.Pontos, Me.txt11_1, oCh.Descricao, Me.rnd11_1_Sim, rnd11_1_Nao, Me.rnd11_1_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 2)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 2)
 '    Call BCDet(oCh.Pontos, Me.txt11_2, oCh.Descricao, Me.rnd11_2_Sim, rnd11_2_Nao, Me.rnd11_2_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 3)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 3)
 '    Call BCDet(oCh.Pontos, Me.txt11_3, oCh.Descricao, Me.rnd11_3_Sim, rnd11_3_Nao, Me.rnd11_3_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 4)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 4)
 '    Call BCDet(oCh.Pontos, Me.txt11_4, oCh.Descricao, Me.rnd11_4_Sim, rnd11_4_Nao, Me.rnd11_4_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 5)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 5)
 '    Call BCDet(oCh.Pontos, Me.txt11_5, oCh.Descricao, Me.rnd11_5_Sim, rnd11_5_Nao, Me.rnd11_5_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 6)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 6)
 '    Call BCDet(oCh.Pontos, Me.txt11_6, oCh.Descricao, Me.rnd11_6_Sim, rnd11_6_Nao, Me.rnd11_6_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 7)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 7)
 '    Call BCDet(oCh.Pontos, Me.txt11_7, oCh.Descricao, Me.rnd11_7_Sim, rnd11_7_Nao, Me.rnd11_7_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 8)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 8)
 '    Call BCDet(oCh.Pontos, Me.txt11_8, oCh.Descricao, Me.rnd11_8_Sim, rnd11_8_Nao, Me.rnd11_8_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 9)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 9)
 '    Call BCDet(oCh.Pontos, Me.txt11_9, oCh.Descricao, Me.rnd11_9_Sim, rnd11_9_Nao, Me.rnd11_9_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 10)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 10)
 '    Call BCDet(oCh.Pontos, Me.txt11_10, oCh.Descricao, Me.rnd11_10_Sim, rnd11_10_Nao, Me.rnd11_10_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 11)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 11)
 '    Call BCDet(oCh.Pontos, Me.txt11_11, oCh.Descricao, Me.rnd11_11_Sim, rnd11_11_Nao, Me.rnd11_11_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 12)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 12)
 '    Call BCDet(oCh.Pontos, Me.txt11_12, oCh.Descricao, Me.rnd11_12_Sim, rnd11_12_Nao, Me.rnd11_12_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 13)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 13)
 '    Call BCDet(oCh.Pontos, Me.txt11_13, oCh.Descricao, Me.rnd11_13_Sim, rnd11_13_Nao, Me.rnd11_13_NA)
 
 
@@ -3585,19 +3585,19 @@ End Class
 
 'Private Sub BuscarChecklist_Grupo12(ByVal iGrupo As Byte)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 1)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 1)
 '    Call BCDet(oCh.Pontos, Me.txt12_1, oCh.Descricao, Me.rnd12_1_Sim, rnd12_1_Nao, Me.rnd12_1_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 2)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 2)
 '    Call BCDet(oCh.Pontos, Me.txt12_2, oCh.Descricao, Me.rnd12_2_Sim, rnd12_2_Nao, Me.rnd12_2_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 3)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 3)
 '    Call BCDet(oCh.Pontos, Me.txt12_3, oCh.Descricao, Me.rnd12_3_Sim, rnd12_3_Nao, Me.rnd12_3_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 4)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 4)
 '    Call BCDet(oCh.Pontos, Me.txt12_4, oCh.Descricao, Me.rnd12_4_Sim, rnd12_4_Nao, Me.rnd12_4_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 5)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 5)
 '    Call BCDet(oCh.Pontos, Me.txt12_5, oCh.Descricao, Me.rnd12_5_Sim, rnd12_5_Nao, Me.rnd12_5_NA)
 
 
@@ -3605,39 +3605,39 @@ End Class
 
 'Private Sub BuscarChecklist_Grupo13(ByVal iGrupo As Byte)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 1)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 1)
 '    Call BCDet(oCh.Pontos, Me.txt13_1, oCh.Descricao, Me.rnd13_1_Sim, rnd13_1_Nao, Me.rnd13_1_NA)
 
 'End Sub
 
 'Private Sub BuscarChecklist_Grupo14(ByVal iGrupo As Byte)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 1)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 1)
 '    Call BCDet(oCh.Pontos, Me.txt14_1, oCh.Descricao, Me.rnd14_1_Sim, rnd14_1_Nao, Me.rnd14_1_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 2)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 2)
 '    Call BCDet(oCh.Pontos, Me.txt14_2, oCh.Descricao, Me.rnd14_2_Sim, rnd14_2_Nao, Me.rnd14_2_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 3)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 3)
 '    Call BCDet(oCh.Pontos, Me.txt14_3, oCh.Descricao, Me.rnd14_3_Sim, rnd14_3_Nao, Me.rnd14_3_NA)
 
 'End Sub
 
 'Private Sub BuscarChecklist_Grupo15(ByVal iGrupo As Byte)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 1)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 1)
 '    Call BCDet(oCh.Pontos, Me.txt15_1, oCh.Descricao, Me.rnd15_1_Sim, rnd15_1_Nao, Me.rnd15_1_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 2)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 2)
 '    Call BCDet(oCh.Pontos, Me.txt15_2, oCh.Descricao, Me.rnd15_2_Sim, rnd15_2_Nao, Me.rnd15_2_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 3)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 3)
 '    Call BCDet(oCh.Pontos, Me.txt15_3, oCh.Descricao, Me.rnd15_3_Sim, rnd15_3_Nao, Me.rnd15_3_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 4)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 4)
 '    Call BCDet(oCh.Pontos, Me.txt15_4, oCh.Descricao, Me.rnd15_4_Sim, rnd15_4_Nao, Me.rnd15_4_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 5)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 5)
 '    Call BCDet(oCh.Pontos, Me.txt15_5, oCh.Descricao, Me.rnd15_5_Sim, rnd15_5_Nao, Me.rnd15_5_NA)
 
 
@@ -4780,381 +4780,381 @@ End Class
 
 'Private Sub BuscarChecklist_Grupo1(ByVal iGrupo As Byte)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 1)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 1)
 '    Call BCDet(oCh.Pontos, Me.txt1_1, oCh.Descricao, Me.rnd1_1_Sim, rnd1_1_Nao, Me.rnd1_1_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 2)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 2)
 '    Call BCDet(oCh.Pontos, Me.txt1_2, oCh.Descricao, Me.rnd1_2_Sim, rnd1_2_Nao, Me.rnd1_2_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 3)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 3)
 '    Call BCDet(oCh.Pontos, Me.txt1_3, oCh.Descricao, Me.rnd1_3_Sim, rnd1_3_Nao, Me.rnd1_3_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 4)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 4)
 '    Call BCDet(oCh.Pontos, Me.txt1_4, oCh.Descricao, Me.rnd1_4_Sim, rnd1_4_Nao, Me.rnd1_4_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 5)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 5)
 '    Call BCDet(oCh.Pontos, Me.txt1_5, oCh.Descricao, Me.rnd1_5_Sim, rnd1_5_Nao, Me.rnd1_5_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 6)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 6)
 '    Call BCDet(oCh.Pontos, Me.txt1_6, oCh.Descricao, Me.rnd1_6_Sim, rnd1_6_Nao, Me.rnd1_6_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 7)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 7)
 '    Call BCDet(oCh.Pontos, Me.txt1_7, oCh.Descricao, Me.rnd1_7_Sim, rnd1_7_Nao, Me.rnd1_7_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 8)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 8)
 '    Call BCDet(oCh.Pontos, Me.txt1_8, oCh.Descricao, Me.rnd1_8_Sim, rnd1_8_Nao, Me.rnd1_8_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 9)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 9)
 '    Call BCDet(oCh.Pontos, Me.txt1_9, oCh.Descricao, Me.rnd1_9_Sim, rnd1_9_Nao, Me.rnd1_9_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 10)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 10)
 '    Call BCDet(oCh.Pontos, Me.txt1_10, oCh.Descricao, Me.rnd1_10_Sim, rnd1_10_Nao, Me.rnd1_10_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 11)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 11)
 '    Call BCDet(oCh.Pontos, Me.txt1_11, oCh.Descricao, Me.rnd1_11_Sim, rnd1_11_Nao, Me.rnd1_11_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 12)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 12)
 '    Call BCDet(oCh.Pontos, Me.txt1_12, oCh.Descricao, Me.rnd1_12_Sim, rnd1_12_Nao, Me.rnd1_12_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 13)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 13)
 '    Call BCDet(oCh.Pontos, Me.txt1_13, oCh.Descricao, Me.rnd1_13_Sim, rnd1_13_Nao, Me.rnd1_13_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 14)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 14)
 '    Call BCDet(oCh.Pontos, Me.txt1_14, oCh.Descricao, Me.rnd1_14_Sim, rnd1_14_Nao, Me.rnd1_14_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 15)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 15)
 '    Call BCDet(oCh.Pontos, Me.txt1_15, oCh.Descricao, Me.rnd1_15_Sim, rnd1_15_Nao, Me.rnd1_15_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 16)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 16)
 '    Call BCDet(oCh.Pontos, Me.txt1_16, oCh.Descricao, Me.rnd1_16_Sim, rnd1_16_Nao, Me.rnd1_16_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 17)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 17)
 '    Call BCDet(oCh.Pontos, Me.txt1_17, oCh.Descricao, Me.rnd1_17_Sim, rnd1_17_Nao, Me.rnd1_17_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 18)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 18)
 '    Call BCDet(oCh.Pontos, Me.txt1_18, oCh.Descricao, Me.rnd1_18_Sim, rnd1_18_Nao, Me.rnd1_18_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 19)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 19)
 '    Call BCDet(oCh.Pontos, Me.txt1_19, oCh.Descricao, Me.rnd1_19_Sim, rnd1_19_Nao, Me.rnd1_19_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 20)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 20)
 '    Call BCDet(oCh.Pontos, Me.txt1_20, oCh.Descricao, Me.rnd1_20_Sim, rnd1_20_Nao, Me.rnd1_20_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 21)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 21)
 '    Call BCDet(oCh.Pontos, Me.txt1_21, oCh.Descricao, Me.rnd1_21_Sim, rnd1_21_Nao, Me.rnd1_21_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 22)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 22)
 '    Call BCDet(oCh.Pontos, Me.txt1_22, oCh.Descricao, Me.rnd1_22_Sim, rnd1_22_Nao, Me.rnd1_22_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 23)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 23)
 '    Call BCDet(oCh.Pontos, Me.txt1_23, oCh.Descricao, Me.rnd1_23_Sim, rnd1_23_Nao, Me.rnd1_23_NA)
 
 'End Sub
 
 'Private Sub BuscarChecklist_Grupo2(ByVal iGrupo As Byte)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 1)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 1)
 '    Call BCDet(oCh.Pontos, Me.txt2_1, oCh.Descricao, Me.rnd2_1_Sim, rnd2_1_Nao, Me.rnd2_1_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 2)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 2)
 '    Call BCDet(oCh.Pontos, Me.txt2_2, oCh.Descricao, Me.rnd2_2_Sim, rnd2_2_Nao, Me.rnd2_2_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 3)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 3)
 '    Call BCDet(oCh.Pontos, Me.txt2_3, oCh.Descricao, Me.rnd2_3_Sim, rnd2_3_Nao, Me.rnd2_3_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 4)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 4)
 '    Call BCDet(oCh.Pontos, Me.txt2_4, oCh.Descricao, Me.rnd2_4_Sim, rnd2_4_Nao, Me.rnd2_4_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 5)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 5)
 '    Call BCDet(oCh.Pontos, Me.txt2_5, oCh.Descricao, Me.rnd2_5_Sim, rnd2_5_Nao, Me.rnd2_5_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 6)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 6)
 '    Call BCDet(oCh.Pontos, Me.txt2_6, oCh.Descricao, Me.rnd2_6_Sim, rnd2_6_Nao, Me.rnd2_6_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 7)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 7)
 '    Call BCDet(oCh.Pontos, Me.txt2_7, oCh.Descricao, Me.rnd2_7_Sim, rnd2_7_Nao, Me.rnd2_7_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 8)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 8)
 '    Call BCDet(oCh.Pontos, Me.txt2_8, oCh.Descricao, Me.rnd2_8_Sim, rnd2_8_Nao, Me.rnd2_8_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 9)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 9)
 '    Call BCDet(oCh.Pontos, Me.txt2_9, oCh.Descricao, Me.rnd2_9_Sim, rnd2_9_Nao, Me.rnd2_9_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 10)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 10)
 '    Call BCDet(oCh.Pontos, Me.txt2_10, oCh.Descricao, Me.rnd2_10_Sim, rnd2_10_Nao, Me.rnd2_10_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 11)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 11)
 '    Call BCDet(oCh.Pontos, Me.txt2_11, oCh.Descricao, Me.rnd2_11_Sim, rnd2_11_Nao, Me.rnd2_11_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 12)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 12)
 '    Call BCDet(oCh.Pontos, Me.txt2_12, oCh.Descricao, Me.rnd2_12_Sim, rnd2_12_Nao, Me.rnd2_12_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 13)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 13)
 '    Call BCDet(oCh.Pontos, Me.txt2_13, oCh.Descricao, Me.rnd2_13_Sim, rnd2_13_Nao, Me.rnd2_13_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 14)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 14)
 '    Call BCDet(oCh.Pontos, Me.txt2_14, oCh.Descricao, Me.rnd2_14_Sim, rnd2_14_Nao, Me.rnd2_14_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 15)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 15)
 '    Call BCDet(oCh.Pontos, Me.txt2_15, oCh.Descricao, Me.rnd2_15_Sim, rnd2_15_Nao, Me.rnd2_15_NA)
 
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 16)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 16)
 '    'Call BCDet(oCh.Pontos, Me.txt2_16, oCh.Descricao, Me.rnd2_16_Sim, rnd2_16_Nao, Me.rnd2_16_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 17)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 17)
 '    'Call BCDet(oCh.Pontos, Me.txt2_17, oCh.Descricao, Me.rnd2_17_Sim, rnd2_17_Nao, Me.rnd2_17_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 18)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 18)
 '    'Call BCDet(oCh.Pontos, Me.txt2_18, oCh.Descricao, Me.rnd2_18_Sim, rnd2_18_Nao, Me.rnd2_18_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 19)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 19)
 '    'Call BCDet(oCh.Pontos, Me.txt2_19, oCh.Descricao, Me.rnd2_19_Sim, rnd2_19_Nao, Me.rnd2_19_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 20)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 20)
 '    'Call BCDet(oCh.Pontos, Me.txt2_20, oCh.Descricao, Me.rnd2_20_Sim, rnd2_20_Nao, Me.rnd2_20_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 21)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 21)
 '    'Call BCDet(oCh.Pontos, Me.txt2_21, oCh.Descricao, Me.rnd2_21_Sim, rnd2_21_Nao, Me.rnd2_21_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 22)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 22)
 '    'Call BCDet(oCh.Pontos, Me.txt2_22, oCh.Descricao, Me.rnd2_22_Sim, rnd2_22_Nao, Me.rnd2_22_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 23)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 23)
 '    'Call BCDet(oCh.Pontos, Me.txt2_23, oCh.Descricao, Me.rnd2_23_Sim, rnd2_23_Nao, Me.rnd2_23_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 24)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 24)
 '    'Call BCDet(oCh.Pontos, Me.txt2_24, oCh.Descricao, Me.rnd2_24_Sim, rnd2_24_Nao, Me.rnd2_24_NA)
 
 
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 25)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 25)
 '    'Call BCDet(oCh.Pontos, Me.txt2_25, oCh.Descricao, Me.rnd2_25_Sim, rnd2_25_Nao, Me.rnd2_25_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 26)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 26)
 '    'Call BCDet(oCh.Pontos, Me.txt2_26, oCh.Descricao, Me.rnd2_26_Sim, rnd2_26_Nao, Me.rnd2_26_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 27)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 27)
 '    'Call BCDet(oCh.Pontos, Me.txt2_27, oCh.Descricao, Me.rnd2_27_Sim, rnd2_27_Nao, Me.rnd2_27_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 28)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 28)
 '    'Call BCDet(oCh.Pontos, Me.txt2_28, oCh.Descricao, Me.rnd2_28_Sim, rnd2_28_Nao, Me.rnd2_28_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 29)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 29)
 '    'Call BCDet(oCh.Pontos, Me.txt2_29, oCh.Descricao, Me.rnd2_29_Sim, rnd2_29_Nao, Me.rnd2_29_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 30)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 30)
 '    'Call BCDet(oCh.Pontos, Me.txt2_30, oCh.Descricao, Me.rnd2_30_Sim, rnd2_30_Nao, Me.rnd2_30_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 31)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 31)
 '    'Call BCDet(oCh.Pontos, Me.txt2_31, oCh.Descricao, Me.rnd2_31_Sim, rnd2_31_Nao, Me.rnd2_31_NA)
 
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 32)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 32)
 '    'Call BCDet(oCh.Pontos, Me.txt2_32, oCh.Descricao, Me.rnd2_32_Sim, rnd2_32_Nao, Me.rnd2_32_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 33)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 33)
 '    'Call BCDet(oCh.Pontos, Me.txt2_33, oCh.Descricao, Me.rnd2_33_Sim, rnd2_33_Nao, Me.rnd2_33_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 34)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 34)
 '    'Call BCDet(oCh.Pontos, Me.txt2_34, oCh.Descricao, Me.rnd2_34_Sim, rnd2_34_Nao, Me.rnd2_34_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 35)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 35)
 '    'Call BCDet(oCh.Pontos, Me.txt2_35, oCh.Descricao, Me.rnd2_35_Sim, rnd2_35_Nao, Me.rnd2_35_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 36)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 36)
 '    'Call BCDet(oCh.Pontos, Me.txt2_36, oCh.Descricao, Me.rnd2_36_Sim, rnd2_36_Nao, Me.rnd2_36_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 37)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 37)
 '    'Call BCDet(oCh.Pontos, Me.txt2_37, oCh.Descricao, Me.rnd2_37_Sim, rnd2_37_Nao, Me.rnd2_37_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 38)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 38)
 '    'Call BCDet(oCh.Pontos, Me.txt2_38, oCh.Descricao, Me.rnd2_38_Sim, rnd2_38_Nao, Me.rnd2_38_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 39)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 39)
 '    'Call BCDet(oCh.Pontos, Me.txt2_39, oCh.Descricao, Me.rnd2_39_Sim, rnd2_39_Nao, Me.rnd2_39_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 40)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 40)
 '    'Call BCDet(oCh.Pontos, Me.txt2_40, oCh.Descricao, Me.rnd2_40_Sim, rnd2_40_Nao, Me.rnd2_40_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 41)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 41)
 '    'Call BCDet(oCh.Pontos, Me.txt2_41, oCh.Descricao, Me.rnd2_41_Sim, rnd2_41_Nao, Me.rnd2_41_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 42)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 42)
 '    'Call BCDet(oCh.Pontos, Me.txt2_42, oCh.Descricao, Me.rnd2_42_Sim, rnd2_42_Nao, Me.rnd2_42_NA)
 
 'End Sub
 
 'Private Sub BuscarChecklist_Grupo3(ByVal iGrupo As Byte)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 1)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 1)
 '    Call BCDet(oCh.Pontos, Me.txt3_1, oCh.Descricao, Me.rnd3_1_Sim, rnd3_1_Nao, Me.rnd3_1_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 2)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 2)
 '    Call BCDet(oCh.Pontos, Me.txt3_2, oCh.Descricao, Me.rnd3_2_Sim, rnd3_2_Nao, Me.rnd3_2_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 3)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 3)
 '    Call BCDet(oCh.Pontos, Me.txt3_3, oCh.Descricao, Me.rnd3_3_Sim, rnd3_3_Nao, Me.rnd3_3_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 4)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 4)
 '    Call BCDet(oCh.Pontos, Me.txt3_4, oCh.Descricao, Me.rnd3_4_Sim, rnd3_4_Nao, Me.rnd3_4_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 5)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 5)
 '    Call BCDet(oCh.Pontos, Me.txt3_5, oCh.Descricao, Me.rnd3_5_Sim, rnd3_5_Nao, Me.rnd3_5_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 6)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 6)
 '    Call BCDet(oCh.Pontos, Me.txt3_6, oCh.Descricao, Me.rnd3_6_Sim, rnd3_6_Nao, Me.rnd3_6_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 7)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 7)
 '    Call BCDet(oCh.Pontos, Me.txt3_7, oCh.Descricao, Me.rnd3_7_Sim, rnd3_7_Nao, Me.rnd3_7_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 8)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 8)
 '    Call BCDet(oCh.Pontos, Me.txt3_8, oCh.Descricao, Me.rnd3_8_Sim, rnd3_8_Nao, Me.rnd3_8_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 9)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 9)
 '    Call BCDet(oCh.Pontos, Me.txt3_9, oCh.Descricao, Me.rnd3_9_Sim, rnd3_9_Nao, Me.rnd3_9_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 10)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 10)
 '    Call BCDet(oCh.Pontos, Me.txt3_10, oCh.Descricao, Me.rnd3_10_Sim, rnd3_10_Nao, Me.rnd3_10_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 11)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 11)
 '    'Call BCDet(oCh.Pontos, Me.txt3_11, oCh.Descricao, Me.rnd3_11_Sim, rnd3_11_Nao, Me.rnd3_11_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 12)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 12)
 '    'Call BCDet(oCh.Pontos, Me.txt3_12, oCh.Descricao, Me.rnd3_12_Sim, rnd3_12_Nao, Me.rnd3_12_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 13)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 13)
 '    'Call BCDet(oCh.Pontos, Me.txt3_13, oCh.Descricao, Me.rnd3_13_Sim, rnd3_13_Nao, Me.rnd3_13_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 14)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 14)
 '    'Call BCDet(oCh.Pontos, Me.txt3_14, oCh.Descricao, Me.rnd3_14_Sim, rnd3_14_Nao, Me.rnd3_14_NA)
 
 
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 15)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 15)
 '    'Call BCDet(oCh.Pontos, Me.txt3_15, oCh.Descricao, Me.rnd3_15_Sim, rnd3_15_Nao, Me.rnd3_15_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 16)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 16)
 '    'Call BCDet(oCh.Pontos, Me.txt3_16, oCh.Descricao, Me.rnd3_16_Sim, rnd3_16_Nao, Me.rnd3_16_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 17)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 17)
 '    'Call BCDet(oCh.Pontos, Me.txt3_17, oCh.Descricao, Me.rnd3_17_Sim, rnd3_17_Nao, Me.rnd3_17_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 18)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 18)
 '    'Call BCDet(oCh.Pontos, Me.txt3_18, oCh.Descricao, Me.rnd3_18_Sim, rnd3_18_Nao, Me.rnd3_18_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 19)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 19)
 '    'Call BCDet(oCh.Pontos, Me.txt3_19, oCh.Descricao, Me.rnd3_19_Sim, rnd3_19_Nao, Me.rnd3_19_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 20)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 20)
 '    'Call BCDet(oCh.Pontos, Me.txt3_20, oCh.Descricao, Me.rnd3_20_Sim, rnd3_20_Nao, Me.rnd3_20_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 21)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 21)
 '    'Call BCDet(oCh.Pontos, Me.txt3_21, oCh.Descricao, Me.rnd3_21_Sim, rnd3_21_Nao, Me.rnd3_21_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 22)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 22)
 '    'Call BCDet(oCh.Pontos, Me.txt3_22, oCh.Descricao, Me.rnd3_22_Sim, rnd3_22_Nao, Me.rnd3_22_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 23)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 23)
 '    'Call BCDet(oCh.Pontos, Me.txt3_23, oCh.Descricao, Me.rnd3_23_Sim, rnd3_23_Nao, Me.rnd3_23_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 24)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 24)
 '    'Call BCDet(oCh.Pontos, Me.txt3_24, oCh.Descricao, Me.rnd3_24_Sim, rnd3_24_Nao, Me.rnd3_24_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 25)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 25)
 '    'Call BCDet(oCh.Pontos, Me.txt3_25, oCh.Descricao, Me.rnd3_25_Sim, rnd3_25_Nao, Me.rnd3_25_NA)
 
 
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 26)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 26)
 '    'Call BCDet(oCh.Pontos, Me.txt3_26, oCh.Descricao, Me.rnd3_26_Sim, rnd3_26_Nao, Me.rnd3_26_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 27)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 27)
 '    'Call BCDet(oCh.Pontos, Me.txt3_27, oCh.Descricao, Me.rnd3_27_Sim, rnd3_27_Nao, Me.rnd3_27_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 28)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 28)
 '    'Call BCDet(oCh.Pontos, Me.txt3_28, oCh.Descricao, Me.rnd3_28_Sim, rnd3_28_Nao, Me.rnd3_28_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 29)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 29)
 '    'Call BCDet(oCh.Pontos, Me.txt3_29, oCh.Descricao, Me.rnd3_29_Sim, rnd3_29_Nao, Me.rnd3_29_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 30)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 30)
 '    'Call BCDet(oCh.Pontos, Me.txt3_30, oCh.Descricao, Me.rnd3_30_Sim, rnd3_30_Nao, Me.rnd3_30_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 31)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 31)
 '    'Call BCDet(oCh.Pontos, Me.txt3_31, oCh.Descricao, Me.rnd3_31_Sim, rnd3_31_Nao, Me.rnd3_31_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 32)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 32)
 '    'Call BCDet(oCh.Pontos, Me.txt3_32, oCh.Descricao, Me.rnd3_32_Sim, rnd3_32_Nao, Me.rnd3_32_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 33)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 33)
 '    'Call BCDet(oCh.Pontos, Me.txt3_33, oCh.Descricao, Me.rnd3_33_Sim, rnd3_33_Nao, Me.rnd3_33_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 34)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 34)
 '    'Call BCDet(oCh.Pontos, Me.txt3_34, oCh.Descricao, Me.rnd3_34_Sim, rnd3_34_Nao, Me.rnd3_34_NA)
 
 
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 35)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 35)
 '    'Call BCDet(oCh.Pontos, Me.txt3_35, oCh.Descricao, Me.rnd3_35_Sim, rnd3_35_Nao, Me.rnd3_35_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 36)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 36)
 '    'Call BCDet(oCh.Pontos, Me.txt3_36, oCh.Descricao, Me.rnd3_36_Sim, rnd3_36_Nao, Me.rnd3_36_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 37)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 37)
 '    'Call BCDet(oCh.Pontos, Me.txt3_37, oCh.Descricao, Me.rnd3_37_Sim, rnd3_37_Nao, Me.rnd3_37_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 38)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 38)
 '    'Call BCDet(oCh.Pontos, Me.txt3_38, oCh.Descricao, Me.rnd3_38_Sim, rnd3_38_Nao, Me.rnd3_38_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 39)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 39)
 '    'Call BCDet(oCh.Pontos, Me.txt3_39, oCh.Descricao, Me.rnd3_39_Sim, rnd3_39_Nao, Me.rnd3_39_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 40)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 40)
 '    'Call BCDet(oCh.Pontos, Me.txt3_40, oCh.Descricao, Me.rnd3_40_Sim, rnd3_40_Nao, Me.rnd3_40_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 41)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 41)
 '    'Call BCDet(oCh.Pontos, Me.txt3_41, oCh.Descricao, Me.rnd3_41_Sim, rnd3_41_Nao, Me.rnd3_41_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 42)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 42)
 '    'Call BCDet(oCh.Pontos, Me.txt3_42, oCh.Descricao, Me.rnd3_42_Sim, rnd3_42_Nao, Me.rnd3_42_NA)
 
 
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 5, 43)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 5, 43)
 '    'Call BCDet(oCh.Pontos, Me.txt3_43, oCh.Descricao, Me.rnd3_43_Sim, rnd3_43_Nao, Me.rnd3_43_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 5, 44)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 5, 44)
 '    'Call BCDet(oCh.Pontos, Me.txt3_44, oCh.Descricao, Me.rnd3_44_Sim, rnd3_44_Nao, Me.rnd3_44_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 5, 45)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 5, 45)
 '    'Call BCDet(oCh.Pontos, Me.txt3_45, oCh.Descricao, Me.rnd3_45_Sim, rnd3_45_Nao, Me.rnd3_45_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 5, 46)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 5, 46)
 '    'Call BCDet(oCh.Pontos, Me.txt3_46, oCh.Descricao, Me.rnd3_46_Sim, rnd3_46_Nao, Me.rnd3_46_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 5, 47)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 5, 47)
 '    'Call BCDet(oCh.Pontos, Me.txt3_47, oCh.Descricao, Me.rnd3_47_Sim, rnd3_47_Nao, Me.rnd3_47_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 5, 48)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 5, 48)
 '    'Call BCDet(oCh.Pontos, Me.txt3_48, oCh.Descricao, Me.rnd3_48_Sim, rnd3_48_Nao, Me.rnd3_48_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 5, 49)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 5, 49)
 '    'Call BCDet(oCh.Pontos, Me.txt3_49, oCh.Descricao, Me.rnd3_49_Sim, rnd3_49_Nao, Me.rnd3_49_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 5, 50)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 5, 50)
 '    'Call BCDet(oCh.Pontos, Me.txt3_50, oCh.Descricao, Me.rnd3_50_Sim, rnd3_50_Nao, Me.rnd3_50_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 5, 51)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 5, 51)
 '    'Call BCDet(oCh.Pontos, Me.txt3_51, oCh.Descricao, Me.rnd3_51_Sim, rnd3_51_Nao, Me.rnd3_51_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 5, 52)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 5, 52)
 '    'Call BCDet(oCh.Pontos, Me.txt3_52, oCh.Descricao, Me.rnd3_52_Sim, rnd3_52_Nao, Me.rnd3_52_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 5, 53)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 5, 53)
 '    'Call BCDet(oCh.Pontos, Me.txt3_53, oCh.Descricao, Me.rnd3_53_Sim, rnd3_53_Nao, Me.rnd3_53_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 6, 54)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 6, 54)
 '    'Call BCDet(oCh.Pontos, Me.txt3_54, oCh.Descricao, Me.rnd3_54_Sim, rnd3_54_Nao, Me.rnd3_54_NA)
 
 
@@ -5163,120 +5163,120 @@ End Class
 'Private Sub BuscarChecklist_Grupo4(ByVal iGrupo As Byte)
 
 '    'Grupo 4 *****************************************************************************************************************
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 1)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 1)
 '    Call BCDet(oCh.Pontos, Me.txt4_1, oCh.Descricao, Me.rnd4_1_Sim, rnd4_1_Nao, Me.rnd4_1_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 2)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 2)
 '    Call BCDet(oCh.Pontos, Me.txt4_2, oCh.Descricao, Me.rnd4_2_Sim, rnd4_2_Nao, Me.rnd4_2_NA)
 
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 3)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 3)
 '    Call BCDet(oCh.Pontos, Me.txt4_3, oCh.Descricao, Me.rnd4_3_Sim, rnd4_3_Nao, Me.rnd4_3_NA)
 
 
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 4)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 4)
 '    Call BCDet(oCh.Pontos, Me.txt4_4, oCh.Descricao, Me.rnd4_4_Sim, rnd4_4_Nao, Me.rnd4_4_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 5)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 5)
 '    Call BCDet(oCh.Pontos, Me.txt4_5, oCh.Descricao, Me.rnd4_5_Sim, rnd4_5_Nao, Me.rnd4_5_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 6)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 6)
 '    Call BCDet(oCh.Pontos, Me.txt4_6, oCh.Descricao, Me.rnd4_6_Sim, rnd4_6_Nao, Me.rnd4_6_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 7)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 7)
 '    Call BCDet(oCh.Pontos, Me.txt4_7, oCh.Descricao, Me.rnd4_7_Sim, rnd4_7_Nao, Me.rnd4_7_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 8)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 8)
 '    'Call BCDet(oCh.Pontos, Me.txt4_8, oCh.Descricao, Me.rnd4_8_Sim, rnd4_8_Nao, Me.rnd4_8_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 9)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 9)
 '    'Call BCDet(oCh.Pontos, Me.txt4_9, oCh.Descricao, Me.rnd4_9_Sim, rnd4_9_Nao, Me.rnd4_9_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 10)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 10)
 '    'Call BCDet(oCh.Pontos, Me.txt4_10, oCh.Descricao, Me.rnd4_10_Sim, rnd4_10_Nao, Me.rnd4_10_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 21)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 21)
 '    'Call BCDet(oCh.Pontos, Me.txt4_21, oCh.Descricao, Me.rnd4_21_Sim, rnd4_21_Nao, Me.rnd4_21_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 22)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 22)
 '    'Call BCDet(oCh.Pontos, Me.txt4_22, oCh.Descricao, Me.rnd4_22_Sim, rnd4_22_Nao, Me.rnd4_22_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 2, 23)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 2, 23)
 '    'Call BCDet(oCh.Pontos, Me.txt4_23, oCh.Descricao, Me.rnd4_23_Sim, rnd4_23_Nao, Me.rnd4_23_NA)
 
 
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 11)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 11)
 '    'Call BCDet(oCh.Pontos, Me.txt4_11, oCh.Descricao, Me.rnd4_11_Sim, rnd4_11_Nao, Me.rnd4_11_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 12)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 12)
 '    'Call BCDet(oCh.Pontos, Me.txt4_12, oCh.Descricao, Me.rnd4_12_Sim, rnd4_12_Nao, Me.rnd4_12_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 3, 13)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 3, 13)
 '    'Call BCDet(oCh.Pontos, Me.txt4_13, oCh.Descricao, Me.rnd4_13_Sim, rnd4_13_Nao, Me.rnd4_13_NA)
 
 
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 14)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 14)
 '    'Call BCDet(oCh.Pontos, Me.txt4_14, oCh.Descricao, Me.rnd4_14_Sim, rnd4_14_Nao, Me.rnd4_14_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 15)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 15)
 '    'Call BCDet(oCh.Pontos, Me.txt4_15, oCh.Descricao, Me.rnd4_15_Sim, rnd4_15_Nao, Me.rnd4_15_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 16)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 16)
 '    'Call BCDet(oCh.Pontos, Me.txt4_16, oCh.Descricao, Me.rnd4_16_Sim, rnd4_16_Nao, Me.rnd4_16_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 17)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 17)
 '    'Call BCDet(oCh.Pontos, Me.txt4_17, oCh.Descricao, Me.rnd4_17_Sim, rnd4_17_Nao, Me.rnd4_17_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 18)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 18)
 '    'Call BCDet(oCh.Pontos, Me.txt4_18, oCh.Descricao, Me.rnd4_18_Sim, rnd4_18_Nao, Me.rnd4_18_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 19)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 19)
 '    'Call BCDet(oCh.Pontos, Me.txt4_19, oCh.Descricao, Me.rnd4_19_Sim, rnd4_19_Nao, Me.rnd4_19_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 4, 20)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 4, 20)
 '    'Call BCDet(oCh.Pontos, Me.txt4_20, oCh.Descricao, Me.rnd4_20_Sim, rnd4_20_Nao, Me.rnd4_20_NA)
 
 'End Sub
 
 'Private Sub BuscarChecklist_Grupo5(ByVal iGrupo As Byte)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 1)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 1)
 '    Call BCDet(oCh.Pontos, Me.txt5_1, oCh.Descricao, Me.rnd5_1_Sim, rnd5_1_Nao, Me.rnd5_1_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 2)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 2)
 '    Call BCDet(oCh.Pontos, Me.txt5_2, oCh.Descricao, Me.rnd5_2_Sim, rnd5_2_Nao, Me.rnd5_2_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 3)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 3)
 '    Call BCDet(oCh.Pontos, Me.txt5_3, oCh.Descricao, Me.rnd5_3_Sim, rnd5_3_Nao, Me.rnd5_3_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 4)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 4)
 '    Call BCDet(oCh.Pontos, Me.txt5_4, oCh.Descricao, Me.rnd5_4_Sim, rnd5_4_Nao, Me.rnd5_4_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 5)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 5)
 '    Call BCDet(oCh.Pontos, Me.txt5_5, oCh.Descricao, Me.rnd5_5_Sim, rnd5_5_Nao, Me.rnd5_5_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 6)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 6)
 '    Call BCDet(oCh.Pontos, Me.txt5_6, oCh.Descricao, Me.rnd5_6_Sim, rnd5_6_Nao, Me.rnd5_6_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 7)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 7)
 '    Call BCDet(oCh.Pontos, Me.txt5_7, oCh.Descricao, Me.rnd5_7_Sim, rnd5_7_Nao, Me.rnd5_7_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 8)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 8)
 '    Call BCDet(oCh.Pontos, Me.txt5_8, oCh.Descricao, Me.rnd5_8_Sim, rnd5_8_Nao, Me.rnd5_8_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 9)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 9)
 '    Call BCDet(oCh.Pontos, Me.txt5_9, oCh.Descricao, Me.rnd5_9_Sim, rnd5_9_Nao, Me.rnd5_9_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 10)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 10)
 '    Call BCDet(oCh.Pontos, Me.txt5_10, oCh.Descricao, Me.rnd5_10_Sim, rnd5_10_Nao, Me.rnd5_10_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 11)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 11)
 '    Call BCDet(oCh.Pontos, Me.txt5_11, oCh.Descricao, Me.rnd5_11_Sim, rnd5_11_Nao, Me.rnd5_11_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 12)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 12)
 '    'Call BCDet(oCh.Pontos, Me.txt5_12, oCh.Descricao, Me.rnd5_12_Sim, rnd5_12_Nao, Me.rnd5_12_NA)
 
 'End Sub
@@ -5284,89 +5284,89 @@ End Class
 'Private Sub BuscarChecklist_Grupo6(ByVal iGrupo As Byte)
 
 '    'Grupo 4 *****************************************************************************************************************
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 1)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 1)
 '    Call BCDet(oCh.Pontos, Me.txt6_1, oCh.Descricao, Me.rnd6_1_Sim, rnd6_1_Nao, Me.rnd6_1_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 2)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 2)
 '    Call BCDet(oCh.Pontos, Me.txt6_2, oCh.Descricao, Me.rnd6_2_Sim, rnd6_2_Nao, Me.rnd6_2_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 3)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 3)
 '    Call BCDet(oCh.Pontos, Me.txt6_3, oCh.Descricao, Me.rnd6_3_Sim, rnd6_3_Nao, Me.rnd6_3_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 4)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 4)
 '    Call BCDet(oCh.Pontos, Me.txt6_4, oCh.Descricao, Me.rnd6_4_Sim, rnd6_4_Nao, Me.rnd6_4_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 5)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 5)
 '    Call BCDet(oCh.Pontos, Me.txt6_5, oCh.Descricao, Me.rnd6_5_Sim, rnd6_5_Nao, Me.rnd6_5_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 6)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 6)
 '    Call BCDet(oCh.Pontos, Me.txt6_6, oCh.Descricao, Me.rnd6_6_Sim, rnd6_6_Nao, Me.rnd6_6_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 7)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 7)
 '    'Call BCDet(oCh.Pontos, Me.txt6_7, oCh.Descricao, Me.rnd6_7_Sim, rnd6_7_Nao, Me.rnd6_7_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 8)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 8)
 '    'Call BCDet(oCh.Pontos, Me.txt6_8, oCh.Descricao, Me.rnd6_8_Sim, rnd6_8_Nao, Me.rnd6_8_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 9)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 9)
 '    'Call BCDet(oCh.Pontos, Me.txt6_9, oCh.Descricao, Me.rnd6_9_Sim, rnd6_9_Nao, Me.rnd6_9_NA)
 
 'End Sub
 
 'Private Sub BuscarChecklist_Grupo7(ByVal iGrupo As Byte)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 1)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 1)
 '    Call BCDet(oCh.Pontos, Me.txt7_1, oCh.Descricao, Me.rnd7_1_Sim, rnd7_1_Nao, Me.rnd7_1_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 2)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 2)
 '    Call BCDet(oCh.Pontos, Me.txt7_2, oCh.Descricao, Me.rnd7_2_Sim, rnd7_2_Nao, Me.rnd7_2_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 3)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 3)
 '    Call BCDet(oCh.Pontos, Me.txt7_3, oCh.Descricao, Me.rnd7_3_Sim, rnd7_3_Nao, Me.rnd7_3_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 4)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 4)
 '    Call BCDet(oCh.Pontos, Me.txt7_4, oCh.Descricao, Me.rnd7_4_Sim, rnd7_4_Nao, Me.rnd7_4_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 5)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 5)
 '    Call BCDet(oCh.Pontos, Me.txt7_5, oCh.Descricao, Me.rnd7_5_Sim, rnd7_5_Nao, Me.rnd7_5_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 6)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 6)
 '    Call BCDet(oCh.Pontos, Me.txt7_6, oCh.Descricao, Me.rnd7_6_Sim, rnd7_6_Nao, Me.rnd7_6_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 7)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 7)
 '    Call BCDet(oCh.Pontos, Me.txt7_7, oCh.Descricao, Me.rnd7_7_Sim, rnd7_7_Nao, Me.rnd7_7_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 8)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 8)
 '    Call BCDet(oCh.Pontos, Me.txt7_8, oCh.Descricao, Me.rnd7_8_Sim, rnd7_8_Nao, Me.rnd7_8_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 9)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 9)
 '    'Call BCDet(oCh.Pontos, Me.txt7_9, oCh.Descricao, Me.rnd7_9_Sim, rnd7_9_Nao, Me.rnd7_9_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 10)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 10)
 '    'Call BCDet(oCh.Pontos, Me.txt7_10, oCh.Descricao, Me.rnd7_10_Sim, rnd7_10_Nao, Me.rnd7_10_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 11)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 11)
 '    'Call BCDet(oCh.Pontos, Me.txt7_11, oCh.Descricao, Me.rnd7_11_Sim, rnd7_11_Nao, Me.rnd7_11_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 12)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 12)
 '    'Call BCDet(oCh.Pontos, Me.txt7_12, oCh.Descricao, Me.rnd7_12_Sim, rnd7_12_Nao, Me.rnd7_12_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 13)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 13)
 '    'Call BCDet(oCh.Pontos, Me.txt7_13, oCh.Descricao, Me.rnd7_13_Sim, rnd7_13_Nao, Me.rnd7_13_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 14)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 14)
 '    'Call BCDet(oCh.Pontos, Me.txt7_14, oCh.Descricao, Me.rnd7_14_Sim, rnd7_14_Nao, Me.rnd7_14_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 15)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 15)
 '    'Call BCDet(oCh.Pontos, Me.txt7_15, oCh.Descricao, Me.rnd7_15_Sim, rnd7_15_Nao, Me.rnd7_15_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 16)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 16)
 '    'Call BCDet(oCh.Pontos, Me.txt7_16, oCh.Descricao, Me.rnd7_16_Sim, rnd7_16_Nao, Me.rnd7_16_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 17)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 17)
 '    'Call BCDet(oCh.Pontos, Me.txt7_17, oCh.Descricao, Me.rnd7_17_Sim, rnd7_17_Nao, Me.rnd7_17_NA)
 
-'    'oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 18)
+'    'oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 18)
 '    'Call BCDet(oCh.Pontos, Me.txt7_18, oCh.Descricao, Me.rnd7_18_Sim, rnd7_18_Nao, Me.rnd7_18_NA)
 
 
@@ -5374,123 +5374,123 @@ End Class
 
 'Private Sub BuscarChecklist_Grupo8(ByVal iGrupo As Byte)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 1)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 1)
 '    Call BCDet(oCh.Pontos, Me.txt8_1, oCh.Descricao, Me.rnd8_1_Sim, rnd8_1_Nao, Me.rnd8_1_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 2)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 2)
 '    Call BCDet(oCh.Pontos, Me.txt8_2, oCh.Descricao, Me.rnd8_2_Sim, rnd8_2_Nao, Me.rnd8_2_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 3)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 3)
 '    Call BCDet(oCh.Pontos, Me.txt8_3, oCh.Descricao, Me.rnd8_3_Sim, rnd8_3_Nao, Me.rnd8_3_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 4)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 4)
 '    Call BCDet(oCh.Pontos, Me.txt8_4, oCh.Descricao, Me.rnd8_4_Sim, rnd8_4_Nao, Me.rnd8_4_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 5)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 5)
 '    Call BCDet(oCh.Pontos, Me.txt8_5, oCh.Descricao, Me.rnd8_5_Sim, rnd8_5_Nao, Me.rnd8_5_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 6)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 6)
 '    Call BCDet(oCh.Pontos, Me.txt8_6, oCh.Descricao, Me.rnd8_6_Sim, rnd8_6_Nao, Me.rnd8_6_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 7)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 7)
 '    Call BCDet(oCh.Pontos, Me.txt8_7, oCh.Descricao, Me.rnd8_7_Sim, rnd8_7_Nao, Me.rnd8_7_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 8)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 8)
 '    Call BCDet(oCh.Pontos, Me.txt8_8, oCh.Descricao, Me.rnd8_8_Sim, rnd8_8_Nao, Me.rnd8_8_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 9)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 9)
 '    Call BCDet(oCh.Pontos, Me.txt8_9, oCh.Descricao, Me.rnd8_9_Sim, rnd8_9_Nao, Me.rnd8_9_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 10)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 10)
 '    Call BCDet(oCh.Pontos, Me.txt8_10, oCh.Descricao, Me.rnd8_10_Sim, rnd8_10_Nao, Me.rnd8_10_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 11)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 11)
 '    Call BCDet(oCh.Pontos, Me.txt8_11, oCh.Descricao, Me.rnd8_11_Sim, rnd8_11_Nao, Me.rnd8_11_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 12)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 12)
 '    Call BCDet(oCh.Pontos, Me.txt8_12, oCh.Descricao, Me.rnd8_12_Sim, rnd8_12_Nao, Me.rnd8_12_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 13)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 13)
 '    Call BCDet(oCh.Pontos, Me.txt8_13, oCh.Descricao, Me.rnd8_13_Sim, rnd8_13_Nao, Me.rnd8_13_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 14)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 14)
 '    Call BCDet(oCh.Pontos, Me.txt8_14, oCh.Descricao, Me.rnd8_14_Sim, rnd8_14_Nao, Me.rnd8_14_NA)
 
 'End Sub
 
 'Private Sub BuscarChecklist_Grupo9(ByVal iGrupo As Byte)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 1)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 1)
 '    Call BCDet(oCh.Pontos, Me.txt9_1, oCh.Descricao, Me.rnd9_1_Sim, rnd9_1_Nao, Me.rnd9_1_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 2)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 2)
 '    Call BCDet(oCh.Pontos, Me.txt9_2, oCh.Descricao, Me.rnd9_2_Sim, rnd9_2_Nao, Me.rnd9_2_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 3)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 3)
 '    Call BCDet(oCh.Pontos, Me.txt9_3, oCh.Descricao, Me.rnd9_3_Sim, rnd9_3_Nao, Me.rnd9_3_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 4)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 4)
 '    Call BCDet(oCh.Pontos, Me.txt9_4, oCh.Descricao, Me.rnd9_4_Sim, rnd9_4_Nao, Me.rnd9_4_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 5)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 5)
 '    Call BCDet(oCh.Pontos, Me.txt9_5, oCh.Descricao, Me.rnd9_5_Sim, rnd9_5_Nao, Me.rnd9_5_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 6)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 6)
 '    Call BCDet(oCh.Pontos, Me.txt9_6, oCh.Descricao, Me.rnd9_6_Sim, rnd9_6_Nao, Me.rnd9_6_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 7)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 7)
 '    Call BCDet(oCh.Pontos, Me.txt9_7, oCh.Descricao, Me.rnd9_7_Sim, rnd9_7_Nao, Me.rnd9_7_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 8)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 8)
 '    Call BCDet(oCh.Pontos, Me.txt9_8, oCh.Descricao, Me.rnd9_8_Sim, rnd9_8_Nao, Me.rnd9_8_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 9)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 9)
 '    Call BCDet(oCh.Pontos, Me.txt9_9, oCh.Descricao, Me.rnd9_9_Sim, rnd9_9_Nao, Me.rnd9_9_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 10)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 10)
 '    Call BCDet(oCh.Pontos, Me.txt9_10, oCh.Descricao, Me.rnd9_10_Sim, rnd9_10_Nao, Me.rnd9_10_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 11)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 11)
 '    Call BCDet(oCh.Pontos, Me.txt9_11, oCh.Descricao, Me.rnd9_11_Sim, rnd9_11_Nao, Me.rnd9_11_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 12)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 12)
 '    Call BCDet(oCh.Pontos, Me.txt9_12, oCh.Descricao, Me.rnd9_12_Sim, rnd9_12_Nao, Me.rnd9_12_NA)
 
-'    oCh.BuscarCheckList(txtData.Value, Me.selFilial.SelectedValue, iGrupo, 1, 13)
+'    oCh.BuscarCheckList(txtData.Text, Me.selFilial.SelectedValue, iGrupo, 1, 13)
 '    Call BCDet(oCh.Pontos, Me.txt9_13, oCh.Descricao, Me.rnd9_13_Sim, rnd9_13_Nao, Me.rnd9_13_NA)
 
 'End Sub
 
 'Private Sub BuscarChecklist_GrupoCor()
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 1, 1)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 2, 1)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 2, 2)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 2, 3)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 2, 4)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 3, 1)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 3, 2)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 3, 3)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 3, 4)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 3, 5)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 4, 1)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 4, 2)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 4, 3)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 4, 4)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 5, 1)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 6, 1)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 7, 1)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 8, 1)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 9, 1)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 10, 1)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 11, 1)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 12, 1)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 13, 1)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 14, 1)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 15, 1)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 16, 1)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 17, 1)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 18, 1)
-'    oCh.BuscarCheckListGrupo(txtData.Value, Me.selFilial.SelectedValue, 19, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 1, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 2, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 2, 2)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 2, 3)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 2, 4)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 3, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 3, 2)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 3, 3)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 3, 4)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 3, 5)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 4, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 4, 2)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 4, 3)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 4, 4)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 5, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 6, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 7, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 8, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 9, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 10, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 11, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 12, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 13, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 14, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 15, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 16, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 17, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 18, 1)
+'    oCh.BuscarCheckListGrupo(txtData.Text, Me.selFilial.SelectedValue, 19, 1)
 
 'End Sub
 

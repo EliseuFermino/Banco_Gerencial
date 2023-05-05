@@ -288,7 +288,8 @@
                         <%--<uc2:wuciListaDia runat="server" ID="cboDia" />--%>
                         <div class="input-group">
                             <span class="input-group-text">Selecione um dia:</span>
-                            <input type="date" class="form-control xs" autopostback="false" runat="server" id="txtData" />
+                            <%--<input type="date" class="form-control xs" autopostback="true" runat="server" id="txtData" onselect="return update()" />--%>
+                            <asp:TextBox ID="txtData" runat="server" type="date" AutoPostBack="true" class="form-control xs" OnTextChanged="btnAtualizar_Click"></asp:TextBox>
                         </div>
 
                     </div>
@@ -300,7 +301,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">Filial</div>
                                 </div>
-                                <asp:DropDownList class="form-control" ID="selFilial" runat="server" DataTextField="Desc" OnSelectedIndexChanged="selFilial_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                <asp:DropDownList class="form-control" ID="selFilial" runat="server" DataTextField="Desc"></asp:DropDownList>
                             </div>
                         </div>
                         <div class="col col-auto" style="width: auto; padding-right: 2px">
@@ -6827,11 +6828,82 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="container" style="max-width: 80%; font-size: 12pt; display: none" id="renderRel" runat="server">
-        </div>
+    <div class="container" style="max-width: 80%; font-size: 12pt; display: none" id="renderRel" runat="server">
+    </div>
 
-        <script>
+    <script>
+
+        maxData();
+
+        //$("#success-alert").hide();
+        //$("#dangerAlert").hide();
+
+        function alertSucess() {
+            //    $("#success-alert").fadeTo(8000, 500).slideUp(500, function () {
+            //        $("#success-alert").slideUp(500);
+            //    });
+            $('#ModalSucess').modal('show');
+        }
+
+        function alertErro() {
+            //$("#dangerAlert").fadeTo(8000, 500).slideUp(500, function () {
+            //$("#dangerAlert").slideUp(500);
+            //});
+            $('#ModalErro').modal('show');
+        }
+
+        function alertSucessImg() {
+            //    $("#success-alert").fadeTo(8000, 500).slideUp(500, function () {
+            //        $("#success-alert").slideUp(500);
+            //    });
+            $('#ModalSucessImg').modal('show');
+        }
+
+        function createPDF() {
+            var pdf = new jsPDF('p', 'pt', 'a4');
+            var d = new Date().toISOString().slice(0, 19).replace(/-/g, "");
+            filename = 'report_' + d + '.pdf';
+            // source can be HTML-formatted string, or a reference
+            // to an actual DOM element from which the text will be scraped.
+            source = document.getElementById('MainContent_renderRel');
+
+            // we support special element handlers. Register them with jQuery-style 
+            // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
+            // There is no support for any other type of selectors 
+            // (class, of compound) at this time.
+            specialElementHandlers = {
+                // element with id of "bypass" - jQuery style selector
+                '#bypassme': function (element, renderer) {
+                    // true = "handled elsewhere, bypass text extraction"
+                    return true
+                }
+            };
+            margins = {
+                top: 15,
+                bottom: 15,
+                left: 35,
+                width: 552
+            };
+            // all coords and widths are in jsPDF instance's declared units
+            // 'inches' in this case
+            pdf.fromHTML(
+                source, // HTML string or DOM elem ref.
+                margins.left, // x coord
+                margins.top, { // y coord
+                'width': margins.width, // max width of content on PDF
+                'elementHandlers': specialElementHandlers
+            },
+
+                function (dispose) {
+                    // dispose: object with X, Y of the last line add to the PDF 
+                    //          this allow the insertion of new lines after html
+                    pdf.save(filename);
+                }, margins);
+        }
+
+        function maxData() {
 
             try {
                 MainContent_txtData.max = new Date().toISOString().split("T")[0];
@@ -6841,81 +6913,16 @@
                 console.log(e.message)
                 // Unexpected token n in JSON at position 2
             }
+        }
 
-            //$("#success-alert").hide();
-            //$("#dangerAlert").hide();
+    </script>
 
-            function alertSucess() {
-                //    $("#success-alert").fadeTo(8000, 500).slideUp(500, function () {
-                //        $("#success-alert").slideUp(500);
-                //    });
-                $('#ModalSucess').modal('show');
-            }
-
-            function alertErro() {
-                //$("#dangerAlert").fadeTo(8000, 500).slideUp(500, function () {
-                //$("#dangerAlert").slideUp(500);
-                //});
-                $('#ModalErro').modal('show');
-            }
-
-            function alertSucessImg() {
-                //    $("#success-alert").fadeTo(8000, 500).slideUp(500, function () {
-                //        $("#success-alert").slideUp(500);
-                //    });
-                $('#ModalSucessImg').modal('show');
-            }
-
-            function createPDF() {
-                var pdf = new jsPDF('p', 'pt', 'a4');
-                var d = new Date().toISOString().slice(0, 19).replace(/-/g, "");
-                filename = 'report_' + d + '.pdf';
-                // source can be HTML-formatted string, or a reference
-                // to an actual DOM element from which the text will be scraped.
-                source = document.getElementById('MainContent_renderRel');
-
-                // we support special element handlers. Register them with jQuery-style 
-                // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
-                // There is no support for any other type of selectors 
-                // (class, of compound) at this time.
-                specialElementHandlers = {
-                    // element with id of "bypass" - jQuery style selector
-                    '#bypassme': function (element, renderer) {
-                        // true = "handled elsewhere, bypass text extraction"
-                        return true
-                    }
-                };
-                margins = {
-                    top: 15,
-                    bottom: 15,
-                    left: 35,
-                    width: 552
-                };
-                // all coords and widths are in jsPDF instance's declared units
-                // 'inches' in this case
-                pdf.fromHTML(
-                    source, // HTML string or DOM elem ref.
-                    margins.left, // x coord
-                    margins.top, { // y coord
-                    'width': margins.width, // max width of content on PDF
-                    'elementHandlers': specialElementHandlers
-                },
-
-                    function (dispose) {
-                        // dispose: object with X, Y of the last line add to the PDF 
-                        //          this allow the insertion of new lines after html
-                        pdf.save(filename);
-                    }, margins);
-            }
-
-        </script>
-
-        <style>
-            .btn-wrap-text {
-                white-space: normal !important;
-                word-wrap: break-word !important;
-            }
-        </style>
+    <style>
+        .btn-wrap-text {
+            white-space: normal !important;
+            word-wrap: break-word !important;
+        }
+    </style>
 </asp:Content>
 
 
