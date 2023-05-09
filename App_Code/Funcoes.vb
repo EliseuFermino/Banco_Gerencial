@@ -31,6 +31,9 @@ Public Class Funcoes
         Duas = 2
         Três = 3
         Quatro = 4
+        Moeda_Nenhuma = 5
+        Moeda_Uma = 6
+        Moeda_Duas = 7
     End Enum
 
     Public Sub CheckBoxStatusExibir(ByVal iCheckBox As ASPxCheckBox, ByVal gridViewName As ASPxGridView, ByVal descObjecto As String)
@@ -747,6 +750,12 @@ Public Class Funcoes
                 TryCast(gridViewName.Columns(columnName), GridViewDataTextColumn).PropertiesTextEdit.DisplayFormatString = "n3"
             Case CasaDecimais.Quatro
                 TryCast(gridViewName.Columns(columnName), GridViewDataTextColumn).PropertiesTextEdit.DisplayFormatString = "n4"
+            Case CasaDecimais.Moeda_Nenhuma
+                TryCast(gridViewName.Columns(columnName), GridViewDataTextColumn).PropertiesTextEdit.DisplayFormatString = "c0"
+            Case CasaDecimais.Moeda_Uma
+                TryCast(gridViewName.Columns(columnName), GridViewDataTextColumn).PropertiesTextEdit.DisplayFormatString = "c1"
+            Case CasaDecimais.Moeda_Duas
+                TryCast(gridViewName.Columns(columnName), GridViewDataTextColumn).PropertiesTextEdit.DisplayFormatString = "c2"
         End Select
 
         TryCast(gridViewName.Columns(columnName), GridViewDataTextColumn).PropertiesTextEdit.EncodeHtml = False

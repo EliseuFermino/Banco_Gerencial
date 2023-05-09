@@ -182,10 +182,10 @@
                 </dxwgv:ASPxGridView>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
                     ConnectionString="<%$ ConnectionStrings:gerConcorConnectionString %>" 
-                    DeleteCommand="DELETE FROM [tblDados] WHERE [IE] = @IE AND [Ano] = @Ano AND [Mes] = @Mes" 
-                    InsertCommand="INSERT INTO [tblDados] ([IE], [Ano], [Mes], [vlrOri], [vlr], [Fechada], [aConfirmar], [StatusID]) VALUES (@IE, @Ano, @Mes, @vlrOri, @vlr, 1, 0, @StatusID)" 
-                    SelectCommand="SELECT [IE], [Ano], [Mes], [vlrOri], [vlr], [Fechada], [aConfirmar], [StatusID]  FROM [tblDados] WHERE (([Ano] = @Ano) AND ([Mes] = @Mes)) ORDER BY [Ano], [Mes], [IE]" 
-                    UpdateCommand="UPDATE [tblDados] SET [vlrOri] = @vlrOri, [vlr] = @vlr, [Fechada] = @Fechada, [aConfirmar] = @aConfirmar, [StatusID] = @StatusID WHERE [IE] = @IE AND [Ano] = @Ano AND [Mes] = @Mes">
+                    DeleteCommand="DELETE FROM [Vendas_Mes].[tblDados_2023] WHERE [IE] = @IE AND [Ano] = @Ano AND [Mes] = @Mes" 
+                    InsertCommand="INSERT INTO [Vendas_Mes].[tblDados_2023] ([IE], [Ano], [Mes], [vlrOri], [vlr], [Fechada], [aConfirmar], [StatusID]) VALUES (@IE, @Ano, @Mes, @vlrOri, @vlr, 1, 0, @StatusID)" 
+                    SelectCommand="SELECT [IE], [Ano], [Mes], [vlrOri], [vlr], [Fechada], [aConfirmar], [StatusID]  FROM [Vendas_Mes].[tblDados_2023] WHERE (([Ano] = @Ano) AND ([Mes] = @Mes)) ORDER BY [Ano], [Mes], [IE]" 
+                    UpdateCommand="UPDATE [Vendas_Mes].[tblDados_2023] SET [vlrOri] = @vlrOri, [vlr] = @vlr, [Fechada] = @Fechada, [aConfirmar] = @aConfirmar, [StatusID] = @StatusID WHERE [IE] = @IE AND [Ano] = @Ano AND [Mes] = @Mes">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="cboAno" Name="Ano" PropertyName="Value" 
                             Type="Int16" />

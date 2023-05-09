@@ -46,14 +46,12 @@ Partial Class MemberPages_menuPrincipal_Ricardo
             cboDiaFinalGestor.Value = Date.Today.AddDays(-1)
             cboDia_Acima.Value = Date.Today
             cboDia_AcimaAtacarejo.Value = Date.Today
-
             Session("sDIA_INICIAL_GESTOR") = myDateTimes.GetFirstDayOfMonth(Date.Now)
             Session("sDIA_FINAL_GESTOR") = Date.Today.AddDays(-1)
             Session("sDIA_ACIMA") = Date.Today
             Session("sDIA_ACIMA_ATACAREJO") = Date.Today
-
-            Session("sDIA_INICIAL_ATACAREJO") = myDateTimes.GetFirstDayOfMonth(Date.Now)
-            Session("sDIA_FINAL_ATACAREJO") = Date.Today.AddDays(-1)
+            Session("sRADIOTV") = 1
+            Session("sRADIOTV_ATACAREJO") = 1
 
             KPI_Indicators()
             Call DefineSemana()
@@ -155,6 +153,7 @@ Partial Class MemberPages_menuPrincipal_Ricardo
         Session("sMES") = Month(DateAndTime.Today.AddDays(-1))
         Session("sDEPARTAMENTO") = Trim(oPro.BuscarDepartamentoDoUsuario(User.Identity.Name))
 
+        ' **************** LOJAS ******************
         If rndTodos.Checked = True Then
             Session("sRADIOTV") = 0
         End If
@@ -163,13 +162,22 @@ Partial Class MemberPages_menuPrincipal_Ricardo
             Session("sRADIOTV") = 1
         End If
 
+        'If rndAll.Checked = True Then
+        '    Session("sRADIOTV") = 2
+        'End If
 
+
+        ' **************** ATACAREJO ******************
         If rndTodosAtacarejo.Checked = True Then
             Session("sRADIOTV_ATACAREJO") = 0
         End If
 
         If rndRadioAtacarejo.Checked = True Then
             Session("sRADIOTV_ATACAREJO") = 1
+        End If
+
+        If rndTodosAtacarejo.Checked = True Then
+            Session("sRADIOTV_ATACAREJO") = 2
         End If
 
     End Sub

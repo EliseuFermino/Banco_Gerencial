@@ -1539,7 +1539,7 @@ cbPanelAcima.PerformCallback() ;
                                                                     <HeaderStyle HorizontalAlign="Center" />
                                                                 </dx:GridViewDataTextColumn>
                                                                 
-                                                                <dx:GridViewDataTextColumn Caption="Seq.<br>Cupom" FieldName="SEQCUPOM" ShowInCustomizationForm="True" VisibleIndex="15">                                                                    
+                                                                <dx:GridViewDataTextColumn Caption="Quantidade<br>de Itens<br>no Cupom" FieldName="SEQCUPOM" ShowInCustomizationForm="True" VisibleIndex="15">                                                                    
                                                                     <HeaderStyle HorizontalAlign="Center" />
                                                                 </dx:GridViewDataTextColumn>
                                                                 
@@ -1741,7 +1741,7 @@ cbPanelAcimaAtacarejo.PerformCallback() ;
                                                                     <HeaderStyle HorizontalAlign="Center" />
                                                                 </dx:GridViewDataTextColumn>
                                                                 
-                                                                <dx:GridViewDataTextColumn Caption="Seq.<br>Cupom" FieldName="SEQCUPOM" ShowInCustomizationForm="True" VisibleIndex="15">                                                                    
+                                                                <dx:GridViewDataTextColumn Caption="Quantidade<br>de Itens<br>no Cupom" FieldName="SEQCUPOM" ShowInCustomizationForm="True" VisibleIndex="15">                                                                    
                                                                     <HeaderStyle HorizontalAlign="Center" />
                                                                 </dx:GridViewDataTextColumn>
                                                                 
