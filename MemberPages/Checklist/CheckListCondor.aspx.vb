@@ -602,14 +602,19 @@ Partial Class MemberPages_CheckListCondor
     End Sub
 
     Private Function DefinirPontuacao(ByVal rndSim As CheckBox, ByVal rndNao As CheckBox, ByVal rndNA As CheckBox) As Byte
+        Dim qtd = Session("qtdRespostas")
+
         If rndSim.Checked = True Then DefinirPontuacao = 1
         If rndNao.Checked = True Then DefinirPontuacao = 0
         If rndNA.Checked = True Then DefinirPontuacao = 2
+
+        If DefinirPontuacao <> 2 Then Session("qtdRespostas") = qtd + 1
+
         Return DefinirPontuacao
     End Function
 
     Protected Sub btnGrupo1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo1.Click
-
+        Session("qtdRespostas") = 0
         Dim userName As String
         Dim varIssue(19) As Byte
         userName = User.Identity.Name
@@ -658,13 +663,13 @@ Partial Class MemberPages_CheckListCondor
         'ScriptManager.RegisterStartupScript(Me, Page.GetType, "Script", "alertErro();", True)
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+        If Session("qtdRespostas").ToString() = "19" Then btnMenu_1.BackColor = Color.FromArgb(120, 167, 149)
 
-        btnMenu_1.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
     Protected Sub btnGrupo2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo2.Click
-
+        Session("qtdRespostas") = 0
         Dim userName As String
         Dim varIssue(12) As Byte
 
@@ -700,11 +705,12 @@ Partial Class MemberPages_CheckListCondor
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_2.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "12" Then btnMenu_2.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
     Protected Sub btnGrupo3_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo3.Click
+        Session("qtdRespostas") = 0
         Dim varIssue(9) As Byte
         Dim userName As String
 
@@ -734,11 +740,12 @@ Partial Class MemberPages_CheckListCondor
         'Me.panTitle3.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_3.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "9" Then btnMenu_3.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub   ' Bloco 2 - 14 a 22. Total de 9 Perguntas
 
     Protected Sub btnGrupo4_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo4.Click
+        Session("qtdRespostas") = 0
 
         Dim userName As String
         Dim varIssue(6) As Byte
@@ -764,12 +771,13 @@ Partial Class MemberPages_CheckListCondor
         'Me.panTitle4.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_4.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "6" Then btnMenu_4.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub  ' Bloco 2 - 23 a 29. Total de 7 Perguntas
 
     Protected Sub btnGrupo5_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo5.Click
 
+        Session("qtdRespostas") = 0
         Dim userName As String
         Dim varIssue(9) As Byte
 
@@ -801,12 +809,13 @@ Partial Class MemberPages_CheckListCondor
         'Me.panTitle5.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_5.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "9" Then btnMenu_5.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub  ' Bloco 2 - 30 a 42. Total de 11 Perguntas
 
     Protected Sub btnGrupo6_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo6.Click
 
+        Session("qtdRespostas") = 0
         Dim userName As String
         Dim varIssue(9) As Byte
 
@@ -837,13 +846,14 @@ Partial Class MemberPages_CheckListCondor
         'Me.panTitle6.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_6.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "9" Then btnMenu_6.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub  ' Bloco 3 - 1 a 14. Total de 14 Perguntas
 
     Protected Sub btnGrupo7_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo7.Click
         ' Botão Salvar
         ' Salvar os itens do 3.10 ao 3.17 que esta no Grupo 3 - Armazenamento(Câmaras) - Fiambreria e Laticinios - Grupo 2 - (8 perguntas, 10 a 17)
+        Session("qtdRespostas") = 0
         Dim userName As String
         Dim varIssue(10) As Byte
 
@@ -876,11 +886,12 @@ Partial Class MemberPages_CheckListCondor
         'Me.panTitle7.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_7.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "10" Then btnMenu_7.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub  ' Bloco 3 - 15 a 25. Total de 10 Perguntas
 
     Protected Sub btnGrupo8_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo8.Click
+        Session("qtdRespostas") = 0
         Dim userName As String
         Dim varIssue(24) As Byte
 
@@ -941,11 +952,12 @@ Partial Class MemberPages_CheckListCondor
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_8.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "24" Then btnMenu_8.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub  ' Bloco 3 - 26 a 34. Total de 9 Perguntas
 
     Protected Sub btnGrupo9_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo9.Click
+        Session("qtdRespostas") = 0
         Dim userName As String
         Dim varIssue(21) As Byte
 
@@ -999,11 +1011,12 @@ Partial Class MemberPages_CheckListCondor
         'Me.panTitle9.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_9.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "21" Then btnMenu_9.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub  ' Bloco 3 - 35 a 42. Total de 8 Perguntas
 
     Protected Sub btnGrupo10_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo10.Click
+        Session("qtdRespostas") = 0
         Dim userName As String
         Dim varIssue(8) As Byte
 
@@ -1031,11 +1044,12 @@ Partial Class MemberPages_CheckListCondor
         'Me.panTitle10.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_10.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "8" Then btnMenu_10.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub  ' Bloco 3 - 43 a 54. Total de 10 Perguntas
 
     Protected Sub btnGrupo11_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo11.Click
+        Session("qtdRespostas") = 0
         Dim userName As String
         Dim varIssue(21) As Byte
 
@@ -1089,11 +1103,12 @@ Partial Class MemberPages_CheckListCondor
         'Me.panTitle11.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_11.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "21" Then btnMenu_11.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub  ' Bloco 4 - 1 a 3. Total de 3 Perguntasrnd8
 
     Protected Sub btnGrupo12_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo12.Click
+        Session("qtdRespostas") = 0
         Dim userName As String
         Dim varIssue(18) As Byte
         userName = User.Identity.Name
@@ -1140,11 +1155,12 @@ Partial Class MemberPages_CheckListCondor
         'Me.panTitle12.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_12.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "18" Then btnMenu_12.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub  ' Bloco 4 - 4 a 10. Total de 7 Perguntas
 
     Protected Sub btnGrupo13_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo13.Click
+        Session("qtdRespostas") = 0
         Dim userName As String
         Dim varIssue(10) As Byte
         userName = User.Identity.Name
@@ -1175,11 +1191,12 @@ Partial Class MemberPages_CheckListCondor
         'Me.panTitle13.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_13.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "10" Then btnMenu_13.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub  ' Bloco 4 - 11 a 13. Total de 3 Perguntas
 
     Protected Sub btnGrupo14_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo14.Click
+        Session("qtdRespostas") = 0
         Dim userName As String
         Dim varIssue(9) As Byte
         userName = User.Identity.Name
@@ -1206,11 +1223,12 @@ Partial Class MemberPages_CheckListCondor
         'Me.panTitle14.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_14.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "8" Then btnMenu_14.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub  ' Bloco 4 - 14 a 20. Total de 7 Perguntas
 
     Protected Sub btnGrupo15_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo15.Click
+        Session("qtdRespostas") = 0
         Dim userName As String
         Dim varIssue(3) As Byte
         userName = User.Identity.Name
@@ -1227,11 +1245,12 @@ Partial Class MemberPages_CheckListCondor
         'Me.panTitle15.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_15.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "3" Then btnMenu_15.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub  ' Bloco 5 - 1 a 12. Total de 12 Perguntas
 
     Protected Sub btnGrupo16_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo16.Click
+        Session("qtdRespostas") = 0
         Dim userName As String
         Dim varIssue(7) As Byte
         userName = User.Identity.Name
@@ -1256,11 +1275,12 @@ Partial Class MemberPages_CheckListCondor
         'Me.panTitle16.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_16.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "7" Then btnMenu_16.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub  ' Bloco 6 - 1 a 6. Total de 6 Perguntas
 
     Protected Sub btnGrupo17_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo17.Click
+        Session("qtdRespostas") = 0
         Dim userName As String
         Dim varIssue(5) As Byte
         userName = User.Identity.Name
@@ -1281,11 +1301,12 @@ Partial Class MemberPages_CheckListCondor
         'Me.panTitle17.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_17.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "5" Then btnMenu_17.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub  ' Bloco 7 - 1 a 12. Total de 6 Perguntas
 
     Protected Sub btnGrupo18_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo18.Click
+        Session("qtdRespostas") = 0
         Dim userName As String
         Dim varIssue(8) As Byte
 
@@ -1314,11 +1335,12 @@ Partial Class MemberPages_CheckListCondor
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_18.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "8" Then btnMenu_18.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub   ' Bloco 2 - 1 a 14. Total de 14 Perguntas
 
     Protected Sub btnGrupo19_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo19.Click
+        Session("qtdRespostas") = 0
         Dim userName As String
         Dim varIssue(7) As Byte
         userName = User.Identity.Name
@@ -1344,11 +1366,12 @@ Partial Class MemberPages_CheckListCondor
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_19.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "7" Then btnMenu_19.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub   ' Bloco 2 - 1 a 14. Total de 14 Perguntas
 
     Protected Sub btnGrupo20_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo20.Click
+        Session("qtdRespostas") = 0
         Dim userName As String
         Dim varIssue(20) As Byte
         userName = User.Identity.Name
@@ -1388,7 +1411,7 @@ Partial Class MemberPages_CheckListCondor
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        btnMenu_20.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "14" Then btnMenu_20.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub   ' Bloco 2 - 1 a 14. Total de 14 Perguntas
 
