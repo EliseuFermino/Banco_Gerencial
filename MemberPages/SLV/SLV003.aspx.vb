@@ -42,7 +42,11 @@ Partial Class MemberPages_SLV_SLV003
     End Sub
 
     Protected Sub cbPanel_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase) Handles cbPanel.Callback
-       
+
+        Session("sFILIAL") = Me.cboFilial.CallFilial
+        Session("sDIA_INICIAL") = Me.cboPeriodo.CallDiaInicial
+        Session("sDIA_FINAL") = Me.cboPeriodo.CallDiaFinal
+
         'Exibir Ano Anterior
         If Me.chkMostrar_AA.Checked = True Then
             Me.grid.Columns.Item("bandAnoAnterior").Visible = True

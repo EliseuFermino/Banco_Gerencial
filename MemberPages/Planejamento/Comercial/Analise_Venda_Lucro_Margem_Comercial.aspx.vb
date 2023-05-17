@@ -48,6 +48,7 @@ Partial Class MemberPages_Planejamento_Comercial_Analise_Venda_Lucro_Margem_Come
     End Sub
 
     Protected Sub cbPanel_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase) Handles cbPanel.Callback
+        On Error Resume Next
         gridDados.Visible = True
         Session("sANO") = cboAno.CallAno
         Session("sSECAO") = cboSecao.CallSecao
@@ -72,7 +73,7 @@ Partial Class MemberPages_Planejamento_Comercial_Analise_Venda_Lucro_Margem_Come
             oFun.Grid_Column_Visible(gridDados, "vlrRealMA1", True)
             oFun.Grid_Column_Visible(gridDados, "vlrRealMA2", True)
         End If
-        
+
         Titulos()
 
     End Sub
@@ -152,7 +153,7 @@ Partial Class MemberPages_Planejamento_Comercial_Analise_Venda_Lucro_Margem_Come
     End Sub
 
     Protected Sub grid_CustomSummaryCalculate(sender As Object, e As DevExpress.Data.CustomSummaryEventArgs) Handles gridDados.CustomSummaryCalculate
-
+        On Error Resume Next
         If e.SummaryProcess = DevExpress.Data.CustomSummaryProcess.Start Then
             vlrRealAA = 0
             vlrMetaVenda = 0
@@ -247,7 +248,7 @@ Partial Class MemberPages_Planejamento_Comercial_Analise_Venda_Lucro_Margem_Come
     End Sub
 
     Protected Sub gridDados_CustomUnboundColumnData(sender As Object, e As ASPxGridViewColumnDataEventArgs) Handles gridDados.CustomUnboundColumnData
-
+        On Error Resume Next
         If e.Column.FieldName = "vlrRealMAVG" Then
             Dim vOne As Decimal = Convert.ToDecimal(e.GetListSourceFieldValue("vlrRealMA"))
             Dim vTwo As Decimal = Convert.ToDecimal(e.GetListSourceFieldValue("vlrRealMA1"))

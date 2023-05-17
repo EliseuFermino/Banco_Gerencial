@@ -479,7 +479,7 @@
                     
 		                             <asp:SqlDataSource ID="dsDados" runat="server" ConnectionString="<%$ ConnectionStrings:DW_VendasConnectionString %>" SelectCommand="dbo.sp_BuscarCrescimento" SelectCommandType="StoredProcedure">
                             <SelectParameters>
-                                <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                                <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                             </SelectParameters>
                         </asp:SqlDataSource>
 
@@ -631,7 +631,7 @@
                                             <SelectParameters>
                                                 <asp:SessionParameter Name="Ano" SessionField="sANO" Type="Int16" />
                                                 <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />
-                                                <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                                                <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                                             </SelectParameters>
                                         </asp:SqlDataSource> 
                                             </td>
@@ -662,7 +662,7 @@
                         </dx:ASPxGridView>
                         <asp:SqlDataSource ID="dsMediaClientes" runat="server" ConnectionString="<%$ ConnectionStrings:gerManagerConnectionString %>" SelectCommand="Clientes.usp_BuscarMediaClientes_Ultimos_7_Meses" SelectCommandType="StoredProcedure">
                             <SelectParameters>
-                                <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                                <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="INt16" />
                             </SelectParameters>
                         </asp:SqlDataSource>
                     </div>
@@ -759,7 +759,7 @@
 
                                                     <asp:SqlDataSource ID="dsMediaClienteAcum" runat="server" ConnectionString="<%$ ConnectionStrings:gerManagerConnectionString %>" SelectCommand="Clientes.usp_BuscarMediaClientesAcumulado_Ultimos_6_Meses" SelectCommandType="StoredProcedure">
                                                         <SelectParameters>
-                                                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                                                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                                                         </SelectParameters>
                                                     </asp:SqlDataSource>
                                                 </div>
@@ -918,7 +918,7 @@
                     
 		                                <asp:SqlDataSource ID="dsDados_KeyRegiao_1" runat="server" ConnectionString="<%$ ConnectionStrings:DW_VendasConnectionString %>" SelectCommand="dbo.sp_BuscarCrescimento" SelectCommandType="StoredProcedure">
                                             <SelectParameters>                                
-                                                <asp:SessionParameter Name="idFilial" SessionField="sKEY_REGIAO" Type="Byte" DefaultValue="200" />
+                                                <asp:SessionParameter Name="idFilial" SessionField="sKEY_REGIAO" Type="Int16" DefaultValue="200" />
                                             </SelectParameters>
                                         </asp:SqlDataSource>
 
@@ -1064,7 +1064,7 @@
                     
 		                <asp:SqlDataSource ID="dsDados_KeyRegiao_3" runat="server" ConnectionString="<%$ ConnectionStrings:DW_VendasConnectionString %>" SelectCommand="dbo.sp_BuscarCrescimento" SelectCommandType="StoredProcedure">
                             <SelectParameters>                                
-                                <asp:SessionParameter Name="idFilial" SessionField="sKEY_REGIAO" Type="Byte" DefaultValue="201" />
+                                <asp:SessionParameter Name="idFilial" SessionField="sKEY_REGIAO" Type="Int16" DefaultValue="201" />
                             </SelectParameters>
                         </asp:SqlDataSource>
 
@@ -1210,7 +1210,7 @@
                     
 		                <asp:SqlDataSource ID="dsDados_KeyRegiao_4" runat="server" ConnectionString="<%$ ConnectionStrings:DW_VendasConnectionString %>" SelectCommand="dbo.sp_BuscarCrescimento" SelectCommandType="StoredProcedure">
                             <SelectParameters>                                
-                                <asp:SessionParameter Name="idFilial" SessionField="sKEY_REGIAO" Type="Byte" DefaultValue="202" />
+                                <asp:SessionParameter Name="idFilial" SessionField="sKEY_REGIAO" Type="Int16" DefaultValue="202" />
                             </SelectParameters>
                         </asp:SqlDataSource>
 
@@ -1355,7 +1355,7 @@
                     
 		                <asp:SqlDataSource ID="dsDados_KeyRegiao_5" runat="server" ConnectionString="<%$ ConnectionStrings:DW_VendasConnectionString %>" SelectCommand="dbo.sp_BuscarCrescimento" SelectCommandType="StoredProcedure">
                             <SelectParameters>                               
-                                <asp:SessionParameter Name="idFilial" SessionField="sKEY_REGIAO" Type="Byte" DefaultValue="203" />
+                                <asp:SessionParameter Name="idFilial" SessionField="sKEY_REGIAO" Type="Int16" DefaultValue="203" />
                             </SelectParameters>
                         </asp:SqlDataSource>
                
@@ -1499,7 +1499,7 @@
                     
 		                <asp:SqlDataSource ID="dsDados_KeyRegiao_7" runat="server" ConnectionString="<%$ ConnectionStrings:DW_VendasConnectionString %>" SelectCommand="dbo.sp_BuscarCrescimento" SelectCommandType="StoredProcedure">
                             <SelectParameters>                                
-                                <asp:SessionParameter Name="idFilial" SessionField="sKEY_REGIAO" Type="Byte" DefaultValue="211" />
+                                <asp:SessionParameter Name="idFilial" SessionField="sKEY_REGIAO" Type="Int16" DefaultValue="211" />
                             </SelectParameters>
                         </asp:SqlDataSource>
 
@@ -1643,7 +1643,7 @@
                     
 		                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DW_VendasConnectionString %>" SelectCommand="dbo.sp_BuscarCrescimento" SelectCommandType="StoredProcedure">
                             <SelectParameters>                                
-                                <asp:SessionParameter Name="idFilial" SessionField="sKEY_REGIAO" Type="Byte" DefaultValue="213" />
+                                <asp:SessionParameter Name="idFilial" SessionField="sKEY_REGIAO" Type="Int16" DefaultValue="213" />
                             </SelectParameters>
                         </asp:SqlDataSource>
 

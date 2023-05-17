@@ -104,6 +104,7 @@
                                 <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="Lucro" SummaryType="Sum" />
                                 <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="LucroSO" SummaryType="Sum" />
                                 <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrLucroFinal" SummaryType="Sum" />
+                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percPartAT" SummaryType="Sum" />                                
                                 <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMargem" SummaryType="Custom" />
                                 <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMargemSO" SummaryType="Custom" />
                                 <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMargemFinal" SummaryType="Custom" />
@@ -253,7 +254,7 @@
                             ConnectionString="<%$ ConnectionStrings:DW_Condor_One_ConnectionString %>" 
                             SelectCommand="Analises.uspBuscarTodosItens_AnoAtual" SelectCommandType="StoredProcedure"  EnableCaching="true" >
                             <SelectParameters>
-                                <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                                <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                                 <asp:SessionParameter Name="DiaInicial" SessionField="sDIA_INICIAL" DbType="Date" />
                                 <asp:SessionParameter Name="DiaFinal" SessionField="sDIA_FINAL" DbType="Date" />
                                 <asp:SessionParameter Name="idMercadologico" SessionField="sMERCADOLOGICO" Type="Int16" />

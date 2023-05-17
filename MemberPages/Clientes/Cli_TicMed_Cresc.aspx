@@ -266,7 +266,7 @@
                     
 		                    <asp:SqlDataSource ID="dsDados" runat="server" ConnectionString="<%$ ConnectionStrings:DW_Condor_One_ConnectionString %>" SelectCommand="Analises.uspClientes_TicketMedio_CrescimentoVenda" SelectCommandType="StoredProcedure">
                                 <SelectParameters>
-                                    <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                                    <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                                 </SelectParameters>
                             </asp:SqlDataSource>           
 
@@ -440,7 +440,7 @@
                     
 		                    <asp:SqlDataSource ID="dsDados_Depto1" runat="server" ConnectionString="<%$ ConnectionStrings:DW_Condor_One_ConnectionString %>" SelectCommand="Analises.uspClientes_TicketMedio_CrescimentoVenda_Depto" SelectCommandType="StoredProcedure">
                                 <SelectParameters>
-                                    <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                                    <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                                     <asp:SessionParameter Name="idDepto" SessionField="sDEPTO" Type="Byte" />
                                 </SelectParameters>
                             </asp:SqlDataSource>   
@@ -618,7 +618,7 @@
                     
 		                    <asp:SqlDataSource ID="dsDados_Secao" runat="server" ConnectionString="<%$ ConnectionStrings:DW_Condor_One_ConnectionString %>" SelectCommand="Analises.uspClientes_TicketMedio_CrescimentoVenda_Secao" SelectCommandType="StoredProcedure">
                                 <SelectParameters>
-                                    <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                                    <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                                     <asp:SessionParameter Name="idSecao" SessionField="sSECAO" Type="Byte" />
                                 </SelectParameters>
                             </asp:SqlDataSource>   

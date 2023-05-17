@@ -25,6 +25,8 @@ Partial Class MemberPages_Gerencial_AnaliseSecao
             cboSecao.AutoPostBack = False
             cboFilial.AutoPostBack = False
 
+            cboSecao.SelectedIndex = 1
+
             mySession()
 
         End If
@@ -57,6 +59,15 @@ Partial Class MemberPages_Gerencial_AnaliseSecao
     End Sub
 
     Private Sub Atualizar()
+
+        If cboSecao.SelectedIndex = 0 Then
+            oVen.UserMsgBox(Me, "A opção 'Todas as Seções' não esta disponivel nessa tela")
+        End If
+
+        On Error Resume Next
+
+
+
         mySession()
         oFun.Grid_Title(grid, "Análise por Seção da Loja " & cboFilial.CallFilialNome & "  -  Ano " & cboAno.CallAno & "   - Seção " & cboSecao.CallSecaoDesc)
 
@@ -94,13 +105,13 @@ Partial Class MemberPages_Gerencial_AnaliseSecao
         graphVolumeCliente.DataBind()
         graphNCrescimentoClientes.DataBind()
 
-        lblCaption_ClientesPerdidos.Text = "Total de Clientes Perdidos: " & CDbl((oDb.GetDataDB_ExecuteScalar_Parameter3("Analises.uspBuscar_NumeroDeClientesPerdidos", Conexao.DW_Condor_One_ConnectionString, "@Ano", cboAno.CallAno, "@idFilial", cboFilial.CallFilial, "@idSecao", cboSecao.CallSecao))).ToString("n0")
-        lblCaption_TicketMedio.Text = "Valor do Ticket Médio: " & CDbl((oDb.GetDataDB_ExecuteScalar_Parameter3("Analises.uspBuscar_TicketMedio", Conexao.DW_Condor_One_ConnectionString, "@Ano", cboAno.CallAno, "@idFilial", cboFilial.CallFilial, "@idSecao", cboSecao.CallSecao))).ToString("n2")
-        lblCaption_vlrVendaPerdida.Text = "Valor da Venda Perdida: " & CDbl((oDb.GetDataDB_ExecuteScalar_Parameter3("Analises.uspBuscar_ValorVendaPerdida", Conexao.DW_Condor_One_ConnectionString, "@Ano", cboAno.CallAno, "@idFilial", cboFilial.CallFilial, "@idSecao", cboSecao.CallSecao))).ToString("n2")
+        lblCaption_ClientesPerdidos.Text = "Total de Clientes Perdidos: " & CDbl(oDb.GetDataDB_ExecuteScalar_Parameter3("Analises.uspBuscar_NumeroDeClientesPerdidos", Conexao.DW_Condor_One_ConnectionString, "@Ano", cboAno.CallAno, "@idFilial", cboFilial.CallFilial, "@idSecao", cboSecao.CallSecao)).ToString("n0")
+        lblCaption_TicketMedio.Text = "Valor do Ticket Médio: " & CDbl(oDb.GetDataDB_ExecuteScalar_Parameter3("Analises.uspBuscar_TicketMedio", Conexao.DW_Condor_One_ConnectionString, "@Ano", cboAno.CallAno, "@idFilial", cboFilial.CallFilial, "@idSecao", cboSecao.CallSecao)).ToString("n2")
+        lblCaption_vlrVendaPerdida.Text = "Valor da Venda Perdida: " & CDbl(oDb.GetDataDB_ExecuteScalar_Parameter3("Analises.uspBuscar_ValorVendaPerdida", Conexao.DW_Condor_One_ConnectionString, "@Ano", cboAno.CallAno, "@idFilial", cboFilial.CallFilial, "@idSecao", cboSecao.CallSecao)).ToString("n2")
 
-        lblCaption_ClientesPerdidosGanhos.Text = "Total de Clientes Ganhos: " & CDbl((oDb.GetDataDB_ExecuteScalar_Parameter3("Analises.uspBuscar_NumeroDeClientesGanhos", Conexao.DW_Condor_One_ConnectionString, "@Ano", cboAno.CallAno, "@idFilial", cboFilial.CallFilial, "@idSecao", cboSecao.CallSecao))).ToString("n0")
-        lblCaption_TicketMedioGanhos.Text = "Valor do Ticket Médio: " & CDbl((oDb.GetDataDB_ExecuteScalar_Parameter3("Analises.uspBuscar_TicketMedioGanhos", Conexao.DW_Condor_One_ConnectionString, "@Ano", cboAno.CallAno, "@idFilial", cboFilial.CallFilial, "@idSecao", cboSecao.CallSecao))).ToString("n2")
-        lblCaption_vlrVendaPerdidaGanhos.Text = "Valor da Venda Obtida: " & CDbl((oDb.GetDataDB_ExecuteScalar_Parameter3("Analises.uspBuscar_ValorVendaGanhos", Conexao.DW_Condor_One_ConnectionString, "@Ano", cboAno.CallAno, "@idFilial", cboFilial.CallFilial, "@idSecao", cboSecao.CallSecao))).ToString("n2")
+        lblCaption_ClientesPerdidosGanhos.Text = "Total de Clientes Ganhos: " & CDbl(oDb.GetDataDB_ExecuteScalar_Parameter3("Analises.uspBuscar_NumeroDeClientesGanhos", Conexao.DW_Condor_One_ConnectionString, "@Ano", cboAno.CallAno, "@idFilial", cboFilial.CallFilial, "@idSecao", cboSecao.CallSecao)).ToString("n0")
+        lblCaption_TicketMedioGanhos.Text = "Valor do Ticket Médio: " & CDbl(oDb.GetDataDB_ExecuteScalar_Parameter3("Analises.uspBuscar_TicketMedioGanhos", Conexao.DW_Condor_One_ConnectionString, "@Ano", cboAno.CallAno, "@idFilial", cboFilial.CallFilial, "@idSecao", cboSecao.CallSecao)).ToString("n2")
+        lblCaption_vlrVendaPerdidaGanhos.Text = "Valor da Venda Obtida: " & CDbl(oDb.GetDataDB_ExecuteScalar_Parameter3("Analises.uspBuscar_ValorVendaGanhos", Conexao.DW_Condor_One_ConnectionString, "@Ano", cboAno.CallAno, "@idFilial", cboFilial.CallFilial, "@idSecao", cboSecao.CallSecao)).ToString("n2")
 
 
 

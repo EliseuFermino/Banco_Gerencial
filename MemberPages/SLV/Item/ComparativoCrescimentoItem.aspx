@@ -687,7 +687,7 @@
                     </dx:ASPxGridView>
 <%--SelectCommand="Analises.usp_ComparativoCrescimentoItem" SelectCommandType="StoredProcedure" CacheExpirationPolicy="Sliding"  EnableCaching="False">--%>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:gerVendaItemConnectionString %>" 
-                        SelectCommand="Analises.usp_ComparativoCrescimentoItem" SelectCommandType="StoredProcedure" >
+                        SelectCommand="Analises.usp_ComparativoCrescimentoItem" SelectCommandType="StoredProcedure" CacheExpirationPolicy="Sliding"  EnableCaching="True" >
                         <SelectParameters>                           
                             <asp:SessionParameter Name="DiaInicial" SessionField="sDIA_INICIAL" Type="DateTime" />
                             <asp:SessionParameter Name="DiaFinal" SessionField="sDIA_FINAL" Type="DateTime" />

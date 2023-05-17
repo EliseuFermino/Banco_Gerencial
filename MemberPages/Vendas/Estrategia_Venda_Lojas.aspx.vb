@@ -10,7 +10,6 @@ Partial Class MemberPages_Vendas_Estrategia_Venda_Lojas
         If Not IsPostBack Then
 
             oVen.AtualizarEstatisticaPrograma(389, User.Identity.Name)
-            oFun.Grid_Title(grid, "Loja 99 - Empresa  -  Estratégia de Vendas")
 
             oFun.Grid_Column_BorderRight(grid, "nomeDiaSemana", Drawing.Color.Gray, BorderStyle.Solid, 2)
 
@@ -125,6 +124,14 @@ Partial Class MemberPages_Vendas_Estrategia_Venda_Lojas
             Session("sSECAO") = 0
 
             grid.DataBind()
+        End If
+    End Sub
+
+    Private Sub MemberPages_Vendas_Estrategia_Venda_Lojas_PreRender(sender As Object, e As EventArgs) Handles Me.PreRender
+        If Not IsPostBack Then
+
+            oFun.Grid_Title(grid, cboFilial.CallFilialNome + " -  Estratégia de Vendas")
+
         End If
     End Sub
 

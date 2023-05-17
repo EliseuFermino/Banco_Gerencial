@@ -380,7 +380,7 @@
                             <SelectParameters>
                                 <asp:SessionParameter Name="diaInicial" SessionField="sDIA_INICIAL" DbType="Date" />
                                 <asp:SessionParameter Name="diaFinal" SessionField="sDIA_FINAL" DbType="Date" />
-                                <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                                <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                             </SelectParameters>
                         </asp:SqlDataSource>
 

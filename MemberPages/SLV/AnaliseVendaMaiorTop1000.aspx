@@ -262,11 +262,11 @@
                         </dx:ASPxGridView>
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:DW_Condor_One_ConnectionString %>" 
-                            SelectCommand="Analises.uspBuscarTop1000" SelectCommandType="StoredProcedure">
+                            SelectCommand="Analises.uspBuscarTop1000" SelectCommandType="StoredProcedure" EnableCaching="true">
                             <SelectParameters>
-                                <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                                <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                                 <asp:SessionParameter Name="Ano" SessionField="sANO" Type="Int16" />
-                                <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />
+                                <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />                            
                             </SelectParameters>
                         </asp:SqlDataSource>
 

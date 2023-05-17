@@ -161,7 +161,7 @@
                         <SelectParameters>
                             <asp:SessionParameter Name="DiaInicial" SessionField="sDIA_INICIAL" Type="DateTime" />
                             <asp:SessionParameter Name="DiaFinal" SessionField="sDIA_FINAL" Type="DateTime" />
-                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                         </SelectParameters>
                     </asp:SqlDataSource>
 
@@ -253,7 +253,7 @@
                         <SelectParameters>
                             <asp:SessionParameter Name="DiaInicial" SessionField="sDIA_INICIAL" Type="DateTime" />
                             <asp:SessionParameter Name="DiaFinal" SessionField="sDIA_FINAL" Type="DateTime" />
-                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                             <asp:SessionParameter Name="idDepto" SessionField="sDEPTO" Type="Byte" DefaultValue="1" />
                         </SelectParameters>
                     </asp:SqlDataSource>
@@ -346,7 +346,7 @@
                         <SelectParameters>
                             <asp:SessionParameter Name="DiaInicial" SessionField="sDIA_INICIAL" Type="DateTime" />
                             <asp:SessionParameter Name="DiaFinal" SessionField="sDIA_FINAL" Type="DateTime" />
-                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                             <asp:SessionParameter Name="idDepto" SessionField="sDEPTO" Type="Byte" DefaultValue="2" />
                         </SelectParameters>
                     </asp:SqlDataSource>
@@ -439,7 +439,7 @@
                         <SelectParameters>
                             <asp:SessionParameter Name="DiaInicial" SessionField="sDIA_INICIAL" Type="DateTime" />
                             <asp:SessionParameter Name="DiaFinal" SessionField="sDIA_FINAL" Type="DateTime" />
-                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                             <asp:SessionParameter Name="idDepto" SessionField="sDEPTO" Type="Byte" DefaultValue="3" />
                         </SelectParameters>
                     </asp:SqlDataSource>
@@ -532,7 +532,7 @@
                         <SelectParameters>
                             <asp:SessionParameter Name="DiaInicial" SessionField="sDIA_INICIAL" Type="DateTime" />
                             <asp:SessionParameter Name="DiaFinal" SessionField="sDIA_FINAL" Type="DateTime" />
-                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                             <asp:SessionParameter Name="idDepto" SessionField="sDEPTO" Type="Byte" DefaultValue="4" />
                         </SelectParameters>
                     </asp:SqlDataSource>
@@ -625,7 +625,7 @@
                         <SelectParameters>
                             <asp:SessionParameter Name="DiaInicial" SessionField="sDIA_INICIAL" Type="DateTime" />
                             <asp:SessionParameter Name="DiaFinal" SessionField="sDIA_FINAL" Type="DateTime" />
-                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                             <asp:SessionParameter Name="idDepto" SessionField="sDEPTO" Type="Byte" DefaultValue="5" />
                         </SelectParameters>
                     </asp:SqlDataSource>

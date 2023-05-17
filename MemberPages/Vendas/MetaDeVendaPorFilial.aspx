@@ -225,7 +225,7 @@
                                         SelectCommand="Analises.uspBuscarMetaDeVendaPorFilial" 
                                         SelectCommandType="StoredProcedure">
                                         <SelectParameters>
-                                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                                             <asp:SessionParameter Name="Ano" SessionField="sAno" />
                                         </SelectParameters>
                                     </asp:SqlDataSource>

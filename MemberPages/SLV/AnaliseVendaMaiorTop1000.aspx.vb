@@ -55,6 +55,10 @@ Partial Class MemberPages_SLV_AnaliseVendaMaiorTop1000
             Me.grid.Columns.Item("bandAnoAnterior").Visible = False
         End If
 
+        Session("sANO") = cboAno.CallAno
+        Session("sMes") = cboMes.CallMes
+        Session("sFILIAL") = cboFilial.CallFilial
+
         Me.grid.DataBind()
         Me.grid.Visible = True
 

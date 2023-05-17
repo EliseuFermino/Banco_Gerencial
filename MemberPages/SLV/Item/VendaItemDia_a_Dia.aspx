@@ -278,7 +278,7 @@
                             <asp:SessionParameter Name="idProduto" SessionField="sPRODUTO" Type="Int32" />
                             <asp:SessionParameter Name="DiaInicial" SessionField="sDIA_INICIAL" DbType="Date" />
                             <asp:SessionParameter Name="DiaFinal" SessionField="sDIA_FINAL" DbType="Date" />
-                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                         </SelectParameters>
                     </asp:SqlDataSource>
 

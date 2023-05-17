@@ -902,7 +902,7 @@ cbPanelGrid.PerformCallback();
 
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DW_Condor_One_ConnectionString %>" SelectCommand="Vendas_Dia.uspSLV001_W" SelectCommandType="StoredProcedure" EnableCaching="False" >
                             <SelectParameters>
-                                <asp:SessionParameter Name="f" SessionField="sFILIAL" Type="Byte" />
+                                <asp:SessionParameter Name="f" SessionField="sFILIAL" Type="Int16" />
                                 <asp:SessionParameter DbType="Date" Name="iAT" SessionField="sDIA_INICIAL" />
                                 <asp:SessionParameter DbType="Date" Name="fAT" SessionField="sDIA_FINAL" />
                                 <asp:SessionParameter Name="vOpcao" SessionField="sOPCAO" Type="Byte" />

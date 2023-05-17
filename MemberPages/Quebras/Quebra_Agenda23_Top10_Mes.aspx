@@ -231,7 +231,7 @@
                     
 		<asp:SqlDataSource ID="dsDados" runat="server" ConnectionString="<%$ ConnectionStrings:gerPerdasConnectionString %>" SelectCommand="Analises.usp_Top10_Agenda23_Mes" SelectCommandType="StoredProcedure">
                         <SelectParameters>
-                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                             <asp:SessionParameter Name="Ano" SessionField="sANO" Type="Int16" />
                             <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />
                         </SelectParameters>

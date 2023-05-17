@@ -17,16 +17,7 @@
 <%@ Register Src="~/Controles/wucListaSecao.ascx" TagPrefix="uc1" TagName="wucListaSecao" %>
 
 
-
-
-
-
-
 <%@ Register assembly="DevExpress.XtraCharts.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.XtraCharts" tagprefix="cc1" %>
-
-
-
-
 
 
 
@@ -335,7 +326,7 @@
 		<asp:SqlDataSource ID="dsDados" runat="server" ConnectionString="<%$ ConnectionStrings:DW_Condor_One_ConnectionString %>" SelectCommand="Analises.uspTicketMedioSecao" SelectCommandType="StoredProcedure">
                         <SelectParameters>
                             <asp:SessionParameter Name="Ano" SessionField="sANO" Type="Int16" />
-                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                             <asp:SessionParameter Name="idSecao" SessionField="sSECAO" Type="Byte" />
                         </SelectParameters>
                     </asp:SqlDataSource>
@@ -477,7 +468,7 @@
         <asp:SqlDataSource ID="dsCrescVenda" runat="server" ConnectionString="<%$ ConnectionStrings:DW_Condor_One_ConnectionString %>" SelectCommand="Analises.uspTicketMedio_VolumeCliente_porSecao_Ultimos25Meses" SelectCommandType="StoredProcedure">
             <SelectParameters>
                 <asp:SessionParameter Name="Ano" SessionField="sANO" Type="Int16" />
-                <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                 <asp:SessionParameter Name="idSecao" SessionField="sSECAO" Type="Byte" />
             </SelectParameters>
         </asp:SqlDataSource>
@@ -678,7 +669,7 @@
         <asp:SqlDataSource ID="dsCrescCliente" runat="server" ConnectionString="<%$ ConnectionStrings:DW_Condor_One_ConnectionString %>" SelectCommand="Analises.uspNumeroClientes_PercentualCrescimento_porSecao_Ultimos25Meses" SelectCommandType="StoredProcedure">
             <SelectParameters>
                 <asp:SessionParameter Name="Ano" SessionField="sANO" Type="Int16" />
-                <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                 <asp:SessionParameter Name="idSecao" SessionField="sSECAO" Type="Byte" />
             </SelectParameters>
         </asp:SqlDataSource>
@@ -783,7 +774,7 @@
         <asp:SqlDataSource ID="dsGraphTicket" runat="server" ConnectionString="<%$ ConnectionStrings:DW_Condor_One_ConnectionString %>" SelectCommand="Analises.uspTicketMedio_VolumeCliente_porSecao_Ultimos25Meses" SelectCommandType="StoredProcedure">
             <SelectParameters>
                 <asp:SessionParameter Name="Ano" SessionField="sANO" Type="Int16" />
-                <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                 <asp:SessionParameter Name="idSecao" SessionField="sSECAO" Type="Byte" />
             </SelectParameters>
         </asp:SqlDataSource>

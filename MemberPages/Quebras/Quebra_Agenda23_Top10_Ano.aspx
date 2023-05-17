@@ -232,7 +232,7 @@
                     
 		<asp:SqlDataSource ID="dsDados" runat="server" ConnectionString="<%$ ConnectionStrings:gerPerdasConnectionString %>" SelectCommand="Analises.usp_Top10_Agenda23_Ano" SelectCommandType="StoredProcedure">
                         <SelectParameters>
-                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
                             <asp:SessionParameter Name="Ano" SessionField="sANO" Type="Int16" />
                          
                         </SelectParameters>
