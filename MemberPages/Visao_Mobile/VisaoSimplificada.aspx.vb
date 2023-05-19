@@ -3,6 +3,7 @@ Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Drawing
 Imports DevExpress.Web
+Imports DevExpress.Web.Bootstrap
 
 Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
     Inherits System.Web.UI.Page
@@ -36,6 +37,7 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
             Call atualizaAcompanhamento()
 
             'Menu Analise Hora
+            Call RotinaInicio()
             Call AtualizarAnaliseHora()
 
             'Menu Acumulado Mes
@@ -128,7 +130,7 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
 
         selAnoMenu1.SelectedValue = Year(Now())
 
-        Call RotinaInicio()
+        'Call RotinaInicio()
         Call MudarTitulo()
 
         Dim varStatus, varFilial As Byte
@@ -354,7 +356,7 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
             End If
 
         Else
-            If CInt(DateAndTime.Now.Hour) > 9 Then
+            If CInt(DateAndTime.Now.Hour) > 9 Or (Me.cboDia.CallDia.Date <> Now.Date) Then
                 'If CInt(DateAndTime.Now.Hour) > 7 Then
                 Session("sDIA") = Me.cboDia.CallDia.Date
             Else
