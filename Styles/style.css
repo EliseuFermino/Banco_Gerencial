@@ -460,7 +460,7 @@ body
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 	font-size: 12px;
 	margin: 5px;
-	width: 700px;
+	width: 400px !important;
 	text-align: left;
 	border-collapse: collapse;
 }
@@ -479,6 +479,7 @@ body
 	padding: 8px; 
 	border-bottom: 1px solid #fff;
 	color: #669;
+	max-width: 400px !important;
 	border-top: 1px solid #fff;
 	background: #e8edff url('/table-images/gradback.png') repeat-x;
 }

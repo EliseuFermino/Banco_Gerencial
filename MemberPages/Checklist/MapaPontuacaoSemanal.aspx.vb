@@ -90,10 +90,8 @@ Partial Class MemberPages_Checklist_MapaPontuacaoSemanal
 
         If chkGrupoSub.Checked = True Then
             oFun.Grid_Column_GroupIndex(grid, "listaGrupo", 0)
-            oFun.Grid_Column_GroupIndex(grid, "listaSubgrupo", 1)
         Else
             oFun.Grid_Column_GroupIndex(grid, "listaGrupo", -1)
-            oFun.Grid_Column_GroupIndex(grid, "listaSubgrupo", -1)
         End If
 
         grid.DataBind()
