@@ -3,90 +3,70 @@
 <%@ Register Assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
 
-
-
+<%@ Register Src="~/Controles/wuciListaLojasComApoio.ascx" TagName="wuciListaLojasComApoio" TagPrefix="uc3" %>
 <%@ Register Src="~/Controles/wucLista_Filial_Empresa.ascx" TagPrefix="uc1" TagName="wucLista_Filial_Empresa" %>
 
 
 
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
-    <link href="../../../css/bootstrap.min.css" rel="stylesheet" />
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 
     <style type="text/css">
-
         .Aumentar_Espaco {
-           margin-top: 10px
+            margin-top: 10px
         }
-
     </style>
 
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
 
     <br />
+    <br />
 
-    <div class="container-fluid">
+    <div class="container-fluid" style="max-width: 600px">
+        <div class="row justify-content-between">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Data</span>
+                    </div>
+                    <input type="date" class="form-control xs" autopostback="true" runat="server" id="txtData" />
+                </div>
+                <br />
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Filial</span>
+                    </div>
+                    <asp:DropDownList class="form-control" ID="selFilial" runat="server" ></asp:DropDownList>
+                    <%--<select id="selFilial" runat="server" class="form-control justify-content-center"></select>--%>
+                </div>
+            </div>
 
-        <div class="row">
-            <div class="col-md-3 ">
+            <div class="col-md-3">
+                <div class="col-auto justify-content-between">
+                    <asp:Button ID="btnBuscar" runat="server" style="width:98px" Text="Pesquisar" Font-Bold="true" CssClass="btn btn-warning" OnClick="btnBuscar_Click" />
+                </div>
+                <br />
+                <div class="col-auto" runat="server" id="divRecalc">
+                    <asp:Button ID="btn_Cadastrar_Dia" runat="server" style="width:98px" Text="Cadastrar" Font-Bold="true" CssClass="btn btn-primary" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="col-auto">
+                    <asp:Button ID="btn_Recalcular" runat="server" style="width:98px" Text="Recalcular" Font-Bold="true" CssClass="btn btn-success" />
+                </div>
+                <br />
+                <div class="col-auto justify-content-end" >
+                    <asp:Button ID="btn_Excluir" runat="server" style="width:98px" Text="Excluir" Font-Bold="true" CssClass="btn btn-danger" />
+                </div>
             </div>
         </div>
-   
 
-        <div class="row ">
-            
-            <div class="col-md-1 ">
-                Selecione um Dia: 
-            </div>
-            <div class="col-md-3 ">
-                <dx:ASPxDateEdit ID="cboDia" runat="server" Theme="iOS" AutoPostBack="True"></dx:ASPxDateEdit>            
-             </div>
-        </div>
-
-        <div class="row  Aumentar_Espaco center-text">
-            <div class="col-md-1 ">
-                <asp:Button ID="btn_Cadastrar_Dia" runat="server" Text="Cadastrar Dia" CssClass="btn btn-primary" />
-            </div>
-
-            <div class="col-md-1 ">
-                <asp:Button ID="btn_Excluir" runat="server" Text="Excluir Dia"  CssClass="btn btn-danger" />
-                
-            </div>
-
-            <div class="col-md-2 ">
-                <asp:Button ID="btn_Recalcular" runat="server" Text="Recalcular Pontuação do Check-List"  CssClass="btn btn-success" />
-            </div>
-
-        </div>
-
-        <br /><br />
-        
         <br />
 
-        
-        <div style="border: 3px solid gray; margin: 5px; padding: 5px">
-
-        
-        <div class="row">
-
-            <div class="col-md-2">
-                <uc1:wucLista_Filial_Empresa runat="server" ID="cboFilial" />
-            </div>           
-
-        </div>
-
-        <div class="row" style="margin-top: 10px">               
-
-        </div>
-
-        <div class="row">
-            <div class="col-md-2">
-               <asp:Button ID="btnExcluirFilial" runat="server" Text="Excluir Filial"  CssClass="btn btn-danger" />
-            </div>
-
-            <div class="col-md-4 ">
-                <dx:ASPxGridView ID="grid" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="400px">
+        <div class="row justify-content-sm-center" runat="server" id="divGrid" >
+            <div class="col-auto">
+                <dx:ASPxGridView ID="grid" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="600px">
                     <Columns>
                         <dx:GridViewDataTextColumn Caption="Filial" FieldName="FilialLista" VisibleIndex="0" Width="250px">
                         </dx:GridViewDataTextColumn>
@@ -104,20 +84,14 @@
                     </SelectParameters>
                 </asp:SqlDataSource>
             </div>
-
         </div>
-    
-        </div>
-
-
     </div>
-
-
-    
 
     <br />
 
-    
+    <script src="../../../assets/bootstrap-5.0.2-dist/Modal/jquery.min.js"></script>
+    <script src="../../../assets/bootstrap-5.0.2-dist/Modal/bootstrap.min.js"></script>
+    <link href="../../../assets/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet" />
 
 
 </asp:Content>
