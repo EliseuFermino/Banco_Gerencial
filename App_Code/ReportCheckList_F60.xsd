@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="ReportCheckList_F58" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+<xs:schema id="ReportCheckList_F60" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
@@ -7,13 +7,13 @@
           <Connection ConnectionStringObject="Data Source=CONTROLADORIA2\SQLCONTRO;Initial Catalog=gerCheckList;User ID=sa;Password=rd700@1" IsAppSettingsProperty="false" Modifier="Assembly" Name="Connection" ParameterPrefix="@" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vReportAdapter_F58" GeneratorDataComponentClassName="vReportAdapter_F58" Name="vReport_Loja58" UserDataComponentName="vReportAdapter_F58">
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vReportAdapter_F60" GeneratorDataComponentClassName="vReportAdapter_F60" Name="vReport_Loja60" UserDataComponentName="vReportAdapter_F60">
             <MainSource>
-              <DbSource ConnectionRef="Connection" DbObjectName="gerCheckList.Checklist.vReport_Loja58" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="Connection" DbObjectName="gerCheckList.Checklist.vReport_Loja60" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c560934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>SELECT        Dia, FilialLista, listaGrupo, listaSubgrupo, descPergunta, Hora, Descricao, imgData, imgTitle
-FROM            Checklist.vReport_Loja58</CommandText>
+FROM            Checklist.vReport_Loja60</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -37,10 +37,10 @@ FROM            Checklist.vReport_Loja58</CommandText>
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="ReportCheckList_F58" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="ReportCheckList_F58" msprop:Generator_UserDSName="ReportCheckList_F58">
+  <xs:element name="ReportCheckList_F60" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="ReportCheckList_F60" msprop:Generator_UserDSName="ReportCheckList_F60">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="vReport_Loja58" msprop:Generator_TableClassName="vReport_Loja58DataTable" msprop:Generator_TableVarName="tablevReport_Loja58" msprop:Generator_RowChangedName="vReport_Loja58RowChanged" msprop:Generator_TablePropName="vReport_Loja58" msprop:Generator_RowDeletingName="vReport_Loja58RowDeleting" msprop:Generator_RowChangingName="vReport_Loja58RowChanging" msprop:Generator_RowEvHandlerName="vReport_Loja58RowChangeEventHandler" msprop:Generator_RowDeletedName="vReport_Loja58RowDeleted" msprop:Generator_RowClassName="vReport_Loja58Row" msprop:Generator_UserTableName="vReport_Loja58" msprop:Generator_RowEvArgName="vReport_Loja58RowChangeEvent">
+        <xs:element name="vReport_Loja60" msprop:Generator_TableClassName="vReport_Loja60DataTable" msprop:Generator_TableVarName="tablevReport_Loja60" msprop:Generator_RowChangedName="vReport_Loja60RowChanged" msprop:Generator_TablePropName="vReport_Loja60" msprop:Generator_RowDeletingName="vReport_Loja60RowDeleting" msprop:Generator_RowChangingName="vReport_Loja60RowChanging" msprop:Generator_RowEvHandlerName="vReport_Loja60RowChangeEventHandler" msprop:Generator_RowDeletedName="vReport_Loja60RowDeleted" msprop:Generator_RowClassName="vReport_Loja60Row" msprop:Generator_UserTableName="vReport_Loja60" msprop:Generator_RowEvArgName="vReport_Loja60RowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Dia" msprop:Generator_ColumnVarNameInTable="columnDia" msprop:Generator_ColumnPropNameInRow="Dia" msprop:Generator_ColumnPropNameInTable="DiaColumn" msprop:Generator_UserColumnName="Dia" type="xs:dateTime" />

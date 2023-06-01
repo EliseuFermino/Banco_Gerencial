@@ -16,8 +16,6 @@
     <link rel="stylesheet" type="text/css" href="../../Styles/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas2image@1.0.5/canvas2image.min.js"></script>
-
-
     <script src="../../assets/bootstrap-5.0.2-dist/Modal/jquery.min.js"></script>
     <script src="../../assets/bootstrap-5.0.2-dist/Modal/bootstrap.min.js"></script>
     <script src="../../js/bootstrap.js"></script>
@@ -189,6 +187,20 @@
 
                     <asp:Button runat="server" ID="btnVoltar" OnClick="btnVoltar_Click" AutoPostBack="False" CssClass="btn btn-danger btn-lg" Text="Voltar" Width="100px" />
 
+
+                </div>
+
+
+                <div class="row col-md-12 justify-content-center text-center">
+                    <div class="col-auto justify-content-center">
+                        <div class="alert alert-danger" id="dangerAlert" style="text-align: center; display: none">
+                            <strong>Ocorreu um problema no salvamento da imagem!</strong>
+                        </div>
+
+                        <div class="alert alert-success" id="success-alert" style="text-align: center; display: none">
+                            <strong>A imagem foi salva com sucesso!</strong>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row col-md-12 justify-content-center text-center">
@@ -208,15 +220,6 @@
                             </tr>
                         </table>
 
-                        <div class="alert alert-danger" id="dangerAlert" style="text-align: center">
-                            <button type="button" class="close" data-dismiss="alert">x</button>
-                            <strong>Ocorreu um problema no salvamento da imagem!</strong>
-                        </div>
-
-                        <div class="alert alert-success" id="success-alert" style="text-align: center">
-                            <button type="button" class="close" data-dismiss="alert">x</button>
-                            <strong>A imagem foi salva com sucesso!</strong>
-                        </div>
 
                         <asp:Panel ID="panDados1" runat="server" CssClass="justify-content-center" Visible="false" Style="border: solid 1px #c0c0c0; align-content: center">
                             <p>
@@ -6598,7 +6601,7 @@
 
             </panelcontent>
         </panelcollection>
-    </aspxcallbackpanel>
+    </aspxcallbackpanel>  
 
     <!-- Modal Sucesso -->
     <div class="modal fade w-auto h-auto" id="ModalSucess" tabindex="-1" role="dialog" aria-labelledby="ModalSucess" aria-hidden="true">
@@ -6663,85 +6666,56 @@
     <div class="container" style="max-width: 80%; font-size: 12pt; display: none" id="renderRel" runat="server">
     </div>
 
-    <script>
+     <script>
 
-        $("#success-alert").hide();
-        $("#dangerAlert").hide();
+         function alertSucessImg() {
 
-        maxData();
+             var display = document.getElementById("success-alert").style.display;
+             if (display == "none")
+                 document.getElementById("success-alert").style.display = 'block';
+             else
+                 document.getElementById("success-alert").style.display = 'none';
 
-        function alertSucessImg() {
-            $("#success-alert").fadeTo(8000, 500).slideUp(500, function () {
-                $("#success-alert").slideUp(500);
-            });
-        }
+             $("#success-alert").fadeTo(8000, 500).slideUp(500, function () {
+                 $("#success-alert").slideUp(500);
+             });
+         }
 
-        function alertError() {
-            $("#dangerAlert").fadeTo(8000, 500).slideUp(500, function () {
-                $("#dangerAlert").slideUp(500);
-            });
-        }
+         function alertError() {
 
-        function alertSucess() {
-            $('#ModalSucess').modal('show');
-            $("#ModalSucess").slideUp(500);
-        }
+             var display = document.getElementById("dangerAlert").style.display;
+             if (display == "none")
+                 document.getElementById("dangerAlert").style.display = 'block';
+             else
+                 document.getElementById("dangerAlert").style.display = 'none';
 
-        function maxData() {
+             $("#dangerAlert").fadeTo(8000, 500).slideUp(500, function () {
+                 $("#dangerAlert").slideUp(500);
+             });
+         }
 
-            try {
-                MainContent_txtData.max = new Date().toISOString().split("T")[0];
-                //document.getElementById('MainContent_txtData').valueAsDate = new Date();
+         function alertSucess() {
+             $('#ModalSucess').modal('show');
+             $("#ModalSucess").slideUp(500);
+         }
 
-            } catch (e) {
-                console.log(e.message)
-                // Unexpected token n in JSON at position 2
-            }
-        }
+         function maxData() {
 
-         //function createPDF() {
-        //    var pdf = new jsPDF('p', 'pt', 'a4');
-        //    var d = new Date().toISOString().slice(0, 19).replace(/-/g, "");
-        //    filename = 'report_' + d + '.pdf';
-        //    // source can be HTML-formatted string, or a reference
-        //    // to an actual DOM element from which the text will be scraped.
-        //    source = document.getElementById('MainContent_renderRel');
+             try {
+                 MainContent_txtData.max = new Date().toISOString().split("T")[0];
+                 //document.getElementById('MainContent_txtData').valueAsDate = new Date();
 
-        //    // we support special element handlers. Register them with jQuery-style
-        //    // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
-        //    // There is no support for any other type of selectors
-        //    // (class, of compound) at this time.
-        //    specialElementHandlers = {
-        //        // element with id of "bypass" - jQuery style selector
-        //        '#bypassme': function (element, renderer) {
-        //            // true = "handled elsewhere, bypass text extraction"
-        //            return true
-        //        }
-        //    };
-        //    margins = {
-        //        top: 15,
-        //        bottom: 15,
-        //        left: 35,
-        //        width: 552
-        //    };
-        //    // all coords and widths are in jsPDF instance's declared units
-        //    // 'inches' in this case
-        //    pdf.fromHTML(
-        //        source, // HTML string or DOM elem ref.
-        //        margins.left, // x coord
-        //        margins.top, { // y coord
-        //        'width': margins.width, // max width of content on PDF
-        //        'elementHandlers': specialElementHandlers
-        //    },
+             } catch (e) {
+                 console.log(e.message)
+                 // Unexpected token n in JSON at position 2
+             }
+         }
 
-        //        function (dispose) {
-        //            // dispose: object with X, Y of the last line add to the PDF
-        //            //          this allow the insertion of new lines after html
-        //            pdf.save(filename);
-        //        }, margins);
-        //}
+         maxData();
 
-    </script>
+
+     </script>
+
 
 </asp:Content>
 
