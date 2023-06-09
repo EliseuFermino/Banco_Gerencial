@@ -10,7 +10,7 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
 
     Dim oFun As New Funcoes
     Dim oVen As New VendaEmpresaMes
-    Dim oPro As New Projeto
+    Dim oProj As New Projeto
     Dim oTime As New myDateTimes
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -26,27 +26,33 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
             Session("sMERCADOLOGICO") = 1
             Session("sOPCAO") = 1
             Session("sFILIAL") = 99
-            Session("sDEPARTAMENTO") = Trim(oPro.BuscarDepartamentoDoUsuario(User.Identity.Name))
+            Session("sDEPARTAMENTO") = LCase(Trim(oProj.Buscar_Departamento_Usuario(Page.User.Identity.Name)))
             Session("sUSUARIO") = LCase(Page.User.Identity.Name)
             Session("sMES_ANTERIOR") = 2
             Session("sFILIAL_LUCRO_NEGATIVO") = 99
 
+            If (Session("sDEPARTAMENTO") = "controladoria") Then
+
+                divSair.Visible = True
+
+            End If
+
             carregaSelects()
 
-            'Menu Acompanhamento
-            Call atualizaAcompanhamento()
+                'Menu Acompanhamento
+                Call atualizaAcompanhamento()
 
-            'Menu Analise Hora
-            Call RotinaInicio()
-            Call AtualizarAnaliseHora()
+                'Menu Analise Hora
+                Call RotinaInicio()
+                Call AtualizarAnaliseHora()
 
-            'Menu Acumulado Mes
-            Call AtualizarAcumuladoMes()
+                'Menu Acumulado Mes
+                Call AtualizarAcumuladoMes()
 
-            'Menu Lucro Negativo
-            Call AtualizaLucroNegativo()
+                'Menu Lucro Negativo
+                Call AtualizaLucroNegativo()
 
-        End If
+            End If
 
     End Sub
 
@@ -345,18 +351,18 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
     End Sub
 
     Protected Sub atualizaAcompanhamento()
-        Session("sDEPARTAMENTO") = Trim(oPro.BuscarDepartamentoDoUsuario(User.Identity.Name))
+        Session("sDEPARTAMENTO") = LCase(Trim(oProj.Buscar_Departamento_Usuario(Page.User.Identity.Name)))
         Session("sFILIAL") = 99
 
         If DateAndTime.Now.Month = 1 And (DateAndTime.Now.Day = 1 Or DateAndTime.Now.Day = 2) Then
-            If CInt(DateAndTime.Now.Hour) > 9 Then
+            If CInt(DateAndTime.Now.Hour) > 6 Then
                 Session("sDIA") = Me.cboDia.CallDia.Date
             Else
                 Session("sDIA") = myDateTimes.GetFirstDayOfYear_baseYear(myDateTimes.YearToday()).AddDays(-1)
             End If
 
         Else
-            If CInt(DateAndTime.Now.Hour) > 9 Or (Me.cboDia.CallDia.Date <> Now.Date) Then
+            If CInt(DateAndTime.Now.Hour) > 6 Or (Me.cboDia.CallDia.Date <> Now.Date) Then
                 'If CInt(DateAndTime.Now.Hour) > 7 Then
                 Session("sDIA") = Me.cboDia.CallDia.Date
             Else
@@ -468,12 +474,12 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         ' TOTALIZADOR ----
         Me.gridTotalizador.Columns.Item("bandAtual").Caption = selAnoMenu3.SelectedValue
 
-        Me.gridTotalizador.Columns.Item("percCresc_RealAA2").Caption = selAnoMenu3.SelectedValue - 1
+        Me.gridTotalizador.Columns.Item("percCresc_RealAA1").Caption = selAnoMenu3.SelectedValue.ToString().Substring(2) + " X " + (selAnoMenu3.SelectedValue - 1).ToString().Substring(2)
 
         ' LOJAS ----
         Me.gridRankingMensal.Columns.Item("bandAtual").Caption = selAnoMenu3.SelectedValue
 
-        Me.gridRankingMensal.Columns.Item("percCresc_RealAA2").Caption = selAnoMenu3.SelectedValue - 1
+        Me.gridRankingMensal.Columns.Item("percCresc_RealAA1").Caption = selAnoMenu3.SelectedValue.ToString().Substring(2) + " X " + (selAnoMenu3.SelectedValue - 1).ToString().Substring(2)
 
 
     End Sub
@@ -585,7 +591,7 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
 
 #Region "Botões Menu"
     Protected Sub btnSair_Click(sender As Object, e As EventArgs)
-        Response.Redirect("~/MemberPages/SLV/PrincipalSLV.aspx")
+        Response.Redirect("~/MemberPages/menuPrincipal_Controladoria.aspx")
     End Sub
 
     Protected Sub btnMenu_1_Click(sender As Object, e As EventArgs)

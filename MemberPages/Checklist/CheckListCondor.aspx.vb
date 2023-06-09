@@ -850,7 +850,10 @@ Partial Class MemberPages_CheckListCondor
                         Next
                     End Using
                 End Using
+
+                cmd.Dispose()
             End Using
+            con.Dispose()
         End Using
 
         Session("sMenuColor") = arrayTotal
