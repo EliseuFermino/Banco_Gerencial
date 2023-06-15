@@ -115,396 +115,405 @@
             <PanelCollection>
                 <dx:PanelContent>
 
+                    <div class="justify-content-center" style="padding: 15px 0 15px 0; font-size: 20px">
+                        <div class="widget-box" style="width: 100%">
+                            <div class="widget-header">
+                                <h4 class="widget-title"><span class="fa fa-th">&nbsp &nbsp</span><asp:Label ID="lblTitulo_Capa" runat="server" Text="Capa - Total"></asp:Label></h4>
 
-                    <div class="container justify-content-center" style="padding: 15px 0 15px 0">
-                        <div class="row col-md-12 justify-content-center text-center">
-                            <div class="col col-auto">
+                                <div class="widget-toolbar">
+                                    <a href="#" data-action="collapse">
+                                        <i class="ace-icon fa fa-chevron-up"></i>
+                                    </a>
 
-                                <div class="widget-box">
-                                    <div class="widget-header">
-                                        <h4 class="widget-title"><span class="fa fa-th">&nbsp &nbsp</span><asp:Label ID="lblTitulo_Capa" runat="server" Text="Capa - Total"></asp:Label></h4>
-
-                                        <div class="widget-toolbar">
-                                            <a href="#" data-action="collapse">
-                                                <i class="ace-icon fa fa-chevron-up"></i>
-                                            </a>
-
-                                            <a href="#" data-action="close">
-                                                <i class="ace-icon fa fa-times"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <div class="widget-body">
-                                        <div class="widget-main">
-
-                                            <%----------------%>
-
-                                            <style type="text/css">
-                                                .auto-style1 {
-                                                    width: 100%;
-                                                }
-
-                                                .auto-style2 {
-                                                    height: 70px;
-                                                    width: 164px;
-                                                }
-
-                                                .auto-style3 {
-                                                    width: 460px;
-                                                    font-weight: 700;
-                                                }
-
-                                                .auto-style4 {
-                                                    width: 183px;
-                                                }
-
-                                                .auto-style5 {
-                                                    width: 390px;
-                                                    text-align: center;
-                                                }
-                                            </style>
-
-                                            <div class="container justify-content-center" style="background-color: lightgray; margin: 0 0 0 0 !important">
-                                                <asp:Label ID="lblPeriodo1" runat="server" Text="Label" Style="font-size: medium; background-color: lightgray; text-align: left; font-size: 20px; height: 5px; padding: 0px; border: 1px solid darkgray; border-top-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px"></asp:Label>
-                                            </div>
-
-                                            <br />
-                                            <br />
-
-                                            <table class="auto-style1">
-                                                <tr>
-                                                    <td colspan="10" style="background-color: lightgray; text-align: left; font-size: 20px; height: 5px; padding: 0px; border: 1px solid darkgray; border-top-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px">
-                                                        <table class="dxflInternalEditorTable_Office2010Silver">
-                                                            <tr>
-                                                                <td class="auto-style3"></td>
-                                                                <td class="auto-style4"></td>
-                                                                <td class="auto-style5"></td>
-                                                                <td></td>
-                                                                <td>&nbsp;</td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                                <%--Atingimento--%>
-
-                                                <tr>
-                                                    <td colspan="8" rowspan="1" style="background-color: lightgray; text-align: center; font-size: 20px; height: 5px; padding: 0px; border: solid; border-width: 1px; border-color: darkgray; border-top-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px">
-                                                        <b>
-                                                            <asp:Label ID="lblDescricaoAT" runat="server" Text="Label"></asp:Label></b>&nbsp;</td>
-                                                    <td colspan="2" rowspan="1" style="background-color: gray; text-align: center; font-size: 20px; height: 5px; padding: 0px; border: solid; border-width: 1px; border-color: darkgray; border-top-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px">
-                                                        <b>
-                                                            <asp:Label ID="lblAnoAT" runat="server" Text="Label" ForeColor="White"></asp:Label></b>
-                                                    </td>
-                                                </tr>
-                                                <%--Diferença Margem Realizada--%>
-
-                                                <tr>
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkblue; color: white; height: 70px; text-align: center; width: 220px">
-                                                        <asp:Label ID="lblTituloQtdeAT" runat="server" Text="Realizado Volume"></asp:Label>
-                                                        <br />
-                                                        <asp:Label ID="lblVolumePascoaAT" runat="server" Text="0" Font-Size="35px"></asp:Label>
-                                                    </td>
-
-                                                    <td style="border-style: solid; border-color: inherit; border-width: 1px; font-size: 20px; background-color: darkred; color: white; text-align: center;" class="auto-style2">Crescimento
-                                                    <br />
-                                                        <asp:Label ID="lblCrescimentoVolumeAT" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Participação--%>
-
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkblue; color: white; height: 70px; text-align: center; width: 220px">
-                                                        <asp:Label ID="lblTituloReal" runat="server" Text="Realizado Páscoa Total"></asp:Label>
-                                                        <br />
-                                                        R$
-                                                    <asp:Label ID="lblRealPascoa" runat="server" Text="0" Font-Size="35px"></asp:Label>
-                                                    </td>
-                                                    <%--Diferença Lucratividade--%>
-                                                    <td style="border-style: solid; border-color: inherit; border-width: 1px; font-size: 20px; background-color: darkred; color: white; text-align: center;" class="auto-style2">Crescimento
-                                                    <br />
-                                                        <asp:Label ID="lblCrescimento" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Participação--%>
-
-                                                    <td style="border: solid; border-width: 1px; font-size: 18px; background-color: darkorange; color: white; height: 70px; text-align: center; width: 90px">Margem PDV
-                                                    <br />
-                                                        <asp:Label ID="lblMargemPDV" runat="server" Text="0" Font-Size="25px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Meta Pascoa--%>
-                                                    <td style="border: solid; border-width: 1px; font-size: 18px; background-color: #58c72c; color: white; height: 70px; text-align: center; width: 90px">Margem Final
-                                                    <br />
-                                                        <asp:Label ID="lblMargemFinal" runat="server" Text="0" Font-Size="25px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Meta Pascoa--%>
-
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: chocolate; color: white; height: 70px; text-align: center; width: 200px">Lucratividade
-                                                    <br />
-                                                        R$
-                                                    <asp:Label ID="lblLucratividade" runat="server" Text="0" Font-Size="35px"></asp:Label>
-                                                    </td>
-                                                    <%--Crescimento--%>
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkslategray; color: white; height: 70px; text-align: center; width: 180px">Participação
-                                                    <br />
-                                                        <asp:Label ID="lblParticipacao" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Dados 2012--%>
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkgreen; color: white; height: 70px; text-align: center; width: 220px">
-                                                        <asp:Label ID="lblTituloMeta" runat="server" Text="Meta Pascoa Total"></asp:Label>
-                                                        <br />
-                                                        R$
-                                                    <asp:Label ID="lblMetaPascoa" runat="server" Text="0" Font-Size="35px"></asp:Label>
-                                                    </td>
-                                                    <%--Diferenças--%>
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: gray; color: white; height: 70px; text-align: center; width: 180px">Atingimento
-                                                    <br />
-                                                        <asp:Label ID="lblPercentualAtingimento" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Informações Diferença--%>
-                                                </tr>
-                                                <%--Atingimento--%>
-
-                                                <tr>
-                                                    <td colspan="5" rowspan="1" style="color: slategray">
-                                                        <asp:Label ID="lblPeriodo2" runat="server" Text="Label"></asp:Label>
-                                                    </td>
-                                                </tr>
-                                                <%--Diferença Margem Realizada--%>
-
-                                                <tr>
-                                                    <td colspan="8" rowspan="1" style="background-color: lightgray; text-align: center; font-size: 20px; height: 5px; padding: 0px; border: solid; border-width: 1px; border-color: darkgray; border-top-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px">
-                                                        <b>
-                                                            <asp:Label ID="lblDescricaoAA" runat="server" Text="Label"></asp:Label></b>
-                                                    </td>
-                                                    <td colspan="2" rowspan="1" style="background-color: gray; text-align: center; font-size: 20px; height: 5px; padding: 0px; border: solid; border-width: 1px; border-color: darkgray; border-top-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px">
-                                                        <b>
-                                                            <asp:Label ID="lblAnoAA" runat="server" Text="0"></asp:Label></b>
-                                                    </td>
-                                                </tr>
-                                                <%--Diferença Lucratividade--%>
-
-                                                <tr>
-
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkblue; color: white; height: 70px; text-align: center; width: 220px">
-                                                        <asp:Label ID="lblTituloQtdeAA" runat="server" Text="Realizado Volume"></asp:Label>
-                                                        <br />
-                                                        <asp:Label ID="lblVolumePascoaAA" runat="server" Text="0" Font-Size="35px"></asp:Label>
-                                                    </td>
-
-                                                    <td style="border-style: solid; border-color: inherit; border-width: 1px; font-size: 20px; background-color: darkred; color: white; text-align: center;" class="auto-style2">Crescimento
-                                                    <br />
-                                                        &nbsp;<asp:Label ID="lblCrescimentoVolumeAA" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Meta Pascoa--%>
-
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkblue; color: white; height: 70px; text-align: center; width: 220px">
-                                                        <asp:Label ID="lblTituloRealAA" runat="server" Text="Realizado Páscoa Total"></asp:Label>
-                                                        <br />
-                                                        R$
-                                                    <asp:Label ID="lblRealPascoaAA" runat="server" Text="0" Font-Size="35px"></asp:Label>
-                                                    </td>
-                                                    <%--Participação--%>
-                                                    <td style="border-style: solid; border-color: inherit; border-width: 1px; font-size: 20px; background-color: darkred; color: white; text-align: center;" class="auto-style2">Crescimento
-                                                    <br />
-                                                        &nbsp;<asp:Label ID="lblCrescimentoAA" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Meta Pascoa--%>
-
-                                                    <td style="border: solid; border-width: 1px; font-size: 18px; background-color: darkorange; color: white; height: 70px; text-align: center; width: 90px">Margem PDV
-                                                    <br />
-                                                        <asp:Label ID="lblMargemPDV_AA" runat="server" Text="0" Font-Size="25px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Crescimento--%>
-                                                    <td style="border: solid; border-width: 1px; font-size: 18px; background-color: #58c72c; color: white; height: 70px; text-align: center; width: 90px">Margem Final
-                                                    <br />
-                                                        <asp:Label ID="lblMargemFinal_AA" runat="server" Text="0" Font-Size="25px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Crescimento--%>
-
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: chocolate; color: white; height: 70px; text-align: center; width: 200px">Lucratividade
-                                                    <br />
-                                                        R$
-                                                    <asp:Label ID="lblLucratividadeAA" runat="server" Text="0" Font-Size="35px"></asp:Label>
-                                                    </td>
-                                                    <%--Informações Diferença--%>
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkslategray; color: white; height: 70px; text-align: center; width: 180px">Participação
-                                                    <br />
-                                                        <asp:Label ID="lblParticipacaoAA" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Diferenças--%>
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkblue; color: white; height: 70px; text-align: center; width: 220px">
-                                                        <asp:Label ID="lblTituloMetaAA" runat="server" Text="Realizado Pascoa Total"></asp:Label>
-                                                        <br />
-                                                        R$
-                                                    <asp:Label ID="lblMetaPascoaAA" runat="server" Text="0" Font-Size="35px"></asp:Label>
-                                                    </td>
-                                                    <%--Informações Diferença--%>
-
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: gray; color: white; height: 70px; text-align: center; width: 180px">Atingimento
-                                                    <br />
-                                                        <asp:Label ID="lblPercentualAtingimentoAA" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Atingimento--%>
-                                                </tr>
-                                                <%--Diferença Margem Realizada--%>
-
-                                                <tr>
-                                                    <td colspan="5" rowspan="1" style="color: slategray">
-                                                        <asp:Label ID="lblPeriodo3" runat="server" Text="Label"></asp:Label>
-                                                    </td>
-                                                </tr>
-                                                <%--Diferença Lucratividade--%>
-
-                                                <tr>
-                                                    <td colspan="8" rowspan="1" style="background-color: lightgray; text-align: center; font-size: 20px; height: 5px; padding: 0px; border: solid; border-width: 1px; border-color: darkgray; border-top-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px">
-                                                        <b>
-                                                            <asp:Label ID="lblDescricaoAA1" runat="server" Text="Label"></asp:Label></b>&nbsp;</td>
-                                                    <td colspan="2" rowspan="1" style="background-color: gray; text-align: center; font-size: 20px; height: 5px; padding: 0px; border: solid; border-width: 1px; border-color: darkgray; border-top-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px">
-                                                        <b>
-                                                            <asp:Label ID="lblAnoAA1" runat="server" Text="0"></asp:Label></b>
-                                                    </td>
-                                                </tr>
-                                                <%--Participação--%>
-
-                                                <tr>
-
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkblue; color: white; height: 70px; text-align: center; width: 220px">
-                                                        <asp:Label ID="lblTituloVolumeAA1" runat="server" Text="Realizado Volume"></asp:Label>
-                                                        <br />
-                                                        <asp:Label ID="lblVolumePascoaAA1" runat="server" Text="0" Font-Size="35px"></asp:Label>
-                                                    </td>
-
-                                                    <td style="border-style: solid; border-color: inherit; border-width: 1px; font-size: 20px; background-color: darkred; color: white; text-align: center;" class="auto-style2">Crescimento
-                                                    <br />
-                                                        <asp:Label ID="lblCrescimentoVolumeAA1" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Crescimento--%>
-
-
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkblue; color: white; height: 70px; text-align: center; width: 220px">
-                                                        <asp:Label ID="lblTituloRealAA1" runat="server" Text="Realizado Páscoa Total"></asp:Label>
-                                                        <br />
-                                                        R$
-                                                    <asp:Label ID="lblRealPascoaAA1" runat="server" Text="0" Font-Size="35px"></asp:Label>
-                                                    </td>
-                                                    <%--Meta Pascoa--%>
-                                                    <td style="border-style: solid; border-color: inherit; border-width: 1px; font-size: 20px; background-color: darkred; color: white; text-align: center;" class="auto-style2">Crescimento
-                                                    <br />
-                                                        <asp:Label ID="lblCrescimentoAA1" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Crescimento--%>
-                                                    <td style="border: solid; border-width: 1px; font-size: 18px; background-color: darkorange; color: white; height: 70px; text-align: center; width: 90px">Margem PDV<br />
-                                                        <asp:Label ID="lblMargemPDV_AA1" runat="server" Text="0" Font-Size="25px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Informações Diferença--%>
-                                                    <td style="border: solid; border-width: 1px; font-size: 18px; background-color: #58c72c; color: white; height: 70px; text-align: center; width: 90px">Margem Final
-                                                    <br />
-                                                        <asp:Label ID="lblMargemFinal_AA1" runat="server" Text="0" Font-Size="25px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Informações Diferença--%>
-
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: chocolate; color: white; height: 70px; text-align: center; width: 200px">Lucratividade
-                                                    <br />
-                                                        R$
-                                                    <asp:Label ID="lblLucratividadeAA1" runat="server" Text="0" Font-Size="35px"></asp:Label>
-                                                    </td>
-                                                    <%--Atingimento--%>
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkslategray; color: white; height: 70px; text-align: center; width: 180px">Participação
-                                                    <br />
-                                                        <asp:Label ID="lblParticipacaoAA1" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Diferença Margem Realizada--%>
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkblue; color: white; height: 70px; text-align: center; width: 220px">
-                                                        <asp:Label ID="lblTituloMetaAA1" runat="server" Text="Meta Pascoa Total"></asp:Label>
-                                                        <br />
-                                                        R$
-                                                    <asp:Label ID="lblMetaPascoaAA1" runat="server" Text="0" Font-Size="35px"></asp:Label>
-                                                    </td>
-                                                    <%--Diferença Lucratividade--%>
-
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: gray; color: white; height: 70px; text-align: center; width: 180px">Atingimento
-                                                    <br />
-                                                        <asp:Label ID="lblPercentualAtingimentoAA1" runat="server" Text="0" Font-Size="50px" Font-Bold="True"></asp:Label>
-                                                    </td>
-                                                    <%--Participação--%>
-                                                </tr>
-                                                <%--Meta Pascoa--%>
-
-                                                <tr>
-                                                    <td colspan="7" rowspan="1" style="background-color: lightgray; text-align: center; font-size: 20px; height: 5px; padding: 0px; border: solid; border-width: 1px; border-color: darkgray; border-top-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px">
-                                                        <b>Diferenças</b>
-                                                    </td>
-                                                </tr>
-                                                <%--Crescimento--%>
-
-                                                <tr>
-
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkblue; color: white; height: 70px; text-align: center; width: 220px">
-                                                        <asp:Label ID="Label13" runat="server" Text="Realizado Volume"></asp:Label>
-                                                        <br />
-                                                        <asp:Label ID="lblVolumeDif" runat="server" Text="0" Font-Size="35px"></asp:Label>
-                                                    </td>
-
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkred; color: white; height: 70px; text-align: center; width: 220px">
-                                                        <asp:Label ID="Label15" runat="server" Text="% Cresc"></asp:Label>
-                                                        <br />
-                                                        <asp:Label ID="lblVolumeCrescimentoDif" runat="server" Text="0" Font-Size="35px"></asp:Label>
-                                                    </td>
-
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkblue; color: white; height: 70px; text-align: center; width: 220px">
-                                                        <asp:Label ID="lblTituloRealDif" runat="server" Text="Valor"></asp:Label>
-                                                        <br />
-                                                        R$
-                                                    <asp:Label ID="lblRealPascoaDif" runat="server" Text="0" Font-Size="35px"></asp:Label>
-                                                    </td>
-                                                    <%--Informações Diferença--%>
-                                                    <td style="border-style: solid; border-color: inherit; border-width: 1px; font-size: 20px; background-color: gray; color: white; text-align: center;" class="auto-style2">Percentual
-                                                    <br />
-                                                        <asp:Label ID="lblPercentualAtingimentoDif" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Atingimento--%>
-                                                    <td style="border: solid; border-width: 1px; font-size: 18px; background-color: darkorange; color: white; height: 70px; text-align: center; width: 90px">Margem PDV
-                                                    <br />
-                                                        <asp:Label ID="lblMargemPDV_Dif" runat="server" Text="0" Font-Size="25px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Diferença Margem Realizada--%>
-                                                    <td style="border: solid; border-width: 1px; font-size: 18px; background-color: #58c72c; color: white; height: 70px; text-align: center; width: 90px">Margem Final
-                                                    <br />
-                                                        <asp:Label ID="lblMargemFinal_Dif" runat="server" Text="0" Font-Size="25px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: chocolate; color: white; height: 70px; text-align: center; width: 100px">Lucratividade
-                                                    <br />
-                                                        <asp:Label ID="lblLucratividadeDif" runat="server" Text="0" Font-Size="35px"></asp:Label>
-                                                    </td>
-                                                    <%--Diferença Lucratividade--%>
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkslategray; color: white; height: 70px; text-align: center; width: 180px">Percentual
-                                                    <br />
-                                                        <asp:Label ID="lblParticipacaoDif" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Participação--%>
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: forestgreen; color: white; height: 70px; text-align: center; width: 220px">
-                                                        <asp:Label ID="lblTituloMetaDif" runat="server" Text="Valor"></asp:Label>
-                                                        <br />
-                                                        R$
-                                                    <asp:Label ID="lblMetaPascoaDif" runat="server" Text="0" Font-Size="35px"></asp:Label>
-                                                    </td>
-                                                    <%--Meta Pascoa--%>
-                                                    <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkred; color: white; height: 70px; text-align: center; width: 180px">Percentual
-                                                    <br />
-                                                        <asp:Label ID="lblCrescimentoDif" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
-                                                    </td>
-                                                    <%--Crescimento--%>
-                                                </tr>
-                                                <%--Informações Diferença--%>
-                                            </table>
-
-                                            <%----------------%>
-                                        </div>
-                                    </div>
+                                    <a href="#" data-action="close">
+                                        <i class="ace-icon fa fa-times"></i>
+                                    </a>
                                 </div>
+                            </div>
 
+                            <div class="widget-body">
+                                <div class="widget-main">
+
+                                    <style type="text/css">
+                                        .auto-style1 {
+                                            width: 100%;
+                                        }
+
+                                        .auto-style2 {
+                                            height: 70px;
+                                            width: 164px;
+                                        }
+
+                                        .auto-style3 {
+                                            width: 460px;
+                                            font-weight: 700;
+                                        }
+
+                                        .auto-style4 {
+                                            width: 183px;
+                                        }
+
+                                        .auto-style5 {
+                                            width: 390px;
+                                            text-align: center;
+                                        }
+                                    </style>
+
+                                    <div class="row col col-md-12 justify-content-center">
+                                        <div class="col-md-12 justify-content-center text-center" style="background-color: lightgray; padding: 0 0 5px 0 !important; border: 1px solid">
+                                            <b>
+                                                <asp:Label ID="lblPeriodo1" runat="server" Text="Label" Style="text-align: left; height: 5px; padding: 0px;"></asp:Label></b>
+                                        </div>
+                                        <div class="col col-md-9 justify-content-center text-center" style="background-color: lightgray; padding: 0 0 5px 0 !important; border: 1px solid">
+                                            <b>
+                                                <asp:Label ID="lblDescricaoAT" runat="server" Text="Label"></asp:Label>
+
+                                            </b>
+                                            <br />
+                                            <br />
+
+                                            <div class="row justify-content-center">
+
+                                                <div class="col-auto" style="background-color: darkblue; color: white; padding: 0 0 5px 0 !important; border: 1px solid; width: 170px">
+                                                    <asp:Label ID="lblTituloQtdeAT" runat="server" Text="Realizado Volume"></asp:Label>
+                                                    <br />
+                                                    <b>
+                                                        <asp:Label ID="lblVolumePascoaAT" runat="server" Text="0"></asp:Label>
+                                                    </b>
+                                                </div>
+                                                <div class="col-auto" style="background-color: darkred; color: white; padding: 0 0 5px 0 !important; border: 1px solid; width: 140px">
+                                                    Crescimento
+                                                            <br />
+                                                    <b>
+                                                        <asp:Label ID="lblCrescimentoVolumeAT" runat="server" Text="0" Font-Bold="true"></asp:Label></b>
+                                                </div>
+                                                <div class="col-auto" style="background-color: darkblue; color: white; padding: 0 0 5px 0 !important; border: 1px solid; width: 170px">
+
+                                                    <asp:Label ID="lblTituloReal" runat="server" Text="Realizado Total"></asp:Label>
+                                                    <br />
+                                                    <b>R$
+                                                            <asp:Label ID="lblRealPascoa" runat="server" Text="0"></asp:Label></b>
+
+                                                </div>
+                                                <div class="col-auto" style="background-color: darkred; color: white; padding: 0 0 5px 0 !important; border: 1px solid; width: 140px">
+                                                    Crescimento  
+                                                            <br />
+                                                    <b>
+                                                        <asp:Label ID="lblCrescimento" runat="server" Text="0" Font-Bold="true"></asp:Label></b>
+
+                                                </div>
+                                                <div class="col-auto" style="background-color: darkorange; color: white; padding: 0 0 5px 0 !important; border: 1px solid; width: 170px">
+                                                    Margem PDV
+                                                            <br />
+                                                    <b>
+                                                        <asp:Label ID="lblMargemPDV" runat="server" Text="0" Font-Bold="true"></asp:Label>
+                                                    </b>
+                                                </div>
+                                                <div class="col-auto" style="background-color: #58c72c; color: white; padding: 0 0 5px 0 !important; border: 1px solid; width: 170px">
+                                                    Margem Final
+                                                            <br />
+                                                    <b>
+                                                        <asp:Label ID="lblMargemFinal" runat="server" Text="0" Font-Bold="true"></asp:Label>
+                                                    </b>
+                                                </div>
+                                                <div class="col-auto" style="background-color: chocolate; color: white; padding: 0 0 5px 0 !important; border: 1px solid; width: 170px">
+                                                    Lucratividade
+                                                            <br />
+                                                    <b>R$
+                                                            <asp:Label ID="lblLucratividade" runat="server" Text="0"></asp:Label></b>
+                                                </div>
+                                                <div class="col-auto" style="background-color: darkslategray; color: white; padding: 0 0 5px 0 !important; border: 1px solid; width: 150px">
+                                                    Participação
+                                                            <br />
+                                                    <b>
+
+                                                        <asp:Label ID="lblParticipacao" runat="server" Text="0" Font-Bold="true"></asp:Label>
+                                                    </b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 justify-content-center text-center" style="background-color: gray; padding: 0 0 5px 0 !important; border: 1px solid; width: 300px">
+                                            <b>
+                                                <asp:Label ID="lblAnoAT" runat="server" Text="Label" ForeColor="White"></asp:Label>
+                                            </b>
+                                            <br />
+                                            <br />
+
+                                            <div class="row justify-content-around">
+                                                <div class="col-auto" style="background-color: darkgreen; color: white; padding: 0 0 5px 0 !important; border: 1px solid; width: 170px">
+                                                    <asp:Label ID="lblTituloMeta" runat="server" Text="Meta Pascoa Total"></asp:Label>
+                                                    <br />
+                                                    <b>R$
+                                                            <asp:Label ID="lblMetaPascoa" runat="server" Text="0"></asp:Label></b>
+                                                </div>
+
+                                                <div class="col-auto" style="background-color: gray; color: white; padding: 0 0 5px 0 !important; border: 1px solid; width: 150px">
+                                                    Atingimento
+                                                        <br />
+                                                    <b>
+                                                        <asp:Label ID="lblPercentualAtingimento" runat="server" Text="0" Font-Bold="true"></asp:Label></b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                </div>
                             </div>
                         </div>
+
                     </div>
 
+                    <table class="auto-style1">
+                        <tr>
+                            <td colspan="10" style="background-color: lightgray; text-align: left; font-size: 20px; height: 5px; padding: 0px; border: 1px solid darkgray; border-top-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px">
+                                <table class="dxflInternalEditorTable_Office2010Silver">
+                                    <tr>
+                                        <td class="auto-style3"></td>
+                                        <td class="auto-style4"></td>
+                                        <td class="auto-style5"></td>
+                                        <td></td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <%--Atingimento--%>
+
+                        <tr>
+                            <td colspan="5" rowspan="1" style="color: slategray">
+                                <asp:Label ID="lblPeriodo2" runat="server" Text="Label"></asp:Label>
+                            </td>
+                        </tr>
+                        <%--Diferença Margem Realizada--%>
+
+                        <tr>
+                            <td colspan="8" rowspan="1" style="background-color: lightgray; text-align: center; font-size: 20px; height: 5px; padding: 0px; border: solid; border-width: 1px; border-color: darkgray; border-top-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px">
+                                <b>
+                                    <asp:Label ID="lblDescricaoAA" runat="server" Text="Label"></asp:Label></b>
+                            </td>
+                            <td colspan="2" rowspan="1" style="background-color: gray; text-align: center; font-size: 20px; height: 5px; padding: 0px; border: solid; border-width: 1px; border-color: darkgray; border-top-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px">
+                                <b>
+                                    <asp:Label ID="lblAnoAA" runat="server" Text="0"></asp:Label></b>
+                            </td>
+                        </tr>
+                        <%--Diferença Lucratividade--%>
+
+                        <tr>
+
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkblue; color: white; height: 70px; text-align: center; width: 220px">
+                                <asp:Label ID="lblTituloQtdeAA" runat="server" Text="Realizado Volume"></asp:Label>
+                                <br />
+                                <asp:Label ID="lblVolumePascoaAA" runat="server" Text="0" Font-Size="35px"></asp:Label>
+                            </td>
+
+                            <td style="border-style: solid; border-color: inherit; border-width: 1px; font-size: 20px; background-color: darkred; color: white; text-align: center;" class="auto-style2">Crescimento
+                                                    <br />
+                                &nbsp;<asp:Label ID="lblCrescimentoVolumeAA" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
+                            </td>
+                            <%--Meta Pascoa--%>
+
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkblue; color: white; height: 70px; text-align: center; width: 220px">
+                                <asp:Label ID="lblTituloRealAA" runat="server" Text="Realizado Páscoa Total"></asp:Label>
+                                <br />
+                                R$
+                                                    <asp:Label ID="lblRealPascoaAA" runat="server" Text="0" Font-Size="35px"></asp:Label>
+                            </td>
+                            <%--Participação--%>
+                            <td style="border-style: solid; border-color: inherit; border-width: 1px; font-size: 20px; background-color: darkred; color: white; text-align: center;" class="auto-style2">Crescimento
+                                                    <br />
+                                &nbsp;<asp:Label ID="lblCrescimentoAA" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
+                            </td>
+                            <%--Meta Pascoa--%>
+
+                            <td style="border: solid; border-width: 1px; font-size: 18px; background-color: darkorange; color: white; height: 70px; text-align: center; width: 90px">Margem PDV
+                                                    <br />
+                                <asp:Label ID="lblMargemPDV_AA" runat="server" Text="0" Font-Size="25px" Font-Bold="true"></asp:Label>
+                            </td>
+                            <%--Crescimento--%>
+                            <td style="border: solid; border-width: 1px; font-size: 18px; background-color: #58c72c; color: white; height: 70px; text-align: center; width: 90px">Margem Final
+                                                    <br />
+                                <asp:Label ID="lblMargemFinal_AA" runat="server" Text="0" Font-Size="25px" Font-Bold="true"></asp:Label>
+                            </td>
+                            <%--Crescimento--%>
+
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: chocolate; color: white; height: 70px; text-align: center; width: 200px">Lucratividade
+                                                    <br />
+                                R$
+                                                    <asp:Label ID="lblLucratividadeAA" runat="server" Text="0" Font-Size="35px"></asp:Label>
+                            </td>
+                            <%--Informações Diferença--%>
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkslategray; color: white; height: 70px; text-align: center; width: 180px">Participação
+                                                    <br />
+                                <asp:Label ID="lblParticipacaoAA" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
+                            </td>
+                            <%--Diferenças--%>
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkblue; color: white; height: 70px; text-align: center; width: 220px">
+                                <asp:Label ID="lblTituloMetaAA" runat="server" Text="Realizado Pascoa Total"></asp:Label>
+                                <br />
+                                R$
+                                                    <asp:Label ID="lblMetaPascoaAA" runat="server" Text="0" Font-Size="35px"></asp:Label>
+                            </td>
+                            <%--Informações Diferença--%>
+
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: gray; color: white; height: 70px; text-align: center; width: 180px">Atingimento
+                                                    <br />
+                                <asp:Label ID="lblPercentualAtingimentoAA" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
+                            </td>
+                            <%--Atingimento--%>
+                        </tr>
+                        <%--Diferença Margem Realizada--%>
+
+                        <tr>
+                            <td colspan="5" rowspan="1" style="color: slategray">
+                                <asp:Label ID="lblPeriodo3" runat="server" Text="Label"></asp:Label>
+                            </td>
+                        </tr>
+                        <%--Diferença Lucratividade--%>
+
+                        <tr>
+                            <td colspan="8" rowspan="1" style="background-color: lightgray; text-align: center; font-size: 20px; height: 5px; padding: 0px; border: solid; border-width: 1px; border-color: darkgray; border-top-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px">
+                                <b>
+                                    <asp:Label ID="lblDescricaoAA1" runat="server" Text="Label"></asp:Label></b>&nbsp;</td>
+                            <td colspan="2" rowspan="1" style="background-color: gray; text-align: center; font-size: 20px; height: 5px; padding: 0px; border: solid; border-width: 1px; border-color: darkgray; border-top-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px">
+                                <b>
+                                    <asp:Label ID="lblAnoAA1" runat="server" Text="0"></asp:Label></b>
+                            </td>
+                        </tr>
+                        <%--Participação--%>
+
+                        <tr>
+
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkblue; color: white; height: 70px; text-align: center; width: 220px">
+                                <asp:Label ID="lblTituloVolumeAA1" runat="server" Text="Realizado Volume"></asp:Label>
+                                <br />
+                                <asp:Label ID="lblVolumePascoaAA1" runat="server" Text="0" Font-Size="35px"></asp:Label>
+                            </td>
+
+                            <td style="border-style: solid; border-color: inherit; border-width: 1px; font-size: 20px; background-color: darkred; color: white; text-align: center;" class="auto-style2">Crescimento
+                                                    <br />
+                                <asp:Label ID="lblCrescimentoVolumeAA1" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
+                            </td>
+                            <%--Crescimento--%>
+
+
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkblue; color: white; height: 70px; text-align: center; width: 220px">
+                                <asp:Label ID="lblTituloRealAA1" runat="server" Text="Realizado Páscoa Total"></asp:Label>
+                                <br />
+                                R$
+                                                    <asp:Label ID="lblRealPascoaAA1" runat="server" Text="0" Font-Size="35px"></asp:Label>
+                            </td>
+                            <%--Meta Pascoa--%>
+                            <td style="border-style: solid; border-color: inherit; border-width: 1px; font-size: 20px; background-color: darkred; color: white; text-align: center;" class="auto-style2">Crescimento
+                                                    <br />
+                                <asp:Label ID="lblCrescimentoAA1" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
+                            </td>
+                            <%--Crescimento--%>
+                            <td style="border: solid; border-width: 1px; font-size: 18px; background-color: darkorange; color: white; height: 70px; text-align: center; width: 90px">Margem PDV<br />
+                                <asp:Label ID="lblMargemPDV_AA1" runat="server" Text="0" Font-Size="25px" Font-Bold="true"></asp:Label>
+                            </td>
+                            <%--Informações Diferença--%>
+                            <td style="border: solid; border-width: 1px; font-size: 18px; background-color: #58c72c; color: white; height: 70px; text-align: center; width: 90px">Margem Final
+                                                    <br />
+                                <asp:Label ID="lblMargemFinal_AA1" runat="server" Text="0" Font-Size="25px" Font-Bold="true"></asp:Label>
+                            </td>
+                            <%--Informações Diferença--%>
+
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: chocolate; color: white; height: 70px; text-align: center; width: 200px">Lucratividade
+                                                    <br />
+                                R$
+                                                    <asp:Label ID="lblLucratividadeAA1" runat="server" Text="0" Font-Size="35px"></asp:Label>
+                            </td>
+                            <%--Atingimento--%>
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkslategray; color: white; height: 70px; text-align: center; width: 180px">Participação
+                                                    <br />
+                                <asp:Label ID="lblParticipacaoAA1" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
+                            </td>
+                            <%--Diferença Margem Realizada--%>
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkblue; color: white; height: 70px; text-align: center; width: 220px">
+                                <asp:Label ID="lblTituloMetaAA1" runat="server" Text="Meta Pascoa Total"></asp:Label>
+                                <br />
+                                R$
+                                                    <asp:Label ID="lblMetaPascoaAA1" runat="server" Text="0" Font-Size="35px"></asp:Label>
+                            </td>
+                            <%--Diferença Lucratividade--%>
+
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: gray; color: white; height: 70px; text-align: center; width: 180px">Atingimento
+                                                    <br />
+                                <asp:Label ID="lblPercentualAtingimentoAA1" runat="server" Text="0" Font-Size="50px" Font-Bold="True"></asp:Label>
+                            </td>
+                            <%--Participação--%>
+                        </tr>
+                        <%--Meta Pascoa--%>
+
+                        <tr>
+                            <td colspan="7" rowspan="1" style="background-color: lightgray; text-align: center; font-size: 20px; height: 5px; padding: 0px; border: solid; border-width: 1px; border-color: darkgray; border-top-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px">
+                                <b>Diferenças</b>
+                            </td>
+                        </tr>
+                        <%--Crescimento--%>
+
+                        <tr>
+
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkblue; color: white; height: 70px; text-align: center; width: 220px">
+                                <asp:Label ID="Label13" runat="server" Text="Realizado Volume"></asp:Label>
+                                <br />
+                                <asp:Label ID="lblVolumeDif" runat="server" Text="0" Font-Size="35px"></asp:Label>
+                            </td>
+
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkred; color: white; height: 70px; text-align: center; width: 220px">
+                                <asp:Label ID="Label15" runat="server" Text="% Cresc"></asp:Label>
+                                <br />
+                                <asp:Label ID="lblVolumeCrescimentoDif" runat="server" Text="0" Font-Size="35px"></asp:Label>
+                            </td>
+
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkblue; color: white; height: 70px; text-align: center; width: 220px">
+                                <asp:Label ID="lblTituloRealDif" runat="server" Text="Valor"></asp:Label>
+                                <br />
+                                R$
+                                                    <asp:Label ID="lblRealPascoaDif" runat="server" Text="0" Font-Size="35px"></asp:Label>
+                            </td>
+                            <%--Informações Diferença--%>
+                            <td style="border-style: solid; border-color: inherit; border-width: 1px; font-size: 20px; background-color: gray; color: white; text-align: center;" class="auto-style2">Percentual
+                                                    <br />
+                                <asp:Label ID="lblPercentualAtingimentoDif" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
+                            </td>
+                            <%--Atingimento--%>
+                            <td style="border: solid; border-width: 1px; font-size: 18px; background-color: darkorange; color: white; height: 70px; text-align: center; width: 90px">Margem PDV
+                                                    <br />
+                                <asp:Label ID="lblMargemPDV_Dif" runat="server" Text="0" Font-Size="25px" Font-Bold="true"></asp:Label>
+                            </td>
+                            <%--Diferença Margem Realizada--%>
+                            <td style="border: solid; border-width: 1px; font-size: 18px; background-color: #58c72c; color: white; height: 70px; text-align: center; width: 90px">Margem Final
+                                                    <br />
+                                <asp:Label ID="lblMargemFinal_Dif" runat="server" Text="0" Font-Size="25px" Font-Bold="true"></asp:Label>
+                            </td>
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: chocolate; color: white; height: 70px; text-align: center; width: 100px">Lucratividade
+                                                    <br />
+                                <asp:Label ID="lblLucratividadeDif" runat="server" Text="0" Font-Size="35px"></asp:Label>
+                            </td>
+                            <%--Diferença Lucratividade--%>
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkslategray; color: white; height: 70px; text-align: center; width: 180px">Percentual
+                                                    <br />
+                                <asp:Label ID="lblParticipacaoDif" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
+                            </td>
+                            <%--Participação--%>
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: forestgreen; color: white; height: 70px; text-align: center; width: 220px">
+                                <asp:Label ID="lblTituloMetaDif" runat="server" Text="Valor"></asp:Label>
+                                <br />
+                                R$
+                                                    <asp:Label ID="lblMetaPascoaDif" runat="server" Text="0" Font-Size="35px"></asp:Label>
+                            </td>
+                            <%--Meta Pascoa--%>
+                            <td style="border: solid; border-width: 1px; font-size: 20px; background-color: darkred; color: white; height: 70px; text-align: center; width: 180px">Percentual
+                                                    <br />
+                                <asp:Label ID="lblCrescimentoDif" runat="server" Text="0" Font-Size="50px" Font-Bold="true"></asp:Label>
+                            </td>
+                            <%--Crescimento--%>
+                        </tr>
+                        <%--Informações Diferença--%>
+                    </table>
 
                     <div class="justify-content-center" style="padding: 5px 5px 5px 5px">
                         <div class="row col-md-12 justify-content-center text-center">
