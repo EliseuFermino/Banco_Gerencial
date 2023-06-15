@@ -52,7 +52,7 @@
                     <asp:Button ID="btnMenu_5" Height="30px" CssClass="btn btn-sm" Text="50 Itens mais vendidos" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_5_Click" Style="background-repeat: round" />
                 </div>
                 <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 15px" runat="server" visible="false" id="divSair">
-                    <asp:Button runat="server" ID="btnSair" Height="30px" OnClick="btnSair_Click" autopostback="false" Font-Size="X-Small" CssClass="btn btn-danger btn-sm" Text="Sair" />
+                    <asp:Button runat="server" ID="btnSair" Height="30px" OnClick="btnSair_Click" autopostback="false" Font-Size="X-Small" CssClass="btn btn-danger btn-sm" Text="Sair (Visão PC)" />
                 </div>
             </div>
         </div>
@@ -1169,7 +1169,7 @@
                                                 <FooterCellStyle ForeColor="Blue">
                                                 </FooterCellStyle>
                                             </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="2010" FieldName="percCresc_RealAA2"
+                                            <dx:GridViewDataTextColumn Caption="2010" FieldName="percCresc_RealAA1"
                                                 VisibleIndex="1" Name="bandCrescAA2">
                                                 <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
@@ -1364,7 +1364,7 @@
                                                 <FooterCellStyle ForeColor="Blue">
                                                 </FooterCellStyle>
                                             </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="2010" FieldName="percCresc_RealAA2"
+                                            <dx:GridViewDataTextColumn Caption="2010" FieldName="percCresc_RealAA1"
                                                 VisibleIndex="4" Name="bandCrescAA2">
                                                 <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
