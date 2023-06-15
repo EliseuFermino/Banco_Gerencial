@@ -16,12 +16,12 @@ Public Class VendaEmpresaMes
     Private vPercRea As String
     Private vVendaRevista As String
     Private vVendaRealizada As String
-    Private connString As String = "Data Source=CONTROLADORIA2\SQLCONTRO;Initial Catalog=gerCont;Persist Security Info=True;User ID=sa;Password=rd700@1"
+    Private connString As String = "Data Source=10.1.1.14\SQLCONTRO;Initial Catalog=gerCont;Persist Security Info=True;User ID=sa;Password=rd700@1"
     'Private conn196 As String = "Data Source=NS3;Initial Catalog=gerContSQL1;User ID=eliseuf;Password=rd700sx"
     Private connManager As String = Conexao.gerManager
     Private connBI As String = clDataDb_gerBI.dbConnect   '"Data Source=CONTROLADORIA1\SQLCONTRO;Initial Catalog=gerBI;Persist Security Info=True;User ID=sa;Password=rd700@1"
     Private connCadastros As String = clData_gerCadastro.dbConnect   '"Data Source=CONTROLADORIA1\SQLCONTRO;Initial Catalog=gerCadastros;Persist Security Info=True;User ID=sa;Password=rd700@1"
-    Private connContSQL1 As String = "Data Source=WIN-DJITT2B93NO;Initial Catalog=gerContSQL1;User ID=sa;Password=rd700@1"
+    Private connContSQL1 As String = "Data Source=10.1.2.225;Initial Catalog=gerContSQL1;User ID=sa;Password=rd700@1"
     Private strSQL As String
     Private strCategoria As String
     Private vDesc As String

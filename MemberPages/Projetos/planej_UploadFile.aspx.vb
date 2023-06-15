@@ -5,7 +5,7 @@ Imports System.IO
 Partial Class MemberPages_planejUploadArquivo
     Inherits System.Web.UI.Page
 
-    Dim cnnStr As String = "Data Source=CONTROLADORIA2\SQLCONTRO;Initial Catalog=gerCont;User ID=sa; PWD=rd700@1"
+    Dim cnnStr As String = "Data Source=10.1.1.14\SQLCONTRO;Initial Catalog=gerCont;User ID=sa; PWD=rd700@1"
     Dim oProjeto As New Projeto
 
     Protected Sub btnSubmit_Manutencao_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSubmit_Manutencao.Click

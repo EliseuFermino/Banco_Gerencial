@@ -8,8 +8,8 @@ Imports System.IO
 Partial Class Ranking_ConcPrincipal_work
     Inherits System.Web.UI.Page
     Dim strSQL, strBusca As String
-    Dim cnnStr As String = "Data Source=CONTROLADORIA2\SQLCONTRO;Initial Catalog=gerCont;User ID=sa; PWD=rd700@1"
-    Dim connString As String = "Data Source=CONTROLADORIA2\SQLCONTRO;Initial Catalog=gerContSQL1;Persist Security Info=True;User ID=sa;Password=rd700@1"
+    Dim cnnStr As String = "Data Source=10.1.1.14\SQLCONTRO;Initial Catalog=gerCont;User ID=sa; PWD=rd700@1"
+    Dim connString As String = "Data Source=10.1.1.14\SQLCONTRO;Initial Catalog=gerContSQL1;Persist Security Info=True;User ID=sa;Password=rd700@1"
 
     Private selectedProduct As Product
     Dim oVem As New VendaEmpresaMes

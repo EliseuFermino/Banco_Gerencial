@@ -223,9 +223,9 @@ Partial Class wucListaLojasComCorporacao
                             Call Preenche_cboFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegiao IN (203,217) ORDER BY nomeFilial")
                             cboCorporacao.Visible = False
                             cboFilial.SelectedIndex = 0
-                       
 
                         End If
+
                     Case "supervisor_trainee"
                         Call Preenche_cboFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1015 ORDER BY nomeFilial")
                         cboFilial.SelectedIndex = 0

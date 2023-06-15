@@ -28,20 +28,20 @@
         #divPeriodo {
             float: left;
             margin-left: 5px;
-            margin-top: 7px;
+            margin-top: 1px;
         }
 
         #divBotaoAtualizar {            
             float: left;
             margin-left: 10px;
             width: 80px;  
-            padding-top: 2px;                      
+            margin-top: 6px;                      
         }
 
         #divBotaoExcel {
             float: left;
             margin-left: 0px;              
-            padding-top: 2px;                      
+            margin-top: 6px;                      
         }
 
         #divZoom {
@@ -53,7 +53,7 @@
         #divSize {
             float:left ;  
             margin-left: 2px;
-            margin-top: 2px
+            margin-top: 1px
         }
         
         #divGrid1 {
@@ -428,12 +428,13 @@
                             </styles>
                         </dx:ASPxGridView>
 
-                        <asp:SqlDataSource ID="dsDados" runat="server" ConnectionString="<%$ ConnectionStrings:gerPerdasConnectionString %>" SelectCommand="Analises.uspQuebras010" SelectCommandType="StoredProcedure" >
+                        <asp:SqlDataSource ID="dsDados" runat="server" ConnectionString="<%$ ConnectionStrings:gerPerdasConnectionString %>" SelectCommand="Analises.uspQuebras010" SelectCommandType="StoredProcedure" EnableCaching="true"  >
                             <SelectParameters>
                                 <asp:SessionParameter Name="DiaInicial" SessionField="sDIA_INICIAL" DbType="Date" />
                                 <asp:SessionParameter Name="DiaFinal" SessionField="sDIA_FINAL" DbType="Date" />
                                 <asp:SessionParameter Name="idTipo" SessionField="sOPCAO" Type="Byte" />
                                 <asp:SessionParameter Name="idMercadologico" SessionField="sMERCADOLOGICO" Type="Int16" />
+                                <asp:SessionParameter Name="idUnidade" SessionField="sUNIDADE" Type="Byte" />
                             </SelectParameters>
                         </asp:SqlDataSource>
                         <br />

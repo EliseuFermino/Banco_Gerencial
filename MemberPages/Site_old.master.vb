@@ -10,7 +10,7 @@ Partial Class SiteMaster_Old
     Private Const menuConcorrentes As Integer = 4   'Index do Menu "Concorrentes".
     Private Const menuOpcoes As Integer = 5   'Index do Menu "Opções".
     Private Const menuProjeto As Integer = 6   'Index do Menu "Projeto".
-    Dim cnnStr As String = "Data Source=CONTROLADORIA2\SQLCONTRO;Initial Catalog=gerCont;User ID=sa; PWD=rd700@1"
+    Dim cnnStr As String = "Data Source=10.1.1.14\SQLCONTRO;Initial Catalog=gerCont;User ID=sa; PWD=rd700@1"
     Dim varDepto, varPermissao As String
 
     ' ---- Lista dos Menus -------------------------------------------------------------------------------------

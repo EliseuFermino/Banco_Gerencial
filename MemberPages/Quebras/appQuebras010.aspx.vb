@@ -25,6 +25,7 @@ Partial Class MemberPages_Quebras_appQuebras010
         Session("sDIA_INICIAL") = cboDia.CallDiaInicial
         Session("sDIA_FINAL") = cboDia.CallDiaFinal
 
+        ' **** MERCADOLOGICO ********
 
         If Me.cboMercadologico.Checked_rdTotal = True Then    'Total - Exibe todos os departamento
             Me.grid1.Settings.ShowFilterRow = False
@@ -56,7 +57,16 @@ Partial Class MemberPages_Quebras_appQuebras010
             oFun.Grid_Title(grid1, "Visualização do Departamento " & cboMercadologico.CallDeptoDescricao & " | Seção " & cboMercadologico.CallSecaoDescricao & " | Grupo " & cboMercadologico.CallGrupoDescricao & " | Subgrupo " & cboMercadologico.CallSubgrupoDescricao)
         End If
 
-        
+        ' **** UNIDADE ********
+
+        Select Case cboLoja_Atacarejo.CallUnidade
+            Case 3
+                Session("sUNIDADE") = 3     ' Condor
+            Case 8
+                Session("sUNIDADE") = 8     ' Atacarejo
+        End Select
+
+
 
         Me.grid1.Visible = True
         Me.grid1.DataBind()

@@ -5,7 +5,7 @@ Imports System.Text
 Imports System.IO
 
 Public Class Projeto
-    Private conn18 As String = "Data Source=10.1.1.14;Initial Catalog=gerCont;Persist Security Info=True;User ID=sa;Password=rd700@1"
+    Private conn18 As String = "Data Source=10.1.1.14\SQLCONTRO;Initial Catalog=gerCont;Persist Security Info=True;User ID=sa;Password=rd700@1"
 
 
     Private vEtapaNumero As String

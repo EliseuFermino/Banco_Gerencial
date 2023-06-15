@@ -12,8 +12,8 @@ Partial Class MemberPages_Projetos_Controles_wuc_cboProjeto_Subprojeto
 
 #Region " Connections"
 
-    Dim cnnStr As String = "Data Source=CONTROLADORIA2\SQLCONTRO;Initial Catalog=gerCont;User ID=sa; PWD=rd700@1"
-    Dim cnnProjetoStr As String = "Data Source=CONTROLADORIA2\SQLCONTRO;Initial Catalog=gerProjetos;User ID=sa; PWD=rd700@1"
+    Dim cnnStr As String = "Data Source=10.1.1.14\SQLCONTRO;Initial Catalog=gerCont;User ID=sa; PWD=rd700@1"
+    Dim cnnProjetoStr As String = "Data Source=10.1.1.14\SQLCONTRO;Initial Catalog=gerProjetos;User ID=sa; PWD=rd700@1"
 
 #End Region
 

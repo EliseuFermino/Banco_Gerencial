@@ -261,6 +261,8 @@
         <tr>
             <td>
                 <asp:Label ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label>
+                <dxwgv:ASPxComboBox ID="ASPxComboBox1" runat="server" ValueType="System.String">
+                </dxwgv:ASPxComboBox>
             </td>
         </tr>
     </table>

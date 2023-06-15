@@ -9,7 +9,7 @@ Partial Class MemberPages_Despesas_Gestor_viewDespMesTotal
     Private Venda02 As Double = 0
     Private Venda03 As Double = 0
     Private Meta As Double = 0
-    Dim connString As String = "Data Source=CONTROLADORIA2\SQLCONTRO;Initial Catalog=gerContSQL1;Persist Security Info=True;User ID=sa;Password=rd700@1"
+    Dim connString As String = "Data Source=10.1.1.14\SQLCONTRO;Initial Catalog=gerContSQL1;Persist Security Info=True;User ID=sa;Password=rd700@1"
 
     Protected Sub GridView1_RowCreated(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowCreated
         If e.Row.RowType = DataControlRowType.DataRow Then

@@ -3,7 +3,7 @@ Imports System.Data.SqlClient
 
 Partial Class Ranking_planej06_DiarioBordo
     Inherits System.Web.UI.Page
-    Dim cnnStr As String = "Data Source=CONTROLADORIA2\SQLCONTRO;Initial Catalog=gerCont;User ID=sa; PWD=rd700@1"
+    Dim cnnStr As String = "Data Source=10.1.1.14\SQLCONTRO;Initial Catalog=gerCont;User ID=sa; PWD=rd700@1"
     Dim varPlanoAcao As Byte
     Dim varSalvarPA As Byte
     Dim varStatus As Byte

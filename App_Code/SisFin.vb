@@ -5,7 +5,7 @@ Imports System.Data.SqlClient
 Public Class SisFin
     Private vDesc As String
 
-    Private connBI As String = "Data Source=CONTROLADORIA2\SQLCONTRO;Initial Catalog=gerSisFin;User ID=sa;Password=rd700@1"
+    Private connBI As String = "Data Source=10.1.1.14\SQLCONTRO;Initial Catalog=gerSisFin;User ID=sa;Password=rd700@1"
     Private connCad As String = clData_gerCadastro.dbConnect  '"Data Source=CONTROLADORIA1\SQLCONTRO;Initial Catalog=gerCadastros;User ID=sa;Password=rd700@1"
     '"Data Source=CONTROLADORIA1\SQLCONTRO;Initial Catalog=gerSisFin;User ID=sa;Password=rd700@1"
 

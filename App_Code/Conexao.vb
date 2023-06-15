@@ -16,22 +16,22 @@ Public Class Conexao
     Dim oVem As New VendaEmpresaMes
 
     Public Shared Function DW_Condor_One() As SqlConnection
-        Dim connectionString As String = "Data Source=WIN-DJITT2B93NO;Initial Catalog=DW_Condor_One;User ID=sa;Password=rd700@1"
+        Dim connectionString As String = "Data Source=10.1.2.225;Initial Catalog=DW_Condor_One;User ID=sa;Password=rd700@1"
         Return New SqlConnection(connectionString)
     End Function
 
     Public Shared Function gerCont() As SqlConnection
-        Dim connectionString As String = "Data Source=CONTROLADORIA2\SQLCONTRO;Initial Catalog=gerCont;User ID=sa; PWD=rd700@1"
+        Dim connectionString As String = "Data Source=10.1.1.14\SQLCONTRO;Initial Catalog=gerCont;User ID=sa; PWD=rd700@1"
         Return New SqlConnection(connectionString)
     End Function
 
     Public Shared Function gerProjetos() As SqlConnection
-        Dim connectionString As String = "Data Source=CONTROLADORIA2\SQLCONTRO;Initial Catalog=gerProjetos;User ID=sa; PWD=rd700@1"
+        Dim connectionString As String = "Data Source=10.1.1.14\SQLCONTRO;Initial Catalog=gerProjetos;User ID=sa; PWD=rd700@1"
         Return New SqlConnection(connectionString)
     End Function
 
     Public Shared Function gerManager_conn() As SqlConnection
-        Dim connectionString As String = "Data Source=WIN-DJITT2B93NO;Initial Catalog=gerManager;User ID=sa;Password=rd700@1"
+        Dim connectionString As String = "Data Source=10.1.2.225;Initial Catalog=gerManager;User ID=sa;Password=rd700@1"
         Return New SqlConnection(connectionString)
     End Function
 

@@ -9,6 +9,8 @@
 <%@ Register Src="~/Controles/wucListaLojasComCorporacao.ascx" TagPrefix="uc1" TagName="wucListaLojasComCorporacao" %>
 <%@ Register Src="~/Controles/wucAno.ascx" TagPrefix="uc1" TagName="wucAno" %>
 <%@ Register Src="~/Controles/wuciListaMesPeriodo.ascx" TagPrefix="uc1" TagName="wuciListaMesPeriodo" %>
+<%@ Register Src="~/Controles/wucListaSecao.ascx" TagPrefix="uc1" TagName="wucListaSecao" %>
+
 
 
 
@@ -32,6 +34,13 @@
         #divFilial {
             float:left;
             margin-left: 15px;
+           
+        }
+
+         #divSecao {
+            float:left;
+            margin-left: 15px;
+             margin-right: 15px;
         }
 
         #BotaoAtualizar {
@@ -105,11 +114,11 @@
         <uc1:wucListaLojasComCorporacao runat="server" ID="cboFilial" AutoPostBack ="false"  />
     </div>
 
-<div id="divBotaoAtualizar">
-        <dx:ASPxButton ID="btnAtualizar" runat="server" Text="Atualizar" AutoPostBack="False" Theme="Metropolis">
-            <ClientSideEvents Click="function(s, e) {cbPanelTeorico.PerformCallback();cbPanel.PerformCallback();}" />
-        </dx:ASPxButton>
+    <div id="divSecao">
+        <uc1:wucListaSecao runat="server" ID="cboSecao" />
     </div>
+
+
 
 
     <div id="ShowButton"  runat="server" >
@@ -153,7 +162,15 @@
                     <ClientSideEvents CheckedChanged="function(s, e) {	cbPanel.PerformCallback();}" />
                 </dx:ASPxCheckBox>
             </div>
+
+        
     </div>
+
+    <div id="divBotaoAtualizar">
+            <dx:ASPxButton ID="btnAtualizar" runat="server" Text="Atualizar" AutoPostBack="False" Theme="Metropolis">
+                <ClientSideEvents Click="function(s, e) {cbPanelTeorico.PerformCallback();cbPanel.PerformCallback();}" />
+            </dx:ASPxButton>
+        </div>
 
 
      <dx:ASPxCallbackPanel ID="cboPanelTeorico" runat="server" Width="100%" ClientInstanceName="cbPanelTeorico" Theme="Metropolis"  Images-LoadingPanel-AlternateText="Aguarde. Atualizando">
