@@ -28,6 +28,7 @@ Public Class Projeto
     Private vCodigoSuperHiper As Boolean
     Private vResetarSenha As Boolean
     Private vAtivo As Boolean
+    Private vIsAtacarejo As Boolean
 
     Public Departamento As String
 
@@ -140,6 +141,15 @@ Public Class Projeto
         End Get
         Set(ByVal value As Boolean)
             vIsRegional = value
+        End Set
+    End Property
+
+    Public Property IsAtacarejo() As Boolean
+        Get
+            IsAtacarejo = vIsAtacarejo
+        End Get
+        Set(ByVal value As Boolean)
+            vIsAtacarejo = value
         End Set
     End Property
 
@@ -384,6 +394,7 @@ Public Class Projeto
                 Isloja = reader5.GetBoolean(4)
                 IsRegional = reader5.GetBoolean(5)
                 CodigoSuperHiper = reader5.GetBoolean(6)
+                IsAtacarejo = reader5.GetBoolean(7)
             End While
 
         Catch ex As Exception
