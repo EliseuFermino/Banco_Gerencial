@@ -1,0 +1,128 @@
+﻿<%@ Master Language="VB" CodeFile="SiteCipla.master.vb" Inherits="MemberPages_SiteCipla" %>
+
+<%@ Register Assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+
+<!DOCTYPE html>
+
+<html>
+
+    <head runat="server">
+
+        <meta charset="utf-8" />       
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>CIPLA Condor Indústria Plástica Ltda. </title>
+
+            <link href="../css/Dashboard.css" rel="stylesheet" />            
+            <link href="../css/bootstrap.min.css" rel="stylesheet" />    
+            <script src="../js/bootstrap.min.js"></script>             
+            <link href="../css/ionicons.min.css" rel="stylesheet" />                  
+            <link href="../assets/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+         <link href="../css/myCSS.css" rel="stylesheet" />
+        <link href="../Content/Site.css" rel="stylesheet" />
+        
+
+        <asp:ContentPlaceHolder id="HeadContent" runat="server">
+        </asp:ContentPlaceHolder>
+
+
+    </head>
+
+    <body>
+        <form id="form1" runat="server" >
+            <%--<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>--%>
+            <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" ></ajaxToolkit:ToolkitScriptManager>
+            <header>
+               <div class="content-wrapper">
+                    <div class="float-left">
+                    <table >
+                        <tr>
+                            
+                            <td>
+                                <asp:Image ID="Image1" runat="server" Height="34px" 
+                                    ImageUrl="~/image/logo_cipla.png" Width="95px" TabIndex="906" />
+                               
+                            </td>
+
+                            <td >
+                                <asp:Label ID="lblTitle" runat="server" Text="" Font-Size="Medium" TabIndex="907"></asp:Label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>  <%--Logotipo e Titulo da Aplicação--%>
+
+                    <div class="float-right">
+                        <section id="login">
+                        <asp:LoginView ID="LoginView1" runat="server" ViewStateMode="Disabled">
+                            <AnonymousTemplate>
+                                <ul>
+                                    <li><a id="registerLink" runat="server" href="~/Account/Register.aspx">Register</a></li>
+                                    <li><a id="loginLink" runat="server" href="~/Account/Login.aspx">Log in</a></li>
+                                </ul>
+                            </AnonymousTemplate>
+                            <LoggedInTemplate>
+                                <p>
+                                    Bem-vindo, <asp:LoginName ID="LoginName1" runat="server" CssClass="username" /> !                                                                                      
+                                    <asp:HyperLink ID="A2" runat="server" CssClass="username" NavigateUrl="~/Account/ChangePassword.aspx">Alterar Senha</asp:HyperLink>                                    
+                                    <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" />
+                                </p>
+                            </LoggedInTemplate>
+                        </asp:LoginView>
+                    </section>          
+                   </div>  <%--Login--%>
+               </div>
+            </header>   <%--Cabeçalho da Página--%>
+
+            <nav>
+                <dx:ASPxMenu ID="ASPxMenu1" runat="server" Theme="Office2010Silver" BackColor="White" BorderBetweenItemAndSubMenu="HideAll" Font-Bold="False" Font-Names="Segoe UI" Font-Size="Small" ForeColor="#999999" SeparatorWidth="0px"  GutterWidth="500px" Visible="true">
+                    <Paddings Padding="0px" />
+                    <SeparatorPaddings Padding="0px" />
+                    <Border BorderColor="White" BorderStyle="None" BorderWidth="0px" />
+                </dx:ASPxMenu>               
+        </nav>  <%--Menu Principal--%>        
+            
+            <aside></aside> <%--Menu Vertical --%>                 
+
+            <div id="body">
+                <section class="content-wrapper clear-fix" >
+                    <asp:ContentPlaceHolder runat="server" ID="MainContent"   >                 
+                    </asp:ContentPlaceHolder>
+                </section>
+                
+            </div>  <%--Corpo da Página--%>
+
+            <footer>
+            <div class="content-wrapper">
+            <div class="float-left">
+                <p id="#999" tabindex="908">
+                    &copy;
+                    <%: DateAndTime.Now.Year%>- Condor Super Center Development
+
+                    
+                </p>
+                
+            </div>
+            <div class="float-right">
+                <ul id="social">                    
+                    <li><a href="http://twitter.com" class="twitter" tabindex="902">Twitter</a></li>&nbsp;&nbsp;&nbsp;&nbsp;                    
+              
+                                </ul>
+            </div>
+        </div>
+        </footer> <%-- Rodapé da Página--%>
+
+                <asp:SqlDataSource ID="AccessDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:LocalSqlServer %>" SelectCommand="Menu.uspMenuDoUsuario" SelectCommandType="StoredProcedure">
+                    <SelectParameters>
+                        <asp:SessionParameter Name="idUsuario" SessionField="sUSUARIO" Type="String" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+
+        </form>
+
+        
+
+    </body>
+
+</html>
