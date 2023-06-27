@@ -1,8 +1,12 @@
-﻿Imports System.IO
+﻿Imports System
+Imports System.IO
 Imports System.Drawing.Imaging
 Imports System.Data.SqlClient
 Imports System.Data
 Imports System.Drawing
+Imports DevExpress.XtraScheduler
+Imports DevExpress.Data.Filtering.Helpers
+Imports DevExpress.DataProcessing
 
 Partial Class MemberPages_CheckListCondor
     Inherits System.Web.UI.Page
@@ -22,10 +26,24 @@ Partial Class MemberPages_CheckListCondor
             Dim oVem As New VendaEmpresaMes
 
             vDepartamento = LCase(Trim(oProj.Buscar_Departamento_Usuario(Page.User.Identity.Name)))
-            vFilial = oProj.Buscar_Filial_Usuario(Page.User.Identity.Name)
-
             Session("sDEPARTAMENTO") = vDepartamento
-            Session("sFILIAL") = vFilial
+
+            If Session("sFILIAL") IsNot Nothing Then
+                If Session("sFILIAL").ToString() <> "" Then
+                    vFilial = Session("sFILIAL")
+                Else
+                    vFilial = oProj.Buscar_Filial_Usuario(Page.User.Identity.Name)
+                    Session("sFILIAL") = vFilial
+                End If
+            Else
+                vFilial = oProj.Buscar_Filial_Usuario(Page.User.Identity.Name)
+                Session("sFILIAL") = vFilial
+            End If
+
+            If Session("sFILIAL") > 100 Then
+                Session("sFILIAL_INTERNO") = selFilial.SelectedValue
+                Response.Redirect("CheckListGigante.aspx")
+            End If
 
             Call Define_Corporacao()
             Call Define_Filial()
@@ -39,7 +57,6 @@ Partial Class MemberPages_CheckListCondor
 
             Call BuscarChecklist()
             Call colorMenu()
-
 
         End If
     End Sub
@@ -503,7 +520,17 @@ Partial Class MemberPages_CheckListCondor
 
         End Select
 
-        ' Session("sFILIAL") = selFilial.SelectedItem.Value
+        If Session("sFILIAL") IsNot Nothing Then
+            For i As Integer = 0 To selFilial.Items.Count
+                If selFilial.Items(i).Value = Session("sFILIAL") Then
+                    selFilial.SelectedValue = Session("sFILIAL")
+                    selFilial.SelectedIndex = i
+                    Exit For
+                End If
+            Next
+        End If
+
+        'selFilial.SelectedItem.Value = Session("sFILIAL")
         Session("sCORPORACAO") = selTipo.SelectedItem.Value
     End Sub
 
@@ -574,6 +601,7 @@ Partial Class MemberPages_CheckListCondor
     End Sub
 
     Private Sub BuscarChecklist()
+        On Error Resume Next
         Dim arrayTotal(20) As Integer
         Dim constr As String = ConfigurationManager.ConnectionStrings("gerCheckListConnectionString").ConnectionString
         Using con As New SqlConnection(constr)
@@ -1202,6 +1230,12 @@ Partial Class MemberPages_CheckListCondor
     End Sub
 
     Protected Sub btnAtualizar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnAtualizar.Click
+
+        If selFilial.SelectedValue > 100 Then
+            Session("sFILIAL") = selFilial.SelectedValue
+            Response.Redirect("CheckListGigante.aspx")
+        End If
+
         Call LimparTextBox()
         Call PadraoInicial()
         Call HabilitarGerarRelatorio()
@@ -1262,6 +1296,11 @@ Partial Class MemberPages_CheckListCondor
         Catch ex As Exception
 
         End Try
+
+        If selFilial.SelectedValue > 100 Then
+            Session("sFILIAL") = selFilial.SelectedValue
+            Response.Redirect("CheckListGigante.aspx")
+        End If
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "maxData();", True)
 
@@ -3059,10 +3098,10 @@ Partial Class MemberPages_CheckListCondor
     Private Sub HabilitarGerarRelatorio()
 
         Select Case Me.selFilial.SelectedValue
-            Case 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 60, 61
-                Me.btnPDF.Enabled = True
-            Case Else
+            Case 1, 2, 35, 12, 59
                 Me.btnPDF.Enabled = False
+            Case Else
+                Me.btnPDF.Enabled = True
         End Select
     End Sub
 
@@ -3074,67 +3113,67 @@ End Class
 #Region "Codigo Comentado"
 
 'If oDa.ExecuteStoredProcedure_Scalar("uspBuscarStatusLoja_SuperHiper", Conexao.gerCheckList, "@idFilial", selFilial.SelectedValue) = 207 Then
-        '    btnMenu_4.Enabled = False
+'    btnMenu_4.Enabled = False
 
-        '    btnMenu_5.Enabled = False
+'    btnMenu_5.Enabled = False
 
-        '    EnabledControls(rnd7_1_Sim, rnd7_1_Nao, rnd7_1_NA, txt7_1, imgFoto7_1, btnSalvarFoto7_1, False)
-        '    EnabledControls(rnd7_2_Sim, rnd7_2_Nao, rnd7_2_NA, txt7_2, imgFoto7_2, btnSalvarFoto7_2, False)
-        '    EnabledControls(rnd7_3_Sim, rnd7_3_Nao, rnd7_3_NA, txt7_3, imgFoto7_3, btnSalvarFoto7_3, False)
-        '    ' EnabledControls(rnd2_24_Sim, rnd2_24_Nao, rnd2_24_NA, txt2_24, imgFoto2_24, btnSalvarFoto2_24, False)
+'    EnabledControls(rnd7_1_Sim, rnd7_1_Nao, rnd7_1_NA, txt7_1, imgFoto7_1, btnSalvarFoto7_1, False)
+'    EnabledControls(rnd7_2_Sim, rnd7_2_Nao, rnd7_2_NA, txt7_2, imgFoto7_2, btnSalvarFoto7_2, False)
+'    EnabledControls(rnd7_3_Sim, rnd7_3_Nao, rnd7_3_NA, txt7_3, imgFoto7_3, btnSalvarFoto7_3, False)
+'    ' EnabledControls(rnd2_24_Sim, rnd2_24_Nao, rnd2_24_NA, txt2_24, imgFoto2_24, btnSalvarFoto2_24, False)
 
-        'Else
-        '    btnMenu_4.Enabled = True
+'Else
+'    btnMenu_4.Enabled = True
 
-        '    btnMenu_5.Enabled = True
+'    btnMenu_5.Enabled = True
 
-        '    EnabledControls(rnd7_1_Sim, rnd7_1_Nao, rnd7_1_NA, txt7_1, imgFoto7_1, btnSalvarFoto7_1, True)
-        '    EnabledControls(rnd7_2_Sim, rnd7_2_Nao, rnd7_2_NA, txt7_2, imgFoto7_2, btnSalvarFoto7_2, True)
-        '    EnabledControls(rnd7_3_Sim, rnd7_3_Nao, rnd7_3_NA, txt7_3, imgFoto7_3, btnSalvarFoto7_3, True)
-        '    'EnabledControls(rnd2_24_Sim, rnd2_24_Nao, rnd2_24_NA, txt2_24, imgFoto2_24, btnSalvarFoto2_24, True)
+'    EnabledControls(rnd7_1_Sim, rnd7_1_Nao, rnd7_1_NA, txt7_1, imgFoto7_1, btnSalvarFoto7_1, True)
+'    EnabledControls(rnd7_2_Sim, rnd7_2_Nao, rnd7_2_NA, txt7_2, imgFoto7_2, btnSalvarFoto7_2, True)
+'    EnabledControls(rnd7_3_Sim, rnd7_3_Nao, rnd7_3_NA, txt7_3, imgFoto7_3, btnSalvarFoto7_3, True)
+'    'EnabledControls(rnd2_24_Sim, rnd2_24_Nao, rnd2_24_NA, txt2_24, imgFoto2_24, btnSalvarFoto2_24, True)
 
-        'End If
+'End If
 
-        'If selFilial.SelectedValue = 8 Or selFilial.SelectedValue = 13 Or selFilial.SelectedValue = 15 Or selFilial.SelectedValue = 17 Or selFilial.SelectedValue = 28 Or selFilial.SelectedValue = 34 Then
-        '    EnabledControls(rnd7_6_Sim, rnd7_6_Nao, rnd7_6_NA, txt7_6, imgFoto7_6, btnSalvarFoto7_6, False)
-        'Else
-        '    EnabledControls(rnd7_6_Sim, rnd7_6_Nao, rnd7_6_NA, txt7_6, imgFoto7_6, btnSalvarFoto7_6, True)
-        'End If
+'If selFilial.SelectedValue = 8 Or selFilial.SelectedValue = 13 Or selFilial.SelectedValue = 15 Or selFilial.SelectedValue = 17 Or selFilial.SelectedValue = 28 Or selFilial.SelectedValue = 34 Then
+'    EnabledControls(rnd7_6_Sim, rnd7_6_Nao, rnd7_6_NA, txt7_6, imgFoto7_6, btnSalvarFoto7_6, False)
+'Else
+'    EnabledControls(rnd7_6_Sim, rnd7_6_Nao, rnd7_6_NA, txt7_6, imgFoto7_6, btnSalvarFoto7_6, True)
+'End If
 
-        'If selFilial.SelectedValue = 7 Then
-        '    EnabledControls(rnd7_1_Sim, rnd7_1_Nao, rnd7_1_NA, txt7_1, imgFoto7_1, btnSalvarFoto7_1, False)
-        '    EnabledControls(rnd7_2_Sim, rnd7_2_Nao, rnd7_2_NA, txt7_2, imgFoto7_2, btnSalvarFoto7_2, False)
-        '    EnabledControls(rnd7_3_Sim, rnd7_3_Nao, rnd7_3_NA, txt7_3, imgFoto7_3, btnSalvarFoto7_3, False)
-        '    'EnabledControls(rnd7_9_Sim, rnd7_9_Nao, rnd7_9_NA, txt7_9, imgFoto7_9, btnSalvarFoto7_9, False)
-        'End If
+'If selFilial.SelectedValue = 7 Then
+'    EnabledControls(rnd7_1_Sim, rnd7_1_Nao, rnd7_1_NA, txt7_1, imgFoto7_1, btnSalvarFoto7_1, False)
+'    EnabledControls(rnd7_2_Sim, rnd7_2_Nao, rnd7_2_NA, txt7_2, imgFoto7_2, btnSalvarFoto7_2, False)
+'    EnabledControls(rnd7_3_Sim, rnd7_3_Nao, rnd7_3_NA, txt7_3, imgFoto7_3, btnSalvarFoto7_3, False)
+'    'EnabledControls(rnd7_9_Sim, rnd7_9_Nao, rnd7_9_NA, txt7_9, imgFoto7_9, btnSalvarFoto7_9, False)
+'End If
 
-        ''Dim filial() = (5, 8, 11, 17, 21, 22, 23, 27, 29, 31, 32, 33, 37, 38, 43, 50, 91)
+''Dim filial() = (5, 8, 11, 17, 21, 22, 23, 27, 29, 31, 32, 33, 37, 38, 43, 50, 91)
 
-        'Select Case (selFilial.SelectedValue)
-        '    Case 5, 8, 11, 17, 21, 22, 23, 27, 29, 31, 32, 33, 37, 38, 43, 50, 91
-        '        btnMenu_19.Enabled = True
-        '    Case Else
-        '        btnMenu_19.Enabled = False
-        'End Select
+'Select Case (selFilial.SelectedValue)
+'    Case 5, 8, 11, 17, 21, 22, 23, 27, 29, 31, 32, 33, 37, 38, 43, 50, 91
+'        btnMenu_19.Enabled = True
+'    Case Else
+'        btnMenu_19.Enabled = False
+'End Select
 
 
-        'If selFilial.SelectedValue = 8 Then
-        '    EnabledControls(rnd4_2_Sim, rnd4_2_Nao, rnd4_2_NA, txt4_2, imgFoto4_2, btnSalvarFoto4_2, False)
-        'Else
-        '    EnabledControls(rnd4_2_Sim, rnd4_2_Nao, rnd4_2_NA, txt4_2, imgFoto4_2, btnSalvarFoto4_2, True)
-        'End If
+'If selFilial.SelectedValue = 8 Then
+'    EnabledControls(rnd4_2_Sim, rnd4_2_Nao, rnd4_2_NA, txt4_2, imgFoto4_2, btnSalvarFoto4_2, False)
+'Else
+'    EnabledControls(rnd4_2_Sim, rnd4_2_Nao, rnd4_2_NA, txt4_2, imgFoto4_2, btnSalvarFoto4_2, True)
+'End If
 
-        'If selFilial.SelectedValue = 28 Then
-        '    EnabledControls(rnd7_8_Sim, rnd7_8_Nao, rnd7_8_NA, txt7_8, imgFoto7_8, btnSalvarFoto7_8, False)
-        'Else
-        '    EnabledControls(rnd7_8_Sim, rnd7_8_Nao, rnd7_8_NA, txt7_8, imgFoto7_8, btnSalvarFoto7_8, True)
-        'End If
+'If selFilial.SelectedValue = 28 Then
+'    EnabledControls(rnd7_8_Sim, rnd7_8_Nao, rnd7_8_NA, txt7_8, imgFoto7_8, btnSalvarFoto7_8, False)
+'Else
+'    EnabledControls(rnd7_8_Sim, rnd7_8_Nao, rnd7_8_NA, txt7_8, imgFoto7_8, btnSalvarFoto7_8, True)
+'End If
 
-        'If selFilial.SelectedValue = 49 Then
-        '    EnabledControls(rnd4_3_Sim, rnd4_3_Nao, rnd4_3_NA, txt4_3, imgFoto4_3, btnSalvarFoto4_3, False)
-        'Else
-        '    EnabledControls(rnd4_3_Sim, rnd4_3_Nao, rnd4_3_NA, txt4_3, imgFoto4_3, btnSalvarFoto4_3, True)
-        'End If
+'If selFilial.SelectedValue = 49 Then
+'    EnabledControls(rnd4_3_Sim, rnd4_3_Nao, rnd4_3_NA, txt4_3, imgFoto4_3, btnSalvarFoto4_3, False)
+'Else
+'    EnabledControls(rnd4_3_Sim, rnd4_3_Nao, rnd4_3_NA, txt4_3, imgFoto4_3, btnSalvarFoto4_3, True)
+'End If
 
 'Protected Function Doc2SQLServer(ByVal title As String, ByVal Content As Byte(), ByVal Length As Integer, _
 '                                 ByVal strType As String, ByVal iDia As Date, ByVal iFilial As Byte, _
