@@ -87,6 +87,7 @@
                                             <dx:ListEditItem Text="Supervisor_Postos" Value="Supervisor_Postos" /> 
                                             <dx:ListEditItem Text="Gestor_Assistente" Value="Gestor_Assistente" /> 
                                             <dx:ListEditItem Text="GC" Value="GC" /> 
+                                            <dx:ListEditItem Text="CIPLA" Value="CIPLA" /> 
                                         </Items>
                                         <ValidationSettings ErrorDisplayMode="ImageWithText" ErrorTextPosition="Bottom"></ValidationSettings>
                                     </dx:ASPxComboBox>
