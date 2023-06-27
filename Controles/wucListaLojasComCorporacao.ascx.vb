@@ -276,6 +276,9 @@ Partial Class wucListaLojasComCorporacao
             Case 9  ' Delivery
                 Preenche_cboFilial("SELECT idFilial AS Filial ,FilialDesc AS nomeFilial, icone FROM DW.dbo.DimFilial WHERE IsDelivery = 1")
                 cboFilial.SelectedIndex = 0
+            Case 11  ' Indústrias
+                Preenche_cboFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliais WHERE IsIndustria=1")
+                cboFilial.SelectedIndex = 0
             Case 199    'Corporação
                 Select Case Session("sDEPARTAMENTO")
 
