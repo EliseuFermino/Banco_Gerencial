@@ -50,14 +50,21 @@ Partial Class Default2
             End If
         End If
 
-        
+
         'userName = LCase(Login1.UserName)
 
         Select Case vDepartamento
+            Case "cipla"
+                Response.Redirect("~/MemberPages/Cipla/LancamentoVendas.aspx")
             Case "loja"
                 Response.Redirect("~/MemberPages/menuPrincipal_GerenciaLoja.aspx")
             Case "supervisor"
-                Response.Redirect("~/MemberPages/menuPrincipal.aspx")
+                If IsMobile() = True Then
+                    Response.Redirect("~/MemberPages/Visao_Mobile/VisaoSimplificada.aspx")
+                Else
+                    Response.Redirect("~/MemberPages/menuPrincipal.aspx")
+                End If
+
             Case "seguranca"
                 Response.Redirect("~/MemberPages/menuPrincipal_Seguranca.aspx")
             Case "perdas", "suprimentos"
@@ -71,15 +78,30 @@ Partial Class Default2
             Case "perdas_supervisor"
                 Response.Redirect("~/MemberPages/Checklist/Dashboard.aspx")
             Case "controladoria"
-                'Response.Redirect("~/MemberPages/menuPrincipal_Controladoria.aspx")
-                Response.Redirect("~/MemberPages/Default_Direction.aspx")
+                If IsMobile() = True Then
+                    Response.Redirect("~/MemberPages/Visao_Mobile/VisaoSimplificada.aspx")
+                Else
+                    Response.Redirect("~/MemberPages/menuPrincipal_Controladoria.aspx")
+                End If
             Case "delivery"
                 Response.Redirect("~/MemberPages/menuPrincipal_Prevencao.aspx")
+            Case "presidência"
+                If IsMobile() = True Then
+                    Response.Redirect("~/MemberPages/Visao_Mobile/VisaoSimplificada.aspx")
+                Else
+                    Select Case userName
+                        Case "ricardo", "ricardo_pre" '
+                            Response.Redirect("~/MemberPages/menuPrincipal_Ricardo.aspx")
+                        Case "joanir"
+                            Response.Redirect("~/MemberPages/Gerencial/AnaliseHoraJoanir.aspx")
+                        Case Else
+                            Response.Redirect("~/MemberPages/menuPrincipal_Ricardo.aspx")
+                    End Select
+                End If
+
             Case Else
                 Select Case userName
-                    Case "joanir", "presidência"
-                        Response.Redirect("~/MemberPages/Gerencial/AnaliseHoraJoanir.aspx")
-                    Case "joanir", "adailton", "presidência", "709330", "filipe", "andreia", "ricardo", "121169", "aliceu", "vladimir", "wanclei", "bendixen", "jesuli", "eliseu"
+                    Case "adailton", "709330", "121169", "aliceu", "vladimir", "wanclei", "bendixen"
                         Response.Redirect("~/MemberPages/Default_Direction.aspx")
                     Case "gabrieli"
                         Response.Redirect("~/MemberPages/Checklist/DashboardHSA.aspx")
@@ -112,4 +134,19 @@ Partial Class Default2
         Dim oDb As New clDataDb
         oDb.ExecuteStoredProcedure("uspUser_UnlockedUser", Conexao.gerCont_str)
     End Sub
+
+    Public Function IsMobile() As Boolean
+        Dim request As HttpRequest = HttpContext.Current.Request
+        Dim userAgent As String = request.UserAgent.ToLower()
+        Dim mobileKeywords() As String = {"mobile", "android", "iphone", "ipod", "blackberry", "windows phone"}
+
+        For Each keyword As String In mobileKeywords
+            If userAgent.Contains(keyword) Then
+                Return True
+            End If
+        Next
+
+        Return False
+    End Function
+
 End Class
