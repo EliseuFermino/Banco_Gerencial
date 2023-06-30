@@ -145,7 +145,7 @@ Partial Class MemberPages_Vendas_RankingMes
         Dim NomeColuna As String = e.GetValue("idFilial")
 
         Select Case NomeColuna
-            Case "207", "208", "251", "250", "6027", "6037"
+            Case "207", "208", "251", "250", "6027", "6037", "799"
                 e.Row.BackColor = System.Drawing.Color.LightGray
                 e.Row.Font.Bold = True
             Case "240"
