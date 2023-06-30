@@ -1161,7 +1161,7 @@ Partial Class MemberPages_CheckListGigante
     Protected Sub btnGrupo1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo1.Click
         Session("qtdRespostas") = 0
         Dim userName As String
-        Dim varIssue(19) As Byte
+        Dim varIssue(18) As Byte
         userName = User.Identity.Name
 
         varIssue(1) = DefinirPontuacao(rnd1_1_Sim, rnd1_1_Nao, rnd1_1_NA)
@@ -1206,7 +1206,7 @@ Partial Class MemberPages_CheckListGigante
         'ScriptManager.RegisterStartupScript(Me, Page.GetType, "Script", "alertErro();", True)
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
-        If Session("qtdRespostas").ToString() = "19" Then btnMenu_1.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "18" Then btnMenu_1.BackColor = Color.FromArgb(120, 167, 149)
 
         btnVoltar_Click(sender, e)
     End Sub
@@ -1214,7 +1214,7 @@ Partial Class MemberPages_CheckListGigante
     Protected Sub btnGrupo2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo2.Click
         Session("qtdRespostas") = 0
         Dim userName As String
-        Dim varIssue(12) As Byte
+        Dim varIssue(3) As Byte
 
         userName = User.Identity.Name
 
@@ -1230,13 +1230,13 @@ Partial Class MemberPages_CheckListGigante
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        If Session("qtdRespostas").ToString() = "12" Then btnMenu_2.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "3" Then btnMenu_2.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
     Protected Sub btnGrupo3_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo3.Click
         Session("qtdRespostas") = 0
-        Dim varIssue(9) As Byte
+        Dim varIssue(8) As Byte
         Dim userName As String
 
         userName = User.Identity.Name
@@ -1263,7 +1263,7 @@ Partial Class MemberPages_CheckListGigante
         'Me.panTitle3.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        If Session("qtdRespostas").ToString() = "9" Then btnMenu_3.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "8" Then btnMenu_3.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
@@ -1271,7 +1271,7 @@ Partial Class MemberPages_CheckListGigante
         Session("qtdRespostas") = 0
 
         Dim userName As String
-        Dim varIssue(7) As Byte
+        Dim varIssue(13) As Byte
 
         userName = User.Identity.Name
 
@@ -1307,7 +1307,7 @@ Partial Class MemberPages_CheckListGigante
         'Me.panTitle4.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        If Session("qtdRespostas").ToString() = "7" Then btnMenu_4.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "13" Then btnMenu_4.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
@@ -1315,7 +1315,7 @@ Partial Class MemberPages_CheckListGigante
 
         Session("qtdRespostas") = 0
         Dim userName As String
-        Dim varIssue(10) As Byte
+        Dim varIssue(7) As Byte
 
         userName = User.Identity.Name
 
@@ -1341,7 +1341,7 @@ Partial Class MemberPages_CheckListGigante
         'Me.panTitle5.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        If Session("qtdRespostas").ToString() = "10" Then btnMenu_5.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "7" Then btnMenu_5.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
@@ -1349,7 +1349,7 @@ Partial Class MemberPages_CheckListGigante
 
         Session("qtdRespostas") = 0
         Dim userName As String
-        Dim varIssue(9) As Byte
+        Dim varIssue(16) As Byte
 
         userName = User.Identity.Name
 
@@ -1391,7 +1391,7 @@ Partial Class MemberPages_CheckListGigante
         'Me.panTitle6.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        If Session("qtdRespostas").ToString() = "9" Then btnMenu_6.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "16" Then btnMenu_6.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
@@ -1400,7 +1400,7 @@ Partial Class MemberPages_CheckListGigante
         ' Salvar os itens do 3.10 ao 3.17 que esta no Grupo 3 - Armazenamento(Câmaras) - Fiambreria e Laticinios - Grupo 2 - (8 perguntas, 10 a 17)
         Session("qtdRespostas") = 0
         Dim userName As String
-        Dim varIssue(10) As Byte
+        Dim varIssue(9) As Byte
 
         userName = User.Identity.Name
 
@@ -1429,7 +1429,7 @@ Partial Class MemberPages_CheckListGigante
         'Me.panTitle7.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        If Session("qtdRespostas").ToString() = "10" Then btnMenu_7.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "9" Then btnMenu_7.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
@@ -1477,7 +1477,7 @@ Partial Class MemberPages_CheckListGigante
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        If Session("qtdRespostas").ToString() = "24" Then btnMenu_8.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "15" Then btnMenu_8.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
@@ -1516,7 +1516,7 @@ Partial Class MemberPages_CheckListGigante
         'Me.panTitle9.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        If Session("qtdRespostas").ToString() = "21" Then btnMenu_9.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "11" Then btnMenu_9.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
@@ -1572,7 +1572,7 @@ Partial Class MemberPages_CheckListGigante
         'Me.panTitle11.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        If Session("qtdRespostas").ToString() = "21" Then btnMenu_11.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "3" Then btnMenu_11.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
@@ -1606,7 +1606,7 @@ Partial Class MemberPages_CheckListGigante
         'Me.panTitle12.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        If Session("qtdRespostas").ToString() = "18" Then btnMenu_12.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "9" Then btnMenu_12.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
@@ -1648,7 +1648,7 @@ Partial Class MemberPages_CheckListGigante
         'Me.panTitle13.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        If Session("qtdRespostas").ToString() = "10" Then btnMenu_13.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "13" Then btnMenu_13.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
@@ -1684,7 +1684,7 @@ Partial Class MemberPages_CheckListGigante
         'Me.panTitle14.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        If Session("qtdRespostas").ToString() = "8" Then btnMenu_14.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "10" Then btnMenu_14.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
@@ -1711,7 +1711,7 @@ Partial Class MemberPages_CheckListGigante
         'Me.panTitle15.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        If Session("qtdRespostas").ToString() = "3" Then btnMenu_15.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "5" Then btnMenu_15.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
@@ -1751,7 +1751,7 @@ Partial Class MemberPages_CheckListGigante
         'Me.panTitle16.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        If Session("qtdRespostas").ToString() = "7" Then btnMenu_16.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "12" Then btnMenu_16.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
@@ -1791,7 +1791,7 @@ Partial Class MemberPages_CheckListGigante
         'Me.panTitle17.CssClass = "pnl_Verde"
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        If Session("qtdRespostas").ToString() = "5" Then btnMenu_17.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "12" Then btnMenu_17.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
@@ -1823,7 +1823,7 @@ Partial Class MemberPages_CheckListGigante
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        If Session("qtdRespostas").ToString() = "8" Then btnMenu_18.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "7" Then btnMenu_18.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
@@ -1850,7 +1850,7 @@ Partial Class MemberPages_CheckListGigante
 
         ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
 
-        If Session("qtdRespostas").ToString() = "7" Then btnMenu_19.BackColor = Color.FromArgb(120, 167, 149)
+        If Session("qtdRespostas").ToString() = "5" Then btnMenu_19.BackColor = Color.FromArgb(120, 167, 149)
         btnVoltar_Click(sender, e)
     End Sub
 
