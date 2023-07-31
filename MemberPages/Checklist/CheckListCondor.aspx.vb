@@ -14,8 +14,11 @@ Partial Class MemberPages_CheckListCondor
     Dim oCh As New Check
     Dim oDa As New clDataDb
     Private vFilial As Int16
+    Private vIsLoja As Boolean
     Private vDepartamento As String
     Dim oProj As New Projeto
+    Dim selects As New preencheSelects
+    Dim oVem As New VendaEmpresaMes
     Public Event ListTipoChanged(ByVal sender As Object, ByVal e As EventArgs)
 
 
@@ -23,30 +26,36 @@ Partial Class MemberPages_CheckListCondor
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
-            Dim oVem As New VendaEmpresaMes
-
             vDepartamento = LCase(Trim(oProj.Buscar_Departamento_Usuario(Page.User.Identity.Name)))
             Session("sDEPARTAMENTO") = vDepartamento
+            vIsLoja = oProj.Isloja
 
-            If Session("sFILIAL") IsNot Nothing Then
-                If Session("sFILIAL").ToString() <> "" Then
-                    vFilial = Session("sFILIAL")
+            If vIsLoja Then
+                vFilial = oProj.Buscar_Filial_Usuario(Page.User.Identity.Name)
+                Session("sFILIAL") = vFilial
+            Else
+                If Session("sFILIAL") IsNot Nothing Then
+                    If Session("sFILIAL").ToString() <> "" Then
+                        vFilial = Session("sFILIAL")
+                    Else
+                        vFilial = oProj.Buscar_Filial_Usuario(Page.User.Identity.Name)
+                        Session("sFILIAL") = vFilial
+                    End If
                 Else
                     vFilial = oProj.Buscar_Filial_Usuario(Page.User.Identity.Name)
                     Session("sFILIAL") = vFilial
                 End If
-            Else
-                vFilial = oProj.Buscar_Filial_Usuario(Page.User.Identity.Name)
-                Session("sFILIAL") = vFilial
+
             End If
 
             If Session("sFILIAL") > 100 Then
                 Session("sFILIAL_INTERNO") = selFilial.SelectedValue
                 Response.Redirect("CheckListGigante.aspx")
             End If
+            'Call Define_Corporacao()
+            'Call Define_Filial()
 
-            Call Define_Corporacao()
-            Call Define_Filial()
+            Call carregaSelects()
 
             oVem.AtualizarEstatisticaPrograma(66, User.Identity.Name)
 
@@ -400,200 +409,26 @@ Partial Class MemberPages_CheckListCondor
         Return DefinirPontuacao
     End Function
 
-    Private Sub Define_Corporacao()
-        Select Case Session("sDEPARTAMENTO")
-            Case "gestor_comercial", "comercial"
-                Preenche_selTipo("SELECT idUnidade ,descUnidade FROM gerCadastros.Cad.tblUnidadeLista WHERE idUnidade IN (3,8,9,199)")
-            Case "postos"
-                Preenche_selTipo("SELECT idUnidade ,descUnidade FROM gerCadastros.Cad.tblUnidadeLista WHERE idUnidade = 5")
-            Case "loja"
-                Preenche_selTipo("SELECT idUnidade ,descUnidade FROM gerCadastros.Cad.tblUnidadeLista WHERE idUnidade IN (3,9)")
-            Case "suprimentos"
-                Preenche_selTipo("SELECT idUnidade ,descUnidade FROM gerCadastros.Cad.tblUnidadeLista")
-                'cboCorporacao.Enabled = False
-            Case Else
-                Preenche_selTipo("SELECT idUnidade ,descUnidade FROM gerCadastros.Cad.tblUnidadeLista")
-        End Select
+    Private Sub carregaSelects()
 
-    End Sub
-
-    Private Sub Define_Filial()
-        On Error Resume Next
-        Select Case Me.selTipo.SelectedValue
-            Case 3  ' Lojas
-                Select Case Session("sDEPARTAMENTO")
-
-                    Case "supervisor"
-                        If Session("sUSUARIO") = "bendixen" Then   'Supervisor Norte
-                            Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1006 ORDER BY nomeFilial")
-                            selFilial.SelectedIndex = 0
-                        ElseIf Session("sUSUARIO") = "352100" Then  ' Supervisor Edison
-                            Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1005 ORDER BY nomeFilial")
-                            selFilial.SelectedIndex = 0
-                        ElseIf Session("sUSUARIO") = "1075390" Then ' Claudinei Fitz
-                            Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1004 ORDER BY nomeFilial")
-                            selFilial.SelectedIndex = 0
-                        ElseIf Session("sUSUARIO") = "68977" Then   ' João Carlos
-                            Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1014 ORDER BY nomeFilial")
-                            selFilial.SelectedIndex = 0
-                        ElseIf Session("sUSUARIO") = "100400" Then   ' João Carlos
-                            Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1015 ORDER BY nomeFilial")
-                            selFilial.SelectedIndex = 0
-                        ElseIf Session("sUSUARIO") = "388690" Then   ' Samoel
-                            Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1016 ORDER BY nomeFilial")
-                            selFilial.SelectedIndex = 0
-                        ElseIf Session("sUSUARIO") = "774" Then   ' Usuario Supervisor (Esta setado para Atacarejo)
-                            Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1016 ORDER BY nomeFilial")
-                            selFilial.SelectedIndex = 0
-                        ElseIf Session("sUSUARIO") = "supervisor" Then
-                            Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1015 ORDER BY nomeFilial")
-                            selFilial.SelectedIndex = 0
-                        ElseIf Session("sUSUARIO") = "898890" Then  ' Rosineli - Lojas do Norte
-                            Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegiao IN (203,217) ORDER BY nomeFilial")
-                            selTipo.Visible = False
-                            selFilial.SelectedIndex = 0
-
-
-                        End If
-                    Case "supervisor_trainee"
-                        Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1015 ORDER BY nomeFilial")
-                        selFilial.SelectedIndex = 0
-                    Case "gerente_cd"
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE Filial IN (1,12,16)")
-                        selFilial.SelectedValue = 1
-                    Case "rh_folha"
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE Filial IN (100)")
-                        selFilial.SelectedValue = 100
-                    Case "Entreposto"
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE Filial = 2")
-                        selFilial.SelectedValue = 2
-                    Case "presidência", "comercial", "comercial_perdas", "gestor_comercial", "gerente_comercial", "gestor_assistente"
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE IsLoja=1")
-                        selFilial.SelectedValue = 3
-                    Case "controladoria", "administração", "perdas_supervisor", "seguranca_supervisor", "projetos_perdas", "suprimentos", "gerente_rh"
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE idLojasCDs=1 OR IsAtacarejo=1")
-                        selFilial.SelectedValue = 3
-
-                    Case "gerente cd"
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE Filial IN (1,12,16)")
-                        selFilial.SelectedIndex = 0
-                    Case "diretor", "diretor_informatica", "diretor_marketing", "contabilidade", "gerente_contabilidade", "gerente_financeiro", "trade marketing"
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE idLojasCDs = 1")
-                        selFilial.SelectedIndex = 0
-                    Case "marketing", "marketing bi"
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE  idLojasCDs = 1")
-                        selFilial.SelectedIndex = 0
-                    Case "gerente hsa", "hsa"
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE  idLojasCDs = 1")
-                        selFilial.SelectedIndex = 0
-                    Case Else
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE Filial=" & vFilial & "")
-                        selFilial.SelectedIndex = 0
-                End Select
-
-            Case 4  ' Regionais
-                Preenche_selFilial("SELECT CodRegional As Filial ,Descricao AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliais_Regional")
-                selFilial.SelectedIndex = 0
-            Case 5  ' Posto
-                Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliais WHERE IsPosto=1")
-                selFilial.SelectedIndex = 2
-            Case 6  ' Gestor
-            Case 7  ' Comprador
-            Case 8  ' Atacarejo
-                Preenche_selFilial("SELECT idFilial AS Filial ,nomeFilial, icone FROM DW.dbo.DimFilial WHERE IsAtacarejo = 1 OR idFilial = 601 ORDER BY idFilial")
-                selFilial.SelectedIndex = 0
-            Case 9  ' Delivery
-                Preenche_selFilial("SELECT idFilial AS Filial ,FilialDesc AS nomeFilial, icone FROM DW.dbo.DimFilial WHERE IsDelivery = 1")
-                selFilial.SelectedIndex = 0
-            Case 199    'Corporação
-                Select Case Session("sDEPARTAMENTO")
-
-                    Case "gestor_comercial", "comercial"
-                        Preenche_selFilial("SELECT Filial, Descricao AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE Filial IN (99,98,699) ORDER BY nomeFilial")
-                        selFilial.SelectedIndex = 0
-                        'Session("sFILIAL") = selFilial.SelectedValue
-                    Case Else
-                        Preenche_selFilial("SELECT Filial, Descricao AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE Filial IN (99,198,199,98,699) ORDER BY nomeFilial")
-                        selFilial.SelectedIndex = 0
-                        'Session("sFILIAL") = selFilial.SelectedValue
-                End Select
-
-        End Select
-
-        If Session("sFILIAL") IsNot Nothing Then
-            For i As Integer = 0 To selFilial.Items.Count
-                If selFilial.Items(i).Value = Session("sFILIAL") Then
-                    selFilial.SelectedValue = Session("sFILIAL")
-                    selFilial.SelectedIndex = i
-                    Exit For
-                End If
-            Next
-        End If
-
-        'selFilial.SelectedItem.Value = Session("sFILIAL")
-        Session("sCORPORACAO") = selTipo.SelectedItem.Value
-    End Sub
-
-    Public Sub Preenche_selTipo(ByVal iStr As String)
-        On Error Resume Next
-
-        Dim selectSQL As String = iStr
-        Dim con As New SqlConnection(Conexao.gerCadastros_str)
-
-        Dim cmd As New SqlCommand(selectSQL, con)
-
-        ' Open the connection
-        con.Open()
-
-        ' Define the binding
-        selTipo.DataSource = cmd.ExecuteReader()
-        selTipo.DataTextField = "descUnidade"
-        selTipo.DataValueField = "idUnidade"
-
-        ' Activate the binding.
-        selTipo.DataBind()
-
-        con.Close()
-
-        selTipo.SelectedIndex = 0
+        selects.Define_Corporacao(Session("sDEPARTAMENTO"), selTipo)
         Session("sCORPORACAO") = selTipo.SelectedItem.Value
 
-    End Sub
-
-    Private Sub Preenche_selFilial(ByVal iStr As String)
-        Dim selectSQL As String = iStr
-        Dim con As New SqlConnection(Conexao.gerCadastros_str)
-        Dim cmd As New SqlCommand(selectSQL, con)
-
-        ' Open the connection
-        con.Open()
-
-        Try
-            ' Define the binding
-            selFilial.DataSource = cmd.ExecuteReader()
-            selFilial.DataTextField = "nomeFilial"
-            selFilial.DataValueField = "Filial"
-
-            ' Activate the binding.
-            selFilial.DataBind()
-
-            con.Close()
-
-        Catch ex As Exception
-            'lblError.Text = iStr
-        Finally
-            con.Close()
-        End Try
+        selects.Define_Filial(selTipo.SelectedItem.Value, Session("sDEPARTAMENTO"), User.Identity.Name, Session("sFILIAL"), selFilial)
 
     End Sub
 
     Protected Sub selTipo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles selTipo.SelectedIndexChanged
 
-        If Session("sDEPARTAMENTO") <> "loja" Then
-            Define_Filial()
-            RaiseEvent ListTipoChanged(sender, e)
-        End If
-        HabilitarGerarRelatorio()
+        'If Session("sDEPARTAMENTO") <> "loja" Then
+        'Define_Filial()
+        'RaiseEvent ListTipoChanged(sender, e)
+        ''End If
+        'HabilitarGerarRelatorio()
+
+        Session("sCORPORACAO") = selTipo.SelectedItem.Value
+        selects.Define_Filial(selTipo.SelectedItem.Value, Session("sDEPARTAMENTO"), User.Identity.Name, Session("sFILIAL"), selFilial)
+
     End Sub
 
     Protected Sub selFilial_SelectedIndexChanged(sender As Object, e As EventArgs)
@@ -2075,7 +1910,7 @@ Partial Class MemberPages_CheckListCondor
     Protected Sub btnGrupo20_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGrupo20.Click
         Session("qtdRespostas") = 0
         Dim userName As String
-        Dim varIssue(20) As Byte
+        Dim varIssue(14) As Byte
         userName = User.Identity.Name
 
         varIssue(1) = DefinirPontuacao(rnd20_1_Sim, rnd20_1_Nao, rnd20_1_NA)

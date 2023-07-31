@@ -59,7 +59,10 @@ Public Class preencheSelects
                         ElseIf sUsu = "68977" Then   ' João Carlos
                             preencheFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1014 ORDER BY nomeFilial", sSelect)
                             sSelect.SelectedIndex = 0
-                        ElseIf sUsu = "100400" Then   ' João Carlos
+                        ElseIf sUsu = "100400" Then   ' Wilson
+                            preencheFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1015 ORDER BY nomeFilial", sSelect)
+                            sSelect.SelectedIndex = 0
+                        ElseIf sUsu = "valdecir" Then   ' Valdecir
                             preencheFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1015 ORDER BY nomeFilial", sSelect)
                             sSelect.SelectedIndex = 0
                         ElseIf sUsu = "388690" Then   ' Samoel
@@ -138,6 +141,21 @@ Public Class preencheSelects
                 End Select
 
         End Select
+
+        Try
+            If sFilial IsNot Nothing Then
+                For i As Integer = 0 To sSelect.Items.Count
+                    If sSelect.Items(i).Value = sFilial Then
+                        sSelect.SelectedValue = sFilial
+                        sSelect.SelectedIndex = i
+                        Exit For
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+
+        End Try
+
 
     End Sub
 
