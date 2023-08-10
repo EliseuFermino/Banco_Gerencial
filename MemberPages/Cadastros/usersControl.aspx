@@ -23,31 +23,55 @@
 
         function alertSucess() {
 
-            document.getElementById('MainContent_divNovaAta').style.display = 'block';
+            document.getElementById('MainContent_divNewUser').style.display = 'none';
+            document.getElementById('success-alert').style.display = 'block';
 
-            $("#success-alert").fadeTo(8000, 500).slideUp(500, function () {
-                $("#success-alert").slideUp(500);
-            });
         };
 
         function hiddenInit() {
-            document.getElementById('MainContent_divMenu').style.display = 'block';
+            //alterar para block depois de funcionar inserir novo cadastro
+            document.getElementById('MainContent_divMenu').style.display = 'none';
         };
 
         function showWindow(url) {
+
+            document.getElementById('MainContent_divMenu').style.display = 'none';
+            document.getElementById('MainContent_divNewUser').style.display = 'none';
+            document.getElementById('MainContent_divFindUser').style.display = 'none';
+            document.getElementById('MainContent_divAlterUser').style.display = 'none';
+            document.getElementById('MainContent_divMenuExcecao').style.display = 'none';
+            document.getElementById('MainContent_divNewRole').style.display = 'none';
+            document.getElementById('MainContent_divParamMenu').style.display = 'none';
+
             if (url == "new_user") {
-                document.getElementById('MainContent_divMenu').style.display = 'none';
-                document.getElementById('MainContent_divNovaAta').style.display = 'block';
-                document.getElementById('MainContent_divConsulta').style.display = 'none';
+                document.getElementById('MainContent_divNewUser').style.display = 'block';
             }
 
             if (url == "find_user") {
-                document.getElementById('MainContent_divMenu').style.display = 'none';
-                document.getElementById('MainContent_divNovaAta').style.display = 'none';
-                document.getElementById('MainContent_divConsulta').style.display = 'block';
+                document.getElementById('MainContent_divFindUser').style.display = 'block';
+            }
 
+            if (url == "alter_user") {
+                document.getElementById('MainContent_divAlterUser').style.display = 'block';
+            }
+
+            if (url == "exception_user") {
+                document.getElementById('MainContent_divMenuExcecao').style.display = 'block';
+            }
+
+            if (url == "new_role") {
+                document.getElementById('MainContent_divNewRole').style.display = 'block';
+            }
+
+            if (url == "param_menu") {
+                document.getElementById('MainContent_divParamMenu').style.display = 'block';
             }
         };
+
+        function collapseCheck(id) {
+            document.getElementById('MainContent_divParamMenu');
+        };
+
     </script>
 </asp:Content>
 
@@ -67,12 +91,14 @@
                             <li class="mb-1">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                     <li>Usuario</li>
+
                                     <li>
                                         <div class="collapse show" id="home-collapse">
                                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                                 <li><a onclick="javascript:showWindow('new_user');" href="#" class="link-dark rounded">Cadastrar</a></li>
                                                 <li><a onclick="javascript:showWindow('find_user');" href="#" class="link-dark rounded">Consultar</a></li>
-                                                <li><a href="#" class="link-dark rounded">Alterar</a></li>
+                                                <li><a onclick="javascript:showWindow('alter_user');" href="#" class="link-dark rounded">Alterar</a></li>
+                                                <li><a onclick="javascript:showWindow('exception_user');" href="#" class="link-dark rounded">Adicionar Menu(Exceção)</a></li>
                                             </ul>
                                         </div>
                                     </li>
@@ -85,10 +111,8 @@
                                     <li>
                                         <div class="collapse show" id="dashboard-collapse" style="">
                                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                                <li><a href="#" class="link-dark rounded">Cadastrar</a></li>
-                                                <li><a href="#" class="link-dark rounded">Consultar</a></li>
-                                                <li><a href="#" class="link-dark rounded">Alterar</a></li>
-                                            </ul>
+                                                <li><a onclick="javascript:showWindow('new_role');" href="#" class="link-dark rounded">Cadastrar</a></li>
+                                                <li><a onclick="javascript:showWindow('param_menu');" href="#" class="link-dark rounded">Parametrizar Menus</a></li>
                                         </div>
                                     </li>
                                 </ul>
@@ -99,7 +123,6 @@
 
                 <div class="col text-center bg-white border-left">
                     <%--Contexto Aqui--%>
-
                     <aspxcallbackpanel id="cbPanel" runat="server" theme="Metropolis" clientinstancename="cbPanel" settingsloadingpanel-text="Atualizando">
                         <panelcollection>
                             <panelcontent>
@@ -111,7 +134,7 @@
                                             </dx:ASPxCallback>
 
                                             <dx:ASPxLoadingPanel ID="ASPxLoadingPanel" runat="server" ClientInstanceName="LoadingPanel"
-                                                Modal="True" Text="Salvando. Aguarde...">
+                                                Modal="True" Text="Aguarde...">
                                             </dx:ASPxLoadingPanel>
                                         </td>
                                     </tr>
@@ -128,185 +151,508 @@
                                     </div>
                                 </div>
 
+                                <%--Usuário--%>
                                 <%--Cadastro de Usuario--%>
                                 <asp:Panel ID="panCadastroUsuario" runat="server" CssClass="justify-content-center">
-                                    <br />
-                                    <div class="container justify-content-center" runat="server" id="divNovaAta" style="padding: 0 50px 0 50px; display: none">
+                                    <div class="container justify-content-center" runat="server" id="divNewUser" style="padding: 15px 15px 15px 15px; display: block">
                                         <hr class="mb-3">
                                         <br />
-                                        <div class="col-sm-12">
-                                            <div class="row justify-content-center">
-                                                <div class="col-auto justify-content-center" style="width: 350px">
-                                                    <span class="col-auto input-group-text justify-content-center">Login</span>
-                                                    <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="lblLogin" runat="server">
-                                                </div>
-                                                <div class="col-auto justify-content-center" style="width: 350px">
-                                                    <span class="col-auto input-group-text justify-content-center">Tipo</span>
-                                                    <div class="form-control justify-content-center text-center">
-                                                        <div class="form-check form-check-inline form-switch">
-                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="chkLoja" value="1" checked="checked">
-                                                            <label class="form-check-label" for="inlineRadio1">Loja</label>
+                                        <div class="col-md-12">
+                                            <div class="row justify-content-between">
+                                                <div class="col-4">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Nome</span>
                                                         </div>
-                                                        <div class="form-check form-check-inline form-switch">
-                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="chkAdm" value="2">
-                                                            <label class="form-check-label" for="inlineRadio2">Adm</label>
+                                                        <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="txtFirstName" runat="server">
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Sobrenome</span>
+                                                        </div>
+                                                        <input type="text" class="form-control justify-content-center text-center" maxlength="100" id="txtLastName" runat="server">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row justify-content-between">
+                                                <div class="col-4">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Login</span>
+                                                        </div>
+                                                        <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="lblLogin" runat="server">
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <div class="input-group-prepend xs">
+                                                                <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Email</span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="txtEmail" runat="server">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row justify-content-between">
+                                                <div class="col-4">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <div class="input-group-prepend xs">
+                                                                <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Matrícula</span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="number" class="form-control justify-content-center text-center" maxlength="50" id="txtMatricula" runat="server">
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <div class="input-group-prepend xs">
+                                                                <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Perfil</span>
+                                                            </div>
+                                                        </div>
+                                                        <asp:DropDownList class="form-control text-center" ID="selPerfilNewUser" runat="server" DataTextField="Desc" AutoPostBack="false"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <div class="input-group-prepend xs">
+                                                                <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Tipo</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-control" style="padding-top: 10px">
+                                                            <div class="form-check form-check-inline form-switch">
+                                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="rdLoja" value="1" checked />
+                                                                <label class="form-check-label" for="inlineRadio1">Loja</label>
+                                                            </div>
+
+                                                            <div class="form-check form-check-inline form-switch">
+                                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="rdAdm" value="2" />
+                                                                <label class="form-check-label" for="inlineRadio2">Adm</label>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <br />
-
-                                            <div class="row justify-content-center">
-
-                                                <div class="col-auto justify-content-center text-center" style="width: 350px">
-                                                    <span class="col-auto input-group-text justify-content-center">Departamento</span>
-                                                    <select id="selLocal" runat="server" class="form-control justify-content-center text-left"></select>
-                                                </div>
-
-                                                <div class="col-auto justify-content-center" style="width: 350px">
+                                            <div class="row justify-content-between text-center">
+                                                <div class="col-2 justify-content-center" style="min-width: 100px">
                                                     <span class="col-auto input-group-text justify-content-center">É loja:</span>
                                                     <div class="form-control justify-content-center text-center">
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                                                            <input class="form-check-input" type="checkbox" id="isLoja" checked>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                            <br />
-
-                                            <div class=" row justify-content-center text-center">
-                                                <div class="col-auto justify-content-center text-center" style="width: 350px">
+                                                <div class="col-2 justify-content-center text-center">
                                                     <span class="col-auto input-group-text justify-content-center">Tipo</span>
                                                     <asp:DropDownList class="form-control text-center" ID="selTipo" runat="server" DataTextField="Desc" AutoPostBack="true" OnSelectedIndexChanged="selTipo_SelectedIndexChanged"></asp:DropDownList>
-
                                                 </div>
-                                                <div class="col-auto justify-content-center text-center" style="width: 350px">
+                                                <div class="col-8 justify-content-center text-center">
                                                     <span class="col-auto input-group-text justify-content-center">Filial</span>
                                                     <asp:DropDownList class="form-control " ID="selFilial" runat="server" DataTextField="Desc"></asp:DropDownList>
                                                 </div>
                                             </div>
-
                                             <br />
-
                                             <div class="row justify-content-sm-center">
-                                                <button type="button" class="btn btn-primary btn-md" style="width: auto" onclick="  ">Cadastrar</button>
+                                                <asp:Button runat="server" OnClick="btnSubmit_Click" Width="200px" class="btn btn-primary btn-md" Text="Cadastrar" ID="btnSubmit" />
                                             </div>
-
                                             <br />
                                             <hr class="mb-3">
                                         </div>
-
-                                        <!-- Modal 
-                                        <div class="modal fade w-auto h-auto" id="ModalConfirm" tabindex="-1" role="dialog" aria-labelledby="ModalAtendLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-
-                                                    <div class="modal-body">
-                                                        <div class="alert alert-warning" role="alert" style="text-align: center">
-                                                            <div style="text-align: center">
-                                                                <h5 class="modal-title" id="ModalAtendLabel"><strong>Atenção!</strong></h5>
-                                                                <br />
-                                                                <strong>Os dados enviados não poderão ser alterados!</strong>
-                                                                <br />
-                                                                <br />
-                                                                <strong>você confirma que os dados informados estão corretos?</strong>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="modal-footer justify-content-between">
-                                                        <button type="button" class="btn btn-danger btn-md" data-dismiss="modal" runat="server" id="btnCancelar">Cancelar</button>
-                                                        <asp:Button ID="btnChange" runat="server" Text="Enviar dados" CssClass="btn btn-success btn-md justify-content-around" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>-->
-
                                     </div>
-
-                                    <div class="alert alert-success" id="success-alert" style="text-align: center">
-                                        <button type="button" class="close" data-dismiss="alert">x</button>
-                                        <strong>Successo! </strong>Usuário criado com sucesso!<br />
-                                        <br />
-                                        Para visualizar acesse a opção <strong>Consulta</strong>.
-                                    </div>
-
                                 </asp:Panel>
 
                                 <%--Consulta de Usuario--%>
                                 <asp:Panel ID="panConsultaUsuario" runat="server" CssClass="justify-content-center">
-                                    <br />
-
-                                    <div id="divConsulta" style="display: none" runat="server">
-                                        <div class="row col-12 justify-content-center" runat="server" id="divFiltro">
-                                            <br />
-                                            <div class="col-auto xs">
-                                                <span class="input-group-text justify-content-center sm">Data</span>
-                                                <input type="text" class="form-control xs" name="daterange" autopostback="false" runat="server" id="daterange" />
-                                            </div>
-
-                                            <div class="col-auto">
-                                                <span class="input-group-text justify-content-center">Local</span>
-                                                <select id="selLocalConsulta" runat="server" class="form-control justify-content-center"></select>
-                                            </div>
-
-                                            <div class="col-auto justify-content-center" style="padding: 13px 0px 13px 0px">
-                                                <dx:ASPxButton ID="btnFiltrar" runat="server" Text="Consultar" AutoPostBack="false" ForeColor="White" Font-Bold="true" CssClass="btn btn-info" OnClick="btnFiltrar_Click" CssFilePath="~/assets/bootstrap-5.0.2-dist/css/bootstrap.css">
-                                                    <ClientSideEvents Click="function(s, e) {Callback.PerformCallback(); LoadingPanel.Show(); LoadingPanel.SetText('Aguarde. Localizando informações...');}" />
-                                                </dx:ASPxButton>
-                                                <%--<asp:Button type="button" class="btn btn-info" runat="server" ID="btnFiltro" Style="height: 50px; width: 110px" OnClientClick="btnFiltrar_Click" Text="Aplicar filtro" />--%>
-                                            </div>
-                                            <p>
-                                                <br />
-                                            </p>
-                                        </div>
-
-                                        <div class="alert alert-danger" id="dangerAlert" style="text-align: center">
-                                            <button type="button" class="close" data-dismiss="alert">x</button>
-                                            <strong>Successo! </strong>O registro foi deletado.
+                                    <div id="divFindUser" style="display: none; padding: 15px 15px 15px 15px;" runat="server">
+                                        <hr class="mb-3">
                                         <br />
+                                        <div class="row col-12 justify-content-center">
+                                            <div class="col-auto" style="width: 200px">
+                                                <span class="input-group-text justify-content-center">Tipo</span>
+                                                <select id="selConsulta" runat="server" class="form-control justify-content-center text-center">
+                                                    <option value="1" selected="selected">Login</option>
+                                                    <option value="2">Email</option>
+                                                    <option value="3">Nome</option>
+                                                </select>
+                                            </div>
+                                            <br />
+                                            <div class="col-auto xs" style="width: 300px">
+                                                <span class="input-group-text justify-content-center sm">Parâmetro</span>
+                                                <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="txtParametro" runat="server">
+                                                <%--<input type="text" class="form-control xs" name="daterange" autopostback="false" runat="server" id="daterange" />--%>
+                                            </div>
+
+                                            <div class="col-auto justify-content-center" style="padding: 20px 15px 15px 15px">
+                                                <asp:Button runat="server" OnClick="btnFiltrar_Click" Width="125px" Height="35px" class="btn btn-primary btn-md" Text="Consultar" ID="btnFiltrar" />
+                                            </div>
+
                                         </div>
+
+                                        <p>
+                                            <br />
+                                        </p>
 
                                         <div class="container col-7 justify-content-center" runat="server" id="divGrid">
-                                            <span class="input-group-text justify-content-center" style="height: 45px">Atas Registradas<br />
-                                            </span>
-                                            <br />
-
                                             <asp:GridView ID="grvDados" CssClass="gwFormat" HeaderStyle-BackColor="#CED4DA" HeaderStyle-ForeColor="Black" KeyFieldName="id"
                                                 RowStyle-BackColor="#E9ECEF" AlternatingRowStyle-BackColor="White" AlternatingRowStyle-ForeColor="#000" GridLines="None"
                                                 runat="server" AutoGenerateColumns="false" BorderStyle="none" Style="margin: 0 auto 0 auto !important" HeaderStyle-Height="40px" RowStyle-Height="50px" HeaderStyle-HorizontalAlign="Center"
-                                                RowStyle-HorizontalAlign="Center" EmptyDataText="<b>Não existem registros para os parâmetros informados!</b>" CellPadding="15" CellSpacing="10" OnRowDataBound="grvDados_RowDataBound">
+                                                RowStyle-HorizontalAlign="Center" EmptyDataText="<b>Não foram encontrados usuários para os parâmetros informados!</b>" CellPadding="15" CellSpacing="10" OnRowDataBound="grvDados_RowDataBound">
                                                 <Columns>
-                                                    <asp:BoundField DataField="id" HeaderText="ID" />
-                                                    <asp:BoundField DataField="Titulo" HeaderText="Título" />
-                                                    <asp:BoundField DataField="Assunto" HeaderText="Assunto" />
-                                                    <asp:BoundField DataField="Data" HeaderText="Data" />
-                                                    <asp:BoundField DataField="Tipo" HeaderText="Tipo" />
-                                                    <asp:BoundField DataField="Unidade" HeaderText="Local" />
-                                                    <asp:BoundField DataField="Arquivo" HeaderText="Arquivos" />
-                                                    <asp:TemplateField ItemStyle-Width="80px">
+                                                    <asp:BoundField DataField="Nome" HeaderText="Nome" />
+                                                    <asp:BoundField DataField="Login" HeaderText="Login" />
+                                                    <asp:BoundField DataField="Perfil" HeaderText="Perfil" />
+                                                    <asp:BoundField DataField="data_criacao" HeaderText="Criação" />
+                                                    <asp:BoundField DataField="data_login" HeaderText="Ultimo Login" />
+                                                    <asp:BoundField DataField="Filial" HeaderText="Filial" />
+                                                    <%--                                                    <asp:TemplateField ItemStyle-Width="80px">
                                                         <ItemTemplate>
                                                             <asp:Button ID="btnExcluir" runat="server" AutoPostBack="False" CommandName='<%# Eval("ID")%>' OnClientClick='var x = confirm("Tem certeza que deseja excluir o registro?"); if (x == false) {alertMsg();}; return x;' OnClick="btnExcluir_Click" CssClass="btn btn-danger btn-sm" Text="Excluir" />
                                                         </ItemTemplate>
-                                                    </asp:TemplateField>
+                                                    </asp:TemplateField>--%>
                                                 </Columns>
                                                 <PagerStyle HorizontalAlign="Center" Height="50px" VerticalAlign="Middle" CssClass="gwFormat" />
                                             </asp:GridView>
                                         </div>
+
                                     </div>
-                                    <br />
+                                </asp:Panel>
+
+                                <%--Alterar Usuario--%>
+                                <asp:Panel ID="panAlteraUsuario" runat="server" CssClass="justify-content-center">
+                                    <div class="container justify-content-center" runat="server" id="divAlterUser" style="padding: 15px 15px 15px 15px; display: none">
+
+                                        <hr class="mb-3">
+                                        <%--Resetar senha--%>
+                                        <div class="row col-12 justify-content-center" style="background-color: #E9ECEF; padding: 20px 0 20px 0">
+                                            <br />
+                                            <span class="justify-content-center sm h5">Resetar Senha</span>
+                                            <br />
+                                            <br />
+
+                                            <div class="col-4">
+                                                <div class="input-group input-group xs" style="max-height: 30px">
+                                                    <div class="input-group-prepend xs">
+                                                        <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Login</span>
+                                                    </div>
+                                                    <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="txtLoginAlter" runat="server">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-4"></div>
+
+                                            <div class="col-2 justify-content-end" style="padding-right: 25px">
+                                                <asp:Button runat="server" OnClick="btnFiltrar_Click" Width="125px" Height="35px" class="btn btn-warning btn-md" Text="Executar" ID="btnResetarSenha" />
+                                            </div>
+                                        </div>
+                                        <hr class="mb-3">
+
+                                        <%--Alterar Perfil--%>
+                                        <div class="row col-12 justify-content-center" style="background-color: #E9ECEF; padding: 20px 0 20px 0">
+                                            <br />
+                                            <span class="justify-content-center sm h5">Alterar Departamento</span>
+                                            <br />
+                                            <br />
+
+                                            <div class="col-4">
+                                                <div class="input-group input-group xs" style="max-height: 30px">
+                                                    <div class="input-group-prepend xs">
+                                                        <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Login</span>
+                                                    </div>
+                                                    <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="txtLoginAlterPerfil" runat="server">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-4">
+                                                <div class="input-group input-group xs" style="max-height: 30px">
+                                                    <div class="input-group-prepend xs">
+                                                        <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Perfil</span>
+                                                    </div>
+                                                    <asp:DropDownList class="form-control text-center" ID="selPerfilAlterUser" runat="server" DataTextField="Desc" AutoPostBack="false"></asp:DropDownList>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-2 justify-content-center" style="padding-right: 25px">
+                                                <asp:Button runat="server" OnClick="btnFiltrar_Click" Width="125px" Height="35px" class="btn btn-warning btn-md" Text="Executar" ID="Button1" />
+                                            </div>
+                                        </div>
+                                        <hr class="mb-3">
+
+                                        <%--Alterar Filial--%>
+                                        <div class="row col-12 justify-content-center " style="background-color: #E9ECEF; padding: 20px 0 20px 0">
+                                            <br />
+                                            <span class="justify-content-center sm h5">Alterar Filial</span>
+                                            <br />
+                                            <br />
+
+                                            <div class="col-3 justify-content-center">
+                                                <div class="input-group input-group xs" style="max-height: 30px">
+                                                    <div class="input-group-prepend xs">
+                                                        <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Login</span>
+                                                    </div>
+                                                    <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="Text2" runat="server">
+                                                </div>
+                                            </div>
+
+                                                <div class="col-2 justify-content-center">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <span class="col-auto input-group-text justify-content-center">Tipo</span>
+                                                        </div>
+                                                        <asp:DropDownList class="form-control text-center" ID="selTipoAlter" runat="server" DataTextField="Desc" AutoPostBack="true" OnSelectedIndexChanged="selTipoAlter_SelectedIndexChanged"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-3 justify-content-center">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Filial</span>
+                                                        </div>
+                                                        <asp:DropDownList class="form-control " ID="selFilialAlter" runat="server" DataTextField="Desc"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+
+                                            <div class="col-2 justify-content-end" style="padding-right: 25px">
+                                                <asp:Button runat="server" OnClick="btnFiltrar_Click" Width="125px" Height="35px" class="btn btn-warning btn-md" Text="Executar" ID="Button2" />
+                                            </div>
+                                        </div>
+                                        <hr class="mb-3">
+
+                                        <%--Inativar Usuário--%>
+                                        <div class="row col-12 justify-content-center " style="background-color: #E9ECEF; padding: 20px 0 20px 0">
+                                            <br />
+                                            <span class="justify-content-center sm h5">Inativar Usuário</span>
+                                            <br />
+                                            <br />
+
+                                            <div class="col-4 justify-content-center">
+                                                <div class="input-group input-group xs" style="max-height: 30px">
+                                                    <div class="input-group-prepend xs">
+                                                        <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Login</span>
+                                                    </div>
+                                                    <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="txtLoginInativar" runat="server">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-4"></div>
+
+                                            <div class="col-2 justify-content-end" style="padding-right: 25px">
+                                                <asp:Button runat="server" OnClick="btnFiltrar_Click" Width="125px" Height="35px" class="btn btn-danger btn-md" Text="Executar" ID="Button4" />
+                                            </div>
+                                        </div>
+                                        <hr class="mb-3">
+                                    </div>
+                                </asp:Panel>
+
+                                <%--Adicionar Menu - Exceção--%>
+                                <asp:Panel ID="panMenuExcecao" runat="server" CssClass="justify-content-center">
+                                    <div class="container justify-content-center" runat="server" id="divMenuExcecao" style="padding: 15px 15px 15px 15px; display: none">
+
+                                        <hr class="mb-3">
+
+                                        <%--Adicionar Menu(Tela) Fora do perfil--%>
+                                        <div class="row col-12 justify-content-center " style="background-color: #E9ECEF; padding: 20px 0 20px 0">
+                                            <div class="row col-12 justify-content-center " style="background-color: #E9ECEF; padding: 20px 0 20px 0">
+                                                <br />
+                                                <span class="justify-content-center sm h5">Menu Personalizado (Fora do perfil)</span>
+                                                <br />
+                                                <br />
+
+                                                <div class="col-4 justify-content-center">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Login</span>
+                                                        </div>
+                                                        <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="txtLoginEx" runat="server">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-2 justify-content-end" style="padding-right: 25px">
+                                                    <asp:Button runat="server" OnClick="btnBuscarEx_Click" Width="125px" Height="35px" class="btn btn-info btn-md" Text="Buscar" ID="btnBuscarEx" />
+                                                </div>
+                                            </div>
+
+                                            <div class="row col-12 justify-content-center" runat="server" id="divTreeEx" visible="false" style="background-color: #E9ECEF; padding: 20px 0 20px 0">
+                                                <div class="row col-12 justify-content-center " style="background-color: #E9ECEF; padding: 20px 0 20px 0">
+                                                    <div class="col-1"></div>
+                                                    <div class="col-5" style="background-color: white">
+                                                        <br />
+                                                        <span class="input-group-text justify-content-center"><b>(Barra de Menu)</b></span>
+                                                        <asp:TreeView ID="tvwMenuHorExc" CssClass="wj-treeview w-auto border" runat="server" ShowLines="True" Width="200px"
+                                                            BorderStyle="Dotted" ShowCheckBoxes="All">
+                                                        </asp:TreeView>
+                                                    </div>
+
+                                                    <div class="col-5" style="background-color: white">
+                                                        <br />
+                                                        <span class="input-group-text justify-content-center"><b>(Menus Internos)</b></span>
+                                                        <asp:TreeView ID="tvwMenuVertExc" CssClass="wj-treeview w-auto border" runat="server" ShowLines="True" Width="200px"
+                                                            BorderStyle="Dotted" ShowCheckBoxes="All">
+                                                        </asp:TreeView>
+                                                    </div>
+                                                    <div class="col-1"></div>
+                                                </div>
+
+                                                <br />
+
+                                                <div class="col-12 justify-content-center" style="padding-right: 25px">
+                                                    <asp:Button runat="server" OnClick="btnSalvarEx_Click" Width="125px" Height="35px" class="btn btn-success btn-md" Text="Salvar" ID="btnSalvarEx" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <hr class="mb-3">
+                                    </div>
+                                </asp:Panel>
+
+                                <%--Perfil--%>
+                                <%--Cadastro de Perfil--%>
+                                <asp:Panel ID="panCadastroPerfil" runat="server" CssClass="justify-content-center">
+                                    <div class="container justify-content-center" runat="server" id="divNewRole" style="padding: 15px 15px 15px 15px; display: none">
+                                        <hr class="mb-3">
+
+                                        <%--Resetar senha--%>
+                                        <div class="row col-12 justify-content-center" style="background-color: #E9ECEF; padding: 20px 0 20px 0">
+                                            <br />
+                                            <span class="justify-content-center sm h5">Novo Perfil</span>
+                                            <br />
+                                            <br />
+
+                                            <div class="col-4">
+                                                <div class="input-group input-group xs" style="max-height: 30px">
+                                                    <div class="input-group-prepend xs">
+                                                        <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Nome (Perfil)</span>
+                                                    </div>
+                                                    <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="Text1" runat="server">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-4"></div>
+
+                                            <div class="col-2 justify-content-end" style="padding-right: 25px">
+                                                <asp:Button runat="server" OnClick="btnFiltrar_Click" Width="125px" Height="35px" class="btn btn-warning btn-md" Text="Executar" ID="Button3" />
+                                            </div>
+                                        </div>
+                                        <hr class="mb-3">
+
+                                        <%--Alterar Perfil--%>
+                                        <div class="row col-12 justify-content-center" style="background-color: #E9ECEF; padding: 20px 0 20px 0">
+                                            <br />
+                                            <span class="justify-content-center sm h5">Duplicar Perfil</span>
+                                            <br />
+                                            <br />
+
+                                            <div class="col-4">
+                                                <div class="input-group input-group xs" style="max-height: 30px">
+                                                    <div class="input-group-prepend xs">
+                                                        <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Perfil Modelo</span>
+                                                    </div>
+                                                    <select id="Select4" runat="server" class="form-control justify-content-center text-center">
+                                                        <option value="0" selected>Selecione...</option>
+                                                        <option value="2">Teste 2</option>
+                                                        <option value="3">Teste 3</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-4">
+                                                <div class="input-group input-group xs" style="max-height: 30px">
+                                                    <div class="input-group-prepend xs">
+                                                        <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Nome (Perfil)</span>
+                                                    </div>
+                                                    <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="Text4" runat="server">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-2 justify-content-center" style="padding-right: 25px">
+                                                <asp:Button runat="server" OnClick="btnFiltrar_Click" Width="125px" Height="35px" class="btn btn-warning btn-md" Text="Executar" ID="Button5" />
+                                            </div>
+                                        </div>
+                                        <hr class="mb-3">
+                                    </div>
+                                </asp:Panel>
+
+                                <%--Parametrizar Menu--%>
+                                <asp:Panel ID="panParametrizarMenus" runat="server" CssClass="justify-content-center">
+                                    <div class="container justify-content-center" runat="server" id="divParamMenu" style="padding: 15px 15px 15px 15px; display: none">
+
+                                        <hr class="mb-3">
+
+                                        <%--Adicionar Menu(Tela) no perfil--%>
+                                        <div class="row col-12 justify-content-center " style="background-color: #E9ECEF; padding: 20px 0 20px 0">
+                                            <div class="row col-12 justify-content-center" style="background-color: #E9ECEF; padding: 20px 0 20px 0">
+                                                <span class="justify-content-center sm h5">Parametrização de menus - Perfil</span>
+                                                <br />
+                                                <br />
+
+                                                <div class="col-4 justify-content-center" runat="server">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Perfil</span>
+                                                        </div>
+                                                        <asp:DropDownList class="form-control text-center" ID="selPerfilMenu" runat="server" DataTextField="Desc" AutoPostBack="false"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 justify-content-end" style="padding-right: 25px">
+                                                    <asp:Button runat="server" OnClick="btnFiltrarMenuPerfil_Click" Width="125px" Height="35px" class="btn btn-info btn-md" Text="Buscar" ID="btnFiltrarMenuPerfil" />
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row col-12 justify-content-center" runat="server" id="divTreePerfil" visible="false" style="background-color: #E9ECEF; padding: 20px 0 20px 0">
+                                                <div class="row col-12 justify-content-center " style="background-color: #E9ECEF; padding: 20px 0 20px 0">
+                                                    <div class="col-1"></div>
+                                                    <div class="col-5" style="background-color: white">
+                                                        <br />
+                                                        <span class="input-group-text justify-content-center"><b>(Barra de Menu)</b></span>
+                                                        <asp:TreeView ID="tvwMenuHor" CssClass="wj-treeview w-100 border" runat="server" ShowLines="True"
+                                                            BorderStyle="Dotted" ShowCheckBoxes="All">
+                                                        </asp:TreeView>
+                                                    </div>
+
+                                                    <div class="col-5" style="background-color: white">
+                                                        <br />
+                                                        <span class="input-group-text justify-content-center"><b>(Menus Internos)</b></span>
+                                                        <asp:TreeView ID="tvwMenuVer" CssClass="wj-treeview w-100 border tag-important" runat="server" ShowLines="True"
+                                                            BorderStyle="Dotted" ShowCheckBoxes="All">
+                                                        </asp:TreeView>
+                                                    </div>
+                                                    <div class="col-1"></div>
+                                                </div>
+
+                                                <div class="col-12 justify-content-center" style="padding-right: 25px">
+                                                    <asp:Button runat="server" OnClick="btnSalvarPerfis_Click" Width="125px" Height="35px" class="btn btn-info btn-md" Text="Salvar" ID="btnSalvarPerfis" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr class="mb-3">
+                                    </div>
                                 </asp:Panel>
 
                             </panelcontent>
                         </panelcollection>
                     </aspxcallbackpanel>
+
+                    <br />
+                    <div class="row col-12 justify-content-center">
+                        <div class="alert alert-success justify-content-center" id="success-alert" style="text-align: center; display: none; max-width: 500px">
+                            <button type="button" class="close" data-dismiss="alert">x</button>
+                            <strong>Successo! </strong>Usuário criado com sucesso!<br />
+                            <br />
+                            Para visualizar acesse a opção <strong>Consulta</strong>.
+                        </div>
+                    </div>
+                    <br />
                 </div>
             </div>
         </div>
@@ -323,6 +669,73 @@
         .gwFormat td {
             padding: 8px 13px 8px 13px;
         }
+
+        .container .header {
+            background-color: #d3d3d3;
+            padding: 2px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .wj-treeview {
+            font-size: 120%;
+            margin-bottom: 8px;
+        }
+
+        /* custom tree styles */
+        .custom-tree.wj-treeview {
+            color: #80044d;
+        }
+
+            /* default nodes */
+            .custom-tree.wj-treeview .wj-node {
+            }
+
+            /* level 0 and deeper nodes */
+            .custom-tree.wj-treeview .wj-nodelist > .wj-node {
+                font-size: 120%;
+                font-weight: bold;
+            }
+
+            /* level 1 and deeper nodes (smaller font, vertical line along the left) */
+            .custom-tree.wj-treeview .wj-nodelist > .wj-nodelist > .wj-node,
+            .custom-tree.wj-treeview .wj-nodelist > .wj-nodelist > .wj-nodelist {
+                font-size: 110%;
+                font-weight: normal;
+                border-left: 4px solid rgba(128, 4, 77, 0.3);
+            }
+
+                /* level 2 and deeper nodes (smaller font, thinner border) */
+                .custom-tree.wj-treeview .wj-nodelist > .wj-nodelist > .wj-nodelist > .wj-node,
+                .custom-tree.wj-treeview .wj-nodelist > .wj-nodelist > .wj-nodelist > .wj-nodelist {
+                    font-size: 100%;
+                    font-style: italic;
+                    opacity: 0.8;
+                    border-left: 2px solid rgba(128, 4, 77, 0.3);
+                }
+
+            /* expanded node glyph */
+            .custom-tree.wj-treeview .wj-nodelist .wj-node:before {
+                content: "\e114";
+                font-family: 'Glyphicons Halflings';
+                top: 4px;
+                border: none;
+                opacity: .3;
+                transition: all .3s cubic-bezier(.4,0,.2,1);
+            }
+
+            /* collapsed node glyph */
+            .custom-tree.wj-treeview .wj-nodelist .wj-node.wj-state-collapsed:before,
+            .custom-tree.wj-treeview .wj-nodelist .wj-node.wj-state-collapsing:before {
+                transform: rotate(-180deg);
+                transition: all .3s cubic-bezier(.4,0,.2,1);
+            }
+
+            /* selected node */
+            .custom-tree.wj-treeview .wj-node.wj-state-selected {
+                color: white;
+                background: rgba(128, 4, 77, 0.70);
+            }
     </style>
 
     <script type="text/javascript"> 
@@ -555,6 +968,23 @@
 
             return false;
         }
+
+        $(".header").click(function () {
+
+            $header = $(this);
+            //getting the next element
+            $content = $header.next();
+            //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+            $content.slideToggle(100, function () {
+                //execute this after slideToggle is done
+                //change text of header based on visibility of content div
+                $header.text(function () {
+                    //change text based on condition
+                    return $content.is(":visible") ? "Collapse" : "Expand";
+                });
+            });
+
+        });
 
     </script>
 </asp:Content>

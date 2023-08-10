@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Runtime.InteropServices
 
 Public Class preencheSelects
 
@@ -183,6 +184,38 @@ Public Class preencheSelects
         Finally
             con.Close()
         End Try
+
+    End Sub
+
+    Public Sub preencherPerfis(ByVal iStr As String, ByRef sSelect As DropDownList)
+        Dim selectSQL As String = iStr
+        Dim con As New SqlConnection(Conexao.LocalSqlServer)
+        Dim cmd As New SqlCommand(selectSQL, con)
+
+        ' Open the connection
+        con.Open()
+
+        Try
+            ' Define the binding
+            sSelect.DataSource = cmd.ExecuteReader()
+            sSelect.DataTextField = "Depto"
+            sSelect.DataValueField = "DeptoId"
+
+            ' Activate the binding.
+            sSelect.DataBind()
+            con.Close()
+
+        Catch ex As Exception
+            'lblError.Text = iStr
+        Finally
+            con.Close()
+        End Try
+
+        sSelect.Items.Insert(0, New ListItem("", "0"))
+        sSelect.SelectedIndex = -1
+        sSelect.ClearSelection()
+        sSelect.SelectedItem.Selected = False
+
 
     End Sub
 

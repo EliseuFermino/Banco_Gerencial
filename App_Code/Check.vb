@@ -118,67 +118,6 @@ Public Class Check
         End Using
     End Function
 
-    Public Function SalvarChecklist_Confeitaria(ByVal iDia As Date, ByVal iFilial As Int16, ByVal iGrupo As Int16, _
-                        ByVal iSubgrupo As Int16, ByVal iCod As Int16, ByVal iPontos As Int16, _
-                        ByVal iMatricula As String, ByVal iDescricao As String, ByVal iProduto As Integer) As Boolean
-        Dim gravou As Boolean
-        Using con As New SqlConnection(connCheckList)
-            Using cmdTest As New SqlCommand("dbo.usp_SalvarChecklist_Confeitaria", con)
-                cmdTest.CommandType = CommandType.StoredProcedure
-                cmdTest.Parameters.AddWithValue("@dia", iDia)
-                cmdTest.Parameters.AddWithValue("@idFilial", iFilial)
-                cmdTest.Parameters.AddWithValue("@idGrupo", iGrupo)
-                cmdTest.Parameters.AddWithValue("@idSubgrupo", iSubgrupo)
-                cmdTest.Parameters.AddWithValue("@idCod", iCod)
-                If iPontos = 0 Then
-                    cmdTest.Parameters.AddWithValue("@notas", 0)
-                Else
-                    cmdTest.Parameters.AddWithValue("@notas", 2)
-                End If
-                cmdTest.Parameters.AddWithValue("@pontos", iPontos)
-                cmdTest.Parameters.AddWithValue("@matricula", iMatricula)
-                cmdTest.Parameters.AddWithValue("@descricao", iDescricao)
-                cmdTest.Parameters.AddWithValue("@idProduto", iProduto)
-
-                Try
-                    con.Open()
-                    gravou = cmdTest.ExecuteNonQuery    'Executa o comando, porém não retorna nenhum dado.
-                Catch ex As Exception
-                    varDesc = Err.Description
-                Finally 'Tudo o que estiver entre o "Finally" e o "End Try" será executado mesmo após a mensagem de erro.
-                    con.Close() 'Fecha o banco de dados
-                End Try
-
-                Return gravou   'Toda função tem retornar alguma coisa
-                'Neste caso o retorno será dados pela variavel "gavou"
-            End Using
-        End Using
-    End Function
-
-    Public Function SalvarChecklist_Confeitaria_Unico(ByVal iDia As Date, ByVal iFilial As Int16, ByVal iProduto As Integer) As Boolean
-        Dim gravou As Boolean
-        Using con As New SqlConnection(connCheckList)
-            Using cmdTest As New SqlCommand("dbo.usp_SalvarChecklist_Confeitaria_Unico", con)
-                cmdTest.CommandType = CommandType.StoredProcedure
-                cmdTest.Parameters.AddWithValue("@dia", iDia)
-                cmdTest.Parameters.AddWithValue("@idFilial", iFilial)
-                cmdTest.Parameters.AddWithValue("@idProduto", iProduto)
-
-                Try
-                    con.Open()
-                    gravou = cmdTest.ExecuteNonQuery    'Executa o comando, porém não retorna nenhum dado.
-                Catch ex As Exception
-                    varDesc = Err.Description
-                Finally 'Tudo o que estiver entre o "Finally" e o "End Try" será executado mesmo após a mensagem de erro.
-                    con.Close() 'Fecha o banco de dados
-                End Try
-
-                Return gravou   'Toda função tem retornar alguma coisa
-                'Neste caso o retorno será dados pela variavel "gavou"
-            End Using
-        End Using
-    End Function
-
     Public Sub BuscarCheckList(ByVal iDia As String, ByVal iFilial As Byte, ByVal iGrupo As Byte,
                          ByVal iSubgrupo As Byte, ByVal iCod As Byte)
 
