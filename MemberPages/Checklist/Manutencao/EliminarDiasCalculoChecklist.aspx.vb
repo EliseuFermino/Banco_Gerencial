@@ -85,25 +85,30 @@ Partial Class MemberPages_Checklist_Manutencao_EliminarDiasCalculoChecklist
 
     Protected Sub btn_Recalcular_Click(sender As Object, e As EventArgs) Handles btn_Recalcular.Click
         Session("sDia") = txtData.Value
-
-        Using con As New SqlConnection(connChecklist)
-            Using cmdTest As New SqlCommand("Pontuacao.usp_RECALCULA_NOTAS", con)
-                cmdTest.CommandType = CommandType.StoredProcedure
-                cmdTest.Parameters.AddWithValue("@dia", txtData.Value)
-                Try
-                    con.Open()
-                    cmdTest.ExecuteNonQuery()
-                    Beep()
-                    grid.DataBind()
-                    oVem.UserMsgBox(Me, "Pontuação do Checklist recalculada com Sucesso!!!")
-                Catch ex As Exception
-                    oVem.UserMsgBox(Me, "Erro no recalculo! Entre em contato com o Suporte! (" + Err.Description + ")")
-                Finally
-                    cmdTest.Dispose()
-                    con.Close()
-                End Try
+        If selFilial.SelectedValue = "99" Then
+            oVem.UserMsgBox(Me, "Para executar o recalculo de todas as filiais entre em contato com o Desenvolvimento 'Eliseu/Guilherme' - (Controladoria)")
+        Else
+            Using con As New SqlConnection(connChecklist)
+                Using cmdTest As New SqlCommand("Pontuacao.usp_RECALCULA_NOTAS_FILIAL", con)
+                    cmdTest.CommandType = CommandType.StoredProcedure
+                    cmdTest.Parameters.AddWithValue("@dia", txtData.Value)
+                    cmdTest.Parameters.AddWithValue("@idFilial", selFilial.SelectedValue)
+                    Try
+                        con.Open()
+                        cmdTest.ExecuteNonQuery()
+                        Beep()
+                        grid.DataBind()
+                        oVem.UserMsgBox(Me, "Pontuação do Checklist recalculada com Sucesso!!!")
+                    Catch ex As Exception
+                        oVem.UserMsgBox(Me, "Erro no recalculo! Entre em contato com o Suporte! (" + Err.Description + ")")
+                    Finally
+                        cmdTest.Dispose()
+                        con.Close()
+                    End Try
+                End Using
             End Using
-        End Using
+        End If
+
     End Sub
 
     Protected Sub btn_Excluir_Click(sender As Object, e As EventArgs) Handles btn_Excluir.Click

@@ -220,7 +220,6 @@
                             </tr>
                         </table>
 
-
                         <asp:Panel ID="panDados1" runat="server" CssClass="justify-content-center" Visible="false" Style="border: solid 1px #c0c0c0; align-content: center">
                             <p>
                                 <table id="gradient-style" summary="Meeting Results">
@@ -6596,6 +6595,7 @@
                             </p>
                         </asp:Panel>
                         <%--20 - Câmara de Congelados--%>
+
                     </div>
                 </div>
 

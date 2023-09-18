@@ -4339,7 +4339,7 @@
                                         <%--PERGUNTA 16.1--%>
                                         <tr>
                                             <td align="center">16.2</td>
-                                            <td>O Checklist de Abertura e Fechamento da loja, está sendo executado diariamente? (verificar planilha e assinaturas)
+                                            <td>O Checklist de Abertura e Fechamento e planilha de temperatura dos balcões, está sendo executado conforme normativas? (verificar planilha e assinaturas)
                                                 <asp:TextBox ID="txt16_2" runat="server" Width="350" TextMode="MultiLine" Height="50"></asp:TextBox></td>
                                             <td align="center">
                                                 <asp:RadioButton ID="rnd16_2_Sim" runat="server" GroupName="grupo16_2" /></td>

@@ -21,16 +21,38 @@
 
     <script>
 
-        function alertSucess() {
+        function alertSucess(param) {
+            //document.getElementById('MainContent_divNewUser').style.display = 'none';
+            //document.getElementById('success-alert').style.display = 'block';
 
-            document.getElementById('MainContent_divNewUser').style.display = 'none';
-            document.getElementById('success-alert').style.display = 'block';
+            swal({
+                title: "Sucesso!",
+                text: "As informações foram gravadas com sucesso!",
+                icon: "success",
+                button: "Voltar!"
+            });
 
+            showWindow(param);
+        };
+
+        function alertErro(param) {
+            //document.getElementById('MainContent_divNewUser').style.display = 'none';
+            //document.getElementById('danger-alert').style.display = 'block';
+
+            swal({
+                title: "Erro!",
+                text: "Guarde as informações e entre em contato com o suporte - Controladoria",
+                icon: "error",
+                button: "Voltar!",
+                return: false
+            });
+
+            showWindow(param);
         };
 
         function hiddenInit() {
             //alterar para block depois de funcionar inserir novo cadastro
-            document.getElementById('MainContent_divMenu').style.display = 'none';
+            document.getElementById('MainContent_divMenu').style.display = 'block';
         };
 
         function showWindow(url) {
@@ -68,8 +90,180 @@
             }
         };
 
-        function collapseCheck(id) {
-            document.getElementById('MainContent_divParamMenu');
+        function alertTxt(elementId) {
+
+            var x = document.getElementById(elementId);
+
+            if (x.value == "") {
+
+                document.getElementById(elementId).classList.remove('is-invalid');
+                document.getElementById(elementId).classList.remove('is-valid');
+                document.getElementById(elementId).classList.add('is-invalid');
+            }
+            else {
+
+                document.getElementById(elementId).classList.remove('is-invalid');
+                document.getElementById(elementId).classList.remove('is-valid');
+                document.getElementById(elementId).classList.add('is-valid');
+            }
+        }
+
+        function alertSelect(elementId) {
+
+            var x = document.getElementById(elementId);
+
+            if (x.value == "0") {
+
+                document.getElementById(elementId).classList.remove('is-invalid');
+                document.getElementById(elementId).classList.remove('is-valid');
+                document.getElementById(elementId).classList.add('is-invalid');
+            }
+            else {
+
+                document.getElementById(elementId).classList.remove('is-invalid');
+                document.getElementById(elementId).classList.remove('is-valid');
+                document.getElementById(elementId).classList.add('is-valid');
+            }
+        }
+
+        function alertCampos() {
+
+            swal({
+                title: "Atenção!",
+                text: "Preencha todos os campos antes de prosseguir!",
+                icon: "warning",
+                button: "Voltar!",
+                return: false
+            });
+
+            alertTxt("MainContent_txtFirstName");
+            alertTxt("MainContent_txtLastName");
+            alertTxt("MainContent_txtLoginNew");
+            alertTxt("MainContent_txtEmail");
+            alertSelect("MainContent_selPerfilNewUser");
+
+            showWindow("new_user");
+
+            return false;
+        };
+
+        function alertCamposAlterDepto() {
+
+            swal({
+                title: "Atenção!",
+                text: "Preencha todos os campos antes de prosseguir!",
+                icon: "warning",
+                button: "Voltar!",
+                return: false
+            });
+
+            alertTxt("MainContent_txtLoginAlterPerfil");
+            alertSelect("MainContent_selPerfilAlterUser");
+
+            showWindow("alter_user");
+
+            return false;
+        };
+
+        function alertCamposResetSenha() {
+
+            swal({
+                title: "Atenção!",
+                text: "Preencha todos os campos antes de prosseguir!",
+                icon: "warning",
+                button: "Voltar!",
+                return: false
+            });
+
+            alertTxt("MainContent_txtLoginReset");
+
+            showWindow("alter_user");
+
+            return false;
+        };
+
+        function alertCamposAlterFilial() {
+
+            swal({
+                title: "Atenção!",
+                text: "Preencha todos os campos antes de prosseguir!",
+                icon: "warning",
+                button: "Voltar!",
+                return: false
+            });
+
+            alertTxt("MainContent_txtLoginAlterFilial");
+
+            showWindow("alter_user");
+
+            return false;
+        };
+
+        function alertCamposInativar() {
+
+            swal({
+                title: "Atenção!",
+                text: "Preencha todos os campos antes de prosseguir!",
+                icon: "warning",
+                button: "Voltar!",
+                return: false
+            });
+
+            alertTxt("MainContent_txtLoginInativar");
+
+            showWindow("alter_user");
+
+            return false;
+        };
+
+        function alertCamposNewPerfil() {
+
+            swal({
+                title: "Atenção!",
+                text: "Preencha todos os campos antes de prosseguir!",
+                icon: "warning",
+                button: "Voltar!",
+                return: false
+            });
+
+            alertTxt("MainContent_txtNewPerfil");
+
+            showWindow("new_role");
+
+            return false;
+        };
+
+        function alertCamposNewPerfilModel() {
+
+            swal({
+                title: "Atenção!",
+                text: "Preencha todos os campos antes de prosseguir!",
+                icon: "warning",
+                button: "Voltar!",
+                return: false
+            });
+
+            alertTxt("MainContent_txtDuplicarPerfil");
+            alertSelect("MainContent_selPerfilDuplicar");
+
+            showWindow("new_role");
+
+            return false;
+        };
+
+        function alertTeste(param, menu) {
+
+            swal({
+                title: "Atenção!",
+                text: param,
+                icon: "warning",
+                button: "Ok!",
+                return: false
+            });
+
+            showWindow(menu);
+
+            return false;
         };
 
     </script>
@@ -93,7 +287,7 @@
                                     <li>Usuario</li>
 
                                     <li>
-                                        <div class="collapse show" id="home-collapse">
+                                        <div class="collapse show" id="user-collapse">
                                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                                 <li><a onclick="javascript:showWindow('new_user');" href="#" class="link-dark rounded">Cadastrar</a></li>
                                                 <li><a onclick="javascript:showWindow('find_user');" href="#" class="link-dark rounded">Consultar</a></li>
@@ -109,10 +303,24 @@
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                     <li>Perfil</li>
                                     <li>
-                                        <div class="collapse show" id="dashboard-collapse" style="">
+                                        <div class="collapse show" id="perfil-collapse" style="">
                                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                                 <li><a onclick="javascript:showWindow('new_role');" href="#" class="link-dark rounded">Cadastrar</a></li>
                                                 <li><a onclick="javascript:showWindow('param_menu');" href="#" class="link-dark rounded">Parametrizar Menus</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="border-top my-3"></li>
+                            <li class="mb-1" style="display: none">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    <li>Menu</li>
+                                    <li>
+                                        <div class="collapse show" id="menu-collapse" style="">
+                                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                                <li><a onclick="javascript:showWindow('new_user');" href="#" class="link-dark rounded">Cadastrar Menu</a></li>
+                                            </ul>
                                         </div>
                                     </li>
                                 </ul>
@@ -154,7 +362,7 @@
                                 <%--Usuário--%>
                                 <%--Cadastro de Usuario--%>
                                 <asp:Panel ID="panCadastroUsuario" runat="server" CssClass="justify-content-center">
-                                    <div class="container justify-content-center" runat="server" id="divNewUser" style="padding: 15px 15px 15px 15px; display: block">
+                                    <div class="container justify-content-center" runat="server" id="divNewUser" style="padding: 15px 15px 15px 15px; display: none">
                                         <hr class="mb-3">
                                         <br />
                                         <div class="col-md-12">
@@ -183,7 +391,7 @@
                                                         <div class="input-group-prepend xs">
                                                             <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Login</span>
                                                         </div>
-                                                        <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="lblLogin" runat="server">
+                                                        <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="txtLoginNew" runat="server">
                                                     </div>
                                                 </div>
                                                 <div class="col-8">
@@ -229,12 +437,12 @@
                                                         </div>
                                                         <div class="form-control" style="padding-top: 10px">
                                                             <div class="form-check form-check-inline form-switch">
-                                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="rdLoja" value="1" checked />
+                                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="rdLoja" runat="server" value="Loja" checked />
                                                                 <label class="form-check-label" for="inlineRadio1">Loja</label>
                                                             </div>
 
                                                             <div class="form-check form-check-inline form-switch">
-                                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="rdAdm" value="2" />
+                                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="rdAdm" runat="server" value="Adm" />
                                                                 <label class="form-check-label" for="inlineRadio2">Adm</label>
                                                             </div>
                                                         </div>
@@ -247,7 +455,7 @@
                                                     <span class="col-auto input-group-text justify-content-center">É loja:</span>
                                                     <div class="form-control justify-content-center text-center">
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" id="isLoja" checked>
+                                                            <input class="form-check-input" type="checkbox" id="isLoja" runat="server" checked>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -282,17 +490,17 @@
                                                     <option value="1" selected="selected">Login</option>
                                                     <option value="2">Email</option>
                                                     <option value="3">Nome</option>
+                                                    <option value="4">Perfil</option>
                                                 </select>
                                             </div>
                                             <br />
-                                            <div class="col-auto xs" style="width: 300px">
+                                            <div class="col-auto xs" style="width: 300px" runat="server">
                                                 <span class="input-group-text justify-content-center sm">Parâmetro</span>
-                                                <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="txtParametro" runat="server">
-                                                <%--<input type="text" class="form-control xs" name="daterange" autopostback="false" runat="server" id="daterange" />--%>
+                                                <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="txtParamConsulta" runat="server">
                                             </div>
 
                                             <div class="col-auto justify-content-center" style="padding: 20px 15px 15px 15px">
-                                                <asp:Button runat="server" OnClick="btnFiltrar_Click" Width="125px" Height="35px" class="btn btn-primary btn-md" Text="Consultar" ID="btnFiltrar" />
+                                                <asp:Button runat="server" OnClick="btnConsulta_Click" Width="125px" Height="35px" class="btn btn-primary btn-md" Text="Consultar" ID="btnConsulta" />
                                             </div>
 
                                         </div>
@@ -301,18 +509,20 @@
                                             <br />
                                         </p>
 
-                                        <div class="container col-7 justify-content-center" runat="server" id="divGrid">
+                                        <div class="container col-12 justify-content-center" runat="server" id="divGrid">
                                             <asp:GridView ID="grvDados" CssClass="gwFormat" HeaderStyle-BackColor="#CED4DA" HeaderStyle-ForeColor="Black" KeyFieldName="id"
                                                 RowStyle-BackColor="#E9ECEF" AlternatingRowStyle-BackColor="White" AlternatingRowStyle-ForeColor="#000" GridLines="None"
                                                 runat="server" AutoGenerateColumns="false" BorderStyle="none" Style="margin: 0 auto 0 auto !important" HeaderStyle-Height="40px" RowStyle-Height="50px" HeaderStyle-HorizontalAlign="Center"
                                                 RowStyle-HorizontalAlign="Center" EmptyDataText="<b>Não foram encontrados usuários para os parâmetros informados!</b>" CellPadding="15" CellSpacing="10" OnRowDataBound="grvDados_RowDataBound">
                                                 <Columns>
-                                                    <asp:BoundField DataField="Nome" HeaderText="Nome" />
+                                                    <asp:BoundField DataField="Name" HeaderText="Nome" />
                                                     <asp:BoundField DataField="Login" HeaderText="Login" />
-                                                    <asp:BoundField DataField="Perfil" HeaderText="Perfil" />
-                                                    <asp:BoundField DataField="data_criacao" HeaderText="Criação" />
-                                                    <asp:BoundField DataField="data_login" HeaderText="Ultimo Login" />
-                                                    <asp:BoundField DataField="Filial" HeaderText="Filial" />
+                                                    <asp:BoundField DataField="Email" HeaderText="Email" />
+                                                    <asp:BoundField DataField="Depto" HeaderText="Perfil" />
+                                                    <asp:BoundField DataField="CreateDate" HeaderText="Criação" />
+                                                    <asp:BoundField DataField="LastLoginDate" HeaderText="Ultimo Login" />
+                                                    <asp:BoundField DataField="FilialDesc" HeaderText="Filial" />
+                                                    <asp:BoundField DataField="Ativo" HeaderText="Status" />
                                                     <%--                                                    <asp:TemplateField ItemStyle-Width="80px">
                                                         <ItemTemplate>
                                                             <asp:Button ID="btnExcluir" runat="server" AutoPostBack="False" CommandName='<%# Eval("ID")%>' OnClientClick='var x = confirm("Tem certeza que deseja excluir o registro?"); if (x == false) {alertMsg();}; return x;' OnClick="btnExcluir_Click" CssClass="btn btn-danger btn-sm" Text="Excluir" />
@@ -338,19 +548,19 @@
                                             <br />
                                             <br />
 
-                                            <div class="col-4">
+                                            <div class="col-4" runat="server">
                                                 <div class="input-group input-group xs" style="max-height: 30px">
                                                     <div class="input-group-prepend xs">
                                                         <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Login</span>
                                                     </div>
-                                                    <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="txtLoginAlter" runat="server">
+                                                    <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="txtLoginReset" runat="server">
                                                 </div>
                                             </div>
 
                                             <div class="col-4"></div>
 
                                             <div class="col-2 justify-content-end" style="padding-right: 25px">
-                                                <asp:Button runat="server" OnClick="btnFiltrar_Click" Width="125px" Height="35px" class="btn btn-warning btn-md" Text="Executar" ID="btnResetarSenha" />
+                                                <asp:Button runat="server" OnClick="btnResetarSenha_Click" Width="125px" Height="35px" class="btn btn-warning btn-md" Text="Executar" ID="btnResetarSenha" />
                                             </div>
                                         </div>
                                         <hr class="mb-3">
@@ -381,7 +591,7 @@
                                             </div>
 
                                             <div class="col-2 justify-content-center" style="padding-right: 25px">
-                                                <asp:Button runat="server" OnClick="btnFiltrar_Click" Width="125px" Height="35px" class="btn btn-warning btn-md" Text="Executar" ID="Button1" />
+                                                <asp:Button runat="server" OnClick="btnAlterDepto_Click" Width="125px" Height="35px" class="btn btn-warning btn-md" Text="Executar" ID="btnAlterDepto" />
                                             </div>
                                         </div>
                                         <hr class="mb-3">
@@ -398,30 +608,30 @@
                                                     <div class="input-group-prepend xs">
                                                         <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Login</span>
                                                     </div>
-                                                    <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="Text2" runat="server">
+                                                    <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="txtLoginAlterFilial" runat="server">
                                                 </div>
                                             </div>
 
-                                                <div class="col-2 justify-content-center">
-                                                    <div class="input-group input-group xs" style="max-height: 30px">
-                                                        <div class="input-group-prepend xs">
-                                                            <span class="col-auto input-group-text justify-content-center">Tipo</span>
-                                                        </div>
-                                                        <asp:DropDownList class="form-control text-center" ID="selTipoAlter" runat="server" DataTextField="Desc" AutoPostBack="true" OnSelectedIndexChanged="selTipoAlter_SelectedIndexChanged"></asp:DropDownList>
+                                            <div class="col-2 justify-content-center">
+                                                <div class="input-group input-group xs" style="max-height: 30px">
+                                                    <div class="input-group-prepend xs">
+                                                        <span class="col-auto input-group-text justify-content-center">Tipo</span>
                                                     </div>
+                                                    <asp:DropDownList class="form-control text-center" ID="selTipoAlter" runat="server" DataTextField="Desc" AutoPostBack="true" OnSelectedIndexChanged="selTipoAlter_SelectedIndexChanged"></asp:DropDownList>
                                                 </div>
+                                            </div>
 
-                                                <div class="col-3 justify-content-center">
-                                                    <div class="input-group input-group xs" style="max-height: 30px">
-                                                        <div class="input-group-prepend xs">
-                                                            <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Filial</span>
-                                                        </div>
-                                                        <asp:DropDownList class="form-control " ID="selFilialAlter" runat="server" DataTextField="Desc"></asp:DropDownList>
+                                            <div class="col-3 justify-content-center">
+                                                <div class="input-group input-group xs" style="max-height: 30px">
+                                                    <div class="input-group-prepend xs">
+                                                        <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Filial</span>
                                                     </div>
+                                                    <asp:DropDownList class="form-control " ID="selFilialAlter" runat="server" DataTextField="Desc"></asp:DropDownList>
                                                 </div>
+                                            </div>
 
                                             <div class="col-2 justify-content-end" style="padding-right: 25px">
-                                                <asp:Button runat="server" OnClick="btnFiltrar_Click" Width="125px" Height="35px" class="btn btn-warning btn-md" Text="Executar" ID="Button2" />
+                                                <asp:Button runat="server" OnClick="btnAlterFilial_Click" Width="125px" Height="35px" class="btn btn-warning btn-md" Text="Executar" ID="btnAlterFilial" />
                                             </div>
                                         </div>
                                         <hr class="mb-3">
@@ -445,7 +655,7 @@
                                             <div class="col-4"></div>
 
                                             <div class="col-2 justify-content-end" style="padding-right: 25px">
-                                                <asp:Button runat="server" OnClick="btnFiltrar_Click" Width="125px" Height="35px" class="btn btn-danger btn-md" Text="Executar" ID="Button4" />
+                                                <asp:Button runat="server" OnClick="btnBlockUser_Click" Width="125px" Height="35px" class="btn btn-danger btn-md" Text="Executar" ID="btnBlockUser" />
                                             </div>
                                         </div>
                                         <hr class="mb-3">
@@ -520,7 +730,7 @@
                                     <div class="container justify-content-center" runat="server" id="divNewRole" style="padding: 15px 15px 15px 15px; display: none">
                                         <hr class="mb-3">
 
-                                        <%--Resetar senha--%>
+                                        <%--Novo Perfil--%>
                                         <div class="row col-12 justify-content-center" style="background-color: #E9ECEF; padding: 20px 0 20px 0">
                                             <br />
                                             <span class="justify-content-center sm h5">Novo Perfil</span>
@@ -532,19 +742,19 @@
                                                     <div class="input-group-prepend xs">
                                                         <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Nome (Perfil)</span>
                                                     </div>
-                                                    <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="Text1" runat="server">
+                                                    <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="txtNewPerfil" runat="server">
                                                 </div>
                                             </div>
 
                                             <div class="col-4"></div>
 
                                             <div class="col-2 justify-content-end" style="padding-right: 25px">
-                                                <asp:Button runat="server" OnClick="btnFiltrar_Click" Width="125px" Height="35px" class="btn btn-warning btn-md" Text="Executar" ID="Button3" />
+                                                <asp:Button runat="server" OnClick="btnNewPerfil_Click" Width="125px" Height="35px" class="btn btn-warning btn-md" Text="Executar" ID="btnNewPerfil" />
                                             </div>
                                         </div>
                                         <hr class="mb-3">
 
-                                        <%--Alterar Perfil--%>
+                                        <%--Duplicar Perfil--%>
                                         <div class="row col-12 justify-content-center" style="background-color: #E9ECEF; padding: 20px 0 20px 0">
                                             <br />
                                             <span class="justify-content-center sm h5">Duplicar Perfil</span>
@@ -556,25 +766,21 @@
                                                     <div class="input-group-prepend xs">
                                                         <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Perfil Modelo</span>
                                                     </div>
-                                                    <select id="Select4" runat="server" class="form-control justify-content-center text-center">
-                                                        <option value="0" selected>Selecione...</option>
-                                                        <option value="2">Teste 2</option>
-                                                        <option value="3">Teste 3</option>
-                                                    </select>
+                                                    <asp:DropDownList class="form-control text-center" ID="selPerfilDuplicar" runat="server" DataTextField="Desc" AutoPostBack="false"></asp:DropDownList>
                                                 </div>
                                             </div>
 
                                             <div class="col-4">
-                                                <div class="input-group input-group xs" style="max-height: 30px">
+                                                <div class="input-group input-group xs" style="max-height: 30px" runat="server">
                                                     <div class="input-group-prepend xs">
                                                         <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Nome (Perfil)</span>
                                                     </div>
-                                                    <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="Text4" runat="server">
+                                                    <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="txtDuplicarPerfil" runat="server">
                                                 </div>
                                             </div>
 
                                             <div class="col-2 justify-content-center" style="padding-right: 25px">
-                                                <asp:Button runat="server" OnClick="btnFiltrar_Click" Width="125px" Height="35px" class="btn btn-warning btn-md" Text="Executar" ID="Button5" />
+                                                <asp:Button runat="server" OnClick="btnDuplicarPerfil_Click" Width="125px" Height="35px" class="btn btn-warning btn-md" Text="Executar" ID="btnDuplicarPerfil" />
                                             </div>
                                         </div>
                                         <hr class="mb-3">
@@ -639,6 +845,124 @@
                                     </div>
                                 </asp:Panel>
 
+                                <%--Menu--%>
+                                <%--Cadastro de Menu--%>
+                                <asp:Panel ID="pnlNewMenu" runat="server" CssClass="justify-content-center">
+                                    <div class="container justify-content-center" runat="server" id="newMenu" style="padding: 15px 15px 15px 15px; display: none">
+                                        <hr class="mb-3">
+                                        <br />
+                                        <div class="col-md-12">
+                                            <div class="row justify-content-between">
+                                                <div class="col-4">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Nome</span>
+                                                        </div>
+                                                        <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="Text1" runat="server">
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Sobrenome</span>
+                                                        </div>
+                                                        <input type="text" class="form-control justify-content-center text-center" maxlength="100" id="Text2" runat="server">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row justify-content-between">
+                                                <div class="col-4">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Login</span>
+                                                        </div>
+                                                        <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="Text3" runat="server">
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <div class="input-group-prepend xs">
+                                                                <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Email</span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="Text4" runat="server">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row justify-content-between">
+                                                <div class="col-4">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <div class="input-group-prepend xs">
+                                                                <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Matrícula</span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="number" class="form-control justify-content-center text-center" maxlength="50" id="Number1" runat="server">
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <div class="input-group-prepend xs">
+                                                                <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Perfil</span>
+                                                            </div>
+                                                        </div>
+                                                        <asp:DropDownList class="form-control text-center" ID="DropDownList1" runat="server" DataTextField="Desc" AutoPostBack="false"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <div class="input-group-prepend xs">
+                                                                <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Tipo</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-control" style="padding-top: 10px">
+                                                            <div class="form-check form-check-inline form-switch">
+                                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Radio1" runat="server" value="Loja" checked />
+                                                                <label class="form-check-label" for="inlineRadio1">Loja</label>
+                                                            </div>
+
+                                                            <div class="form-check form-check-inline form-switch">
+                                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Radio2" runat="server" value="Adm" />
+                                                                <label class="form-check-label" for="inlineRadio2">Adm</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row justify-content-between text-center">
+                                                <div class="col-2 justify-content-center" style="min-width: 100px">
+                                                    <span class="col-auto input-group-text justify-content-center">É loja:</span>
+                                                    <div class="form-control justify-content-center text-center">
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox" id="Checkbox1" runat="server" checked>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 justify-content-center text-center">
+                                                    <span class="col-auto input-group-text justify-content-center">Tipo</span>
+                                                    <asp:DropDownList class="form-control text-center" ID="DropDownList2" runat="server" DataTextField="Desc" AutoPostBack="true" OnSelectedIndexChanged="selTipo_SelectedIndexChanged"></asp:DropDownList>
+                                                </div>
+                                                <div class="col-8 justify-content-center text-center">
+                                                    <span class="col-auto input-group-text justify-content-center">Filial</span>
+                                                    <asp:DropDownList class="form-control " ID="DropDownList3" runat="server" DataTextField="Desc"></asp:DropDownList>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row justify-content-sm-center">
+                                                <asp:Button runat="server" OnClick="btnSubmit_Click" Width="200px" class="btn btn-primary btn-md" Text="Cadastrar" ID="Button1" />
+                                            </div>
+                                            <br />
+                                            <hr class="mb-3">
+                                        </div>
+                                    </div>
+                                </asp:Panel>
                             </panelcontent>
                         </panelcollection>
                     </aspxcallbackpanel>
@@ -651,6 +975,14 @@
                             <br />
                             Para visualizar acesse a opção <strong>Consulta</strong>.
                         </div>
+
+                        <div class="alert alert-danger justify-content-center" id="danger-alert" style="text-align: center; display: none; max-width: 500px">
+                            <button type="button" class="close" data-dismiss="alert">x</button>
+                            <strong>Erro! </strong>Ocorreu um erro na criação do usuário!<br />
+                            <br />
+                            Valide as informações e qualquer coisa entre em contato com o suporte.
+                        </div>
+
                     </div>
                     <br />
                 </div>
@@ -738,255 +1070,6 @@
             }
     </style>
 
-    <script type="text/javascript"> 
-        $(function () {
-
-            $('input[name="ctl00$MainContent$daterange"]').daterangepicker({
-                opens: 'left',
-                maxDate: moment(),
-                autoUpdateInput: false,
-                locale: {
-                    format: 'DD/MM/YYYY',
-                    cancelLabel: 'Limpar',
-                    applyLabel: 'Aplicar',
-                    language: 'pt-br',
-                    daysOfWeek: [
-                        "Dom",
-                        "Seg",
-                        "Ter",
-                        "Qua",
-                        "Qui",
-                        "Sex",
-                        "Sab"
-                    ],
-                    monthNames: [
-                        "Janeiro",
-                        "Fevereiro",
-                        "Março",
-                        "Abril",
-                        "Maio",
-                        "Junho",
-                        "Julho",
-                        "Agosto",
-                        "Setembro",
-                        "Outubro",
-                        "Novembro",
-                        "Dezembro"
-                    ]
-                }
-            });
-
-            $('input[name="ctl00$MainContent$daterange"]').on('apply.daterangepicker', function (ev, picker) {
-                $(this).val(picker.startDate.format('DD/MM/YYYY') + ' à ' + picker.endDate.format('DD/MM/YYYY'));
-            });
-
-            $('input[name="ctl00$MainContent$daterange"]').on('cancel.daterangepicker', function (ev, picker) {
-                $(this).val('');
-            });
-
-            $('input[name="ctl00$MainContent$lblData"]').daterangepicker({
-                opens: 'left',
-                maxDate: moment(),
-                autoUpdateInput: false,
-                singleDatePicker: true,
-                locale: {
-                    format: 'DD/MM/YYYY',
-                    cancelLabel: 'Limpar',
-                    applyLabel: 'Aplicar',
-                    language: 'pt-br',
-                    daysOfWeek: [
-                        "Dom",
-                        "Seg",
-                        "Ter",
-                        "Qua",
-                        "Qui",
-                        "Sex",
-                        "Sab"
-                    ],
-                    monthNames: [
-                        "Janeiro",
-                        "Fevereiro",
-                        "Março",
-                        "Abril",
-                        "Maio",
-                        "Junho",
-                        "Julho",
-                        "Agosto",
-                        "Setembro",
-                        "Outubro",
-                        "Novembro",
-                        "Dezembro"
-                    ]
-                }
-            });
-
-            $('input[name="ctl00$MainContent$lblData"]').on('apply.daterangepicker', function (ev, picker) {
-                $(this).val(picker.startDate.format('DD/MM/YYYY'));
-            });
-
-            $('input[name="ctl00$MainContent$lblData"]').on('cancel.daterangepicker', function (ev, picker) {
-                $(this).val('');
-            });
-
-        });
-
-        $('.selectpicker').select2();
-        $("#success-alert").hide();
-        $("#dangerAlert").hide();
-
-        $("#MainContent_dangerAlert").fadeTo(8000, 500).slideUp(500, function () {
-            $("#MainContent_dangerAlert").slideUp(500);
-        });
-
-        function alertSucess() {
-            $("#success-alert").fadeTo(8000, 500).slideUp(500, function () {
-                $("#success-alert").slideUp(500);
-            });
-        }
-
-        function alertExcluir() {
-            $("#dangerAlert").fadeTo(8000, 500).slideUp(500, function () {
-                $("#dangerAlert").slideUp(500);
-            });
-        }
-
-        function alertMsg() {
-            swal({
-                title: "Atenção!",
-                text: "Os dados excluídos não poderão ser recuperados!",
-                icon: "warning",
-                button: "Ok!"
-            });
-        }
-
-        function alertCampos() {
-            swal({
-                title: "Atenção!",
-                text: "Preencha todos os campos antes de prosseguir!",
-                icon: "warning",
-                button: "Voltar!"
-            });
-
-            var titulo = document.getElementById("MainContent_lblTitulo");
-            var assunto = document.getElementById("MainContent_lblAssunto");
-            var data = document.getElementById("MainContent_lblData");
-            var tipo = document.getElementById("MainContent_selTipo");
-            var local = document.getElementById("MainContent_selLocal");
-            var acesso = document.getElementById("MainContent_selAcesso");
-            var arquivo = document.getElementById("MainContent_FileUpload");
-
-            if (titulo.value == "") {
-
-                document.getElementById("MainContent_lblTitulo").classList.remove('is-invalid');
-                document.getElementById("MainContent_lblTitulo").classList.remove('is-valid');
-                document.getElementById("MainContent_lblTitulo").classList.add('is-invalid');
-            }
-            else {
-
-                document.getElementById("MainContent_lblTitulo").classList.remove('is-invalid');
-                document.getElementById("MainContent_lblTitulo").classList.remove('is-valid');
-                document.getElementById("MainContent_lblTitulo").classList.add('is-valid');
-            }
-
-            if (assunto.value == "") {
-
-                document.getElementById("MainContent_lblAssunto").classList.remove('is-invalid');
-                document.getElementById("MainContent_lblAssunto").classList.remove('is-valid');
-                document.getElementById("MainContent_lblAssunto").classList.add('is-invalid');
-            }
-            else {
-
-                document.getElementById("MainContent_lblAssunto").classList.remove('is-invalid');
-                document.getElementById("MainContent_lblAssunto").classList.remove('is-valid');
-                document.getElementById("MainContent_lblAssunto").classList.add('is-valid');
-            }
-
-            if (data.value == "") {
-
-                document.getElementById("MainContent_lblData").classList.remove('is-invalid');
-                document.getElementById("MainContent_lblData").classList.remove('is-valid');
-                document.getElementById("MainContent_lblData").classList.add('is-invalid');
-            }
-            else {
-
-                document.getElementById("MainContent_lblData").classList.remove('is-invalid');
-                document.getElementById("MainContent_lblData").classList.remove('is-valid');
-                document.getElementById("MainContent_lblData").classList.add('is-valid');
-            }
-
-            if (tipo.value == "") {
-
-                document.getElementById("MainContent_selTipo").classList.remove('is-invalid');
-                document.getElementById("MainContent_selTipo").classList.remove('is-valid');
-                document.getElementById("MainContent_selTipo").classList.add('is-invalid');
-            }
-            else {
-
-                document.getElementById("MainContent_selTipo").classList.remove('is-invalid');
-                document.getElementById("MainContent_selTipo").classList.remove('is-valid');
-                document.getElementById("MainContent_selTipo").classList.add('is-valid');
-            }
-
-            if (local.value == "") {
-
-                document.getElementById("MainContent_selLocal").classList.remove('is-invalid');
-                document.getElementById("MainContent_selLocal").classList.remove('is-valid');
-                document.getElementById("MainContent_selLocal").classList.add('is-invalid');
-            }
-            else {
-
-                document.getElementById("MainContent_selLocal").classList.remove('is-invalid');
-                document.getElementById("MainContent_selLocal").classList.remove('is-valid');
-                document.getElementById("MainContent_selLocal").classList.add('is-valid');
-            }
-
-            if (acesso.value == "") {
-
-                document.getElementById("MainContent_selAcesso").classList.remove('is-invalid');
-                document.getElementById("MainContent_selAcesso").classList.remove('is-valid');
-                document.getElementById("MainContent_selAcesso").classList.add('is-invalid');
-            }
-            else {
-
-                document.getElementById("MainContent_selAcesso").classList.remove('is-invalid');
-                document.getElementById("MainContent_selAcesso").classList.remove('is-valid');
-                document.getElementById("MainContent_selAcesso").classList.add('is-valid');
-            }
-
-            if (arquivo.value == "") {
-
-                document.getElementById("MainContent_FileUpload").classList.remove('is-invalid');
-                document.getElementById("MainContent_FileUpload").classList.remove('is-valid');
-                document.getElementById("MainContent_FileUpload").classList.add('is-invalid');
-            }
-            else {
-
-                document.getElementById("MainContent_FileUpload").classList.remove('is-invalid');
-                document.getElementById("MainContent_FileUpload").classList.remove('is-valid');
-                document.getElementById("MainContent_FileUpload").classList.add('is-valid');
-            }
-
-            return false;
-        }
-
-        $(".header").click(function () {
-
-            $header = $(this);
-            //getting the next element
-            $content = $header.next();
-            //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
-            $content.slideToggle(100, function () {
-                //execute this after slideToggle is done
-                //change text of header based on visibility of content div
-                $header.text(function () {
-                    //change text based on condition
-                    return $content.is(":visible") ? "Collapse" : "Expand";
-                });
-            });
-
-        });
-
-    </script>
 </asp:Content>
 
 

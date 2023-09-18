@@ -26,6 +26,7 @@ Partial Class MemberPages_CheckListCondor
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
+            oProj.BuscarLocalDoUsuario(Page.User.Identity.Name)
             vDepartamento = LCase(Trim(oProj.Buscar_Departamento_Usuario(Page.User.Identity.Name)))
             Session("sDEPARTAMENTO") = vDepartamento
             vIsLoja = oProj.Isloja

@@ -1,5 +1,6 @@
 ﻿Imports System.Data
 Imports System.Data.SqlClient
+Imports DevExpress.Xpf.Scheduler.Drawing
 
 Partial Class MemberPages_Quebras_Validade_CadastroValidade
     Inherits System.Web.UI.Page
@@ -37,6 +38,7 @@ Partial Class MemberPages_Quebras_Validade_CadastroValidade
     Protected Sub Page_PreRenderComplete(sender As Object, e As EventArgs) Handles Me.PreRenderComplete
         If Not IsPostBack Then
             cboSecao.CallSecaoDesc = "01-Seca Pesada"
+            cboSecao.cboSecao_Enabled = False
         End If
     End Sub
 
@@ -44,7 +46,7 @@ Partial Class MemberPages_Quebras_Validade_CadastroValidade
 
         Dim varNomeFornecedor As String = ""
         Dim con As New SqlConnection(Conexao.gerManager)
-        Dim comando As New SqlCommand("Cadastros.uspBuscarProdutoPeloEAN", con)
+        Dim comando As New SqlCommand("Cadastros.uspBuscarProdutoPeloEAN_New", con)
         comando.CommandType = CommandType.StoredProcedure
 
         comando.Parameters.Add(New SqlParameter("@EAN", SqlDbType.BigInt))
@@ -57,6 +59,7 @@ Partial Class MemberPages_Quebras_Validade_CadastroValidade
             While reader5.Read
 
                 lblDescProduto.Text = reader5.GetSqlInt32(0).ToString & " - " & reader5.GetSqlString(1).ToString
+                cboSecao.CallSecaoDesc = reader5.GetSqlString(2).ToString
                 cboDia.Focus()
 
             End While

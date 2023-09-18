@@ -39,25 +39,25 @@ Partial Class MemberPages_Checklist_Dashboard
             CType(gauge_Pontuacao_Pior1.Gauges(0), ICircularGauge).Scales(0).Value = nota
             lblFilial_Pior1.Text = "Filial: " & descFilial
             lblPeriodo_Pior1.Text = Periodo
-            MudaCor(btnPior1, nota)
+            'MudaCor(btnPior1, nota)
 
             Call Buscar_Total_PiorLoja_Mes("Pontuacao.usp_Nota_Buscar_Total_PiorLoja_Mes", ano, mes, 2)
             CType(gauge_Pontuacao_Pior2.Gauges(0), ICircularGauge).Scales(0).Value = nota
             lblFilial_Pior2.Text = "Filial: " & descFilial
             lblPeriodo_Pior2.Text = Periodo
-            MudaCor(btnPior2, nota)
+            'MudaCor(btnPior2, nota)
 
             Call Buscar_Total_PiorLoja_Mes("Pontuacao.usp_Nota_Buscar_Total_MelhorLoja_Mes", ano, mes, 1)
             CType(gauge_Pontuacao_Melhor1.Gauges(0), ICircularGauge).Scales(0).Value = nota
             lblFilial_Melhor1.Text = "Filial: " & descFilial
             lblPeriodo_Melhor1.Text = Periodo
-            MudaCor(btnMelhor1, nota)
+            'MudaCor(btnMelhor1, nota)
 
             Call Buscar_Total_PiorLoja_Mes("Pontuacao.usp_Nota_Buscar_Total_MelhorLoja_Mes", ano, mes, 2)
             CType(gauge_Pontuacao_Melhor2.Gauges(0), ICircularGauge).Scales(0).Value = nota
             lblFilial_Melhor2.Text = "Filial: " & descFilial
             lblPeriodo_Melhor2.Text = Periodo
-            MudaCor(btnMelhor2, nota)
+            'MudaCor(btnMelhor2, nota)
 
             lblPeriodo_Empresa.Text = lblPeriodo_Melhor1.Text
 
@@ -75,14 +75,15 @@ Partial Class MemberPages_Checklist_Dashboard
             lblNaoConforme.Text = "Total de Não-Conforme por Loja e Departamento - " + lblPeriodo_Melhor1.Text
 
             cboGrupo.Text = 1
-            cboSubgrupo.Text = 1
+            'cboSubgrupo.Text = 1
 
             cboGrupo_NA.Text = 1
-            cboSubgrupo_NA.Text = 1
+            'cboSubgrupo_NA.Text = 1
 
             cboFilial_NA.Visible_cboCorporacao = False
             cboFilial_NA.AutoPostBack = True
             cboFilial_Periodo.AutoPostBack = True
+            cboFilial_Periodo.Visible_cboCorporacao = False
 
 
             '  Graficos 
@@ -168,10 +169,10 @@ Partial Class MemberPages_Checklist_Dashboard
         Session("sANO") = Year(DateAndTime.Today.AddDays(-1))
 
         Session("sGRUPO") = cboGrupo.Value
-        Session("sSUBGRUPO") = cboSubgrupo.Value
+        'Session("sSUBGRUPO") = cboSubgrupo.Value
 
         Session("sGRUPO_NA") = cboGrupo_NA.Value
-        Session("sSUBGRUPO_NA") = cboSubgrupo_NA.Value
+        'Session("sSUBGRUPO_NA") = cboSubgrupo_NA.Value
         Session("sFILIAL_NA") = cboFilial_NA.CallFilial
 
     End Sub
@@ -208,11 +209,18 @@ Partial Class MemberPages_Checklist_Dashboard
         oFun.graph_Pontuacao_CheckList(sender, e)
     End Sub
 
+    Protected Sub graph_Regional1015_CustomDrawSeriesPoint(sender As Object, e As CustomDrawSeriesPointEventArgs) Handles graph_Regional1015.CustomDrawSeriesPoint
+        oFun.graph_Pontuacao_CheckList(sender, e)
+    End Sub
+
+    Protected Sub graph_Regional1018_CustomDrawSeriesPoint(sender As Object, e As CustomDrawSeriesPointEventArgs) Handles graph_Regional1018.CustomDrawSeriesPoint
+        oFun.graph_Pontuacao_CheckList(sender, e)
+    End Sub
     Protected Sub cboGrupo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGrupo.SelectedIndexChanged
-        cboSubgrupo.DataBind()
-        If cboSubgrupo.SelectedIndex = -1 Then
-            cboSubgrupo.SelectedIndex = 0
-        End If
+        'cboSubgrupo.DataBind()
+        'If cboSubgrupo.SelectedIndex = -1 Then
+        '    cboSubgrupo.SelectedIndex = 0
+        'End If
         mySession()
         graph_Subgrupo.DataBind()
     End Sub
@@ -221,24 +229,24 @@ Partial Class MemberPages_Checklist_Dashboard
         oFun.graph_Pontuacao_CheckList(sender, e)
     End Sub
 
-    Protected Sub cboSubgrupo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSubgrupo.SelectedIndexChanged
-        mySession()
-        graph_Subgrupo.DataBind()
-    End Sub
+    'Protected Sub cboSubgrupo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSubgrupo.SelectedIndexChanged
+    '    mySession()
+    '    graph_Subgrupo.DataBind()
+    'End Sub
 
     Protected Sub cboGrupo_NA_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGrupo_NA.SelectedIndexChanged
-        cboSubgrupo_NA.DataBind()
-        If cboSubgrupo_NA.SelectedIndex = -1 Then
-            cboSubgrupo_NA.SelectedIndex = 0
-        End If
+        'cboSubgrupo_NA.DataBind()
+        'If cboSubgrupo_NA.SelectedIndex = -1 Then
+        '    cboSubgrupo_NA.SelectedIndex = 0
+        'End If
         mySession()
         graphNaoConforme.DataBind()
     End Sub
 
-    Protected Sub cboSubgrupo_NA_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSubgrupo_NA.SelectedIndexChanged
-        mySession()
-        graphNaoConforme.DataBind()
-    End Sub
+    'Protected Sub cboSubgrupo_NA_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSubgrupo_NA.SelectedIndexChanged
+    '    mySession()
+    '    graphNaoConforme.DataBind()
+    'End Sub
 
     Protected Sub cboFilial_NA_ListFilialChanged(sender As Object, e As EventArgs) Handles cboFilial_NA.ListFilialChanged
         mySession()
