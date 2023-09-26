@@ -227,7 +227,7 @@ Partial Class MemberPages_Cadastros_usersControl
     End Sub
 
     Protected Sub btnBlockUser_Click(sender As Object, e As EventArgs)
-        If (txtFirstName.Value = "" Or txtLastName.Value = "" Or txtLoginNew.Value = "" Or txtEmail.Value = "" Or selPerfilNewUser.SelectedValue = "0") Then
+        If (txtLoginInativar.Value = "") Then
             ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertCamposInativar();", True)
             Return
         End If

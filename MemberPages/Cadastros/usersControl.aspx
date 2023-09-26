@@ -9,14 +9,8 @@
     <link href="../../assets/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="../../assets/bootstrap-5.0.2-dist/js/sidebars.js"></script>
     <link href="../../assets/bootstrap-5.0.2-dist/css/sidebars.css" rel="stylesheet" />
-
     <script src="../../assets/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
-    <script type="text/javascript" src="../../assets/datepickerRange/jquery.min.js"></script>
-    <script type="text/javascript" src="../../assets/datepickerRange/moment.min.js"></script>
-    <script type="text/javascript" src="../../assets/datepickerRange/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../assets/datepickerRange/daterangepicker.css" />
-    <link href="../../assets/bootstrap-select-1.13.14/select2.min.css" rel="stylesheet" />
-    <script src="../../assets/bootstrap-select-1.13.14/select2.min.js"></script>
+
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
@@ -64,6 +58,7 @@
             document.getElementById('MainContent_divMenuExcecao').style.display = 'none';
             document.getElementById('MainContent_divNewRole').style.display = 'none';
             document.getElementById('MainContent_divParamMenu').style.display = 'none';
+            document.getElementById('MainContent_divNewMenu').style.display = 'none';
 
             if (url == "new_user") {
                 document.getElementById('MainContent_divNewUser').style.display = 'block';
@@ -87,6 +82,10 @@
 
             if (url == "param_menu") {
                 document.getElementById('MainContent_divParamMenu').style.display = 'block';
+            }
+
+            if (url == "new_menu") {
+                document.getElementById('MainContent_divNewMenu').style.display = 'block';
             }
         };
 
@@ -313,13 +312,13 @@
                                 </ul>
                             </li>
                             <li class="border-top my-3"></li>
-                            <li class="mb-1" style="display: none">
+                            <li class="mb-1" style="display: block">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                     <li>Menu</li>
                                     <li>
                                         <div class="collapse show" id="menu-collapse" style="">
                                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                                <li><a onclick="javascript:showWindow('new_user');" href="#" class="link-dark rounded">Cadastrar Menu</a></li>
+                                                <li><a onclick="javascript:showWindow('new_menu');" href="#" class="link-dark rounded">Cadastrar Menu</a></li>
                                             </ul>
                                         </div>
                                     </li>
@@ -848,10 +847,48 @@
                                 <%--Menu--%>
                                 <%--Cadastro de Menu--%>
                                 <asp:Panel ID="pnlNewMenu" runat="server" CssClass="justify-content-center">
-                                    <div class="container justify-content-center" runat="server" id="newMenu" style="padding: 15px 15px 15px 15px; display: none">
+                                    <div class="container justify-content-center" runat="server" id="divNewMenu" style="padding: 15px 15px 15px 15px; display: block">
                                         <hr class="mb-3">
                                         <br />
                                         <div class="col-md-12">
+                                            <div class="row justify-content-between">
+                                                <div class="col-4 justify-content-center" style="min-width: 100px">
+                                                    <span class="col-auto input-group-text justify-content-center">Tipo</span>
+                                                    <div class="justify-content-center text-center">
+                                                       <div class="form-control" style="padding-top: 10px">
+                                                            <div class="form-check form-check-inline form-switch">
+                                                                <label class="form-check-label" for="rdlMenu">Barra de Menu</label>
+                                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="rdlMenuBarra" runat="server" value="1" checked />
+                                                            </div>
+                                                            <div class="form-check form-check-inline form-switch">
+                                                                <label class="form-check-label" for="rdlMenu">Menu Interno</label>
+                                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="rdlMenuInterno" runat="server" value="2" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <div class="input-group-prepend xs">
+                                                                <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Matrícula</span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="number" class="form-control justify-content-center text-center" maxlength="50" id="Number1" runat="server">
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <div class="input-group-prepend xs">
+                                                                <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Perfil</span>
+                                                            </div>
+                                                        </div>
+                                                        <asp:DropDownList class="form-control text-center" ID="DropDownList1" runat="server" DataTextField="Desc" AutoPostBack="false"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br />
                                             <div class="row justify-content-between">
                                                 <div class="col-4">
                                                     <div class="input-group input-group xs" style="max-height: 30px">
@@ -892,50 +929,6 @@
                                                 </div>
                                             </div>
                                             <br />
-                                            <div class="row justify-content-between">
-                                                <div class="col-4">
-                                                    <div class="input-group input-group xs" style="max-height: 30px">
-                                                        <div class="input-group-prepend xs">
-                                                            <div class="input-group-prepend xs">
-                                                                <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Matrícula</span>
-                                                            </div>
-                                                        </div>
-                                                        <input type="number" class="form-control justify-content-center text-center" maxlength="50" id="Number1" runat="server">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="input-group input-group xs" style="max-height: 30px">
-                                                        <div class="input-group-prepend xs">
-                                                            <div class="input-group-prepend xs">
-                                                                <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Perfil</span>
-                                                            </div>
-                                                        </div>
-                                                        <asp:DropDownList class="form-control text-center" ID="DropDownList1" runat="server" DataTextField="Desc" AutoPostBack="false"></asp:DropDownList>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-4">
-                                                    <div class="input-group input-group xs" style="max-height: 30px">
-                                                        <div class="input-group-prepend xs">
-                                                            <div class="input-group-prepend xs">
-                                                                <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Tipo</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-control" style="padding-top: 10px">
-                                                            <div class="form-check form-check-inline form-switch">
-                                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Radio1" runat="server" value="Loja" checked />
-                                                                <label class="form-check-label" for="inlineRadio1">Loja</label>
-                                                            </div>
-
-                                                            <div class="form-check form-check-inline form-switch">
-                                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Radio2" runat="server" value="Adm" />
-                                                                <label class="form-check-label" for="inlineRadio2">Adm</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <br />
                                             <div class="row justify-content-between text-center">
                                                 <div class="col-2 justify-content-center" style="min-width: 100px">
                                                     <span class="col-auto input-group-text justify-content-center">É loja:</span>
@@ -963,6 +956,7 @@
                                         </div>
                                     </div>
                                 </asp:Panel>
+
                             </panelcontent>
                         </panelcollection>
                     </aspxcallbackpanel>
