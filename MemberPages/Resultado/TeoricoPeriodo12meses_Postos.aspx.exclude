@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="TeoricoPeriodo12meses_Posto.aspx.vb" Inherits="MemberPages_Resultado_Teorico12Meses_Posto" %>
+﻿<%@ Page Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="TeoricoPeriodo12meses_Postos.aspx.vb" Inherits="MemberPages_Resultado_Teorico12_Meses_Postos" %>
 
 <%@ Register Assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 <%@ Register Src="../../Controles/wucAno.ascx" TagName="wucAno" TagPrefix="uc1" %>
