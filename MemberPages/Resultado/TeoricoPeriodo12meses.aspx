@@ -1502,6 +1502,8 @@
                             <SelectParameters>
                                 <asp:SessionParameter Name="ano" SessionField="sANO" Type="Int16" />
                                 <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
+                                <asp:SessionParameter Name="idUnidade" SessionField="sUNIDADE" Type="Byte" />
+
                             </SelectParameters>
                         </asp:SqlDataSource>
                     </dx:PanelContent>

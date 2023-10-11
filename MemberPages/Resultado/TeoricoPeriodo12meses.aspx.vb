@@ -872,23 +872,44 @@ Partial Class MemberPages_Resultado_Teorico12Meses
 
         Dim NomeColuna As String = e.GetValue("idGrupo")
 
-        Select Case NomeColuna
-            Case "1", "4", "47"
-                e.Row.BackColor = System.Drawing.Color.Honeydew
-                e.Row.Font.Bold = True
-            Case "16", "18", "20", "22", "24", "26", "28", "30", "32", "73", "34", "36"
-                e.Row.BackColor = System.Drawing.Color.Beige
-            Case "39", "51", "10", "50", "80"
-                e.Row.BackColor = System.Drawing.Color.LavenderBlush
-            Case "7", "3", "40", "42", "79", "13"
-                e.Row.BackColor = System.Drawing.Color.LightGray
-                e.Row.Font.Bold = True
-            Case "14"
-                e.Row.BackColor = System.Drawing.Color.Yellow
-                e.Row.Font.Bold = True
+        If cboFilial.CallCorporacao = 5 Then
+            Select Case NomeColuna
+                Case "1", "4", "47"
+                    e.Row.BackColor = System.Drawing.Color.Honeydew
+                    e.Row.Font.Bold = True
+                Case "16", "18", "20", "22", "24", "26", "28", "30", "32", "73", "34", "36"
+                    e.Row.BackColor = System.Drawing.Color.Beige
+                Case "39", "51", "10", "50", "80"
+                    e.Row.BackColor = System.Drawing.Color.LavenderBlush
+                Case "7", "3", "40", "42", "79", "13"
+                    e.Row.BackColor = System.Drawing.Color.LightGray
+                    e.Row.Font.Bold = True
+                Case "14"
+                    e.Row.BackColor = System.Drawing.Color.Yellow
+                    e.Row.Font.Bold = True
+                Case "106", "107", "115"
+                    e.Row.BackColor = System.Drawing.Color.Aqua
+                    e.Row.Font.Bold = True
+            End Select
+        Else
+            Select Case NomeColuna
+                Case "1", "4", "47"
+                    e.Row.BackColor = System.Drawing.Color.Honeydew
+                    e.Row.Font.Bold = True
+                Case "16", "18", "20", "22", "24", "26", "28", "30", "32", "73", "34", "36"
+                    e.Row.BackColor = System.Drawing.Color.Beige
+                Case "39", "51", "10", "50", "80"
+                    e.Row.BackColor = System.Drawing.Color.LavenderBlush
+                Case "7", "3", "40", "42", "79", "13"
+                    e.Row.BackColor = System.Drawing.Color.LightGray
+                    e.Row.Font.Bold = True
+                Case "14"
+                    e.Row.BackColor = System.Drawing.Color.Yellow
+                    e.Row.Font.Bold = True
+            End Select
+        End If
 
 
-        End Select
         'LightYellow
         'Lavender
         'LightGoldenrodYellow
@@ -1532,6 +1553,7 @@ Partial Class MemberPages_Resultado_Teorico12Meses
 
         Session("sFILIAL") = Me.cboFilial.CallFilial
         Session("sANO") = Me.cboAno.CallAno
+        Session("sUNIDADE") = Me.cboFilial.CallCorporacao
 
         Call ColocarBordas()
 
