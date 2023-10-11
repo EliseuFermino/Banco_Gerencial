@@ -874,7 +874,7 @@ Partial Class MemberPages_Resultado_Teorico12Meses
 
         If cboFilial.CallCorporacao = 5 Then
             Select Case NomeColuna
-                Case "1", "4", "47"
+                Case "1", "4", "47", "48"
                     e.Row.BackColor = System.Drawing.Color.Honeydew
                     e.Row.Font.Bold = True
                 Case "16", "18", "20", "22", "24", "26", "28", "30", "32", "73", "34", "36"
