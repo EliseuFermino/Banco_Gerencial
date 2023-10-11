@@ -6,7 +6,7 @@ Imports DevExpress.XtraDiagram.Bars
 Imports DevExpress.Mvvm.POCO
 Imports DevExpress.Spreadsheet
 
-Partial Class MemberPages_Resultado_Teorico12Meses_Posto
+Partial Class MemberPages_Resultado_Teorico12_Meses_Postos
     Inherits System.Web.UI.Page
 
     Dim oFun As New Funcoes

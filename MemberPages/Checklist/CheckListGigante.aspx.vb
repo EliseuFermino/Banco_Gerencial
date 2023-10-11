@@ -10,8 +10,11 @@ Partial Class MemberPages_CheckListGigante
     Dim oCh As New Check
     Dim oDa As New clDataDb
     Private vFilial As Int16
+    Private vIsLoja As Boolean
     Private vDepartamento As String
     Dim oProj As New Projeto
+    Dim selects As New preencheSelects
+    Dim oVem As New VendaEmpresaMes
     Public Event ListTipoChanged(ByVal sender As Object, ByVal e As EventArgs)
 
 
@@ -19,21 +22,27 @@ Partial Class MemberPages_CheckListGigante
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
-            Dim oVem As New VendaEmpresaMes
-
+            oProj.BuscarLocalDoUsuario(Page.User.Identity.Name)
             vDepartamento = LCase(Trim(oProj.Buscar_Departamento_Usuario(Page.User.Identity.Name)))
             Session("sDEPARTAMENTO") = vDepartamento
+            vIsLoja = oProj.Isloja
 
-            If Session("sFILIAL") IsNot Nothing Then
-                If Session("sFILIAL").ToString() <> "" Then
-                    vFilial = Session("sFILIAL")
+            If vIsLoja Then
+                vFilial = oProj.Buscar_Filial_Usuario(Page.User.Identity.Name)
+                Session("sFILIAL") = vFilial
+            Else
+                If Session("sFILIAL") IsNot Nothing Then
+                    If Session("sFILIAL").ToString() <> "" Then
+                        vFilial = Session("sFILIAL")
+                    Else
+                        vFilial = oProj.Buscar_Filial_Usuario(Page.User.Identity.Name)
+                        Session("sFILIAL") = vFilial
+                    End If
                 Else
                     vFilial = oProj.Buscar_Filial_Usuario(Page.User.Identity.Name)
                     Session("sFILIAL") = vFilial
                 End If
-            Else
-                vFilial = oProj.Buscar_Filial_Usuario(Page.User.Identity.Name)
-                Session("sFILIAL") = vFilial
+
             End If
 
             If Session("sFILIAL") < 100 Then
@@ -41,8 +50,10 @@ Partial Class MemberPages_CheckListGigante
                 Response.Redirect("CheckListCordor.aspx")
             End If
 
-            Call Define_Corporacao()
-            Call Define_Filial()
+            'Call Define_Corporacao()
+            'Call Define_Filial()
+
+            Call carregaSelects()
 
             oVem.AtualizarEstatisticaPrograma(66, User.Identity.Name)
 
@@ -343,199 +354,24 @@ Partial Class MemberPages_CheckListGigante
         Return DefinirPontuacao
     End Function
 
-    Private Sub Define_Corporacao()
-        Select Case Session("sDEPARTAMENTO")
-            Case "gestor_comercial", "comercial"
-                Preenche_selTipo("SELECT idUnidade ,descUnidade FROM gerCadastros.Cad.tblUnidadeLista WHERE idUnidade IN (3,8,9,199)")
-            Case "postos"
-                Preenche_selTipo("SELECT idUnidade ,descUnidade FROM gerCadastros.Cad.tblUnidadeLista WHERE idUnidade = 5")
-            Case "loja"
-                Preenche_selTipo("SELECT idUnidade ,descUnidade FROM gerCadastros.Cad.tblUnidadeLista WHERE idUnidade IN (3,9)")
-            Case "suprimentos"
-                Preenche_selTipo("SELECT idUnidade ,descUnidade FROM gerCadastros.Cad.tblUnidadeLista")
-                'cboCorporacao.Enabled = False
-            Case Else
-                Preenche_selTipo("SELECT idUnidade ,descUnidade FROM gerCadastros.Cad.tblUnidadeLista")
-        End Select
+    Private Sub carregaSelects()
 
-    End Sub
-
-    Private Sub Define_Filial()
-        On Error Resume Next
-        Select Case Me.selTipo.SelectedValue
-            Case 3  ' Lojas
-                Select Case Session("sDEPARTAMENTO")
-
-                    Case "supervisor"
-                        If Session("sUSUARIO") = "bendixen" Then   'Supervisor Norte
-                            Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1006 ORDER BY nomeFilial")
-                            selFilial.SelectedIndex = 0
-                        ElseIf Session("sUSUARIO") = "352100" Then  ' Supervisor Edison
-                            Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1005 ORDER BY nomeFilial")
-                            selFilial.SelectedIndex = 0
-                        ElseIf Session("sUSUARIO") = "1075390" Then ' Claudinei Fitz
-                            Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1004 ORDER BY nomeFilial")
-                            selFilial.SelectedIndex = 0
-                        ElseIf Session("sUSUARIO") = "68977" Then   ' João Carlos
-                            Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1014 ORDER BY nomeFilial")
-                            selFilial.SelectedIndex = 0
-                        ElseIf Session("sUSUARIO") = "100400" Then   ' João Carlos
-                            Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1015 ORDER BY nomeFilial")
-                            selFilial.SelectedIndex = 0
-                        ElseIf Session("sUSUARIO") = "388690" Then   ' Samoel
-                            Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1016 ORDER BY nomeFilial")
-                            selFilial.SelectedIndex = 0
-                        ElseIf Session("sUSUARIO") = "774" Then   ' Usuario Supervisor (Esta setado para Atacarejo)
-                            Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1016 ORDER BY nomeFilial")
-                            selFilial.SelectedIndex = 0
-                        ElseIf Session("sUSUARIO") = "supervisor" Then
-                            Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1015 ORDER BY nomeFilial")
-                            selFilial.SelectedIndex = 0
-                        ElseIf Session("sUSUARIO") = "898890" Then  ' Rosineli - Lojas do Norte
-                            Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegiao IN (203,217) ORDER BY nomeFilial")
-                            selTipo.Visible = False
-                            selFilial.SelectedIndex = 0
-
-
-                        End If
-                    Case "supervisor_trainee"
-                        Call Preenche_selFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1015 ORDER BY nomeFilial")
-                        selFilial.SelectedIndex = 0
-                    Case "gerente_cd"
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE Filial IN (1,12,16)")
-                        selFilial.SelectedValue = 1
-                    Case "rh_folha"
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE Filial IN (100)")
-                        selFilial.SelectedValue = 100
-                    Case "Entreposto"
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE Filial = 2")
-                        selFilial.SelectedValue = 2
-                    Case "presidência", "comercial", "comercial_perdas", "gestor_comercial", "gerente_comercial", "gestor_assistente"
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE IsLoja=1")
-                        selFilial.SelectedValue = 3
-                    Case "controladoria", "administração", "perdas_supervisor", "seguranca_supervisor", "projetos_perdas", "suprimentos", "gerente_rh"
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE idLojasCDs=1 OR IsAtacarejo=1")
-                        selFilial.SelectedValue = 3
-
-                    Case "gerente cd"
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE Filial IN (1,12,16)")
-                        selFilial.SelectedIndex = 0
-                    Case "diretor", "diretor_informatica", "diretor_marketing", "contabilidade", "gerente_contabilidade", "gerente_financeiro", "trade marketing"
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE idLojasCDs = 1")
-                        selFilial.SelectedIndex = 0
-                    Case "marketing", "marketing bi"
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE  idLojasCDs = 1")
-                        selFilial.SelectedIndex = 0
-                    Case "gerente hsa", "hsa"
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE  idLojasCDs = 1")
-                        selFilial.SelectedIndex = 0
-                    Case Else
-                        Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE Filial=" & vFilial & "")
-                        selFilial.SelectedIndex = 0
-                End Select
-
-            Case 4  ' Regionais
-                Preenche_selFilial("SELECT CodRegional As Filial ,Descricao AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliais_Regional")
-                selFilial.SelectedIndex = 0
-            Case 5  ' Posto
-                Preenche_selFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliais WHERE IsPosto=1")
-                selFilial.SelectedIndex = 2
-            Case 6  ' Gestor
-            Case 7  ' Comprador
-            Case 8  ' Atacarejo
-                Preenche_selFilial("SELECT idFilial AS Filial ,nomeFilial, icone FROM DW.dbo.DimFilial WHERE IsAtacarejo = 1 OR idFilial = 601 ORDER BY idFilial")
-                selFilial.SelectedIndex = 0
-            Case 9  ' Delivery
-                Preenche_selFilial("SELECT idFilial AS Filial ,FilialDesc AS nomeFilial, icone FROM DW.dbo.DimFilial WHERE IsDelivery = 1")
-                selFilial.SelectedIndex = 0
-            Case 199    'Corporação
-                Select Case Session("sDEPARTAMENTO")
-
-                    Case "gestor_comercial", "comercial"
-                        Preenche_selFilial("SELECT Filial, Descricao AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE Filial IN (99,98,699) ORDER BY nomeFilial")
-                        selFilial.SelectedIndex = 0
-                        'Session("sFILIAL") = selFilial.SelectedValue
-                    Case Else
-                        Preenche_selFilial("SELECT Filial, Descricao AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE Filial IN (99,198,199,98,699) ORDER BY nomeFilial")
-                        selFilial.SelectedIndex = 0
-                        'Session("sFILIAL") = selFilial.SelectedValue
-                End Select
-
-        End Select
-
-        If Session("sFILIAL") IsNot Nothing Then
-            For i As Integer = 0 To selFilial.Items.Count
-                If selFilial.Items(i).Value = Session("sFILIAL") Then
-                    selFilial.SelectedValue = Session("sFILIAL")
-                    selFilial.SelectedIndex = i
-                    Exit For
-                End If
-            Next
-        End If
-
+        selects.Define_Corporacao(Session("sDEPARTAMENTO"), selTipo)
         Session("sCORPORACAO") = selTipo.SelectedItem.Value
-    End Sub
-
-    Public Sub Preenche_selTipo(ByVal iStr As String)
-        On Error Resume Next
-
-        Dim selectSQL As String = iStr
-        Dim con As New SqlConnection(Conexao.gerCadastros_str)
-
-        Dim cmd As New SqlCommand(selectSQL, con)
-
-        ' Open the connection
-        con.Open()
-
-        ' Define the binding
-        selTipo.DataSource = cmd.ExecuteReader()
-        selTipo.DataTextField = "descUnidade"
-        selTipo.DataValueField = "idUnidade"
-
-        ' Activate the binding.
-        selTipo.DataBind()
-
-        con.Close()
-
-        selTipo.SelectedIndex = 0
-        Session("sCORPORACAO") = selTipo.SelectedItem.Value
+        selects.Define_Filial(selTipo.SelectedItem.Value, Session("sDEPARTAMENTO"), User.Identity.Name, Session("sFILIAL"), selFilial)
 
     End Sub
-
-    Private Sub Preenche_selFilial(ByVal iStr As String)
-        Dim selectSQL As String = iStr
-        Dim con As New SqlConnection(Conexao.gerCadastros_str)
-        Dim cmd As New SqlCommand(selectSQL, con)
-
-        ' Open the connection
-        con.Open()
-
-        Try
-            ' Define the binding
-            selFilial.DataSource = cmd.ExecuteReader()
-            selFilial.DataTextField = "nomeFilial"
-            selFilial.DataValueField = "Filial"
-
-            ' Activate the binding.
-            selFilial.DataBind()
-
-            con.Close()
-
-        Catch ex As Exception
-            'lblError.Text = iStr
-        Finally
-            con.Close()
-        End Try
-
-    End Sub
-
     Protected Sub selTipo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles selTipo.SelectedIndexChanged
 
-        If Session("sDEPARTAMENTO") <> "loja" Then
-            Define_Filial()
-            RaiseEvent ListTipoChanged(sender, e)
-        End If
-        HabilitarGerarRelatorio()
+        'If Session("sDEPARTAMENTO") <> "loja" Then
+        '    Define_Filial()
+        '    RaiseEvent ListTipoChanged(sender, e)
+        'End If
+        'HabilitarGerarRelatorio()
+
+        Session("sCORPORACAO") = selTipo.SelectedItem.Value
+        selects.Define_Filial(selTipo.SelectedItem.Value, Session("sDEPARTAMENTO"), User.Identity.Name, Session("sFILIAL"), selFilial)
+
     End Sub
 
     Protected Sub selFilial_SelectedIndexChanged(sender As Object, e As EventArgs)
@@ -1290,18 +1126,18 @@ Partial Class MemberPages_CheckListGigante
         varIssue(13) = DefinirPontuacao(rnd4_13_Sim, rnd4_13_Nao, rnd4_13_NA)
 
         oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 1, varIssue(1), userName, Me.txt4_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 2, varIssue(1), userName, Me.txt4_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 3, varIssue(1), userName, Me.txt4_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 4, varIssue(1), userName, Me.txt4_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 5, varIssue(1), userName, Me.txt4_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 6, varIssue(1), userName, Me.txt4_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 7, varIssue(1), userName, Me.txt4_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 8, varIssue(1), userName, Me.txt4_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 9, varIssue(1), userName, Me.txt4_9.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 10, varIssue(1), userName, Me.txt4_10.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 11, varIssue(1), userName, Me.txt4_11.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 12, varIssue(1), userName, Me.txt4_12.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 13, varIssue(1), userName, Me.txt4_13.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 2, varIssue(2), userName, Me.txt4_2.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 3, varIssue(3), userName, Me.txt4_3.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 4, varIssue(4), userName, Me.txt4_4.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 5, varIssue(5), userName, Me.txt4_5.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 6, varIssue(6), userName, Me.txt4_6.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 7, varIssue(7), userName, Me.txt4_7.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 8, varIssue(8), userName, Me.txt4_8.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 9, varIssue(9), userName, Me.txt4_9.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 10, varIssue(10), userName, Me.txt4_10.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 11, varIssue(11), userName, Me.txt4_11.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 12, varIssue(12), userName, Me.txt4_12.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 4, 1, 13, varIssue(13), userName, Me.txt4_13.Text)
 
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 4, 1)
         'Me.panTitle4.CssClass = "pnl_Verde"
@@ -1371,21 +1207,21 @@ Partial Class MemberPages_CheckListGigante
         varIssue(16) = DefinirPontuacao(rnd6_16_Sim, rnd6_16_Nao, rnd6_16_NA)
 
         oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 1, varIssue(1), userName, Me.txt6_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 2, varIssue(1), userName, Me.txt6_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 3, varIssue(1), userName, Me.txt6_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 4, varIssue(1), userName, Me.txt6_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 5, varIssue(1), userName, Me.txt6_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 6, varIssue(1), userName, Me.txt6_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 7, varIssue(1), userName, Me.txt6_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 8, varIssue(1), userName, Me.txt6_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 9, varIssue(1), userName, Me.txt6_9.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 10, varIssue(1), userName, Me.txt6_10.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 11, varIssue(1), userName, Me.txt6_11.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 12, varIssue(1), userName, Me.txt6_12.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 13, varIssue(1), userName, Me.txt6_13.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 14, varIssue(1), userName, Me.txt6_14.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 15, varIssue(1), userName, Me.txt6_15.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 16, varIssue(1), userName, Me.txt6_16.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 2, varIssue(2), userName, Me.txt6_2.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 3, varIssue(3), userName, Me.txt6_3.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 4, varIssue(4), userName, Me.txt6_4.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 5, varIssue(5), userName, Me.txt6_5.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 6, varIssue(6), userName, Me.txt6_6.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 7, varIssue(7), userName, Me.txt6_7.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 8, varIssue(8), userName, Me.txt6_8.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 9, varIssue(9), userName, Me.txt6_9.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 10, varIssue(10), userName, Me.txt6_10.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 11, varIssue(11), userName, Me.txt6_11.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 12, varIssue(12), userName, Me.txt6_12.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 13, varIssue(13), userName, Me.txt6_13.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 14, varIssue(14), userName, Me.txt6_14.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 15, varIssue(15), userName, Me.txt6_15.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 6, 1, 16, varIssue(16), userName, Me.txt6_16.Text)
 
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 6, 1)
         'Me.panTitle6.CssClass = "pnl_Verde"
@@ -1631,18 +1467,18 @@ Partial Class MemberPages_CheckListGigante
         varIssue(13) = DefinirPontuacao(rnd13_13_Sim, rnd13_13_Nao, rnd13_13_NA)
 
         oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 1, varIssue(1), userName, Me.txt13_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 2, varIssue(1), userName, Me.txt13_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 3, varIssue(1), userName, Me.txt13_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 4, varIssue(1), userName, Me.txt13_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 5, varIssue(1), userName, Me.txt13_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 6, varIssue(1), userName, Me.txt13_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 7, varIssue(1), userName, Me.txt13_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 8, varIssue(1), userName, Me.txt13_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 9, varIssue(1), userName, Me.txt13_9.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 10, varIssue(1), userName, Me.txt13_10.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 11, varIssue(1), userName, Me.txt13_11.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 12, varIssue(1), userName, Me.txt13_12.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 13, varIssue(1), userName, Me.txt13_13.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 2, varIssue(2), userName, Me.txt13_2.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 3, varIssue(3), userName, Me.txt13_3.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 4, varIssue(4), userName, Me.txt13_4.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 5, varIssue(5), userName, Me.txt13_5.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 6, varIssue(6), userName, Me.txt13_6.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 7, varIssue(7), userName, Me.txt13_7.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 8, varIssue(8), userName, Me.txt13_8.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 9, varIssue(9), userName, Me.txt13_9.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 10, varIssue(10), userName, Me.txt13_10.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 11, varIssue(11), userName, Me.txt13_11.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 12, varIssue(12), userName, Me.txt13_12.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 13, 1, 13, varIssue(13), userName, Me.txt13_13.Text)
 
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 13, 1)
         'Me.panTitle13.CssClass = "pnl_Verde"
@@ -1670,15 +1506,15 @@ Partial Class MemberPages_CheckListGigante
         varIssue(10) = DefinirPontuacao(rnd14_10_Sim, rnd14_10_Nao, rnd14_10_NA)
 
         oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 1, varIssue(1), userName, Me.txt14_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 2, varIssue(1), userName, Me.txt14_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 3, varIssue(1), userName, Me.txt14_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 4, varIssue(1), userName, Me.txt14_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 5, varIssue(1), userName, Me.txt14_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 6, varIssue(1), userName, Me.txt14_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 7, varIssue(1), userName, Me.txt14_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 8, varIssue(1), userName, Me.txt14_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 9, varIssue(1), userName, Me.txt14_9.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 10, varIssue(1), userName, Me.txt14_10.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 2, varIssue(2), userName, Me.txt14_2.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 3, varIssue(3), userName, Me.txt14_3.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 4, varIssue(4), userName, Me.txt14_4.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 5, varIssue(5), userName, Me.txt14_5.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 6, varIssue(6), userName, Me.txt14_6.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 7, varIssue(7), userName, Me.txt14_7.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 8, varIssue(8), userName, Me.txt14_8.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 9, varIssue(9), userName, Me.txt14_9.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 14, 1, 10, varIssue(10), userName, Me.txt14_10.Text)
 
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 14, 1)
         'Me.panTitle14.CssClass = "pnl_Verde"
@@ -1704,8 +1540,8 @@ Partial Class MemberPages_CheckListGigante
         oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 15, 1, 1, varIssue(1), userName, Me.txt15_1.Text)
         oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 15, 1, 2, varIssue(2), userName, Me.txt15_2.Text)
         oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 15, 1, 3, varIssue(3), userName, Me.txt15_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 15, 1, 4, varIssue(1), userName, Me.txt15_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 15, 1, 5, varIssue(1), userName, Me.txt15_5.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 15, 1, 4, varIssue(4), userName, Me.txt15_4.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 15, 1, 5, varIssue(5), userName, Me.txt15_5.Text)
 
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 15, 1)
         'Me.panTitle15.CssClass = "pnl_Verde"
@@ -1735,17 +1571,17 @@ Partial Class MemberPages_CheckListGigante
         varIssue(12) = DefinirPontuacao(rnd16_12_Sim, rnd16_12_Nao, rnd16_12_NA)
 
         oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 1, varIssue(1), userName, Me.txt16_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 2, varIssue(1), userName, Me.txt16_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 3, varIssue(1), userName, Me.txt16_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 4, varIssue(1), userName, Me.txt16_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 5, varIssue(1), userName, Me.txt16_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 6, varIssue(1), userName, Me.txt16_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 7, varIssue(1), userName, Me.txt16_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 8, varIssue(1), userName, Me.txt16_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 9, varIssue(1), userName, Me.txt16_9.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 10, varIssue(1), userName, Me.txt16_10.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 11, varIssue(1), userName, Me.txt16_11.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 12, varIssue(1), userName, Me.txt16_12.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 2, varIssue(2), userName, Me.txt16_2.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 3, varIssue(3), userName, Me.txt16_3.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 4, varIssue(4), userName, Me.txt16_4.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 5, varIssue(5), userName, Me.txt16_5.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 6, varIssue(6), userName, Me.txt16_6.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 7, varIssue(7), userName, Me.txt16_7.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 8, varIssue(8), userName, Me.txt16_8.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 9, varIssue(9), userName, Me.txt16_9.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 10, varIssue(10), userName, Me.txt16_10.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 11, varIssue(11), userName, Me.txt16_11.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 16, 1, 12, varIssue(12), userName, Me.txt16_12.Text)
 
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 16, 1)
         'Me.panTitle16.CssClass = "pnl_Verde"
@@ -1775,17 +1611,17 @@ Partial Class MemberPages_CheckListGigante
         varIssue(12) = DefinirPontuacao(rnd17_12_Sim, rnd17_12_Nao, rnd17_12_NA)
 
         oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 1, varIssue(1), userName, Me.txt17_1.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 2, varIssue(1), userName, Me.txt17_2.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 3, varIssue(1), userName, Me.txt17_3.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 4, varIssue(1), userName, Me.txt17_4.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 5, varIssue(1), userName, Me.txt17_5.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 6, varIssue(1), userName, Me.txt17_6.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 7, varIssue(1), userName, Me.txt17_7.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 8, varIssue(1), userName, Me.txt17_8.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 9, varIssue(1), userName, Me.txt17_9.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 10, varIssue(1), userName, Me.txt17_10.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 11, varIssue(1), userName, Me.txt17_11.Text)
-        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 12, varIssue(1), userName, Me.txt17_12.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 2, varIssue(2), userName, Me.txt17_2.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 3, varIssue(3), userName, Me.txt17_3.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 4, varIssue(4), userName, Me.txt17_4.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 5, varIssue(5), userName, Me.txt17_5.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 6, varIssue(6), userName, Me.txt17_6.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 7, varIssue(7), userName, Me.txt17_7.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 8, varIssue(8), userName, Me.txt17_8.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 9, varIssue(9), userName, Me.txt17_9.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 10, varIssue(10), userName, Me.txt17_10.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 11, varIssue(11), userName, Me.txt17_11.Text)
+        oCh.SalvarChecklist(txtData.Value, Me.selFilial.SelectedValue, 17, 1, 12, varIssue(12), userName, Me.txt17_12.Text)
 
         oCh.SalvarChecklistGrupo(txtData.Value, Me.selFilial.SelectedValue, 17, 1)
         'Me.panTitle17.CssClass = "pnl_Verde"

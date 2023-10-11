@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="Dashboard.aspx.vb" Inherits="MemberPages_Checklist_Dashboard" %>
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="DashboardGigante.aspx.vb" Inherits="MemberPages_Checklist_DashboardGigante" %>
 
 <%@ Register Assembly="DevExpress.Web.ASPxGauges.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxGauges" TagPrefix="dx" %>
 <%@ Register Assembly="DevExpress.Web.ASPxGauges.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxGauges.Gauges" TagPrefix="dx" %>
@@ -333,7 +333,7 @@
 
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Dashboard - Prevenção de Perdas
+            <h1>Dashboard - Prevenção de Perdas (Gigante)
         <small>Controladoria</small>
             </h1>
             <ol class="breadcrumb">
@@ -361,7 +361,7 @@
 
                         <div class="row justify-content-center text-center">
 
-                            <div class="col-auto placeholder" style="background-color: #E2EFDA">
+                            <div class="col-3 placeholder" style="background-color: #E2EFDA">
 
                                 <dx:ASPxGaugeControl ID="gauge_Pontuacao_Melhor1" runat="server" Height="200px" Width="200px" BackColor="Transparent" LayoutInterval="6" Value="98,4">
                                     <Gauges>
@@ -399,44 +399,7 @@
                                         <asp:Button ID="btnMelhor1" runat="server" Text="Melhor 1" CssClass="btn btn-warning fixed-bottom" /></h4>--%>
                             </div>
 
-                            <div class="col-auto placeholder" style="background-color: #E2EFDA">
-                                <dx:ASPxGaugeControl ID="gauge_Pontuacao_Melhor2" runat="server" Height="200px" Width="200px" BackColor="Transparent" LayoutInterval="6" Value="98,1">
-                                    <Gauges>
-                                        <dx:CircularGauge Bounds="6, 6, 188, 188" Name="circularGauge1">
-                                            <scales>
-                                                <dx:ArcScaleComponent AcceptOrder="0" AppearanceTickmarkText-Font="Tahoma, 8.5pt" AppearanceTickmarkText-TextBrush="&lt;BrushObject Type=&quot;Solid&quot; Data=&quot;Color:#484E5A&quot;/&gt;" Center="125, 125" EndAngle="60" MajorTickmark-FormatString="{0:F0}" MajorTickmark-ShapeOffset="-14" MajorTickmark-ShapeType="Circular_Style16_1" MajorTickmark-TextOrientation="LeftToRight" MaxValue="100" MinorTickCount="4" MinorTickmark-ShapeOffset="-7" MinorTickmark-ShapeType="Circular_Style16_2" Name="scale1" StartAngle="-240" Value="98.1">
-                                                    <ranges>
-                                                        <dx:ArcScaleRangeWeb AppearanceRange-ContentBrush="&lt;BrushObject Type=&quot;Solid&quot; Data=&quot;Color:Firebrick&quot;/&gt;" EndThickness="14" EndValue="70" Name="Range0" ShapeOffset="0" StartThickness="14" />
-                                                        <dx:ArcScaleRangeWeb AppearanceRange-ContentBrush="&lt;BrushObject Type=&quot;Solid&quot; Data=&quot;Color:SandyBrown&quot;/&gt;" EndThickness="14" EndValue="90" Name="Range1" ShapeOffset="0" StartThickness="14" StartValue="70.01" />
-                                                        <dx:ArcScaleRangeWeb AppearanceRange-ContentBrush="&lt;BrushObject Type=&quot;Solid&quot; Data=&quot;Color:DeepSkyBlue&quot;/&gt;" EndThickness="14" EndValue="95" Name="Range2" ShapeOffset="0" StartThickness="14" StartValue="90.01" />
-                                                        <dx:ArcScaleRangeWeb AppearanceRange-ContentBrush="&lt;BrushObject Type=&quot;Solid&quot; Data=&quot;Color:SteelBlue&quot;/&gt;" EndThickness="14" EndValue="97" Name="Range3" ShapeOffset="0" StartThickness="14" StartValue="95.01" />
-                                                        <dx:ArcScaleRangeWeb AppearanceRange-ContentBrush="&lt;BrushObject Type=&quot;Solid&quot; Data=&quot;Color:LimeGreen&quot;/&gt;" EndThickness="14" EndValue="100" Name="Range4" ShapeOffset="0" StartThickness="14" StartValue="97.01" />
-                                                    </ranges>
-                                                </dx:ArcScaleComponent>
-                                            </scales>
-                                            <backgroundlayers>
-                                                <dx:ArcScaleBackgroundLayerComponent AcceptOrder="-1000" ArcScale="" Name="bg" ScaleID="scale1" ShapeType="CircularFull_Style16" ZOrder="1000" />
-                                            </backgroundlayers>
-                                            <needles>
-                                                <dx:ArcScaleNeedleComponent AcceptOrder="50" ArcScale="" EndOffset="5" Name="needle" ScaleID="scale1" ShapeType="CircularFull_Style16" ZOrder="-50" />
-                                            </needles>
-                                            <spindlecaps>
-                                                <dx:ArcScaleSpindleCapComponent AcceptOrder="100" ArcScale="" Name="cGauge1_SpindleCap1" ScaleID="scale1" ShapeType="CircularFull_Style16" Size="25, 25" ZOrder="-100" />
-                                            </spindlecaps>
-                                        </dx:CircularGauge>
-                                    </Gauges>
-                                    <LayoutPadding All="6" Left="6" Top="6" Right="6" Bottom="6"></LayoutPadding>
-                                </dx:ASPxGaugeControl>
-
-                                <h4>
-                                    <asp:Label ID="lblFilial_Melhor2" runat="server"></asp:Label></h4>
-                                <span class="text-muted">
-                                    <asp:Label ID="lblPeriodo_Melhor2" runat="server"></asp:Label></span>
-                                <%--<h4>
-                                        <asp:Button ID="btnMelhor2" runat="server" Text="Melhor 2" CssClass="btn btn-warning fixed-bottom " /></h4>--%>
-                            </div>
-
-                            <div class="col-auto placeholder" style="background-color: #DDEBF7">
+                            <div class="col-3 placeholder" style="background-color: #DDEBF7">
 
                                 <dx:ASPxGaugeControl ID="gauge_Pontuacao_Empresa" runat="server" Height="200px" Width="200px" BackColor="Transparent" LayoutInterval="6" Value="86,5">
                                     <Gauges>
@@ -466,12 +429,12 @@
                                     <LayoutPadding All="6" Left="6" Top="6" Right="6" Bottom="6"></LayoutPadding>
                                 </dx:ASPxGaugeControl>
 
-                                <h4>Empresa</h4>
+                                <h4>Gigante</h4>
                                 <span class="text-muted">
                                     <asp:Label ID="lblPeriodo_Empresa" runat="server" Text=""></asp:Label></span>
                             </div>
 
-                            <div class="col-auto placeholder" style="background-color: #F5A5A5">
+                            <div class="col-3 placeholder" style="background-color: #F5A5A5">
                                 <dx:ASPxGaugeControl ID="gauge_Pontuacao_Pior1" runat="server" Height="200px" Width="200px" BackColor="Transparent" LayoutInterval="6" Value="61,2">
                                     <Gauges>
                                         <dx:CircularGauge Bounds="6, 6, 188, 188" Name="circularGauge1">
@@ -507,47 +470,7 @@
                                 <%--               <h4>
                                         <asp:Button ID="btnPior1" runat="server" Text="Pior 1" CssClass="btn btn-warning fixed-bottom " /></h4>--%>
                             </div>
-
-                            <div class="col-auto placeholder" style="background-color: #F5A5A5">
-                                <dx:ASPxGaugeControl ID="gauge_Pontuacao_Pior2" runat="server" Height="200px" Width="200px" BackColor="Transparent" LayoutInterval="6" Value="75,4">
-                                    <Gauges>
-                                        <dx:CircularGauge Bounds="6, 6, 188, 188" Name="circularGauge1">
-                                            <scales>
-                                                <dx:ArcScaleComponent AcceptOrder="0" AppearanceTickmarkText-Font="Tahoma, 8.5pt" AppearanceTickmarkText-TextBrush="&lt;BrushObject Type=&quot;Solid&quot; Data=&quot;Color:#484E5A&quot;/&gt;" Center="125, 125" EndAngle="60" MajorTickmark-FormatString="{0:F0}" MajorTickmark-ShapeOffset="-14" MajorTickmark-ShapeType="Circular_Style16_1" MajorTickmark-TextOrientation="LeftToRight" MaxValue="100" MinorTickCount="4" MinorTickmark-ShapeOffset="-7" MinorTickmark-ShapeType="Circular_Style16_2" Name="scale1" StartAngle="-240" Value="75.4">
-                                                    <ranges>
-                                                        <dx:ArcScaleRangeWeb AppearanceRange-ContentBrush="&lt;BrushObject Type=&quot;Solid&quot; Data=&quot;Color:Firebrick&quot;/&gt;" EndThickness="14" EndValue="70" Name="Range0" ShapeOffset="0" StartThickness="14" />
-                                                        <dx:ArcScaleRangeWeb AppearanceRange-ContentBrush="&lt;BrushObject Type=&quot;Solid&quot; Data=&quot;Color:SandyBrown&quot;/&gt;" EndThickness="14" EndValue="90" Name="Range1" ShapeOffset="0" StartThickness="14" StartValue="70.01" />
-                                                        <dx:ArcScaleRangeWeb AppearanceRange-ContentBrush="&lt;BrushObject Type=&quot;Solid&quot; Data=&quot;Color:DeepSkyBlue&quot;/&gt;" EndThickness="14" EndValue="95" Name="Range2" ShapeOffset="0" StartThickness="14" StartValue="90.01" />
-                                                        <dx:ArcScaleRangeWeb AppearanceRange-ContentBrush="&lt;BrushObject Type=&quot;Solid&quot; Data=&quot;Color:SteelBlue&quot;/&gt;" EndThickness="14" EndValue="97" Name="Range3" ShapeOffset="0" StartThickness="14" StartValue="95.01" />
-                                                        <dx:ArcScaleRangeWeb AppearanceRange-ContentBrush="&lt;BrushObject Type=&quot;Solid&quot; Data=&quot;Color:LimeGreen&quot;/&gt;" EndThickness="14" EndValue="100" Name="Range4" ShapeOffset="0" StartThickness="14" StartValue="97.01" />
-                                                    </ranges>
-                                                </dx:ArcScaleComponent>
-                                            </scales>
-                                            <backgroundlayers>
-                                                <dx:ArcScaleBackgroundLayerComponent AcceptOrder="-1000" ArcScale="" Name="bg" ScaleID="scale1" ShapeType="CircularFull_Style16" ZOrder="1000" />
-                                            </backgroundlayers>
-                                            <needles>
-                                                <dx:ArcScaleNeedleComponent AcceptOrder="50" ArcScale="" EndOffset="5" Name="needle" ScaleID="scale1" ShapeType="CircularFull_Style16" ZOrder="-50" />
-                                            </needles>
-                                            <spindlecaps>
-                                                <dx:ArcScaleSpindleCapComponent AcceptOrder="100" ArcScale="" Name="cGauge1_SpindleCap1" ScaleID="scale1" ShapeType="CircularFull_Style16" Size="25, 25" ZOrder="-100" />
-                                            </spindlecaps>
-                                        </dx:CircularGauge>
-                                    </Gauges>
-                                    <LayoutPadding All="6" Left="6" Top="6" Right="6" Bottom="6"></LayoutPadding>
-                                </dx:ASPxGaugeControl>
-
-                                <h4>
-                                    <asp:Label ID="lblFilial_Pior2" runat="server"></asp:Label></h4>
-                                <span class="text-muted">
-                                    <asp:Label ID="lblPeriodo_Pior2" runat="server"></asp:Label></span>
-                                <%--   <h4>
-                                        <asp:Button ID="btnPior2" runat="server" Text="Pior 2" CssClass="btn btn-success fixed-bottom " /></h4>--%>
-                            </div>
-
                         </div>
-
-
                         <!-- /.row -->
                     </div>
                     <!-- ./box-body -->
@@ -581,8 +504,7 @@
                             <asp:UpdatePanel ID="upPanel_AnoMes" runat="server">
                                 <ContentTemplate>
                                     <div class="divGrupo">
-                                        <uc1:wucListaLojasComCorporacao runat="server" ID="cboFilial_Periodo" />
-
+                                        <asp:DropDownList AutoPostBack="true" class="form-control" Font-Size="10px" Height="30px" ID="selFilial1" runat="server" OnSelectedIndexChanged="selFilial1_SelectedIndexChanged" DataTextField="Desc"></asp:DropDownList>
                                     </div>
 
                                     <%--<uc2:wucLista_Filial_Empresa ID="wser" runat="server" />--%>
@@ -670,7 +592,7 @@
                                     <asp:SqlDataSource ID="dsPontuacaoTotal_MesAno" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.sp_TotalAnoMes" SelectCommandType="StoredProcedure">
                                         <SelectParameters>
                                             <asp:SessionParameter Name="Ano" SessionField="sANO" Type="Int16" />
-                                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" />
+                                            <asp:SessionParameter Name="idFilial" SessionField="sFILIAL_NA" Type="Int16" />
                                         </SelectParameters>
                                     </asp:SqlDataSource>
                                 </ContentTemplate>
@@ -802,7 +724,7 @@
                                                 </dxchartsui:WebChartControl>
 
                                                 <div id="div1" runat="server">
-                                                    <asp:SqlDataSource ID="dsTodas" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.usp_BuscarPontuacaoTotal" SelectCommandType="StoredProcedure">
+                                                    <asp:SqlDataSource ID="dsTodas" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.usp_BuscarPontuacaoTotal_Gigante" SelectCommandType="StoredProcedure">
                                                         <SelectParameters>
                                                             <asp:SessionParameter Name="Ano" SessionField="sANO" DbType="Int16" />
                                                             <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />
@@ -815,749 +737,21 @@
                                             </dx:ContentControl>
                                         </ContentCollection>
                                     </dx:TabPage>
-
-                                    <dx:TabPage Text="Super">
-                                        <ContentCollection>
-                                            <dx:ContentControl runat="server" SupportsDisabledAttribute="True">
-
-                                                <h5>
-                                                    <asp:Label ID="lblSuper" runat="server" Text=""></asp:Label></h5>
-
-                                                <dxchartsui:WebChartControl ID="graph_PontuacaoTotal" runat="server" AppearanceNameSerializable="Nature Colors" DataSourceID="dsPontuacaoTotal" Height="450px" Width="990px">
-                                                    <DiagramSerializable>
-                                                        <cc1:XYDiagram>
-                                                            <axisx visibleinpanesserializable="-1">
-                                                                <label angle="90">
-                                                                </label>
-                                                                <range sidemarginsenabled="True" />
-                                                            </axisx>
-                                                            <axisy visibleinpanesserializable="-1" visible="False">
-                                                                <range sidemarginsenabled="True" />
-                                                            </axisy>
-                                                        </cc1:XYDiagram>
-                                                    </DiagramSerializable>
-                                                    <FillStyle>
-                                                        <optionsserializable>
-                                                            <cc1:SolidFillOptions />
-                                                        </optionsserializable>
-                                                    </FillStyle>
-                                                    <Legend Visibility="False"></Legend>
-                                                    <SeriesSerializable>
-                                                        <cc1:Series ArgumentDataMember="Descricao" LabelsVisibility="True" Name="Series 1" ValueDataMembersSerializable="Nota">
-                                                            <viewserializable>
-                                                                <cc1:SideBySideBarSeriesView Transparency="25">
-                                                                </cc1:SideBySideBarSeriesView>
-                                                            </viewserializable>
-                                                            <labelserializable>
-                                                                <cc1:SideBySideBarSeriesLabel EnableAntialiasing="True" LineVisible="True">
-                                                                    <fillstyle>
-                                                                        <optionsserializable>
-                                                                            <cc1:SolidFillOptions />
-                                                                        </optionsserializable>
-                                                                    </fillstyle>
-                                                                    <pointoptionsserializable>
-                                                                        <cc1:PointOptions>
-                                                                            <valuenumericoptions format="Number" precision="1" />
-                                                                        </cc1:PointOptions>
-                                                                    </pointoptionsserializable>
-                                                                </cc1:SideBySideBarSeriesLabel>
-                                                            </labelserializable>
-                                                            <legendpointoptionsserializable>
-                                                                <cc1:PointOptions>
-                                                                    <valuenumericoptions format="Number" precision="1" />
-                                                                </cc1:PointOptions>
-                                                            </legendpointoptionsserializable>
-                                                        </cc1:Series>
-                                                    </SeriesSerializable>
-                                                    <SeriesTemplate>
-                                                        <viewserializable>
-                                                            <cc1:SideBySideBarSeriesView>
-                                                            </cc1:SideBySideBarSeriesView>
-                                                        </viewserializable>
-                                                        <labelserializable>
-                                                            <cc1:SideBySideBarSeriesLabel LineVisible="True">
-                                                                <fillstyle>
-                                                                    <optionsserializable>
-                                                                        <cc1:SolidFillOptions />
-                                                                    </optionsserializable>
-                                                                </fillstyle>
-                                                                <pointoptionsserializable>
-                                                                    <cc1:PointOptions>
-                                                                    </cc1:PointOptions>
-                                                                </pointoptionsserializable>
-                                                            </cc1:SideBySideBarSeriesLabel>
-                                                        </labelserializable>
-                                                        <legendpointoptionsserializable>
-                                                            <cc1:PointOptions>
-                                                            </cc1:PointOptions>
-                                                        </legendpointoptionsserializable>
-                                                    </SeriesTemplate>
-                                                    <CrosshairOptions>
-                                                        <commonlabelpositionserializable>
-                                                            <cc1:CrosshairMousePosition />
-                                                        </commonlabelpositionserializable>
-                                                    </CrosshairOptions>
-                                                    <ToolTipOptions>
-                                                        <tooltippositionserializable>
-                                                            <cc1:ToolTipMousePosition />
-                                                        </tooltippositionserializable>
-                                                    </ToolTipOptions>
-                                                </dxchartsui:WebChartControl>
-
-                                                <div id="divGraph_PontuacaoTotal_Super" runat="server">
-                                                    <asp:SqlDataSource ID="dsPontuacaoTotal" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.usp_BuscarPontuacaoTotal_Super" SelectCommandType="StoredProcedure">
-                                                        <SelectParameters>
-                                                            <asp:SessionParameter Name="Ano" SessionField="sANO" DbType="Int16" />
-                                                            <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />
-                                                        </SelectParameters>
-                                                    </asp:SqlDataSource>
-                                                </div>
-
-                                            </dx:ContentControl>
-                                        </ContentCollection>
-                                    </dx:TabPage>
-
-                                    <dx:TabPage Text="Super E">
-                                        <ContentCollection>
-                                            <dx:ContentControl ID="ContentControl3" runat="server" SupportsDisabledAttribute="True">
-
-                                                <h5>
-                                                    <asp:Label ID="lblSuperE" runat="server" Text=""></asp:Label></h5>
-
-
-                                                <div id="divGraph_PontuacaoTotal_SuperE" runat="server">
-
-                                                    <dxchartsui:WebChartControl ID="graph_SuperE" runat="server" DataSourceID="dsPontuacaoSuperE" AppearanceNameSerializable="Nature Colors" Height="450px" Width="990px">
-                                                        <DiagramSerializable>
-                                                            <cc1:XYDiagram>
-                                                                <axisx visibleinpanesserializable="-1">
-                                                                    <label angle="90">
-                                                                    </label>
-                                                                    <range sidemarginsenabled="True" />
-                                                                </axisx>
-                                                                <axisy visibleinpanesserializable="-1" visible="False">
-                                                                    <range sidemarginsenabled="True" />
-                                                                </axisy>
-                                                            </cc1:XYDiagram>
-                                                        </DiagramSerializable>
-                                                        <FillStyle>
-                                                            <optionsserializable>
-                                                                <cc1:SolidFillOptions></cc1:SolidFillOptions>
-                                                            </optionsserializable>
-                                                        </FillStyle>
-
-                                                        <Legend Visibility="False"></Legend>
-                                                        <SeriesSerializable>
-                                                            <cc1:Series ArgumentDataMember="Descricao" LabelsVisibility="True" Name="Series 1" ValueDataMembersSerializable="Nota">
-                                                                <viewserializable>
-                                                                    <cc1:SideBySideBarSeriesView Transparency="25">
-                                                                    </cc1:SideBySideBarSeriesView>
-                                                                </viewserializable>
-                                                                <labelserializable>
-                                                                    <cc1:SideBySideBarSeriesLabel EnableAntialiasing="True" LineVisible="True">
-                                                                        <fillstyle>
-                                                                            <optionsserializable>
-                                                                                <cc1:SolidFillOptions />
-                                                                            </optionsserializable>
-                                                                        </fillstyle>
-                                                                        <pointoptionsserializable>
-                                                                            <cc1:PointOptions>
-                                                                                <valuenumericoptions format="Number" precision="1" />
-                                                                            </cc1:PointOptions>
-                                                                        </pointoptionsserializable>
-                                                                    </cc1:SideBySideBarSeriesLabel>
-                                                                </labelserializable>
-                                                                <legendpointoptionsserializable>
-                                                                    <cc1:PointOptions>
-                                                                        <valuenumericoptions format="Number" precision="1" />
-                                                                    </cc1:PointOptions>
-                                                                </legendpointoptionsserializable>
-                                                            </cc1:Series>
-                                                        </SeriesSerializable>
-
-                                                        <SeriesTemplate>
-                                                            <viewserializable>
-                                                                <cc1:SideBySideBarSeriesView></cc1:SideBySideBarSeriesView>
-                                                            </viewserializable>
-                                                            <labelserializable>
-                                                                <cc1:SideBySideBarSeriesLabel LineVisible="True">
-                                                                    <fillstyle>
-                                                                        <optionsserializable>
-                                                                            <cc1:SolidFillOptions></cc1:SolidFillOptions>
-                                                                        </optionsserializable>
-                                                                    </fillstyle>
-                                                                    <pointoptionsserializable>
-                                                                        <cc1:PointOptions></cc1:PointOptions>
-                                                                    </pointoptionsserializable>
-                                                                </cc1:SideBySideBarSeriesLabel>
-                                                            </labelserializable>
-                                                            <legendpointoptionsserializable>
-                                                                <cc1:PointOptions></cc1:PointOptions>
-                                                            </legendpointoptionsserializable>
-                                                        </SeriesTemplate>
-
-                                                        <CrosshairOptions>
-                                                            <commonlabelpositionserializable>
-                                                                <cc1:CrosshairMousePosition></cc1:CrosshairMousePosition>
-                                                            </commonlabelpositionserializable>
-                                                        </CrosshairOptions>
-
-                                                        <ToolTipOptions>
-                                                            <tooltippositionserializable>
-                                                                <cc1:ToolTipMousePosition></cc1:ToolTipMousePosition>
-                                                            </tooltippositionserializable>
-                                                        </ToolTipOptions>
-                                                    </dxchartsui:WebChartControl>
-
-                                                    <asp:SqlDataSource ID="dsPontuacaoSuperE" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.usp_BuscarPontuacaoTotal_SuperE" SelectCommandType="StoredProcedure">
-                                                        <SelectParameters>
-                                                            <asp:SessionParameter Name="Ano" SessionField="sANO" DbType="Int16" />
-                                                            <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />
-                                                        </SelectParameters>
-                                                    </asp:SqlDataSource>
-
-                                                </div>
-
-                                            </dx:ContentControl>
-                                        </ContentCollection>
-                                    </dx:TabPage>
-
-                                    <dx:TabPage Text="Hiper">
-                                        <ContentCollection>
-                                            <dx:ContentControl ID="ContentControl4" runat="server" SupportsDisabledAttribute="True">
-
-                                                <h5>
-                                                    <asp:Label ID="lblHiper" runat="server" Text=""></asp:Label></h5>
-
-
-                                                <div id="divGraph_PontuacaoTotal_Hiper">
-                                                    <dxchartsui:WebChartControl ID="graph_Hiper" runat="server" DataSourceID="dsPontuacaoHiper" AppearanceNameSerializable="Nature Colors" Height="450px" Width="990px">
-                                                        <DiagramSerializable>
-                                                            <cc1:XYDiagram>
-                                                                <axisx visibleinpanesserializable="-1">
-                                                                    <label angle="90">
-                                                                    </label>
-                                                                    <range sidemarginsenabled="True" />
-                                                                </axisx>
-                                                                <axisy visibleinpanesserializable="-1" visible="False">
-                                                                    <range sidemarginsenabled="True" />
-                                                                </axisy>
-                                                            </cc1:XYDiagram>
-                                                        </DiagramSerializable>
-                                                        <FillStyle>
-                                                            <optionsserializable>
-                                                                <cc1:SolidFillOptions></cc1:SolidFillOptions>
-                                                            </optionsserializable>
-                                                        </FillStyle>
-
-                                                        <Legend Visibility="False"></Legend>
-                                                        <SeriesSerializable>
-                                                            <cc1:Series ArgumentDataMember="Descricao" LabelsVisibility="True" Name="Series 1" ValueDataMembersSerializable="Nota">
-                                                                <viewserializable>
-                                                                    <cc1:SideBySideBarSeriesView Transparency="25">
-                                                                    </cc1:SideBySideBarSeriesView>
-                                                                </viewserializable>
-                                                                <labelserializable>
-                                                                    <cc1:SideBySideBarSeriesLabel EnableAntialiasing="True" LineVisible="True">
-                                                                        <fillstyle>
-                                                                            <optionsserializable>
-                                                                                <cc1:SolidFillOptions />
-                                                                            </optionsserializable>
-                                                                        </fillstyle>
-                                                                        <pointoptionsserializable>
-                                                                            <cc1:PointOptions>
-                                                                                <valuenumericoptions format="Number" precision="1" />
-                                                                            </cc1:PointOptions>
-                                                                        </pointoptionsserializable>
-                                                                    </cc1:SideBySideBarSeriesLabel>
-                                                                </labelserializable>
-                                                                <legendpointoptionsserializable>
-                                                                    <cc1:PointOptions>
-                                                                        <valuenumericoptions format="Number" precision="1" />
-                                                                    </cc1:PointOptions>
-                                                                </legendpointoptionsserializable>
-                                                            </cc1:Series>
-                                                        </SeriesSerializable>
-
-                                                        <SeriesTemplate>
-                                                            <viewserializable>
-                                                                <cc1:SideBySideBarSeriesView></cc1:SideBySideBarSeriesView>
-                                                            </viewserializable>
-                                                            <labelserializable>
-                                                                <cc1:SideBySideBarSeriesLabel LineVisible="True">
-                                                                    <fillstyle>
-                                                                        <optionsserializable>
-                                                                            <cc1:SolidFillOptions></cc1:SolidFillOptions>
-                                                                        </optionsserializable>
-                                                                    </fillstyle>
-                                                                    <pointoptionsserializable>
-                                                                        <cc1:PointOptions></cc1:PointOptions>
-                                                                    </pointoptionsserializable>
-                                                                </cc1:SideBySideBarSeriesLabel>
-                                                            </labelserializable>
-                                                            <legendpointoptionsserializable>
-                                                                <cc1:PointOptions></cc1:PointOptions>
-                                                            </legendpointoptionsserializable>
-                                                        </SeriesTemplate>
-
-                                                        <CrosshairOptions>
-                                                            <commonlabelpositionserializable>
-                                                                <cc1:CrosshairMousePosition></cc1:CrosshairMousePosition>
-                                                            </commonlabelpositionserializable>
-                                                        </CrosshairOptions>
-
-                                                        <ToolTipOptions>
-                                                            <tooltippositionserializable>
-                                                                <cc1:ToolTipMousePosition></cc1:ToolTipMousePosition>
-                                                            </tooltippositionserializable>
-                                                        </ToolTipOptions>
-                                                    </dxchartsui:WebChartControl>
-                                                    <asp:SqlDataSource ID="dsPontuacaoHiper" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.usp_BuscarPontuacaoTotal_Hiper" SelectCommandType="StoredProcedure">
-                                                        <SelectParameters>
-                                                            <asp:SessionParameter Name="Ano" SessionField="sANO" DbType="Int16" />
-                                                            <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />
-                                                        </SelectParameters>
-                                                    </asp:SqlDataSource>
-                                                </div>
-
-                                            </dx:ContentControl>
-                                        </ContentCollection>
-                                    </dx:TabPage>
-
 
                                     <%--REGIONAL--%>
 
-                                    <dx:TabPage Text="Regional Nei">
-                                        <TabStyle BackColor="#FFFFCC">
-                                        </TabStyle>
-                                        <ContentCollection>
-                                            <dx:ContentControl ID="ContentControl7" runat="server" SupportsDisabledAttribute="True">
-
-                                                <h5>
-                                                    <asp:Label ID="lblRegional206" runat="server" Text=""></asp:Label></h5>
-
-
-                                                <div id="div4">
-                                                    <dxchartsui:WebChartControl ID="graph_Regional206" runat="server" DataSourceID="dsPontuacaoRegional206" AppearanceNameSerializable="Nature Colors" Height="450px" Width="990px">
-                                                        <DiagramSerializable>
-                                                            <cc1:XYDiagram>
-                                                                <axisx visibleinpanesserializable="-1">
-                                                                    <label angle="90">
-                                                                    </label>
-                                                                    <range sidemarginsenabled="True" />
-                                                                </axisx>
-                                                                <axisy visibleinpanesserializable="-1" visible="False">
-                                                                    <range sidemarginsenabled="True" />
-                                                                </axisy>
-                                                            </cc1:XYDiagram>
-                                                        </DiagramSerializable>
-                                                        <FillStyle>
-                                                            <optionsserializable>
-                                                                <cc1:SolidFillOptions></cc1:SolidFillOptions>
-                                                            </optionsserializable>
-                                                        </FillStyle>
-
-                                                        <Legend Visibility="False"></Legend>
-                                                        <SeriesSerializable>
-                                                            <cc1:Series ArgumentDataMember="Descricao" LabelsVisibility="True" Name="Series 1" ValueDataMembersSerializable="Nota">
-                                                                <viewserializable>
-                                                                    <cc1:SideBySideBarSeriesView Transparency="25">
-                                                                    </cc1:SideBySideBarSeriesView>
-                                                                </viewserializable>
-                                                                <labelserializable>
-                                                                    <cc1:SideBySideBarSeriesLabel EnableAntialiasing="True" LineVisible="True">
-                                                                        <fillstyle>
-                                                                            <optionsserializable>
-                                                                                <cc1:SolidFillOptions />
-                                                                            </optionsserializable>
-                                                                        </fillstyle>
-                                                                        <pointoptionsserializable>
-                                                                            <cc1:PointOptions>
-                                                                                <valuenumericoptions format="Number" precision="1" />
-                                                                            </cc1:PointOptions>
-                                                                        </pointoptionsserializable>
-                                                                    </cc1:SideBySideBarSeriesLabel>
-                                                                </labelserializable>
-                                                                <legendpointoptionsserializable>
-                                                                    <cc1:PointOptions>
-                                                                        <valuenumericoptions format="Number" precision="1" />
-                                                                    </cc1:PointOptions>
-                                                                </legendpointoptionsserializable>
-                                                            </cc1:Series>
-                                                        </SeriesSerializable>
-
-                                                        <SeriesTemplate>
-                                                            <viewserializable>
-                                                                <cc1:SideBySideBarSeriesView></cc1:SideBySideBarSeriesView>
-                                                            </viewserializable>
-                                                            <labelserializable>
-                                                                <cc1:SideBySideBarSeriesLabel LineVisible="True">
-                                                                    <fillstyle>
-                                                                        <optionsserializable>
-                                                                            <cc1:SolidFillOptions></cc1:SolidFillOptions>
-                                                                        </optionsserializable>
-                                                                    </fillstyle>
-                                                                    <pointoptionsserializable>
-                                                                        <cc1:PointOptions></cc1:PointOptions>
-                                                                    </pointoptionsserializable>
-                                                                </cc1:SideBySideBarSeriesLabel>
-                                                            </labelserializable>
-                                                            <legendpointoptionsserializable>
-                                                                <cc1:PointOptions></cc1:PointOptions>
-                                                            </legendpointoptionsserializable>
-                                                        </SeriesTemplate>
-
-                                                        <CrosshairOptions>
-                                                            <commonlabelpositionserializable>
-                                                                <cc1:CrosshairMousePosition></cc1:CrosshairMousePosition>
-                                                            </commonlabelpositionserializable>
-                                                        </CrosshairOptions>
-
-                                                        <ToolTipOptions>
-                                                            <tooltippositionserializable>
-                                                                <cc1:ToolTipMousePosition></cc1:ToolTipMousePosition>
-                                                            </tooltippositionserializable>
-                                                        </ToolTipOptions>
-                                                    </dxchartsui:WebChartControl>
-                                                    <asp:SqlDataSource ID="dsPontuacaoRegional206" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.usp_BuscarPontuacaoTotal_Regional" SelectCommandType="StoredProcedure">
-                                                        <SelectParameters>
-                                                            <asp:SessionParameter Name="Ano" SessionField="sANO" DbType="Int16" />
-                                                            <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />
-                                                            <asp:SessionParameter Name="idRegional" Type="Int16" DefaultValue="1004" />
-                                                        </SelectParameters>
-                                                    </asp:SqlDataSource>
-                                                </div>
-
-                                            </dx:ContentControl>
-                                        </ContentCollection>
-                                    </dx:TabPage>
-
-                                    <dx:TabPage Text="Regional Edison">
-                                        <TabStyle BackColor="#FFFFCC">
-                                        </TabStyle>
-                                        <ContentCollection>
-                                            <dx:ContentControl ID="ContentControl5" runat="server" SupportsDisabledAttribute="True">
-
-                                                <h5>
-                                                    <asp:Label ID="lblRegional205" runat="server" Text=""></asp:Label></h5>
-
-                                                <div id="div2">
-                                                    <dxchartsui:WebChartControl ID="graph_Regional205" runat="server" DataSourceID="dsPontuacaoRegional205" AppearanceNameSerializable="Nature Colors" Height="450px" Width="990px">
-                                                        <DiagramSerializable>
-                                                            <cc1:XYDiagram>
-                                                                <axisx visibleinpanesserializable="-1">
-                                                                    <label angle="90">
-                                                                    </label>
-                                                                    <range sidemarginsenabled="True" />
-                                                                </axisx>
-                                                                <axisy visibleinpanesserializable="-1" visible="False">
-                                                                    <range sidemarginsenabled="True" />
-                                                                </axisy>
-                                                            </cc1:XYDiagram>
-                                                        </DiagramSerializable>
-                                                        <FillStyle>
-                                                            <optionsserializable>
-                                                                <cc1:SolidFillOptions></cc1:SolidFillOptions>
-                                                            </optionsserializable>
-                                                        </FillStyle>
-
-                                                        <Legend Visibility="False"></Legend>
-                                                        <SeriesSerializable>
-                                                            <cc1:Series ArgumentDataMember="Descricao" LabelsVisibility="True" Name="Series 1" ValueDataMembersSerializable="Nota">
-                                                                <viewserializable>
-                                                                    <cc1:SideBySideBarSeriesView Transparency="25">
-                                                                    </cc1:SideBySideBarSeriesView>
-                                                                </viewserializable>
-                                                                <labelserializable>
-                                                                    <cc1:SideBySideBarSeriesLabel EnableAntialiasing="True" LineVisible="True">
-                                                                        <fillstyle>
-                                                                            <optionsserializable>
-                                                                                <cc1:SolidFillOptions />
-                                                                            </optionsserializable>
-                                                                        </fillstyle>
-                                                                        <pointoptionsserializable>
-                                                                            <cc1:PointOptions>
-                                                                                <valuenumericoptions format="Number" precision="1" />
-                                                                            </cc1:PointOptions>
-                                                                        </pointoptionsserializable>
-                                                                    </cc1:SideBySideBarSeriesLabel>
-                                                                </labelserializable>
-                                                                <legendpointoptionsserializable>
-                                                                    <cc1:PointOptions>
-                                                                        <valuenumericoptions format="Number" precision="1" />
-                                                                    </cc1:PointOptions>
-                                                                </legendpointoptionsserializable>
-                                                            </cc1:Series>
-                                                        </SeriesSerializable>
-
-                                                        <SeriesTemplate>
-                                                            <viewserializable>
-                                                                <cc1:SideBySideBarSeriesView></cc1:SideBySideBarSeriesView>
-                                                            </viewserializable>
-                                                            <labelserializable>
-                                                                <cc1:SideBySideBarSeriesLabel LineVisible="True">
-                                                                    <fillstyle>
-                                                                        <optionsserializable>
-                                                                            <cc1:SolidFillOptions></cc1:SolidFillOptions>
-                                                                        </optionsserializable>
-                                                                    </fillstyle>
-                                                                    <pointoptionsserializable>
-                                                                        <cc1:PointOptions></cc1:PointOptions>
-                                                                    </pointoptionsserializable>
-                                                                </cc1:SideBySideBarSeriesLabel>
-                                                            </labelserializable>
-                                                            <legendpointoptionsserializable>
-                                                                <cc1:PointOptions></cc1:PointOptions>
-                                                            </legendpointoptionsserializable>
-                                                        </SeriesTemplate>
-
-                                                        <CrosshairOptions>
-                                                            <commonlabelpositionserializable>
-                                                                <cc1:CrosshairMousePosition></cc1:CrosshairMousePosition>
-                                                            </commonlabelpositionserializable>
-                                                        </CrosshairOptions>
-
-                                                        <ToolTipOptions>
-                                                            <tooltippositionserializable>
-                                                                <cc1:ToolTipMousePosition></cc1:ToolTipMousePosition>
-                                                            </tooltippositionserializable>
-                                                        </ToolTipOptions>
-                                                    </dxchartsui:WebChartControl>
-                                                    <asp:SqlDataSource ID="dsPontuacaoRegional205" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.usp_BuscarPontuacaoTotal_Regional" SelectCommandType="StoredProcedure">
-                                                        <SelectParameters>
-                                                            <asp:SessionParameter Name="Ano" SessionField="sANO" DbType="Int16" />
-                                                            <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />
-                                                            <asp:SessionParameter Name="idRegional" Type="Int16" DefaultValue="1005" />
-                                                        </SelectParameters>
-                                                    </asp:SqlDataSource>
-                                                </div>
-
-                                            </dx:ContentControl>
-                                        </ContentCollection>
-                                    </dx:TabPage>
-
-                                    <dx:TabPage Text="Regional João">
-                                        <TabStyle BackColor="#FFFFCC">
-                                        </TabStyle>
-                                        <ContentCollection>
-                                            <dx:ContentControl ID="ContentControl6" runat="server" SupportsDisabledAttribute="True">
-
-                                                <h5>
-                                                    <asp:Label ID="lblRegional214" runat="server" Text=""></asp:Label></h5>
-
-
-                                                <div id="div3">
-                                                    <dxchartsui:WebChartControl ID="graph_Regional214" runat="server" DataSourceID="dsPontuacaoRegional214" AppearanceNameSerializable="Nature Colors" Height="450px" Width="990px">
-                                                        <DiagramSerializable>
-                                                            <cc1:XYDiagram>
-                                                                <axisx visibleinpanesserializable="-1">
-                                                                    <label angle="90">
-                                                                    </label>
-                                                                    <range sidemarginsenabled="True" />
-                                                                </axisx>
-                                                                <axisy visibleinpanesserializable="-1" visible="False">
-                                                                    <range sidemarginsenabled="True" />
-                                                                </axisy>
-                                                            </cc1:XYDiagram>
-                                                        </DiagramSerializable>
-                                                        <FillStyle>
-                                                            <optionsserializable>
-                                                                <cc1:SolidFillOptions></cc1:SolidFillOptions>
-                                                            </optionsserializable>
-                                                        </FillStyle>
-
-                                                        <Legend Visibility="False"></Legend>
-                                                        <SeriesSerializable>
-                                                            <cc1:Series ArgumentDataMember="Descricao" LabelsVisibility="True" Name="Series 1" ValueDataMembersSerializable="Nota">
-                                                                <viewserializable>
-                                                                    <cc1:SideBySideBarSeriesView Transparency="25">
-                                                                    </cc1:SideBySideBarSeriesView>
-                                                                </viewserializable>
-                                                                <labelserializable>
-                                                                    <cc1:SideBySideBarSeriesLabel EnableAntialiasing="True" LineVisible="True">
-                                                                        <fillstyle>
-                                                                            <optionsserializable>
-                                                                                <cc1:SolidFillOptions />
-                                                                            </optionsserializable>
-                                                                        </fillstyle>
-                                                                        <pointoptionsserializable>
-                                                                            <cc1:PointOptions>
-                                                                                <valuenumericoptions format="Number" precision="1" />
-                                                                            </cc1:PointOptions>
-                                                                        </pointoptionsserializable>
-                                                                    </cc1:SideBySideBarSeriesLabel>
-                                                                </labelserializable>
-                                                                <legendpointoptionsserializable>
-                                                                    <cc1:PointOptions>
-                                                                        <valuenumericoptions format="Number" precision="1" />
-                                                                    </cc1:PointOptions>
-                                                                </legendpointoptionsserializable>
-                                                            </cc1:Series>
-                                                        </SeriesSerializable>
-
-                                                        <SeriesTemplate>
-                                                            <viewserializable>
-                                                                <cc1:SideBySideBarSeriesView></cc1:SideBySideBarSeriesView>
-                                                            </viewserializable>
-                                                            <labelserializable>
-                                                                <cc1:SideBySideBarSeriesLabel LineVisible="True">
-                                                                    <fillstyle>
-                                                                        <optionsserializable>
-                                                                            <cc1:SolidFillOptions></cc1:SolidFillOptions>
-                                                                        </optionsserializable>
-                                                                    </fillstyle>
-                                                                    <pointoptionsserializable>
-                                                                        <cc1:PointOptions></cc1:PointOptions>
-                                                                    </pointoptionsserializable>
-                                                                </cc1:SideBySideBarSeriesLabel>
-                                                            </labelserializable>
-                                                            <legendpointoptionsserializable>
-                                                                <cc1:PointOptions></cc1:PointOptions>
-                                                            </legendpointoptionsserializable>
-                                                        </SeriesTemplate>
-
-                                                        <CrosshairOptions>
-                                                            <commonlabelpositionserializable>
-                                                                <cc1:CrosshairMousePosition></cc1:CrosshairMousePosition>
-                                                            </commonlabelpositionserializable>
-                                                        </CrosshairOptions>
-
-                                                        <ToolTipOptions>
-                                                            <tooltippositionserializable>
-                                                                <cc1:ToolTipMousePosition></cc1:ToolTipMousePosition>
-                                                            </tooltippositionserializable>
-                                                        </ToolTipOptions>
-                                                    </dxchartsui:WebChartControl>
-                                                    <asp:SqlDataSource ID="dsPontuacaoRegional214" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.usp_BuscarPontuacaoTotal_Regional" SelectCommandType="StoredProcedure">
-                                                        <SelectParameters>
-                                                            <asp:SessionParameter Name="Ano" SessionField="sANO" DbType="Int16" />
-                                                            <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />
-                                                            <asp:SessionParameter Name="idRegional" Type="Int16" DefaultValue="1014" />
-                                                        </SelectParameters>
-                                                    </asp:SqlDataSource>
-                                                </div>
-
-                                            </dx:ContentControl>
-                                        </ContentCollection>
-                                    </dx:TabPage>
-
-                                    <dx:TabPage Text="Regional Wilson">
-                                        <TabStyle BackColor="#FFFFCC">
-                                        </TabStyle>
-                                        <ContentCollection>
-                                            <dx:ContentControl ID="ContentControl1015" runat="server" SupportsDisabledAttribute="True">
-
-                                                <h5>
-                                                    <asp:Label ID="Label1" runat="server" Text=""></asp:Label></h5>
-
-
-                                                <div>
-                                                    <dxchartsui:WebChartControl ID="graph_Regional1015" runat="server" DataSourceID="dsPontuacaoRegional1015" AppearanceNameSerializable="Nature Colors" Height="450px" Width="990px">
-                                                        <DiagramSerializable>
-                                                            <cc1:XYDiagram>
-                                                                <axisx visibleinpanesserializable="-1">
-                                                                    <label angle="90">
-                                                                    </label>
-                                                                    <range sidemarginsenabled="True" />
-                                                                </axisx>
-                                                                <axisy visibleinpanesserializable="-1" visible="False">
-                                                                    <range sidemarginsenabled="True" />
-                                                                </axisy>
-                                                            </cc1:XYDiagram>
-                                                        </DiagramSerializable>
-                                                        <FillStyle>
-                                                            <optionsserializable>
-                                                                <cc1:SolidFillOptions></cc1:SolidFillOptions>
-                                                            </optionsserializable>
-                                                        </FillStyle>
-
-                                                        <Legend Visibility="False"></Legend>
-                                                        <SeriesSerializable>
-                                                            <cc1:Series ArgumentDataMember="Descricao" LabelsVisibility="True" Name="Series 1" ValueDataMembersSerializable="Nota">
-                                                                <viewserializable>
-                                                                    <cc1:SideBySideBarSeriesView Transparency="25">
-                                                                    </cc1:SideBySideBarSeriesView>
-                                                                </viewserializable>
-                                                                <labelserializable>
-                                                                    <cc1:SideBySideBarSeriesLabel EnableAntialiasing="True" LineVisible="True">
-                                                                        <fillstyle>
-                                                                            <optionsserializable>
-                                                                                <cc1:SolidFillOptions />
-                                                                            </optionsserializable>
-                                                                        </fillstyle>
-                                                                        <pointoptionsserializable>
-                                                                            <cc1:PointOptions>
-                                                                                <valuenumericoptions format="Number" precision="1" />
-                                                                            </cc1:PointOptions>
-                                                                        </pointoptionsserializable>
-                                                                    </cc1:SideBySideBarSeriesLabel>
-                                                                </labelserializable>
-                                                                <legendpointoptionsserializable>
-                                                                    <cc1:PointOptions>
-                                                                        <valuenumericoptions format="Number" precision="1" />
-                                                                    </cc1:PointOptions>
-                                                                </legendpointoptionsserializable>
-                                                            </cc1:Series>
-                                                        </SeriesSerializable>
-
-                                                        <SeriesTemplate>
-                                                            <viewserializable>
-                                                                <cc1:SideBySideBarSeriesView></cc1:SideBySideBarSeriesView>
-                                                            </viewserializable>
-                                                            <labelserializable>
-                                                                <cc1:SideBySideBarSeriesLabel LineVisible="True">
-                                                                    <fillstyle>
-                                                                        <optionsserializable>
-                                                                            <cc1:SolidFillOptions></cc1:SolidFillOptions>
-                                                                        </optionsserializable>
-                                                                    </fillstyle>
-                                                                    <pointoptionsserializable>
-                                                                        <cc1:PointOptions></cc1:PointOptions>
-                                                                    </pointoptionsserializable>
-                                                                </cc1:SideBySideBarSeriesLabel>
-                                                            </labelserializable>
-                                                            <legendpointoptionsserializable>
-                                                                <cc1:PointOptions></cc1:PointOptions>
-                                                            </legendpointoptionsserializable>
-                                                        </SeriesTemplate>
-
-                                                        <CrosshairOptions>
-                                                            <commonlabelpositionserializable>
-                                                                <cc1:CrosshairMousePosition></cc1:CrosshairMousePosition>
-                                                            </commonlabelpositionserializable>
-                                                        </CrosshairOptions>
-
-                                                        <ToolTipOptions>
-                                                            <tooltippositionserializable>
-                                                                <cc1:ToolTipMousePosition></cc1:ToolTipMousePosition>
-                                                            </tooltippositionserializable>
-                                                        </ToolTipOptions>
-                                                    </dxchartsui:WebChartControl>
-                                                    <asp:SqlDataSource ID="dsPontuacaoRegional1015" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.usp_BuscarPontuacaoTotal_Regional" SelectCommandType="StoredProcedure">
-                                                        <SelectParameters>
-                                                            <asp:SessionParameter Name="Ano" SessionField="sANO" DbType="Int16" />
-                                                            <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />
-                                                            <asp:SessionParameter Name="idRegional" Type="Int16" DefaultValue="1015" />
-                                                        </SelectParameters>
-                                                    </asp:SqlDataSource>
-                                                </div>
-
-                                            </dx:ContentControl>
-                                        </ContentCollection>
-                                    </dx:TabPage>
-
-                                    <dx:TabPage Text="Regional Domingos">
+                                    <dx:TabPage Text="Regional Samoel">
                                         <TabStyle BackColor="#FFFFCC">
                                         </TabStyle>
                                         <ContentCollection>
                                             <dx:ContentControl ID="ContentControl9" runat="server" SupportsDisabledAttribute="True">
 
                                                 <h5>
-                                                    <asp:Label ID="Label2" runat="server" Text=""></asp:Label></h5>
+                                                    <asp:Label ID="lblRegional1016" runat="server" Text=""></asp:Label></h5>
 
 
                                                 <div>
-                                                    <dxchartsui:WebChartControl ID="graph_Regional1018" runat="server" DataSourceID="dsPontuacaoRegional1018" AppearanceNameSerializable="Nature Colors" Height="450px" Width="990px">
+                                                    <dxchartsui:WebChartControl ID="graph_Regional1016" runat="server" DataSourceID="dsPontuacaoRegional1016" AppearanceNameSerializable="Nature Colors" Height="450px" Width="990px">
                                                         <DiagramSerializable>
                                                             <cc1:XYDiagram>
                                                                 <axisx visibleinpanesserializable="-1">
@@ -1638,11 +832,11 @@
                                                             </tooltippositionserializable>
                                                         </ToolTipOptions>
                                                     </dxchartsui:WebChartControl>
-                                                    <asp:SqlDataSource ID="dsPontuacaoRegional1018" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.usp_BuscarPontuacaoTotal_Regional" SelectCommandType="StoredProcedure">
+                                                    <asp:SqlDataSource ID="dsPontuacaoRegional1016" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.usp_BuscarPontuacaoTotal_Regional_Gigante" SelectCommandType="StoredProcedure">
                                                         <SelectParameters>
                                                             <asp:SessionParameter Name="Ano" SessionField="sANO" DbType="Int16" />
                                                             <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />
-                                                            <asp:SessionParameter Name="idRegional" Type="Int16" DefaultValue="1018" />
+                                                            <asp:SessionParameter Name="idRegional" Type="Int16" DefaultValue="1016" />
                                                         </SelectParameters>
                                                     </asp:SqlDataSource>
                                                 </div>
@@ -1694,13 +888,8 @@
                                             Grupo:
                                         </div>
 
-                                        <div class="divGrupo">
-                                            <dx:ASPxComboBox ID="cboGrupo" runat="server" DataSourceID="dsGrupo" TextField="listaGrupo" Theme="SoftOrange" ValueField="idGrupo" Width="200px" AutoPostBack="True">
-
-                                                <ClientSideEvents SelectedIndexChanged="function(s, e) {}" />
-
-                                            </dx:ASPxComboBox>
-                                            <asp:SqlDataSource ID="dsGrupo" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="SELECT [idGrupo], [listaGrupo] FROM [Cadastro].[tblCadGrupo] ORDER BY [idGrupo]"></asp:SqlDataSource>
+                                        <div class="divGrupo" style="padding: 10px 0 10px 0">
+                                            <asp:DropDownList AutoPostBack="true" class="form-control" Font-Size="10px" Height="30px" ID="selGrupo1" runat="server" DataTextField="Desc" OnSelectedIndexChanged="selGrupo1_SelectedIndexChanged"></asp:DropDownList>
                                         </div>
 
                                         <dxchartsui:WebChartControl ID="graph_Subgrupo" runat="server" AppearanceNameSerializable="Nature Colors" DataSourceID="dsSubgrupoDados" Height="450px" Width="1020px" CrosshairEnabled="True">
@@ -1785,12 +974,11 @@
                                         </dxchartsui:WebChartControl>
 
                                         <div id="dsSubgrupo" runat="server">
-                                            <asp:SqlDataSource ID="dsSubgrupoDados" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.uspBuscar_Subgrupo" SelectCommandType="StoredProcedure">
+                                            <asp:SqlDataSource ID="dsSubgrupoDados" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.uspBuscar_Subgrupo_Gigante" SelectCommandType="StoredProcedure">
                                                 <SelectParameters>
                                                     <asp:SessionParameter Name="Ano" SessionField="sANO" DbType="Int16" />
                                                     <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />
                                                     <asp:SessionParameter Name="idGrupo" SessionField="sGRUPO" Type="Byte" />
-                                                    <asp:SessionParameter Name="idSubgrupo" SessionField="sSUBGRUPO" Type="Byte" DefaultValue="1" />
                                                 </SelectParameters>
                                             </asp:SqlDataSource>
                                         </div>
@@ -1842,6 +1030,7 @@
                                         <dx:ASPxPageControl ID="ASPxPageControl1" runat="server" ActiveTabIndex="0">
 
                                             <TabPages>
+
                                                 <dx:TabPage Text="Todas Filiais">
                                                     <TabStyle BackColor="#CCFFCC">
                                                     </TabStyle>
@@ -1934,7 +1123,7 @@
                                                                 </ToolTipOptions>
                                                             </dxchartsui:WebChartControl>
 
-                                                            <asp:SqlDataSource ID="dsNaoConforme" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.usp_BuscarQtdeNaoConforme" SelectCommandType="StoredProcedure">
+                                                            <asp:SqlDataSource ID="dsNaoConforme" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.usp_BuscarQtdeNaoConforme_Gigante" SelectCommandType="StoredProcedure">
                                                                 <SelectParameters>
                                                                     <asp:SessionParameter Name="Ano" SessionField="sANO" DbType="Int16" />
                                                                     <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />
@@ -1956,10 +1145,8 @@
                                                                 Grupo:
                                                             </div>
 
-                                                            <div class="divGrupo">
-                                                                <dx:ASPxComboBox ID="cboGrupo_NA" runat="server" DataSourceID="dsGrupo" TextField="listaGrupo" Theme="Default" ValueField="idGrupo" Width="200px" AutoPostBack="True" DropDownRows="10">
-                                                                </dx:ASPxComboBox>
-
+                                                            <div class="divGrupo" style="padding: 10px 0 10px 0">
+                                                                <asp:DropDownList AutoPostBack="true" class="form-control" Font-Size="10px" Height="30px" ID="selGrupo2" runat="server" DataTextField="Desc" OnSelectedIndexChanged="selGrupo2_SelectedIndexChanged"></asp:DropDownList>
                                                             </div>
 
                                                             <dxchartsui:WebChartControl ID="WebChartControl2" runat="server" AppearanceNameSerializable="Northern Lights" DataSourceID="dsNaoConformeSubgrupo" Height="450px" Width="1020px" PaletteName="Black and White">
@@ -2043,12 +1230,11 @@
                                                                 </ToolTipOptions>
                                                             </dxchartsui:WebChartControl>
 
-                                                            <asp:SqlDataSource ID="dsNaoConformeSubgrupo" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.uspBuscar_QtdeNaoConforme_Subgrupo" SelectCommandType="StoredProcedure">
+                                                            <asp:SqlDataSource ID="dsNaoConformeSubgrupo" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.uspBuscar_QtdeNaoConforme_Subgrupo_Gigante" SelectCommandType="StoredProcedure">
                                                                 <SelectParameters>
                                                                     <asp:SessionParameter Name="Ano" SessionField="sANO" DbType="Int16" />
                                                                     <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />
                                                                     <asp:SessionParameter Name="idGrupo" SessionField="sGRUPO_NA" Type="Byte" />
-                                                                    <asp:SessionParameter Name="idSubgrupo" SessionField="sSUBGRUPO_NA" Type="Byte" DefaultValue="1" />
                                                                 </SelectParameters>
                                                             </asp:SqlDataSource>
 
@@ -2064,9 +1250,8 @@
                                                             <h5>
                                                                 <asp:Label ID="lblNaoConformePorFilial" runat="server" Text="" Font-Bold="true"></asp:Label></h5>
 
-                                                            <div class="divGrupo">
-                                                                <uc1:wucListaLojasComCorporacao runat="server" ID="cboFilial_NA" />
-
+                                                            <div class="divGrupo" runat="server" style="padding-bottom: 15px">
+                                                                <asp:DropDownList AutoPostBack="true" class="form-control" Font-Size="10px" Height="30px" ID="selFilial2" runat="server" DataTextField="Desc" OnSelectedIndexChanged="selFilial2_SelectedIndexChanged"></asp:DropDownList>
                                                             </div>
 
                                                             <dxchartsui:WebChartControl ID="graphNaoConformeDepartamentoFilial" runat="server" AppearanceNameSerializable="Northern Lights" DataSourceID="dsQtdeNaoConforme_Subgrupo_porFilial" Height="450px" Width="1020px" PaletteName="Black and White">
@@ -2154,7 +1339,7 @@
                                                                 <SelectParameters>
                                                                     <asp:SessionParameter Name="Ano" SessionField="sANO" DbType="Int16" />
                                                                     <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />
-                                                                    <asp:SessionParameter Name="idFilial" SessionField="sFILIAL_NA" Type="Byte" />
+                                                                    <asp:SessionParameter Name="idFilial" SessionField="sFILIAL_NA" Type="Int16" />
                                                                 </SelectParameters>
                                                             </asp:SqlDataSource>
 
@@ -2163,18 +1348,9 @@
                                                     </ContentCollection>
                                                 </dx:TabPage>
 
-
                                             </TabPages>
 
                                         </dx:ASPxPageControl>
-
-
-
-
-
-                                        <%--                </dx:PanelContent>
-            </PanelCollection>
-        </dx:ASPxCallbackPanel>--%>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
 

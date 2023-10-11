@@ -25,7 +25,7 @@ Public Class Projeto
     Private vFilial As Int16
     Private vIsLoja As Boolean
     Private vIsRegional As Boolean
-    Private vCodigoSuperHiper As Boolean
+    Private vCodigoSuperHiper As Int16
     Private vResetarSenha As Boolean
     Private vAtivo As Boolean
     Private vIsAtacarejo As Boolean
@@ -153,11 +153,11 @@ Public Class Projeto
         End Set
     End Property
 
-    Public Property CodigoSuperHiper() As Boolean
+    Public Property CodigoSuperHiper() As Int16
         Get
             CodigoSuperHiper = vCodigoSuperHiper
         End Get
-        Set(ByVal value As Boolean)
+        Set(ByVal value As Int16)
             vCodigoSuperHiper = value
         End Set
     End Property
@@ -373,7 +373,6 @@ Public Class Projeto
     End Function
 
     Function BuscarLocalDoUsuario(ByVal iUserName As String) As String
-
         Dim con As New SqlConnection(conn18)
 
         Dim comando As New SqlCommand("uspUser_BuscarLocal", con)
@@ -387,14 +386,14 @@ Public Class Projeto
             Dim reader5 As SqlDataReader
             reader5 = comando.ExecuteReader()
             While reader5.Read
-                BuscarLocalDoUsuario = reader5.GetSqlString(0).ToString
-                SomenteLeitura = reader5.GetSqlByte(1).ToString
-                PessoaAdmin = reader5.GetSqlString(2).ToString
-                Filial = reader5.GetSqlByte(3)
-                Isloja = reader5.GetBoolean(4)
-                IsRegional = reader5.GetBoolean(5)
-                CodigoSuperHiper = reader5.GetBoolean(6)
-                IsAtacarejo = reader5.GetBoolean(7)
+                BuscarLocalDoUsuario = reader5.Item(0)
+                SomenteLeitura = reader5.Item(1)
+                PessoaAdmin = reader5.Item(2)
+                Filial = reader5.Item(3)
+                Isloja = reader5.Item(4)
+                IsRegional = reader5.Item(5)
+                CodigoSuperHiper = reader5.Item(6)
+                IsAtacarejo = reader5.Item(7)
             End While
 
         Catch ex As Exception

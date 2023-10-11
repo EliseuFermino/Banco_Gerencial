@@ -5,7 +5,7 @@ Imports DevExpress.XtraCharts
 Imports System.Drawing
 
 
-Partial Class MemberPages_Checklist_Dashboard
+Partial Class MemberPages_Checklist_DashboardGigante
     Inherits System.Web.UI.Page
 
     Dim nota As String
@@ -13,6 +13,7 @@ Partial Class MemberPages_Checklist_Dashboard
     Dim Periodo As String
     Dim varDesc As String
 
+    Dim selects As New preencheSelects
     Dim oTime As New myDateTimes
     Dim oFun As New Funcoes
     Dim oVen As New VendaEmpresaMes
@@ -33,57 +34,36 @@ Partial Class MemberPages_Checklist_Dashboard
 
             oVen.AtualizarEstatisticaPrograma(323, User.Identity.Name)
 
-            CType(gauge_Pontuacao_Empresa.Gauges(0), ICircularGauge).Scales(0).Value = oDB.ExecuteStoredProcedure_Scalar("Pontuacao.usp_Nota_Buscar_Total_Empresa_Mes", Conexao.gerCheckList, "Ano", ano, "mes", mes)
+            CType(gauge_Pontuacao_Empresa.Gauges(0), ICircularGauge).Scales(0).Value = oDB.ExecuteStoredProcedure_Scalar("Pontuacao.usp_Nota_Buscar_Total_Gigante_Mes", Conexao.gerCheckList, "Ano", ano, "mes", mes)
 
-            Call Buscar_Total_PiorLoja_Mes("Pontuacao.usp_Nota_Buscar_Total_PiorLoja_Mes", ano, mes, 1)
+            Call Buscar_Total_PiorLoja_Mes("Pontuacao.usp_Nota_Buscar_Total_PiorLoja_Mes_Gigante", ano, mes, 1)
             CType(gauge_Pontuacao_Pior1.Gauges(0), ICircularGauge).Scales(0).Value = nota
             lblFilial_Pior1.Text = "Filial: " & descFilial
             lblPeriodo_Pior1.Text = Periodo
             'MudaCor(btnPior1, nota)
 
-            Call Buscar_Total_PiorLoja_Mes("Pontuacao.usp_Nota_Buscar_Total_PiorLoja_Mes", ano, mes, 2)
-            CType(gauge_Pontuacao_Pior2.Gauges(0), ICircularGauge).Scales(0).Value = nota
-            lblFilial_Pior2.Text = "Filial: " & descFilial
-            lblPeriodo_Pior2.Text = Periodo
-            'MudaCor(btnPior2, nota)
 
-            Call Buscar_Total_PiorLoja_Mes("Pontuacao.usp_Nota_Buscar_Total_MelhorLoja_Mes", ano, mes, 1)
+            Call Buscar_Total_PiorLoja_Mes("Pontuacao.usp_Nota_Buscar_Total_MelhorLoja_Mes_Gigante", ano, mes, 1)
             CType(gauge_Pontuacao_Melhor1.Gauges(0), ICircularGauge).Scales(0).Value = nota
             lblFilial_Melhor1.Text = "Filial: " & descFilial
             lblPeriodo_Melhor1.Text = Periodo
             'MudaCor(btnMelhor1, nota)
 
-            Call Buscar_Total_PiorLoja_Mes("Pontuacao.usp_Nota_Buscar_Total_MelhorLoja_Mes", ano, mes, 2)
-            CType(gauge_Pontuacao_Melhor2.Gauges(0), ICircularGauge).Scales(0).Value = nota
-            lblFilial_Melhor2.Text = "Filial: " & descFilial
-            lblPeriodo_Melhor2.Text = Periodo
-            'MudaCor(btnMelhor2, nota)
-
             lblPeriodo_Empresa.Text = lblPeriodo_Melhor1.Text
 
             lblTodasFiliais.Text = "Pontuação - Todas as Filiais - " & lblPeriodo_Melhor1.Text
-            lblSuper.Text = "Pontuação - Super - " & lblPeriodo_Melhor1.Text
-            lblSuperE.Text = "Pontuação - Super E - " & lblPeriodo_Melhor1.Text
-            lblHiper.Text = "Pontuação - Hiper - " & lblPeriodo_Melhor1.Text
-            lblRegional205.Text = "Pontuação - Regional Edison - " & lblPeriodo_Melhor1.Text
-            lblRegional206.Text = "Pontuação - Regional Mauricio - " & lblPeriodo_Melhor1.Text
-            lblRegional214.Text = "Pontuação - Regional João - " & lblPeriodo_Melhor1.Text
+            lblRegional1016.Text = "Pontuação - Regional Samoel - " & lblPeriodo_Melhor1.Text
 
             lblDepartamento.Text = lblPeriodo_Melhor1.Text
             lblNaoConforme.Text = "Total de Não-Conforme por Loja - " + lblPeriodo_Melhor1.Text
             lblNaoConformePorDepartamento.Text = "Total de Não-Conforme por Departamento - " + lblPeriodo_Melhor1.Text
             lblNaoConforme.Text = "Total de Não-Conforme por Loja e Departamento - " + lblPeriodo_Melhor1.Text
 
-            cboGrupo.Text = 1
-            'cboSubgrupo.Text = 1
+            preencheSelectGrupo(selGrupo1)
+            preencheSelectGrupo(selGrupo2)
 
-            cboGrupo_NA.Text = 1
-            'cboSubgrupo_NA.Text = 1
-
-            cboFilial_NA.Visible_cboCorporacao = False
-            cboFilial_NA.AutoPostBack = True
-            cboFilial_Periodo.AutoPostBack = True
-            cboFilial_Periodo.Visible_cboCorporacao = False
+            preencheSelectFilial(selFilial1)
+            preencheSelectFilial(selFilial2)
 
 
             '  Graficos 
@@ -146,13 +126,13 @@ Partial Class MemberPages_Checklist_Dashboard
 
         If iNota > 0.0 And iNota < 70 Then
             iButton.CssClass = "btn btn-danger"
-        ElseIf iNota > 70.010000000000005 And iNota < 90 Then
+        ElseIf iNota > 70.01 And iNota < 90 Then
             iButton.CssClass = "btn btn-warning"
-        ElseIf iNota > 90.010000000000005 And iNota < 95 Then
+        ElseIf iNota > 90.01 And iNota < 95 Then
             iButton.CssClass = "btn btn-info"
-        ElseIf iNota > 95.010000000000005 And iNota < 97 Then
+        ElseIf iNota > 95.01 And iNota < 97 Then
             iButton.CssClass = "btn btn-primary"
-        ElseIf iNota > 97.010000000000005 And iNota <= 100 Then
+        ElseIf iNota > 97.01 And iNota <= 100 Then
             iButton.CssClass = "btn btn-success"
         End If
 
@@ -167,62 +147,18 @@ Partial Class MemberPages_Checklist_Dashboard
         End If
 
         Session("sANO") = Year(DateAndTime.Today.AddDays(-1))
+        Session("sGRUPO") = selGrupo1.SelectedValue
+        Session("sGRUPO_NA") = selGrupo2.SelectedValue
+        Session("sFILIAL_NA") = selFilial1.SelectedValue
 
-        Session("sGRUPO") = cboGrupo.Value
-        'Session("sSUBGRUPO") = cboSubgrupo.Value
-
-        Session("sGRUPO_NA") = cboGrupo_NA.Value
-        'Session("sSUBGRUPO_NA") = cboSubgrupo_NA.Value
-        Session("sFILIAL_NA") = cboFilial_NA.CallFilial
-
-    End Sub
-
-    Protected Sub graph_PontuacaoTotal_CustomDrawSeriesPoint(sender As Object, e As CustomDrawSeriesPointEventArgs) Handles graph_PontuacaoTotal.CustomDrawSeriesPoint
-
-        oFun.graph_Pontuacao_CheckList(sender, e)
-
-    End Sub
-
-    Protected Sub graph_SuperE_CustomDrawSeriesPoint(sender As Object, e As CustomDrawSeriesPointEventArgs) Handles graph_SuperE.CustomDrawSeriesPoint
-
-        oFun.graph_Pontuacao_CheckList(sender, e)
-
-    End Sub
-
-    Protected Sub graph_Hiper_CustomDrawSeriesPoint(sender As Object, e As CustomDrawSeriesPointEventArgs) Handles graph_Hiper.CustomDrawSeriesPoint
-        oFun.graph_Pontuacao_CheckList(sender, e)
     End Sub
 
     Protected Sub graph_PontuacaoTodas_CustomDrawSeriesPoint(sender As Object, e As CustomDrawSeriesPointEventArgs) Handles graph_PontuacaoTodas.CustomDrawSeriesPoint
         oFun.graph_Pontuacao_CheckList(sender, e)
     End Sub
 
-    Protected Sub graph_Regional205_CustomDrawSeriesPoint(sender As Object, e As CustomDrawSeriesPointEventArgs) Handles graph_Regional205.CustomDrawSeriesPoint
+    Protected Sub graph_Regional1018_CustomDrawSeriesPoint(sender As Object, e As CustomDrawSeriesPointEventArgs) Handles graph_Regional1016.CustomDrawSeriesPoint
         oFun.graph_Pontuacao_CheckList(sender, e)
-    End Sub
-
-    Protected Sub graph_Regional206_CustomDrawSeriesPoint(sender As Object, e As CustomDrawSeriesPointEventArgs) Handles graph_Regional206.CustomDrawSeriesPoint
-        oFun.graph_Pontuacao_CheckList(sender, e)
-    End Sub
-
-    Protected Sub graph_Regional214_CustomDrawSeriesPoint(sender As Object, e As CustomDrawSeriesPointEventArgs) Handles graph_Regional214.CustomDrawSeriesPoint
-        oFun.graph_Pontuacao_CheckList(sender, e)
-    End Sub
-
-    Protected Sub graph_Regional1015_CustomDrawSeriesPoint(sender As Object, e As CustomDrawSeriesPointEventArgs) Handles graph_Regional1015.CustomDrawSeriesPoint
-        oFun.graph_Pontuacao_CheckList(sender, e)
-    End Sub
-
-    Protected Sub graph_Regional1018_CustomDrawSeriesPoint(sender As Object, e As CustomDrawSeriesPointEventArgs) Handles graph_Regional1018.CustomDrawSeriesPoint
-        oFun.graph_Pontuacao_CheckList(sender, e)
-    End Sub
-    Protected Sub cboGrupo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGrupo.SelectedIndexChanged
-        'cboSubgrupo.DataBind()
-        'If cboSubgrupo.SelectedIndex = -1 Then
-        '    cboSubgrupo.SelectedIndex = 0
-        'End If
-        mySession()
-        graph_Subgrupo.DataBind()
     End Sub
 
     Protected Sub graph_Subgrupo_CustomDrawSeriesPoint(sender As Object, e As CustomDrawSeriesPointEventArgs) Handles graph_Subgrupo.CustomDrawSeriesPoint
@@ -234,26 +170,24 @@ Partial Class MemberPages_Checklist_Dashboard
     '    graph_Subgrupo.DataBind()
     'End Sub
 
-    Protected Sub cboGrupo_NA_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGrupo_NA.SelectedIndexChanged
-        'cboSubgrupo_NA.DataBind()
-        'If cboSubgrupo_NA.SelectedIndex = -1 Then
-        '    cboSubgrupo_NA.SelectedIndex = 0
-        'End If
+    Protected Sub selGrupo1_SelectedIndexChanged(sender As Object, e As EventArgs)
         mySession()
-        graphNaoConforme.DataBind()
+        graph_Subgrupo.DataBind()
+    End Sub
+    Protected Sub selGrupo2_SelectedIndexChanged(sender As Object, e As EventArgs)
+        mySession()
+        WebChartControl2.DataBind()
     End Sub
 
-    'Protected Sub cboSubgrupo_NA_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSubgrupo_NA.SelectedIndexChanged
-    '    mySession()
-    '    graphNaoConforme.DataBind()
-    'End Sub
+    Protected Sub selFilial1_SelectedIndexChanged(sender As Object, e As EventArgs)
+        Session("sFILIAL_NA") = selFilial1.SelectedValue
+        graph_Periodo.DataBind()
+    End Sub
 
-    Protected Sub cboFilial_NA_ListFilialChanged(sender As Object, e As EventArgs) Handles cboFilial_NA.ListFilialChanged
-        mySession()
+    Protected Sub selFilial2_SelectedIndexChanged(sender As Object, e As EventArgs)
+        Session("sFILIAL_NA") = selFilial2.SelectedValue
         graphNaoConformeDepartamentoFilial.DataBind()
     End Sub
-
-
     Protected Sub Page_PreRender(sender As Object, e As EventArgs) Handles Me.PreRender
         If Not IsPostBack Then
 
@@ -266,10 +200,52 @@ Partial Class MemberPages_Checklist_Dashboard
         oFun.graph_Pontuacao_CheckList(sender, e)
     End Sub
 
-
     Protected Sub upPanel_AnoMes_DataBinding(sender As Object, e As EventArgs) Handles upPanel_AnoMes.DataBinding
         graph_Periodo.DataBind()
     End Sub
 
- 
+    Private Sub preencheSelectFilial(ByRef sSelect As DropDownList)
+        Dim selectSQL As String = "Select Distinct a.idFilial As Filial, b.FilialDesc As nomeFilial From Pontuacao.tblNotasDiarias_Total a INNER JOIN [10.1.2.225].DW.dbo.DimFilial  AS b On a.idFilial = b.idFilial And b.IsAtacarejo = 1 Where Ano = Year(getdate())"
+        Dim con As New SqlConnection(Conexao.gerCheckList)
+        Dim cmd As New SqlCommand(selectSQL, con)
+
+        con.Open()
+
+        Try
+            sSelect.DataSource = cmd.ExecuteReader()
+            sSelect.DataTextField = "nomeFilial"
+            sSelect.DataValueField = "Filial"
+            sSelect.DataBind()
+
+            con.Close()
+        Catch ex As Exception
+
+        Finally
+            con.Close()
+        End Try
+
+    End Sub
+
+    Private Sub preencheSelectGrupo(ByRef sSelect As DropDownList)
+        Dim selectSQL As String = "Select idGrupo , listaGrupo From Cadastro.tblCadGrupo_Atacado"
+        Dim con As New SqlConnection(Conexao.gerCheckList)
+        Dim cmd As New SqlCommand(selectSQL, con)
+
+        con.Open()
+
+        Try
+            sSelect.DataSource = cmd.ExecuteReader()
+            sSelect.DataTextField = "listaGrupo"
+            sSelect.DataValueField = "idGrupo"
+            sSelect.DataBind()
+
+            con.Close()
+        Catch ex As Exception
+
+        Finally
+            con.Close()
+        End Try
+
+    End Sub
+
 End Class

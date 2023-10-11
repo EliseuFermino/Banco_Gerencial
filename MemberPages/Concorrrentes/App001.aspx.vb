@@ -19,9 +19,9 @@ Partial Class MemberPages_Concorrrentes_App001
 #Region " Dim / Private"
 
     Dim strSQL, strBusca As String
-    Dim cnnStr As String = "Data Source=WIN-DJITT2B93NO;Initial Catalog=gerConcor;User ID=sa; PWD=rd700@1"
-    Dim connString As String = "Data Source=WIN-DJITT2B93NO;Initial Catalog=gerContSQL1;Persist Security Info=True;User ID=sa;Password=rd700@1"
-    Dim cnnStrManager As String = "Data Source=WIN-DJITT2B93NO;Initial Catalog=gerManager;User ID=sa; PWD=rd700@1"
+    'Dim cnnStr As String = "Data Source=WIN-DJITT2B93NO;Initial Catalog=gerConcor;User ID=sa; PWD=rd700@1"
+    'Dim connString As String = "Data Source=WIN-DJITT2B93NO;Initial Catalog=gerContSQL1;Persist Security Info=True;User ID=sa;Password=rd700@1"
+    'Dim cnnStrManager As String = "Data Source=WIN-DJITT2B93NO;Initial Catalog=gerManager;User ID=sa; PWD=rd700@1"
     Private selectedProduct As Product
     Dim oVem As New VendaEmpresaMes
     Dim oFun As New Funcoes
@@ -33,7 +33,7 @@ Partial Class MemberPages_Concorrrentes_App001
 
     Sub CreateTipo()
         Dim str As String = 1
-        Dim conn As New SqlConnection(cnnStr)
+        Dim conn As New SqlConnection(Conexao.gerConcor)
         Dim com As New SqlCommand(str, conn)
         Dim cmd As SqlCommand = Nothing
         com.Connection.Open()
@@ -60,7 +60,7 @@ Partial Class MemberPages_Concorrrentes_App001
     Sub CreateTipo_Structure(ByVal chkMy As ASPxCheckBox, ByVal numTipo As Byte)
 
         Dim str As String = 1
-        Dim conn As New SqlConnection(cnnStr)
+        Dim conn As New SqlConnection(Conexao.gerConcor)
         Dim com As New SqlCommand(str, conn)
         Dim cmd As SqlCommand = Nothing
         com.Connection.Open()
@@ -128,7 +128,7 @@ Partial Class MemberPages_Concorrrentes_App001
         'define a string com o comando SQL e a string de conexão usando um provedor SQLClient
         Dim strSQL As String = "SELECT CodCidade, DescCidade FROM dbo.tblCidadeCondor"
 
-        Dim Conn As New SqlConnection(cnnStr)
+        Dim conn As New SqlConnection(Conexao.gerConcor)
         Dim objDr As SqlDataReader
         Dim Cmd As New SqlCommand(strSQL, Conn)
         Conn.Open()
@@ -142,8 +142,7 @@ Partial Class MemberPages_Concorrrentes_App001
     End Sub
 
     Sub Preencher_tt_Cidades()
-        Dim sConnStr As String = cnnStr
-        Dim cnBKTest As New SqlConnection(sConnStr)
+        Dim cnBKTest As New SqlConnection(Conexao.gerConcor)
 
         Dim cmdTest As New SqlCommand("uspConc_ttAtualizaCidades", cnBKTest)
 
@@ -170,27 +169,42 @@ Partial Class MemberPages_Concorrrentes_App001
 
         ' -------------------------------------------------------------------------------------------------------------
 
-        Dim conn As New SqlConnection   ' Criando o objeto connection
-        Dim cmd As New SqlCommand
-        Dim da As New SqlDataAdapter
-        Dim ds As New DataSet
+        Dim strSQL As String = "SELECT CodCidade, DescCidade FROM tblCidadeRegiao"
 
-        conn.ConnectionString = cnnStr ' "Data Source=WIN-DJITT2B93NO;Initial Catalog=gerManager;User ID=sa;Password=rd700@1"
-        cmd.Connection = conn
-        cmd.CommandText = "SELECT CodCidade, DescCidade FROM tblCidadeRegiao"
-        cmd.CommandType = CommandType.Text
-        da.SelectCommand = cmd
-        da.Fill(ds, "tblCidadeRegiao") ' Preenchendo o DataSet
+        Dim conn As New SqlConnection(Conexao.gerConcor)
+        Dim objDr As SqlDataReader
+        Dim Cmd As New SqlCommand(strSQL, Conn)
+        Conn.Open()
 
-        ' Desconectando o Banco de Dados
-        conn.Dispose()
-        cmd.Dispose()
-        da.Dispose()
-
+        objDr = Cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection)
         Me.cboCidade.ValueField = "CodCidade"
         Me.cboCidade.TextField = "DescCidade"
-        Me.cboCidade.DataSource = ds
+        Me.cboCidade.DataSource = objDr
         Me.cboCidade.DataBind()
+        Conn.Close()
+
+
+        'Dim conn As New SqlConnection(Conexao.gerConcor)
+        'Dim cmd As New SqlCommand
+        'Dim da As New SqlDataAdapter
+        'Dim ds As New DataSet
+
+        'conn.ConnectionString = cnnStr ' "Data Source=WIN-DJITT2B93NO;Initial Catalog=gerManager;User ID=sa;Password=rd700@1"
+        'cmd.Connection = conn
+        'cmd.CommandText = "SELECT CodCidade, DescCidade FROM tblCidadeRegiao"
+        'cmd.CommandType = CommandType.Text
+        'da.SelectCommand = cmd
+        'da.Fill(ds, "tblCidadeRegiao") ' Preenchendo o DataSet
+
+        '' Desconectando o Banco de Dados
+        'conn.Dispose()
+        'cmd.Dispose()
+        'da.Dispose()
+
+        'Me.cboCidade.ValueField = "CodCidade"
+        'Me.cboCidade.TextField = "DescCidade"
+        'Me.cboCidade.DataSource = ds
+        'Me.cboCidade.DataBind()
 
 
     End Sub
@@ -200,8 +214,7 @@ Partial Class MemberPages_Concorrrentes_App001
         'define a string com o comando SQL e a string de conexão usando um provedor SQLClient
         Dim strSQL As String = "SELECT Filial AS CodCidade, [Desc] AS DescCidade FROM gerManager.dbo.listLojas"
 
-
-        Dim Conn As New SqlConnection(cnnStrManager)
+        Dim conn As New SqlConnection(Conexao.gerManager)
         Dim objDr As SqlDataReader
         Dim Cmd As New SqlCommand(strSQL, Conn)
         Conn.Open()
@@ -215,8 +228,7 @@ Partial Class MemberPages_Concorrrentes_App001
     End Sub
 
     Sub Preencher_tt_Filial()
-        Dim sConnStr As String = cnnStr
-        Dim cnBKTest As New SqlConnection(sConnStr)
+        Dim cnBKTest As New SqlConnection(Conexao.gerConcor)
 
         Dim cmdTest As New SqlCommand("uspConc_ttAtualizaFilial", cnBKTest)
 

@@ -160,7 +160,7 @@
                             <dx:LayoutItem Caption="Seção" ColSpan="1" >
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer1" runat="server" >
-                                        <uc1:wucListaSecao runat="server" ID="cboSecao" Caption="" CssClass="cssSecao" />
+                                        <uc1:wucListaSecao runat="server" ID="cboSecao" Caption="" CssClass="cssSecao" cboSecao_Enabled="false" />
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
