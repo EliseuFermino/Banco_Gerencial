@@ -526,7 +526,7 @@ Partial Class MemberPages_Cadastros_usersControl
                 End If
             Else
                 If tipo = 1 Then
-                    dtChild = Me.GetData("LocalSqlServer", "Select a.* , Case When (Select Top 1 1 From aspnet_UsersExceptions Where Login = '" + login.ToString() + "') = 1 Then 'true' Else 'false' End as Checked From Menu.Dados a  Where ParentID = " + child.Value + "order by MenuOrdem")
+                    dtChild = Me.GetData("LocalSqlServer", "Select a.* , Case When (Select Top 1 1 From aspnet_UsersExceptions x Where a.ID = x.idMenuH and x.Login = '" + login.ToString() + "') = 1 Then 'true' Else 'false' End as Checked From Menu.Dados a  Where ParentID = " + child.Value + "order by MenuOrdem")
                 Else
                     dtChild = Me.GetData("LocalSqlServer", "Select Answer as Text, id, DescPGR , Case When (Select Top 1 1 From aspnet_UsersExceptions x Where a.ID = x.idMenuV and Login = '" + login.ToString() + "') = 1 Then 'true' Else 'false' End as Checked From Menu.tblProgramas a Where ParentID = " + child.Value + "order by Sort")
                 End If

@@ -360,7 +360,7 @@
 
                                 <%--Usuário--%>
                                 <%--Cadastro de Usuario--%>
-                                <asp:Panel ID="panCadastroUsuario" runat="server" CssClass="justify-content-center">
+                                <asp:Panel ID="panCadastroUsuario" runat="server" CssClass="justify-content-center" DefaultButton="btnSubmit">
                                     <div class="container justify-content-center" runat="server" id="divNewUser" style="padding: 15px 15px 15px 15px; display: none">
                                         <hr class="mb-3">
                                         <br />
@@ -478,7 +478,7 @@
                                 </asp:Panel>
 
                                 <%--Consulta de Usuario--%>
-                                <asp:Panel ID="panConsultaUsuario" runat="server" CssClass="justify-content-center">
+                                <asp:Panel ID="panConsultaUsuario" runat="server" CssClass="justify-content-center" DefaultButton="btnConsulta">
                                     <div id="divFindUser" style="display: none; padding: 15px 15px 15px 15px;" runat="server">
                                         <hr class="mb-3">
                                         <br />
@@ -847,7 +847,7 @@
                                 <%--Menu--%>
                                 <%--Cadastro de Menu--%>
                                 <asp:Panel ID="pnlNewMenu" runat="server" CssClass="justify-content-center">
-                                    <div class="container justify-content-center" runat="server" id="divNewMenu" style="padding: 15px 15px 15px 15px; display: block">
+                                    <div class="container justify-content-center" runat="server" id="divNewMenu" style="padding: 15px 15px 15px 15px; display: none">
                                         <hr class="mb-3">
                                         <br />
                                         <div class="col-md-12">
