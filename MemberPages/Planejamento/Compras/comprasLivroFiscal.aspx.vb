@@ -19,15 +19,44 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
             vFilial = oProj.Buscar_Filial_Usuario(Page.User.Identity.Name)
             Session("sFilial") = vFilial
 
-            selUnidade.Value = vFilial
+            selUnidade.SelectedValue = vFilial
 
             If txtData.Value > "" Then
-                Session("sData") = txtData.Value
+                Session("sData") = txtData.Value.ToString()
+                Session("sMes") = Month(txtData.Value).ToString()
+                Session("sAno") = Year(txtData.Value).ToString()
+
             Else
-                Session("sData") = Now.Date().AddDays(-1)
+                Session("sData") = Format(CDate(Now.Date().AddDays(-1)), "dd/MM/yyyy").ToString()
+                Session("sMes") = Month(Now.Date().AddDays(-1)).ToString()
+                Session("sAno") = Year(Now.Date().AddDays(-1)).ToString()
             End If
 
             carregaSelects()
+
+            Select Case selVisao.SelectedValue
+                Case 1
+                    gridPanelDia.Visible = True
+                    gridPanelMes.Visible = False
+                    gridPanelAno.Visible = False
+                    divDia.Visible = True
+                    divMes.Visible = False
+                    divAno.Visible = False
+                Case 2
+                    gridPanelDia.Visible = False
+                    gridPanelMes.Visible = True
+                    gridPanelAno.Visible = False
+                    divDia.Visible = False
+                    divMes.Visible = True
+                    divAno.Visible = True
+                Case 3
+                    gridPanelDia.Visible = False
+                    gridPanelMes.Visible = False
+                    gridPanelAno.Visible = True
+                    divDia.Visible = False
+                    divMes.Visible = False
+                    divAno.Visible = True
+            End Select
 
         End If
     End Sub
@@ -35,7 +64,7 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
     Protected Sub Page_Init(sender As Object, e As EventArgs) Handles Me.Init
         If Not IsPostBack Then
             Dim oVem As New VendaEmpresaMes
-            oVem.AtualizarEstatisticaPrograma(436, User.Identity.Name)
+            'oVem.AtualizarEstatisticaPrograma(436, User.Identity.Name)
 
         End If
     End Sub
@@ -61,15 +90,7 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
 
             con.Close()
 
-            If Session("sFilial") IsNot Nothing Then
-                For i As Integer = 0 To selUnidade.Items.Count
-                    If selUnidade.Items(i).Value = Session("sFilial") Then
-                        selUnidade.Value = Session("sFilial")
-                        selUnidade.SelectedIndex = i
-                        Exit For
-                    End If
-                Next
-            End If
+            selUnidade.SelectedValue = Session("sFilial")
 
         Catch ex As Exception
             'lblError.Text = iStr
@@ -77,19 +98,85 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
             con.Close()
         End Try
 
+        selAno.Items.Clear()
+        selAno.Items.Insert(0, New ListItem(Now.Year().ToString(), Now.Year().ToString()))
+        selAno.Items.Insert(1, New ListItem(Now.Year() - 1.ToString(), Now.Year() - 1.ToString()))
+        selAno.Items.Insert(2, New ListItem(Now.Year() - 2.ToString(), Now.Year() - 2.ToString()))
+        selAno.Items.Insert(3, New ListItem(Now.Year() - 3.ToString(), Now.Year() - 3.ToString()))
+        selAno.Items.Insert(4, New ListItem(Now.Year() - 4.ToString(), Now.Year() - 4.ToString()))
+        selAno.SelectedIndex = 0
+
     End Sub
 
     Protected Sub btnFiltrar_Click(sender As Object, e As EventArgs)
 
-        Session("sFilial") = selUnidade.Value
-        Session("sData") = txtData.Value
-        grvDados.DataBind()
+        Session("sFilial") = selUnidade.SelectedValue
 
+        Select Case selVisao.SelectedValue
+            Case 1
+                Session("sData") = txtData.Value
+                gridPanelDia.Visible = True
+                gridPanelMes.Visible = False
+                gridPanelAno.Visible = False
+                divDia.Visible = True
+                divMes.Visible = False
+                divAno.Visible = False
+            Case 2
+                Session("sMes") = selMes.SelectedValue
+                Session("sAno") = selAno.SelectedValue
+                gridPanelDia.Visible = False
+                gridPanelMes.Visible = True
+                gridPanelAno.Visible = False
+                divDia.Visible = False
+                divMes.Visible = True
+                divAno.Visible = True
+            Case 3
+                Session("sAno") = selAno.SelectedValue
+                gridPanelDia.Visible = False
+                gridPanelMes.Visible = False
+                gridPanelAno.Visible = True
+                divDia.Visible = False
+                divMes.Visible = False
+                divAno.Visible = True
+        End Select
     End Sub
 
-    Protected Sub gridPanel_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase) Handles gridPanel.Callback
+    Protected Sub gridPanelDia_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase) Handles gridPanelDia.Callback
+        grvDadosDia.DataBind()
+    End Sub
 
-        grvDados.DataBind()
+    Protected Sub gridPanelMes_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase) Handles gridPanelMes.Callback
+        grvDadosMes.DataBind()
+    End Sub
+
+    Protected Sub gridPanelAno_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase) Handles gridPanelAno.Callback
+        grvDadosAno.DataBind()
+    End Sub
+
+    Protected Sub selVisao_SelectedIndexChanged(sender As Object, e As EventArgs)
+        Select Case selVisao.SelectedValue
+            Case 1
+                gridPanelDia.Visible = True
+                gridPanelMes.Visible = False
+                gridPanelAno.Visible = False
+                divDia.Visible = True
+                divMes.Visible = False
+                divAno.Visible = False
+            Case 2
+                gridPanelDia.Visible = False
+                gridPanelMes.Visible = True
+                gridPanelAno.Visible = False
+                divDia.Visible = False
+                divMes.Visible = True
+                divAno.Visible = True
+            Case 3
+                gridPanelDia.Visible = False
+                gridPanelMes.Visible = False
+                gridPanelAno.Visible = True
+                divDia.Visible = False
+                divMes.Visible = False
+                divAno.Visible = True
+        End Select
 
     End Sub
 
