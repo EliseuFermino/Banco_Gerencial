@@ -19,23 +19,23 @@
                             </span>
                             <br />
                             <div class="row col-auto justify-content-center sm">
-                                <div class="col-auto xs" >
+                                <div class="col-auto xs">
                                     <span class="input-group-text justify-content-center sm">Visão</span>
                                     <asp:DropDownList ID="selVisao" runat="server" OnSelectedIndexChanged="selVisao_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control justify-content-center">
-                                        <asp:ListItem Text="Dia" Value="1" Selected="True"></asp:ListItem>
+                                        <asp:ListItem Text="Dia" Value="1"></asp:ListItem>
                                         <asp:ListItem Text="Mês" Value="2"></asp:ListItem>
-                                        <asp:ListItem Text="Ano" Value="3"></asp:ListItem>
+                                        <asp:ListItem Text="Ano" Value="3" Selected="True"></asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
 
                                 <div class="col-auto xs" id="divDia" runat="server">
                                     <span class="input-group-text justify-content-center sm" id="spanData" runat="server">Data</span>
-                                    <input type="date" class="form-control xs" name="daterange" runat="server" id="txtData"/>
+                                    <input type="date" class="form-control xs" name="daterange" runat="server" id="txtData" />
                                 </div>
 
                                 <div class="col-auto xs" id="divMes" runat="server">
                                     <span class="input-group-text justify-content-center sm" id="span1" runat="server">Mês</span>
-                                    <asp:DropDownList ID="selMes" runat="server" CssClass="form-control justify-content-center"  >
+                                    <asp:DropDownList ID="selMes" runat="server" CssClass="form-control justify-content-center">
                                         <asp:ListItem Text="01" Value="1"></asp:ListItem>
                                         <asp:ListItem Text="02" Value="2"></asp:ListItem>
                                         <asp:ListItem Text="03" Value="3"></asp:ListItem>
@@ -51,21 +51,25 @@
                                     </asp:DropDownList>
                                 </div>
 
-                                
                                 <div class="col-auto xs" id="divAno" runat="server">
-                                    <span class="input-group-text justify-content-center sm" id="span2" runat="server">Ano</span>
-                                    <asp:DropDownList ID="selAno" runat="server" CssClass="form-control justify-content-center"  >
+                                    <span class="input-group-text justify-content-center sm">Ano</span>
+                                    <asp:DropDownList ID="selAno" runat="server" CssClass="form-control justify-content-center">
                                     </asp:DropDownList>
                                 </div>
 
-                                <div class="col-auto">
-                                    <span class="input-group-text justify-content-center">Unidade</span>                                    
-                                    <asp:DropDownList ID="selUnidade" runat="server" CssClass="form-control justify-content-center" autopostback="true" OnSelectedIndexChanged="btnFiltrar_Click">
+                                <%--                                <div class="col-auto xs" id="divFornecedor" runat="server">
+                                    <span class="input-group-text justify-content-center sm">Fornecedor</span>
+                                    <input type="text" id="txtFornecedor" class="form-control justify-content-center" runat="server" />
+                                </div>--%>
+
+                                <div class="col-auto" id="divUnidade" runat="server">
+                                    <span class="input-group-text justify-content-center">Unidade</span>
+                                    <asp:DropDownList ID="selUnidade" runat="server" CssClass="form-control justify-content-center">
                                     </asp:DropDownList>
                                 </div>
 
-                                <div class="col-auto justify-content-center" style="padding: 13px 0px 13px 0px">
-                                    <asp:Button type="button" class="btn btn-info" runat="server" ID="btnFiltro" Style="height: 50px; width: 110px" OnClick="btnFiltrar_Click" Text="Aplicar filtro" />
+                                <div class="col-auto justify-content-center" style="padding: 13px 0px 13px 20px;">
+                                    <asp:Button type="btnFiltro" class="btn btn-info" runat="server" ID="btnFiltro" OnClientClick="function(s, e) {Callback.PerformCallback(); LoadingPanel.Show(); LoadingPanel.SetText('Gerando dados! Aguarde... ');}" Style="height: 50px; width: 110px" OnClick="btnFiltrar_Click" Text="Aplicar filtro" />
                                 </div>
                             </div>
                         </div>
@@ -75,10 +79,10 @@
                     <div class="col-auto justify-content-center" runat="server" id="divDados">
                         <br />
 
-                        <dx:ASPxCallbackPanel ID="gridPanelDia" runat="server" ClientInstanceName="gridPanelDia" Visible="false" Theme="Metropolis" CssClass="col-auto align-center" SettingsLoadingPanel-Text="Aguarde. Atualizando">
+                        <dx:ASPxCallbackPanel ID="gridPanelDia" runat="server" ClientInstanceName="gridPanelDia" Visible="false" Theme="Metropolis" CssClass="col-auto justify-content-center" SettingsLoadingPanel-Text="Aguarde. Atualizando">
                             <PanelCollection>
                                 <dx:PanelContent runat="server" SupportsDisabledAttributes="both">
-                                    <dx:ASPxGridView ID="grvDadosDia" DataSourceID="SqlDataSourceDia" runat="server" AutoGenerateColumns="true" EnableTheming="True" Theme="SoftOrange">
+                                    <dx:ASPxGridView ID="grvDadosDia" DataSourceID="SqlDataSourceDia" Width="100%" runat="server" EnableTheming="True" Theme="SoftOrange">
                                         <TotalSummary>
                                             <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="QtdeEmbalagem" SummaryType="Sum" />
                                             <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="QtdeProduto" SummaryType="Sum" />
@@ -106,14 +110,21 @@
                                                         <Settings AllowAutoFilter="False" />
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Filial" FieldName="Filial" ShowInCustomizationForm="True" Width="180px">
+                                                    <dx:GridViewDataTextColumn Caption="Filial" FieldName="Filial" ShowInCustomizationForm="True" Width="150px">
                                                         <Settings AllowAutoFilter="False" />
                                                         <CellStyle Wrap="False">
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Fornecedor" FieldName="Fornecedor" ShowInCustomizationForm="True" Width="220px" ToolTip="Nome do Fornecedor">
+                                                    <dx:GridViewDataTextColumn Caption="Código Fornecedor" HeaderStyle-Wrap="True" FieldName="idFornecedor" ShowInCustomizationForm="True" Width="90px">
+                                                        <Settings AutoFilterCondition="Equals" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn Caption="Fornecedor" FieldName="Fornecedor" ShowInCustomizationForm="True" Width="300px" ToolTip="Nome do Fornecedor">
                                                         <Settings AutoFilterCondition="Contains" />
                                                         <CellStyle Wrap="False">
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
@@ -127,12 +138,12 @@
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Serie" FieldName="Serie" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="50px">
+                                                    <%--  <dx:GridViewDataTextColumn Caption="Serie" FieldName="Serie" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="50px">
                                                         <Settings AutoFilterCondition="Equals" />
                                                         <CellStyle Wrap="False">
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
                                                         </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
+                                                    </dx:GridViewDataTextColumn>--%>
 
                                                     <dx:GridViewDataTextColumn Caption="Agenda" FieldName="Agenda" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="65px">
                                                         <Settings AutoFilterCondition="Equals" />
@@ -143,6 +154,37 @@
                                                 </Columns>
                                             </dx:GridViewBandColumn>
 
+                                            <dx:GridViewBandColumn Caption="Mercadológico" ShowInCustomizationForm="True" ToolTip="" Visible="false">
+                                                <Columns>
+                                                    <dx:GridViewDataTextColumn Caption="Departamento" FieldName="Departamento" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="100px">
+                                                        <Settings AutoFilterCondition="contains" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn Caption="Seção" FieldName="Secao" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="150px">
+                                                        <Settings AutoFilterCondition="contains" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn Caption="Grupo" FieldName="Grupo" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="150px">
+                                                        <Settings AutoFilterCondition="contains" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn Caption="SubGrupo" FieldName="SubGrupo" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="150px">
+                                                        <Settings AutoFilterCondition="contains" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
+                                                </Columns>
+                                            </dx:GridViewBandColumn>
 
                                             <dx:GridViewBandColumn Caption="Produto" ShowInCustomizationForm="True" ToolTip="">
                                                 <Columns>
@@ -221,7 +263,7 @@
 
                                         </Columns>
                                         <SettingsBehavior AllowFocusedRow="True" ColumnResizeMode="Control" />
-                                        <SettingsPager PageSize="40">
+                                        <SettingsPager PageSize="70">
                                         </SettingsPager>
                                         <Settings ShowFilterRow="True" ShowFilterBar="Visible" ShowFilterRowMenu="false" HorizontalScrollBarMode="Visible" ShowFooter="True" />
                                         <SettingsText FilterBarClear="Limpar" FilterBarCreateFilter="Filtro" />
@@ -277,24 +319,31 @@
 
                                             <dx:GridViewBandColumn Caption="" ShowInCustomizationForm="True" ToolTip="">
                                                 <Columns>
-                                                    <dx:GridViewDataTextColumn Caption="Mes" FieldName="Mes" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="false" Width="85px" ToolTip="Mes">
+                                                    <dx:GridViewDataTextColumn Caption="Mes" FieldName="Mes" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="false" Width="65px" ToolTip="Mes">
                                                         <Settings AllowAutoFilter="False" />
                                                     </dx:GridViewDataTextColumn>
 
                                                     <dx:GridViewDataTextColumn Caption="Filial" FieldName="Filial" ShowInCustomizationForm="True" Width="200px">
-                                                        <Settings AllowAutoFilter="False" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-
-                                                    <dx:GridViewDataTextColumn Caption="Fornecedor" FieldName="Fornecedor" ShowInCustomizationForm="True" Width="240px" ToolTip="Nome do Fornecedor">
                                                         <Settings AutoFilterCondition="Contains" />
                                                         <CellStyle Wrap="False">
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
-                                                    
+
+                                                    <dx:GridViewDataTextColumn Caption="Código Fornecedor" HeaderStyle-Wrap="True" FieldName="idFornecedor" ShowInCustomizationForm="True" Width="90px">
+                                                        <Settings AutoFilterCondition="Equals" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn Caption="Fornecedor" FieldName="Fornecedor" ShowInCustomizationForm="True" Width="350px" ToolTip="Nome do Fornecedor">
+                                                        <Settings AutoFilterCondition="Contains" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
+
                                                     <dx:GridViewDataTextColumn Caption="Agenda" FieldName="Agenda" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="65px">
                                                         <Settings AutoFilterCondition="Equals" />
                                                         <CellStyle Wrap="False">
@@ -307,7 +356,7 @@
 
                                             <dx:GridViewBandColumn Caption="Produto" ShowInCustomizationForm="True" ToolTip="">
                                                 <Columns>
-                                                    <dx:GridViewDataTextColumn Caption="Quant." FieldName="QtdeProduto" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="60px">
+                                                    <dx:GridViewDataTextColumn Caption="Quant." FieldName="QtdeProduto" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="70px">
                                                         <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False" />
                                                         <Settings AllowAutoFilter="False" />
                                                         <CellStyle Wrap="False">
@@ -315,7 +364,7 @@
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Preço Nota" FieldName="vlrPrecoNF" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="80px">
+                                                    <dx:GridViewDataTextColumn Caption="Preço Nota" FieldName="vlrPrecoNF" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="90px">
                                                         <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
                                                         <Settings AllowAutoFilter="False" />
                                                         <CellStyle Wrap="False">
@@ -327,7 +376,7 @@
 
                                             <dx:GridViewBandColumn Caption="Compra" ShowInCustomizationForm="True" ToolTip="">
                                                 <Columns>
-                                                    <dx:GridViewDataTextColumn Caption="Quant." FieldName="QtdeCompra" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="60px">
+                                                    <dx:GridViewDataTextColumn Caption="Quant." FieldName="QtdeCompra" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="70px">
                                                         <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False" />
                                                         <Settings AllowAutoFilter="False" />
                                                         <CellStyle Wrap="False">
@@ -335,7 +384,7 @@
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Valor" FieldName="vlrCompra" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="80px">
+                                                    <dx:GridViewDataTextColumn Caption="Valor" FieldName="vlrCompra" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="90px">
                                                         <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
                                                         <Settings AllowAutoFilter="False" />
                                                         <CellStyle Wrap="False">
@@ -347,7 +396,7 @@
 
                                             <dx:GridViewBandColumn Caption="Custo" ShowInCustomizationForm="True" ToolTip="">
                                                 <Columns>
-                                                    <dx:GridViewDataTextColumn Caption="Custo Unitário" FieldName="vlrCustoUnitario" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="80px">
+                                                    <dx:GridViewDataTextColumn Caption="Custo Unitário" FieldName="vlrCustoUnitario" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="90px">
                                                         <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
                                                         <Settings AllowAutoFilter="False" />
                                                         <CellStyle Wrap="False">
@@ -355,7 +404,7 @@
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Custo Transf." FieldName="vlrCustoTransferencia" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="80px">
+                                                    <dx:GridViewDataTextColumn Caption="Custo Transf." FieldName="vlrCustoTransferencia" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="90px">
                                                         <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
                                                         <Settings AllowAutoFilter="False" />
                                                         <CellStyle Wrap="False">
@@ -363,7 +412,7 @@
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Custo Condor" FieldName="vlrCustoCondor" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="80px">
+                                                    <dx:GridViewDataTextColumn Caption="Custo Condor" FieldName="vlrCustoCondor" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="90px">
                                                         <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
                                                         <Settings AllowAutoFilter="False" />
                                                         <CellStyle Wrap="False">
@@ -375,7 +424,7 @@
 
                                         </Columns>
                                         <SettingsBehavior AllowFocusedRow="True" ColumnResizeMode="Control" />
-                                        <SettingsPager PageSize="40">
+                                        <SettingsPager PageSize="70">
                                         </SettingsPager>
                                         <Settings ShowFilterRow="True" ShowFilterBar="Visible" ShowFilterRowMenu="false" HorizontalScrollBarMode="Visible" ShowFooter="True" />
                                         <SettingsText FilterBarClear="Limpar" FilterBarCreateFilter="Filtro" />
@@ -398,7 +447,7 @@
                                             <asp:SessionParameter DbType="String" Name="paramData" DefaultValue="0" />
                                             <asp:SessionParameter DbType="Int16" Name="paramMes" SessionField="sMes" />
                                             <asp:SessionParameter DbType="Int16" Name="paramAno" SessionField="sAno" />
-                                            <asp:SessionParameter DbType="Int16" Name="ParamFilial" SessionField="sFilial" />
+                                            <asp:SessionParameter DbType="Int16" Name="ParamFilial" SessionField="sFilial" DefaultValue="99" />
                                         </SelectParameters>
                                     </asp:SqlDataSource>
                                 </dx:PanelContent>
@@ -432,11 +481,11 @@
 
                                             <dx:GridViewBandColumn Caption="" ShowInCustomizationForm="True" ToolTip="">
                                                 <Columns>
-                                                    <dx:GridViewDataTextColumn Caption="Ano" FieldName="Ano" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="false" Width="85px" ToolTip="Dia">
+                                                    <dx:GridViewDataTextColumn Caption="Ano" FieldName="Ano" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="false" Width="70px" ToolTip="Ano">
                                                         <Settings AllowAutoFilter="False" />
-
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn Caption="Mes" FieldName="Mes" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="false" Width="85px" ToolTip="Dia">
+
+                                                    <%--  <dx:GridViewDataTextColumn Caption="Mes" FieldName="Mes" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="false" Width="70px" ToolTip="Mes">
                                                         <Settings AutoFilterCondition="Equals" />
                                                     </dx:GridViewDataTextColumn>
 
@@ -445,9 +494,16 @@
                                                         <CellStyle Wrap="False">
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
                                                         </CellStyle>
-                                                    </dx:GridViewDataTextColumn>     
+                                                    </dx:GridViewDataTextColumn>--%>
 
-                                                    <dx:GridViewDataTextColumn Caption="Fornecedor" FieldName="Fornecedor" ShowInCustomizationForm="True" Width="240px" ToolTip="Nome do Fornecedor">
+                                                    <dx:GridViewDataTextColumn Caption="Código Fornecedor" HeaderStyle-Wrap="True" FieldName="idFornecedor" ShowInCustomizationForm="True" Width="90px">
+                                                        <Settings AutoFilterCondition="Equals" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn Caption="Fornecedor" FieldName="Fornecedor" ShowInCustomizationForm="True" Width="350px" ToolTip="Nome do Fornecedor">
                                                         <Settings AutoFilterCondition="Contains" />
                                                         <CellStyle Wrap="False">
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
@@ -459,7 +515,7 @@
                                                         <CellStyle Wrap="False">
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
                                                         </CellStyle>
-                                                    </dx:GridViewDataTextColumn>                                           
+                                                    </dx:GridViewDataTextColumn> 
                                                 </Columns>
                                             </dx:GridViewBandColumn>
 
@@ -533,7 +589,7 @@
 
                                         </Columns>
                                         <SettingsBehavior AllowFocusedRow="True" ColumnResizeMode="Control" />
-                                        <SettingsPager PageSize="40">
+                                        <SettingsPager PageSize="70">
                                         </SettingsPager>
                                         <Settings ShowFilterRow="True" ShowFilterBar="Visible" ShowFilterRowMenu="false" HorizontalScrollBarMode="Visible" ShowFooter="True" />
                                         <SettingsText FilterBarClear="Limpar" FilterBarCreateFilter="Filtro" />
@@ -553,9 +609,9 @@
                                         <SelectParameters>
                                             <asp:SessionParameter DbType="String" Name="paramTipo" DefaultValue="3" />
                                             <asp:SessionParameter DbType="String" Name="paramData" DefaultValue="0" />
-                                            <asp:SessionParameter DbType="Int16" Name="paramMes" DefaultValue="0"/>
+                                            <asp:SessionParameter DbType="Int16" Name="paramMes" DefaultValue="0" />
                                             <asp:SessionParameter DbType="Int16" Name="paramAno" SessionField="sAno" />
-                                            <asp:SessionParameter DbType="Int16" Name="ParamFilial" SessionField="sFilial" />
+                                            <asp:SessionParameter DbType="Int16" Name="ParamFilial" SessionField="sFilial" DefaultValue="99" />
                                         </SelectParameters>
                                     </asp:SqlDataSource>
                                 </dx:PanelContent>
@@ -600,24 +656,29 @@
                 date.setDate(theDayOfTheMonthOnNextWeek)
 
                 MainContent_txtData.max = date.toISOString().split("T")[0];
-                //document.getElementById('MainContent_txtData').valueAsDate = date;
 
             } catch (e) {
                 console.log(e.message)
-                // Unexpected token n in JSON at position 2
             }
         };
 
 
         function lastData() {
 
-            const date = new Date();
-            const theDayOfTheMonthOnNextWeek = date.getDate() - 1;
-            date.setDate(theDayOfTheMonthOnNextWeek)
+            try {
 
-            document.getElementById('MainContent_txtData').valueAsDate = date;
+                const date = new Date();
+                const theDayOfTheMonthOnNextWeek = date.getDate() - 1;
+                date.setDate(theDayOfTheMonthOnNextWeek)
 
-            maxdata();
+                document.getElementById('MainContent_txtData').valueAsDate = date;
+
+                maxdata();
+            }
+            catch {
+                console.log(e.message)
+
+            };
         };
 
         maxData();

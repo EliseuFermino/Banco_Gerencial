@@ -16,10 +16,10 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
         If Not IsPostBack Then
             ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "lastData();", True)
 
-            vFilial = oProj.Buscar_Filial_Usuario(Page.User.Identity.Name)
-            Session("sFilial") = vFilial
+            carregaSelects()
 
-            selUnidade.SelectedValue = vFilial
+            selUnidade.SelectedValue = 99
+            Session("sFilial") = selUnidade.SelectedValue
 
             If txtData.Value > "" Then
                 Session("sData") = txtData.Value.ToString()
@@ -32,7 +32,6 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
                 Session("sAno") = Year(Now.Date().AddDays(-1)).ToString()
             End If
 
-            carregaSelects()
 
             Select Case selVisao.SelectedValue
                 Case 1
@@ -42,6 +41,7 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
                     divDia.Visible = True
                     divMes.Visible = False
                     divAno.Visible = False
+                    divUnidade.Visible = True
                 Case 2
                     gridPanelDia.Visible = False
                     gridPanelMes.Visible = True
@@ -49,6 +49,7 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
                     divDia.Visible = False
                     divMes.Visible = True
                     divAno.Visible = True
+                    divUnidade.Visible = False
                 Case 3
                     gridPanelDia.Visible = False
                     gridPanelMes.Visible = False
@@ -56,6 +57,7 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
                     divDia.Visible = False
                     divMes.Visible = False
                     divAno.Visible = True
+                    divUnidade.Visible = False
             End Select
 
         End If
@@ -72,7 +74,7 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
     Private Sub carregaSelects()
 
         Dim constr As String = ConfigurationManager.ConnectionStrings("gerTempConnectionString").ConnectionString
-        Dim selectSQL As String = "SELECT Filial ,RTRIM(FilialLista) AS nomeFilial FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE (IdLojasCDs=1 or isAtacarejo = 1) and Filial not in (100) ORDER BY nomeFilial"
+        Dim selectSQL As String = "SELECT Filial ,RTRIM(FilialLista) AS nomeFilial FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE (IdLojasCDs=1 or isAtacarejo = 1) and Filial not in (100) Or Filial In (99)  ORDER BY nomeFilial"
         Dim con As New SqlConnection(Conexao.gerCadastros_str)
         Dim cmd As New SqlCommand(selectSQL, con)
 
@@ -121,6 +123,8 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
                 divDia.Visible = True
                 divMes.Visible = False
                 divAno.Visible = False
+                divUnidade.Visible = True
+                grvDadosDia.DataBind()
             Case 2
                 Session("sMes") = selMes.SelectedValue
                 Session("sAno") = selAno.SelectedValue
@@ -130,6 +134,8 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
                 divDia.Visible = False
                 divMes.Visible = True
                 divAno.Visible = True
+                divUnidade.Visible = False
+                grvDadosMes.DataBind()
             Case 3
                 Session("sAno") = selAno.SelectedValue
                 gridPanelDia.Visible = False
@@ -138,6 +144,8 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
                 divDia.Visible = False
                 divMes.Visible = False
                 divAno.Visible = True
+                divUnidade.Visible = False
+                grvDadosAno.DataBind()
         End Select
     End Sub
 
@@ -156,26 +164,31 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
     Protected Sub selVisao_SelectedIndexChanged(sender As Object, e As EventArgs)
         Select Case selVisao.SelectedValue
             Case 1
-                gridPanelDia.Visible = True
-                gridPanelMes.Visible = False
-                gridPanelAno.Visible = False
+                'gridPanelDia.Visible = True
+                'gridPanelMes.Visible = False
+                'gridPanelAno.Visible = False
                 divDia.Visible = True
                 divMes.Visible = False
                 divAno.Visible = False
+                divUnidade.Visible = True
+
+                ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "lastData();", True)
             Case 2
-                gridPanelDia.Visible = False
-                gridPanelMes.Visible = True
-                gridPanelAno.Visible = False
+                'gridPanelDia.Visible = False
+                'gridPanelMes.Visible = True
+                'gridPanelAno.Visible = False
                 divDia.Visible = False
                 divMes.Visible = True
                 divAno.Visible = True
+                divUnidade.Visible = False
             Case 3
-                gridPanelDia.Visible = False
-                gridPanelMes.Visible = False
-                gridPanelAno.Visible = True
+                'gridPanelDia.Visible = False
+                'gridPanelMes.Visible = False
+                'gridPanelAno.Visible = True
                 divDia.Visible = False
                 divMes.Visible = False
                 divAno.Visible = True
+                divUnidade.Visible = False
         End Select
 
     End Sub
