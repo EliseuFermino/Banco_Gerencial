@@ -14,12 +14,14 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Not IsPostBack Then
+            Dim oVem As New VendaEmpresaMes
+            'oVem.AtualizarEstatisticaPrograma(436, User.Identity.Name)
             ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "lastData();", True)
 
             carregaSelects()
 
-            selUnidade.SelectedValue = 99
-            Session("sFilial") = selUnidade.SelectedValue
+            'selUnidade.SelectedValue = 99
+            'Session("sFilial") = selUnidade.SelectedValue
 
             If txtData.Value > "" Then
                 Session("sData") = txtData.Value.ToString()
@@ -59,14 +61,6 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
                     divAno.Visible = True
                     divUnidade.Visible = False
             End Select
-
-        End If
-    End Sub
-
-    Protected Sub Page_Init(sender As Object, e As EventArgs) Handles Me.Init
-        If Not IsPostBack Then
-            Dim oVem As New VendaEmpresaMes
-            'oVem.AtualizarEstatisticaPrograma(436, User.Identity.Name)
 
         End If
     End Sub

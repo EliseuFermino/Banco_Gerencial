@@ -111,7 +111,7 @@
                                                     </dx:GridViewDataTextColumn>
 
                                                     <dx:GridViewDataTextColumn Caption="Filial" FieldName="Filial" ShowInCustomizationForm="True" Width="150px">
-                                                        <Settings AllowAutoFilter="False" />
+                                                        <Settings AutoFilterCondition="BeginsWith" />
                                                         <CellStyle Wrap="False">
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
                                                         </CellStyle>
