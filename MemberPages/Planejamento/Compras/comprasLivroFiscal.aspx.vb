@@ -20,8 +20,8 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
 
             carregaSelects()
 
-            'selUnidade.SelectedValue = 99
-            'Session("sFilial") = selUnidade.SelectedValue
+            selUnidade.SelectedValue = 99
+            Session("sFilial") = selUnidade.SelectedValue
 
             If txtData.Value > "" Then
                 Session("sData") = txtData.Value.ToString()
@@ -120,6 +120,7 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
                 divUnidade.Visible = True
                 grvDadosDia.DataBind()
             Case 2
+                Session("sFilial") = 99
                 Session("sMes") = selMes.SelectedValue
                 Session("sAno") = selAno.SelectedValue
                 gridPanelDia.Visible = False
@@ -131,6 +132,7 @@ Partial Class MemberPages_Planejamento_Compras_comprasLivroFiscal
                 divUnidade.Visible = False
                 grvDadosMes.DataBind()
             Case 3
+                Session("sFilial") = 99
                 Session("sAno") = selAno.SelectedValue
                 gridPanelDia.Visible = False
                 gridPanelMes.Visible = False

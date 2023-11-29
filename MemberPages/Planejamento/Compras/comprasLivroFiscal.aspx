@@ -84,14 +84,10 @@
                                 <dx:PanelContent runat="server" SupportsDisabledAttributes="both">
                                     <dx:ASPxGridView ID="grvDadosDia" DataSourceID="SqlDataSourceDia" Width="100%" runat="server" EnableTheming="True" Theme="SoftOrange">
                                         <TotalSummary>
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="QtdeEmbalagem" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="QtdeProduto" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrPrecoNF" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="QtdeCompra" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrCompra" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrCustoUnitario" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrCustoTransferencia" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrCustoCondor" SummaryType="Sum" />
+                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrTotalNota" SummaryType="Sum" />
+                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrUnitario" SummaryType="Sum" />
+                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrPrecoConf" SummaryType="Sum" />
+                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrTotal" SummaryType="Sum" />
                                         </TotalSummary>
                                         <Toolbars>
                                             <dx:GridViewToolbar EnableAdaptivity="true">
@@ -106,15 +102,34 @@
 
                                             <dx:GridViewBandColumn Caption="" ShowInCustomizationForm="True" ToolTip="">
                                                 <Columns>
-                                                    <dx:GridViewDataTextColumn Caption="Dia" FieldName="Dia" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="false" Width="85px" ToolTip="Dia">
+                                                    <dx:GridViewDataTextColumn Caption="Dia" FieldName="DiaMovimento" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="false" Width="85px" ToolTip="Dia">
                                                         <Settings AllowAutoFilter="False" />
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Filial" FieldName="Filial" ShowInCustomizationForm="True" Width="150px">
+                                                    <dx:GridViewDataTextColumn Caption="Filial" FieldName="FilialLista" ShowInCustomizationForm="True" Width="200px">
                                                         <Settings AutoFilterCondition="BeginsWith" />
                                                         <CellStyle Wrap="False">
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
                                                         </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn Caption="Agenda" FieldName="idAgenda" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="65px">
+                                                        <Settings AutoFilterCondition="Equals" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn Caption="Nota" FieldName="numNota" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="75px">
+                                                        <Settings AutoFilterCondition="Equals" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn Caption="Total Nota" FieldName="vlrTotalNota" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="false" Width="85px" ToolTip="Dia">
+                                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
+                                                        <Settings AllowAutoFilter="False" />
                                                     </dx:GridViewDataTextColumn>
 
                                                     <dx:GridViewDataTextColumn Caption="Código Fornecedor" HeaderStyle-Wrap="True" FieldName="idFornecedor" ShowInCustomizationForm="True" Width="90px">
@@ -124,118 +139,35 @@
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Fornecedor" FieldName="Fornecedor" ShowInCustomizationForm="True" Width="300px" ToolTip="Nome do Fornecedor">
+                                                    <dx:GridViewDataTextColumn Caption="Fornecedor" FieldName="nomeFornecedor" ShowInCustomizationForm="True" Width="300px" ToolTip="Nome do Fornecedor">
                                                         <Settings AutoFilterCondition="Contains" />
                                                         <CellStyle Wrap="False">
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Nota" FieldName="Nota" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="75px">
+                                                    <dx:GridViewDataTextColumn Caption="CNPJ" FieldName="cgcPrincipal" ShowInCustomizationForm="True" Width="150px">
+                                                        <Settings AutoFilterCondition="BeginsWith" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn Caption="Nome Fornecedor Principal" HeaderStyle-Wrap="True" FieldName="NomeFornecedorPrincipal" ShowInCustomizationForm="True" Width="300px">
+                                                        <Settings AutoFilterCondition="BeginsWith" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn Caption="Codigo" FieldName="idProduto" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="70px">
                                                         <Settings AutoFilterCondition="Equals" />
                                                         <CellStyle Wrap="False">
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <%--  <dx:GridViewDataTextColumn Caption="Serie" FieldName="Serie" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="50px">
-                                                        <Settings AutoFilterCondition="Equals" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>--%>
-
-                                                    <dx:GridViewDataTextColumn Caption="Agenda" FieldName="Agenda" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="65px">
-                                                        <Settings AutoFilterCondition="Equals" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-                                                </Columns>
-                                            </dx:GridViewBandColumn>
-
-                                            <dx:GridViewBandColumn Caption="Mercadológico" ShowInCustomizationForm="True" ToolTip="" Visible="false">
-                                                <Columns>
-                                                    <dx:GridViewDataTextColumn Caption="Departamento" FieldName="Departamento" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="100px">
-                                                        <Settings AutoFilterCondition="contains" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-
-                                                    <dx:GridViewDataTextColumn Caption="Seção" FieldName="Secao" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="150px">
-                                                        <Settings AutoFilterCondition="contains" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-
-                                                    <dx:GridViewDataTextColumn Caption="Grupo" FieldName="Grupo" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="150px">
-                                                        <Settings AutoFilterCondition="contains" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-
-                                                    <dx:GridViewDataTextColumn Caption="SubGrupo" FieldName="SubGrupo" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="150px">
-                                                        <Settings AutoFilterCondition="contains" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-                                                </Columns>
-                                            </dx:GridViewBandColumn>
-
-                                            <dx:GridViewBandColumn Caption="Produto" ShowInCustomizationForm="True" ToolTip="">
-                                                <Columns>
-                                                    <dx:GridViewDataTextColumn Caption="Codigo" FieldName="Produto" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="70px">
-                                                        <Settings AutoFilterCondition="Equals" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-
-                                                    <dx:GridViewDataTextColumn Caption="Quant." FieldName="QtdeProduto" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="60px">
-                                                        <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False" />
-                                                        <Settings AllowAutoFilter="False" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-
-                                                    <dx:GridViewDataTextColumn Caption="Preço Nota" FieldName="vlrPrecoNF" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="75px">
-                                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
-                                                        <Settings AllowAutoFilter="False" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-                                                </Columns>
-                                            </dx:GridViewBandColumn>
-
-                                            <dx:GridViewBandColumn Caption="Compra" ShowInCustomizationForm="True" ToolTip="">
-                                                <Columns>
-                                                    <dx:GridViewDataTextColumn Caption="Quant." FieldName="QtdeCompra" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="60px">
-                                                        <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False" />
-                                                        <Settings AllowAutoFilter="False" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-
-                                                    <dx:GridViewDataTextColumn Caption="Valor" FieldName="vlrCompra" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="75px">
-                                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
-                                                        <Settings AllowAutoFilter="False" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-                                                </Columns>
-                                            </dx:GridViewBandColumn>
-
-                                            <dx:GridViewBandColumn Caption="Custo" ShowInCustomizationForm="True" ToolTip="">
-                                                <Columns>
-                                                    <dx:GridViewDataTextColumn Caption="Custo Unitário" FieldName="vlrCustoUnitario" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="75px">
+                                                    <dx:GridViewDataTextColumn Caption="Valor Unitário"  HeaderStyle-Wrap="True" FieldName="vlrUnitario" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="110px">
                                                         <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
                                                         <Settings AllowAutoFilter="False" />
                                                         <CellStyle Wrap="False">
@@ -243,7 +175,7 @@
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Custo Transf." FieldName="vlrCustoTransferencia" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="75px">
+                                                    <dx:GridViewDataTextColumn Caption="Valor Preço Conferência" FieldName="vlrPrecoConf" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="110px">
                                                         <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
                                                         <Settings AllowAutoFilter="False" />
                                                         <CellStyle Wrap="False">
@@ -251,7 +183,7 @@
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Custo Condor" FieldName="vlrCustoCondor" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="75px">
+                                                    <dx:GridViewDataTextColumn Caption="Valor Total" FieldName="vlrTotal" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="110px">
                                                         <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
                                                         <Settings AllowAutoFilter="False" />
                                                         <CellStyle Wrap="False">
@@ -259,7 +191,7 @@
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
                                                 </Columns>
-                                            </dx:GridViewBandColumn>
+                                            </dx:GridViewBandColumn>                                           
 
                                         </Columns>
                                         <SettingsBehavior AllowFocusedRow="True" ColumnResizeMode="Control" />
@@ -297,14 +229,9 @@
                                 <dx:PanelContent runat="server" SupportsDisabledAttributes="both">
                                     <dx:ASPxGridView ID="grvDadosMes" DataSourceID="SqlDataSourceMes" runat="server" AutoGenerateColumns="true" EnableTheming="True" Theme="SoftOrange">
                                         <TotalSummary>
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="QtdeEmbalagem" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="QtdeProduto" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrPrecoNF" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="QtdeCompra" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrCompra" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrCustoUnitario" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrCustoTransferencia" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrCustoCondor" SummaryType="Sum" />
+                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrUnitario" SummaryType="Sum" />
+                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrPrecoConf" SummaryType="Sum" />
+                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrTotal" SummaryType="Sum" />
                                         </TotalSummary>
                                         <Toolbars>
                                             <dx:GridViewToolbar EnableAdaptivity="true">
@@ -319,12 +246,23 @@
 
                                             <dx:GridViewBandColumn Caption="" ShowInCustomizationForm="True" ToolTip="">
                                                 <Columns>
-                                                    <dx:GridViewDataTextColumn Caption="Mes" FieldName="Mes" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="false" Width="65px" ToolTip="Mes">
+                                                    <dx:GridViewDataTextColumn Caption="Ano" FieldName="Ano" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="false" Width="85px" ToolTip="Dia">
                                                         <Settings AllowAutoFilter="False" />
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Filial" FieldName="Filial" ShowInCustomizationForm="True" Width="200px">
-                                                        <Settings AutoFilterCondition="Contains" />
+                                                    <dx:GridViewDataTextColumn Caption="Mes" FieldName="Mes" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="false" Width="85px" ToolTip="Dia">
+                                                        <Settings AllowAutoFilter="False" />
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn Caption="Filial" FieldName="FilialLista" ShowInCustomizationForm="True" Width="250px">
+                                                        <Settings AutoFilterCondition="BeginsWith" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn Caption="Agenda" FieldName="idAgenda" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="65px">
+                                                        <Settings AutoFilterCondition="Equals" />
                                                         <CellStyle Wrap="False">
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
                                                         </CellStyle>
@@ -337,26 +275,28 @@
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Fornecedor" FieldName="Fornecedor" ShowInCustomizationForm="True" Width="350px" ToolTip="Nome do Fornecedor">
+                                                    <dx:GridViewDataTextColumn Caption="Fornecedor" FieldName="nomeFornecedor" ShowInCustomizationForm="True" Width="300px" ToolTip="Nome do Fornecedor">
                                                         <Settings AutoFilterCondition="Contains" />
                                                         <CellStyle Wrap="False">
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Agenda" FieldName="Agenda" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="65px">
-                                                        <Settings AutoFilterCondition="Equals" />
+                                                    <dx:GridViewDataTextColumn Caption="CNPJ" FieldName="cgcPrincipal" ShowInCustomizationForm="True" Width="150px">
+                                                        <Settings AutoFilterCondition="BeginsWith" />
                                                         <CellStyle Wrap="False">
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
-                                                </Columns>
-                                            </dx:GridViewBandColumn>
 
+                                                    <dx:GridViewDataTextColumn Caption="Nome Fornecedor Principal" FieldName="NomeFornecedorPrincipal" HeaderStyle-Wrap="True" ShowInCustomizationForm="True" Width="300px">
+                                                        <Settings AutoFilterCondition="BeginsWith" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
 
-                                            <dx:GridViewBandColumn Caption="Produto" ShowInCustomizationForm="True" ToolTip="">
-                                                <Columns>
-                                                    <dx:GridViewDataTextColumn Caption="Quant." FieldName="QtdeProduto" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="70px">
+                                                    <dx:GridViewDataTextColumn Caption="Valor Unitário" FieldName="vlrUnitario" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="110px">
                                                         <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False" />
                                                         <Settings AllowAutoFilter="False" />
                                                         <CellStyle Wrap="False">
@@ -364,7 +304,15 @@
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Preço Nota" FieldName="vlrPrecoNF" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="90px">
+                                                    <dx:GridViewDataTextColumn Caption="Valor Preço Conferência" FieldName="vlrPrecoConf" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="110px">
+                                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
+                                                        <Settings AllowAutoFilter="False" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn Caption="Valor Total" FieldName="vlrTotal" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="110px">
                                                         <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
                                                         <Settings AllowAutoFilter="False" />
                                                         <CellStyle Wrap="False">
@@ -372,55 +320,7 @@
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
                                                 </Columns>
-                                            </dx:GridViewBandColumn>
-
-                                            <dx:GridViewBandColumn Caption="Compra" ShowInCustomizationForm="True" ToolTip="">
-                                                <Columns>
-                                                    <dx:GridViewDataTextColumn Caption="Quant." FieldName="QtdeCompra" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="70px">
-                                                        <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False" />
-                                                        <Settings AllowAutoFilter="False" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-
-                                                    <dx:GridViewDataTextColumn Caption="Valor" FieldName="vlrCompra" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="90px">
-                                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
-                                                        <Settings AllowAutoFilter="False" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-                                                </Columns>
-                                            </dx:GridViewBandColumn>
-
-                                            <dx:GridViewBandColumn Caption="Custo" ShowInCustomizationForm="True" ToolTip="">
-                                                <Columns>
-                                                    <dx:GridViewDataTextColumn Caption="Custo Unitário" FieldName="vlrCustoUnitario" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="90px">
-                                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
-                                                        <Settings AllowAutoFilter="False" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-
-                                                    <dx:GridViewDataTextColumn Caption="Custo Transf." FieldName="vlrCustoTransferencia" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="90px">
-                                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
-                                                        <Settings AllowAutoFilter="False" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-
-                                                    <dx:GridViewDataTextColumn Caption="Custo Condor" FieldName="vlrCustoCondor" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="90px">
-                                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
-                                                        <Settings AllowAutoFilter="False" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-                                                </Columns>
-                                            </dx:GridViewBandColumn>
+                                            </dx:GridViewBandColumn>                                           
 
                                         </Columns>
                                         <SettingsBehavior AllowFocusedRow="True" ColumnResizeMode="Control" />
@@ -459,14 +359,9 @@
                                 <dx:PanelContent runat="server" SupportsDisabledAttributes="both">
                                     <dx:ASPxGridView ID="grvDadosAno" DataSourceID="SqlDataSourceAno" runat="server" AutoGenerateColumns="true" EnableTheming="True" Theme="SoftOrange">
                                         <TotalSummary>
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="QtdeEmbalagem" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="QtdeProduto" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrPrecoNF" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="QtdeCompra" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrCompra" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrCustoUnitario" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrCustoTransferencia" SummaryType="Sum" />
-                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrCustoCondor" SummaryType="Sum" />
+                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrUnitario" SummaryType="Sum" />
+                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrPrecoConf" SummaryType="Sum" />
+                                            <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrTotal" SummaryType="Sum" />
                                         </TotalSummary>
                                         <Toolbars>
                                             <dx:GridViewToolbar EnableAdaptivity="true">
@@ -481,20 +376,23 @@
 
                                             <dx:GridViewBandColumn Caption="" ShowInCustomizationForm="True" ToolTip="">
                                                 <Columns>
-                                                    <dx:GridViewDataTextColumn Caption="Ano" FieldName="Ano" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="false" Width="70px" ToolTip="Ano">
+                                                    <dx:GridViewDataTextColumn Caption="Ano" FieldName="Ano" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="false" Width="85px" ToolTip="Dia">
                                                         <Settings AllowAutoFilter="False" />
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <%--  <dx:GridViewDataTextColumn Caption="Mes" FieldName="Mes" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="false" Width="70px" ToolTip="Mes">
-                                                        <Settings AutoFilterCondition="Equals" />
-                                                    </dx:GridViewDataTextColumn>
-
-                                                    <dx:GridViewDataTextColumn Caption="Filial" FieldName="Filial" ShowInCustomizationForm="True" Width="240px">
-                                                        <Settings AllowAutoFilter="False" />
+                                                    <dx:GridViewDataTextColumn Caption="Filial" FieldName="FilialLista" ShowInCustomizationForm="True" Width="200px">
+                                                        <Settings AutoFilterCondition="BeginsWith" />
                                                         <CellStyle Wrap="False">
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
                                                         </CellStyle>
-                                                    </dx:GridViewDataTextColumn>--%>
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn Caption="Agenda" FieldName="idAgenda" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="65px">
+                                                        <Settings AutoFilterCondition="Equals" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
 
                                                     <dx:GridViewDataTextColumn Caption="Código Fornecedor" HeaderStyle-Wrap="True" FieldName="idFornecedor" ShowInCustomizationForm="True" Width="90px">
                                                         <Settings AutoFilterCondition="Equals" />
@@ -503,33 +401,44 @@
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Fornecedor" FieldName="Fornecedor" ShowInCustomizationForm="True" Width="350px" ToolTip="Nome do Fornecedor">
+                                                    <dx:GridViewDataTextColumn Caption="Fornecedor" FieldName="nomeFornecedor" ShowInCustomizationForm="True" Width="300px" ToolTip="Nome do Fornecedor">
                                                         <Settings AutoFilterCondition="Contains" />
                                                         <CellStyle Wrap="False">
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Agenda" FieldName="Agenda" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="65px">
-                                                        <Settings AutoFilterCondition="Equals" />
+                                                    <dx:GridViewDataTextColumn Caption="CNPJ" FieldName="cgcPrincipal" ShowInCustomizationForm="True" Width="120px">
+                                                        <Settings AutoFilterCondition="BeginsWith" />
                                                         <CellStyle Wrap="False">
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
                                                         </CellStyle>
-                                                    </dx:GridViewDataTextColumn> 
-                                                </Columns>
-                                            </dx:GridViewBandColumn>
+                                                    </dx:GridViewDataTextColumn>
 
-                                            <dx:GridViewBandColumn Caption="Produto" ShowInCustomizationForm="True" ToolTip="">
-                                                <Columns>
-                                                    <dx:GridViewDataTextColumn Caption="Quant." FieldName="QtdeProduto" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="110px">
-                                                        <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False" />
+                                                    <dx:GridViewDataTextColumn Caption="Nome Fornecedor Principal" HeaderStyle-Wrap="True"  FieldName="NomeFornecedorPrincipal" ShowInCustomizationForm="True" Width="300px">
+                                                        <Settings AutoFilterCondition="BeginsWith" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn Caption="Valor Unitário" FieldName="vlrUnitario" HeaderStyle-Wrap="True"  CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="110px">
+                                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
                                                         <Settings AllowAutoFilter="False" />
                                                         <CellStyle Wrap="False">
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn Caption="Preço Nota" FieldName="vlrPrecoNF" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="110px">
+                                                    <dx:GridViewDataTextColumn Caption="Valor Preço Conferência" FieldName="vlrPrecoConf" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="110px">
+                                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
+                                                        <Settings AllowAutoFilter="False" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn Caption="Valor Total" FieldName="vlrTotal" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="110px">
                                                         <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
                                                         <Settings AllowAutoFilter="False" />
                                                         <CellStyle Wrap="False">
@@ -537,55 +446,7 @@
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
                                                 </Columns>
-                                            </dx:GridViewBandColumn>
-
-                                            <dx:GridViewBandColumn Caption="Compra" ShowInCustomizationForm="True" ToolTip="">
-                                                <Columns>
-                                                    <dx:GridViewDataTextColumn Caption="Quant." FieldName="QtdeCompra" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="110px">
-                                                        <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False" />
-                                                        <Settings AllowAutoFilter="False" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-
-                                                    <dx:GridViewDataTextColumn Caption="Valor" FieldName="vlrCompra" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="110px">
-                                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
-                                                        <Settings AllowAutoFilter="False" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-                                                </Columns>
-                                            </dx:GridViewBandColumn>
-
-                                            <dx:GridViewBandColumn Caption="Custo" ShowInCustomizationForm="True" ToolTip="">
-                                                <Columns>
-                                                    <dx:GridViewDataTextColumn Caption="Custo Unitário" FieldName="vlrCustoUnitario" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="110px">
-                                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
-                                                        <Settings AllowAutoFilter="False" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-
-                                                    <dx:GridViewDataTextColumn Caption="Custo Transf." FieldName="vlrCustoTransferencia" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="110px">
-                                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
-                                                        <Settings AllowAutoFilter="False" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-
-                                                    <dx:GridViewDataTextColumn Caption="Custo Condor" FieldName="vlrCustoCondor" HeaderStyle-Wrap="True" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="110px">
-                                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />
-                                                        <Settings AllowAutoFilter="False" />
-                                                        <CellStyle Wrap="False">
-                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
-                                                        </CellStyle>
-                                                    </dx:GridViewDataTextColumn>
-                                                </Columns>
-                                            </dx:GridViewBandColumn>
+                                            </dx:GridViewBandColumn>                                           
 
                                         </Columns>
                                         <SettingsBehavior AllowFocusedRow="True" ColumnResizeMode="Control" />
