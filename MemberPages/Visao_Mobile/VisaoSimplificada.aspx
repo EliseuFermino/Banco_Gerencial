@@ -46,6 +46,9 @@
                     <asp:Button ID="btnMenu_3" Height="30px" CssClass="btn btn-sm" Text="Acumulado Mês" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_3_Click" Style="background-repeat: round" />
                 </div>
                 <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 1px" runat="server" id="divMenu_4">
+                    <asp:Button ID="btnMenu_6" Height="30px" CssClass="btn btn-sm" Text="Acumulado Ano" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_6_Click" Style="background-repeat: round" />
+                </div>
+                <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 1px" runat="server" id="div1">
                     <asp:Button ID="btnMenu_4" Height="30px" CssClass="btn btn-sm" Text="Lucro Negativo" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_4_Click" Style="background-repeat: round" />
                 </div>
                 <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 1px" runat="server" id="divMenu_5" visible="false">
@@ -382,9 +385,11 @@
                                 <EditFormLayoutProperties ColCount="1">
                                 </EditFormLayoutProperties>
                                 <Columns>
-                                    <dx:GridViewDataTextColumn Caption="Desc." FieldName="Descricao" VisibleIndex="0" FixedStyle="Left" MinWidth="85">
+                                    <dx:GridViewDataTextColumn Caption="Desc." FieldName="Descricao" VisibleIndex="0" FixedStyle="Left" MinWidth="85" Width="130px">
                                         <HeaderStyle HorizontalAlign="Center" />
                                         <CellStyle HorizontalAlign="Left" Wrap="False" Paddings-PaddingRight="1px">
+                                            <Paddings PaddingRight="1px"></Paddings>
+
                                             <BorderRight BorderColor="#999999" BorderStyle="Solid" BorderWidth="2px" />
                                         </CellStyle>
                                     </dx:GridViewDataTextColumn>
@@ -396,7 +401,7 @@
                                                 </PropertiesTextEdit>
                                                 <HeaderStyle HorizontalAlign="Center" />
                                             </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="% de&lt;br&gt;Cresc" FieldName="percDifCresc" VisibleIndex="1" MinWidth="60">
+                                            <dx:GridViewDataTextColumn Caption="% de&lt;br&gt;Cresc" FieldName="percDifCresc" VisibleIndex="1" MinWidth="60" Width="70px">
                                                 <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                             </dx:GridViewDataTextColumn>
@@ -431,8 +436,8 @@
                                                 </GroupFooterCellStyle>
                                             </dx:GridViewDataTextColumn>
 
-                                            <dx:GridViewDataTextColumn Caption="%&lt;br&gt;Atingimento" FieldName="percAting"
-                                                ToolTip="Percentual de atingimento (meta x realizado)" VisibleIndex="8" UnboundType="Decimal">
+                                            <dx:GridViewDataTextColumn Caption="%&lt;br&gt;Ating." FieldName="percAting"
+                                                ToolTip="Percentual de atingimento (meta x realizado)" VisibleIndex="8" UnboundType="Decimal" Width="70px">
                                                 <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False"></PropertiesTextEdit>
                                                 <HeaderStyle HorizontalAlign="Center" />
                                                 <CellStyle>
@@ -450,7 +455,7 @@
 
                                     <dx:GridViewBandColumn Caption="% Margem Final" VisibleIndex="3">
                                         <Columns>
-                                            <dx:GridViewDataTextColumn Caption="Meta" FieldName="percMetaMargemFinal" ToolTip="Meta" VisibleIndex="0">
+                                            <dx:GridViewDataTextColumn Caption="Meta" FieldName="percMetaMargemFinal" ToolTip="Meta" VisibleIndex="0" Width="60px">
                                                 <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <HeaderStyle BackColor="#009900" ForeColor="White" />
@@ -458,12 +463,12 @@
                                                     <BorderLeft BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
                                                 </CellStyle>
                                             </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="Real" FieldName="percRealMargemSellOut" ToolTip="Margem com Sell-Out" VisibleIndex="1">
+                                            <dx:GridViewDataTextColumn Caption="Real" FieldName="percRealMargemSellOut" ToolTip="Margem com Sell-Out" VisibleIndex="1" Width="60px">
                                                 <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <HeaderStyle BackColor="#003399" ForeColor="White" HorizontalAlign="Center" />
                                             </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="Dif." FieldName="difMargemFinal" VisibleIndex="2">
+                                            <dx:GridViewDataTextColumn Caption="Dif." FieldName="difMargemFinal" VisibleIndex="2" Width="60px">
                                                 <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <CellStyle>
@@ -586,6 +591,8 @@
                                     <dx:GridViewDataTextColumn Caption="Desc." FieldName="Descricao" VisibleIndex="0" FixedStyle="Left" MinWidth="105">
                                         <HeaderStyle HorizontalAlign="Center" />
                                         <CellStyle HorizontalAlign="Left" Wrap="False" Paddings-PaddingRight="1px">
+                                            <Paddings PaddingRight="1px"></Paddings>
+
                                             <BorderRight BorderColor="#999999" BorderStyle="Solid" BorderWidth="2px" />
                                         </CellStyle>
                                     </dx:GridViewDataTextColumn>
@@ -710,6 +717,7 @@
                                 SelectCommandType="StoredProcedure">
                                 <SelectParameters>
                                     <asp:SessionParameter Name="dia" SessionField="sDIA" DbType="Date" />
+                                    <asp:SessionParameter Name="idUsuario" SessionField="sUSUARIO" DbType="String" />
 
                                 </SelectParameters>
                             </asp:SqlDataSource>
@@ -898,6 +906,7 @@
                                 <SelectParameters>
                                     <asp:SessionParameter DbType="Date" Name="Dia" SessionField="sDIA" />
                                     <asp:SessionParameter DbType="Int16" DefaultValue="99" Name="idFilial" SessionField="sFILIAL_LUCRO_NEGATIVO" />
+                                    <asp:SessionParameter Name="idUsuario" SessionField="sUSUARIO" DbType="String" />
                                 </SelectParameters>
                             </asp:SqlDataSource>
 
@@ -1010,6 +1019,7 @@
                                 <SelectParameters>
                                     <asp:SessionParameter DbType="Date" Name="Dia" SessionField="sDIA" />
                                     <asp:SessionParameter DbType="Int16" DefaultValue="99" Name="idFilial" SessionField="sFILIAL_LUCRO_NEGATIVO" />
+                                    <asp:SessionParameter Name="idUsuario" SessionField="sUSUARIO" DbType="String" />
                                 </SelectParameters>
                             </asp:SqlDataSource>
 
@@ -1394,6 +1404,7 @@
                                     </dx:GridViewBandColumn>
 
                                 </Columns>
+
                                 <SettingsBehavior AllowFocusedRow="True" ColumnResizeMode="Control" />
                                 <SettingsPager Mode="ShowAllRecords"></SettingsPager>
                                 <SettingsExport EnableClientSideExportAPI="true" ExcelExportMode="WYSIWYG"></SettingsExport>
@@ -1427,6 +1438,406 @@
                                 <SelectParameters>
                                     <asp:SessionParameter Name="Ano" SessionField="sANO" Type="Int16" />
                                     <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />
+                                </SelectParameters>
+                            </asp:SqlDataSource>
+
+                        </div>
+
+                    </dx:PanelContent>
+                </PanelCollection>
+            </dx:ASPxCallbackPanel>
+        </div>
+
+    </div>
+    
+    <%--Menu Acumulado Ano--%>
+    <div class="justify-content-center" runat="server" id="divAcumuladoAno" visible="false" style="padding: 0 10px 0 10px">
+        <div class="row justify-content-sm-center" style="padding-bottom: 15px">
+            <div class="col col-auto sm" style="width: 130px; padding-right: 2px">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text sm-2">Ano</div>
+                    </div>
+                    <asp:DropDownList class="form-control" ID="selAnoMenu6" runat="server" DataTextField="Desc"></asp:DropDownList>
+                </div>
+            </div>
+            <div class="col col-auto sm" style="width: 130px; padding-right: 2px">
+                <dx:ASPxButton ID="ASPxButtonAno" runat="server" Text="Atualizar" AutoPostBack="false" Theme="MetropolisBlue">
+                    <ClientSideEvents Click="function(s, e) { cbPanelAno.PerformCallback(); }" />
+                </dx:ASPxButton>
+            </div>
+        </div>
+
+        <div class="divDados">
+            <dx:ASPxCallbackPanel ID="cbPanelAno" runat="server" Width="100%" ClientInstanceName="cbPanelAno" Theme="Metropolis" Images-LoadingPanel-AlternateText="Aguarde. Atualizando">
+                <SettingsLoadingPanel Text="Aguarde&amp;hellip;"></SettingsLoadingPanel>
+
+                <Images>
+                    <LoadingPanel AlternateText="Aguarde. Atualizando"></LoadingPanel>
+                </Images>
+
+                <LoadingPanelImage AlternateText="Aguarde. Atualizando"></LoadingPanelImage>
+                <PanelCollection>
+                    <dx:PanelContent runat="server" SupportsDisabledAttributes="both">
+
+
+                        <div id="divRankingMensal_Total_Ano" class="col-12">
+
+                            <dx:ASPxGridView ID="gridTotalizadorAno" runat="server" ClientInstanceName="gridTotalizadorAno"
+                                AutoGenerateColumns="False" EnableTheming="True" Font-Size="X-Small"
+                                DataSourceID="dsSuperTotalizadorAno" KeyFieldName="idFilial"
+                                Theme="SoftOrange" Width="100%">
+
+                                <EditFormLayoutProperties ColCount="1"></EditFormLayoutProperties>
+                                <SettingsAdaptivity>
+                                    <AdaptiveDetailLayoutProperties ColCount="1"></AdaptiveDetailLayoutProperties>
+                                </SettingsAdaptivity>
+
+                                <SettingsBehavior AllowFocusedRow="True" />
+                                <Styles>
+                                    <Header ImageSpacing="5px" SortingImageSpacing="5px"></Header>
+                                    <Footer Font-Bold="True">
+                                    </Footer>
+                                    <LoadingPanel ImageSpacing="10px"></LoadingPanel>
+                                    <FocusedRow BackColor="#66ffff" ForeColor="#0066FF" Font-Bold="true"></FocusedRow>
+                                    <AlternatingRow BackColor="#EEEEEE"></AlternatingRow>
+                                </Styles>
+                                <SettingsPager Mode="ShowAllRecords">
+                                </SettingsPager>
+                                <SettingsText EmptyDataRow="Não informações atualizadas financeiras para este período." />
+
+                                <Toolbars>
+                                    <dx:GridViewToolbar EnableAdaptivity="true">
+                                        <Items>
+                                            <dx:GridViewToolbarItem Command="ExportToXls" Text="Exportar para Excel - XLS" ToolTip="Versão do Excel 2007 para baixo" />
+                                            <dx:GridViewToolbarItem Command="ExportToXlsx" Text="Exportar para Excel - XLSX" ToolTip="Versão do Excel 2010 para cima" />
+                                            <dx:GridViewToolbarItem Command="ExportToCsv" Text="Exportar para CSV" ToolTip="Exporta arquivo sem formatação" />
+                                        </Items>
+                                    </dx:GridViewToolbar>
+                                </Toolbars>
+
+                                <TotalSummary>
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMeta" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrRea" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percCresc_RealMeta" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percCresc_RealAA2" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMargMeta" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMargReal" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMargCheia" SummaryType="Custom" />
+                                </TotalSummary>
+                                <Columns>
+
+                                    <dx:GridViewDataTextColumn Caption="Filial" FieldName="FilialLista"
+                                        VisibleIndex="0" FixedStyle="Left">
+                                        <HeaderStyle HorizontalAlign="Center" />
+                                        <CellStyle Wrap="False">
+                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="2px" />
+                                        </CellStyle>
+                                    </dx:GridViewDataTextColumn>
+
+                                    <dx:GridViewBandColumn Caption="Ano" VisibleIndex="1" Name="bandAtual">
+                                        <Columns>
+                                            <dx:GridViewDataTextColumn Caption="Meta" FieldName="vlrMeta"
+                                                VisibleIndex="0">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                </PropertiesTextEdit>
+                                                <HeaderStyle HorizontalAlign="Center" BackColor="Green" ForeColor="White" />
+                                                <CellStyle ForeColor="#009900">
+                                                </CellStyle>
+                                                <FooterCellStyle ForeColor="#009900">
+                                                </FooterCellStyle>
+                                            </dx:GridViewDataTextColumn>
+
+                                            <dx:GridViewDataTextColumn Caption="Total" FieldName="vlrRea"
+                                                VisibleIndex="1">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                </PropertiesTextEdit>
+                                                <HeaderStyle HorizontalAlign="Center" BackColor="Blue" ForeColor="White" />
+                                                <CellStyle ForeColor="Blue">
+                                                </CellStyle>
+                                                <FooterCellStyle ForeColor="Blue">
+                                                </FooterCellStyle>
+                                            </dx:GridViewDataTextColumn>
+                                        </Columns>
+                                        <HeaderStyle HorizontalAlign="Center" />
+                                    </dx:GridViewBandColumn>
+
+                                    <dx:GridViewBandColumn Caption="Atingimento e Crescimento" VisibleIndex="2">
+                                        <Columns>
+                                            <dx:GridViewDataTextColumn Caption="% Prev" FieldName="percCresc_RealMeta"
+                                                ToolTip="% de crescimento. Meta sobre o  Realizado" VisibleIndex="0">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                                </PropertiesTextEdit>
+                                                <EditCellStyle>
+                                                    <BorderLeft BorderColor="Gray" BorderStyle="Solid" BorderWidth="2px" />
+                                                </EditCellStyle>
+                                                <HeaderStyle HorizontalAlign="Center" />
+                                                <CellStyle ForeColor="Blue">
+                                                    <BorderLeft BorderColor="Gray" BorderStyle="Solid" BorderWidth="2px" />
+                                                </CellStyle>
+                                                <FooterCellStyle ForeColor="Blue">
+                                                </FooterCellStyle>
+                                            </dx:GridViewDataTextColumn>
+                                            <dx:GridViewDataTextColumn Caption="2010" FieldName="percCresc_RealAA1"
+                                                VisibleIndex="1" Name="bandCrescAA2">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                                </PropertiesTextEdit>
+                                                <HeaderStyle HorizontalAlign="Center" />
+                                            </dx:GridViewDataTextColumn>
+                                        </Columns>
+                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+                                    </dx:GridViewBandColumn>
+
+                                    <dx:GridViewBandColumn Caption="Margem Final" ShowInCustomizationForm="True" VisibleIndex="3">
+                                        <Columns>
+                                            <dx:GridViewDataTextColumn Caption="Meta" FieldName="percMargMetaFinal" ShowInCustomizationForm="True" VisibleIndex="0">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                                </PropertiesTextEdit>
+                                            </dx:GridViewDataTextColumn>
+                                            <dx:GridViewDataTextColumn Caption="Real " FieldName="percMargCheia" ShowInCustomizationForm="True" ToolTip="Percentual de Margem com SellOut" VisibleIndex="1" Width="70px">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                                </PropertiesTextEdit>
+                                                <HeaderStyle BackColor="#003399" ForeColor="White" HorizontalAlign="Center" />
+                                            </dx:GridViewDataTextColumn>
+                                            <dx:GridViewDataTextColumn Caption="Dif." FieldName="percMargMetaFinalDif" ShowInCustomizationForm="True" VisibleIndex="2">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                                </PropertiesTextEdit>
+                                            </dx:GridViewDataTextColumn>
+                                        </Columns>
+                                        <HeaderStyle BackColor="Gray" ForeColor="White" HorizontalAlign="Center" />
+                                    </dx:GridViewBandColumn>
+
+                                </Columns>
+
+
+                                <SettingsBehavior AllowFocusedRow="True" ColumnResizeMode="Control" />
+
+                                <SettingsPager Mode="ShowAllRecords"></SettingsPager>
+                                <SettingsExport EnableClientSideExportAPI="true" ExcelExportMode="WYSIWYG"></SettingsExport>
+                                <Settings VerticalScrollBarMode="Hidden" ShowGroupFooter="VisibleAlways" ShowVerticalScrollBar="False"
+                                    ShowFooter="False" HorizontalScrollBarMode="Hidden" />
+                                <SettingsDataSecurity AllowEdit="False" AllowInsert="False" />
+                                <FormatConditions>
+                                    <dx:GridViewFormatConditionIconSet FieldName="percDifCresc" Format="PositiveNegativeArrowsColored" />
+                                    <dx:GridViewFormatConditionIconSet FieldName="percAting" Format="PositiveNegativeTriangles" />
+
+                                    <dx:GridViewFormatConditionTopBottom Threshold="10">
+                                    </dx:GridViewFormatConditionTopBottom>
+                                    <dx:GridViewFormatConditionIconSet Format="Quarters5" />
+
+                                </FormatConditions>
+                                <Styles>
+                                    <FocusedRow BackColor="#66ffff" ForeColor="#0066FF" Font-Bold="true"></FocusedRow>
+                                    <Header HorizontalAlign="Center">
+                                    </Header>
+                                    <AlternatingRow BackColor="#EEEEEE"></AlternatingRow>
+                                    <Footer Font-Bold="True">
+                                    </Footer>
+                                </Styles>
+                            </dx:ASPxGridView>
+
+                            <asp:SqlDataSource ID="dsSuperTotalizadorAno" runat="server"
+                                ConnectionString="<%$ ConnectionStrings:gerVendasConnectionString %>"
+                                SelectCommand="Ano.uspBuscarRanking_Totalizador" SelectCommandType="StoredProcedure">
+                                <SelectParameters>
+                                    <asp:SessionParameter Name="Ano" SessionField="sANO" Type="Int16" />
+                                </SelectParameters>
+                            </asp:SqlDataSource>
+
+
+                        </div>
+
+                        <br />
+
+                        <div id="divRankingMensalAno">
+
+                            <dx:ASPxGridView ID="gridRankingAno" runat="server" ClientInstanceName="gridRankingAno"
+                                AutoGenerateColumns="False"
+                                DataSourceID="dsSuperAno" KeyFieldName="idFilial"
+                                Theme="SoftOrange" Width="100%">
+
+                                <EditFormLayoutProperties ColCount="1"></EditFormLayoutProperties>
+                                <SettingsAdaptivity>
+                                    <AdaptiveDetailLayoutProperties ColCount="1"></AdaptiveDetailLayoutProperties>
+                                </SettingsAdaptivity>
+
+                                <SettingsBehavior AllowFocusedRow="True" />
+                                <Styles>
+                                    <Header ImageSpacing="5px" SortingImageSpacing="5px"></Header>
+                                    <Footer Font-Bold="True">
+                                    </Footer>
+                                    <LoadingPanel ImageSpacing="10px"></LoadingPanel>
+                                    <FocusedRow BackColor="#66ffff" ForeColor="#0066FF" Font-Bold="true"></FocusedRow>
+                                    <AlternatingRow BackColor="#EEEEEE"></AlternatingRow>
+                                </Styles>
+                                <SettingsPager Mode="ShowAllRecords">
+                                </SettingsPager>
+                                <SettingsText EmptyDataRow="Não informações atualizadas financeiras para este período." />
+
+                                <Toolbars>
+                                    <dx:GridViewToolbar EnableAdaptivity="true">
+                                        <Items>
+                                            <dx:GridViewToolbarItem Command="ExportToXls" Text="Exportar para Excel - XLS" ToolTip="Versão do Excel 2007 para baixo" />
+                                            <dx:GridViewToolbarItem Command="ExportToXlsx" Text="Exportar para Excel - XLSX" ToolTip="Versão do Excel 2010 para cima" />
+                                            <dx:GridViewToolbarItem Command="ExportToCsv" Text="Exportar para CSV" ToolTip="Exporta arquivo sem formatação" />
+                                        </Items>
+                                    </dx:GridViewToolbar>
+                                </Toolbars>
+
+                                <TotalSummary>
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMeta"
+                                        SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrRea"
+                                        SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMA"
+                                        SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrAA1"
+                                        SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrAA2"
+                                        SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrAA3"
+                                        SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percCresc_RealMeta"
+                                        SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMA"
+                                        SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percCresc_RealAA1"
+                                        SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percCresc_RealAA3"
+                                        SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percCresc_RealAA2"
+                                        SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMetaAnual"
+                                        SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percCresc_MetaAnual"
+                                        SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMargMeta" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMargReal" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMargCheia" SummaryType="Custom" />
+
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMargemDif"
+                                        SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percPart_vlrRea"
+                                        SummaryType="Custom" />
+                                </TotalSummary>
+
+                                <Columns>
+
+                                    <dx:GridViewDataTextColumn Caption="Filial" FieldName="FilialLista"
+                                        VisibleIndex="0" FixedStyle="Left">
+                                        <HeaderStyle HorizontalAlign="Center" />
+                                        <CellStyle Wrap="False">
+                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="2px" />
+                                        </CellStyle>
+                                    </dx:GridViewDataTextColumn>
+
+                                    <dx:GridViewBandColumn Caption="Ano" VisibleIndex="1" Name="bandAtual">
+                                        <Columns>
+                                            <dx:GridViewDataTextColumn Caption="Meta" FieldName="vlrMeta"
+                                                VisibleIndex="0">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                </PropertiesTextEdit>
+                                                <HeaderStyle HorizontalAlign="Center" BackColor="Green" ForeColor="White" />
+                                                <CellStyle ForeColor="#009900">
+                                                </CellStyle>
+                                                <FooterCellStyle ForeColor="#009900">
+                                                </FooterCellStyle>
+                                            </dx:GridViewDataTextColumn>
+
+                                            <dx:GridViewDataTextColumn Caption="Total" FieldName="vlrRea"
+                                                VisibleIndex="3">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                </PropertiesTextEdit>
+                                                <HeaderStyle HorizontalAlign="Center" BackColor="Blue" ForeColor="White" />
+                                                <CellStyle ForeColor="Blue">
+                                                </CellStyle>
+                                                <FooterCellStyle ForeColor="Blue">
+                                                </FooterCellStyle>
+                                            </dx:GridViewDataTextColumn>
+                                        </Columns>
+                                        <HeaderStyle HorizontalAlign="Center" />
+                                    </dx:GridViewBandColumn>
+
+                                    <dx:GridViewBandColumn Caption="Atingimento e Crescimento" VisibleIndex="2">
+                                        <Columns>
+                                            <dx:GridViewDataTextColumn Caption="% Prev" FieldName="percCresc_RealMeta"
+                                                ToolTip="% de crescimento. Meta sobre o  Realizado" VisibleIndex="0">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                                </PropertiesTextEdit>
+                                                <EditCellStyle>
+                                                    <BorderLeft BorderColor="Gray" BorderStyle="Solid" BorderWidth="2px" />
+                                                </EditCellStyle>
+                                                <HeaderStyle HorizontalAlign="Center" />
+                                                <CellStyle ForeColor="Blue">
+                                                    <BorderLeft BorderColor="Gray" BorderStyle="Solid" BorderWidth="2px" />
+                                                </CellStyle>
+                                                <FooterCellStyle ForeColor="Blue">
+                                                </FooterCellStyle>
+                                            </dx:GridViewDataTextColumn>
+                                            <dx:GridViewDataTextColumn Caption="2010" FieldName="percCresc_RealAA1"
+                                                VisibleIndex="4" Name="bandCrescAA2">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                                </PropertiesTextEdit>
+                                                <HeaderStyle HorizontalAlign="Center" />
+                                            </dx:GridViewDataTextColumn>
+                                        </Columns>
+                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+                                    </dx:GridViewBandColumn>
+
+                                    <dx:GridViewBandColumn Caption="Margem Final" ShowInCustomizationForm="True" VisibleIndex="3">
+                                        <Columns>
+                                            <dx:GridViewDataTextColumn Caption="Meta" FieldName="percMargMetaFinal" ShowInCustomizationForm="True" VisibleIndex="0">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                                </PropertiesTextEdit>
+                                            </dx:GridViewDataTextColumn>
+                                            <dx:GridViewDataTextColumn Caption="Real " FieldName="percMargCheia" ShowInCustomizationForm="True" ToolTip="Percentual de Margem com SellOut" VisibleIndex="1" Width="70px">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                                </PropertiesTextEdit>
+                                                <HeaderStyle BackColor="#003399" ForeColor="White" HorizontalAlign="Center" />
+                                            </dx:GridViewDataTextColumn>
+                                            <dx:GridViewDataTextColumn Caption="Dif." FieldName="percMargMetaFinalDif" ShowInCustomizationForm="True" VisibleIndex="2">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                                </PropertiesTextEdit>
+                                            </dx:GridViewDataTextColumn>
+                                        </Columns>
+                                        <HeaderStyle BackColor="Gray" ForeColor="White" HorizontalAlign="Center" />
+                                    </dx:GridViewBandColumn>
+
+                                </Columns>
+
+                                <SettingsBehavior AllowFocusedRow="True" ColumnResizeMode="Control" />
+                                <SettingsPager Mode="ShowAllRecords"></SettingsPager>
+                                <SettingsExport EnableClientSideExportAPI="true" ExcelExportMode="WYSIWYG"></SettingsExport>
+                                <Settings VerticalScrollBarMode="Visible"
+                                    ShowGroupFooter="VisibleAlways" VerticalScrollableHeight="300"
+                                    ShowFooter="False" HorizontalScrollBarMode="Hidden" />
+                                <SettingsDataSecurity AllowEdit="False" AllowInsert="False" />
+                                <SettingsText EmptyDataRow="Não há vendas realizadas para este dia." />
+                                <FormatConditions>
+                                    <dx:GridViewFormatConditionIconSet FieldName="percDifCresc" Format="PositiveNegativeArrowsColored" />
+                                    <dx:GridViewFormatConditionIconSet FieldName="percAting" Format="PositiveNegativeTriangles" />
+
+                                    <dx:GridViewFormatConditionTopBottom Threshold="10">
+                                    </dx:GridViewFormatConditionTopBottom>
+                                    <dx:GridViewFormatConditionIconSet Format="Quarters5" />
+
+                                </FormatConditions>
+                                <Styles>
+                                    <FocusedRow BackColor="#66ffff" ForeColor="#0066FF" Font-Bold="true"></FocusedRow>
+                                    <Header HorizontalAlign="Center">
+                                    </Header>
+                                    <AlternatingRow BackColor="#EEEEEE"></AlternatingRow>
+                                    <Footer Font-Bold="True">
+                                    </Footer>
+                                </Styles>
+                            </dx:ASPxGridView>
+
+                            <asp:SqlDataSource ID="dsSuperAno" runat="server"
+                                ConnectionString="<%$ ConnectionStrings:gerVendasConnectionString %>"
+                                SelectCommand="Ano.uspBuscarRankingAno" SelectCommandType="StoredProcedure">
+                                <SelectParameters>
+                                    <asp:SessionParameter Name="Ano" SessionField="sANO" Type="Int16" />
+
                                 </SelectParameters>
                             </asp:SqlDataSource>
 

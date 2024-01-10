@@ -1,5 +1,8 @@
 ﻿Imports System.Data
 Imports System.Data.SqlClient
+Imports DevExpress.SharePoint
+Imports DevExpress.Web
+Imports DevExpress.Xpf.Grid
 
 Partial Class MemberPages_Quebras_Validade_CadastroValidade
     Inherits System.Web.UI.Page
@@ -31,6 +34,7 @@ Partial Class MemberPages_Quebras_Validade_CadastroValidade
             '    cboDia.Enabled = False
             'End If
 
+            Atualizar()
 
 
         End If
@@ -60,7 +64,7 @@ Partial Class MemberPages_Quebras_Validade_CadastroValidade
             txtHorariaChegada.Focus()
             Exit Sub
         End If
-   
+
         Call Salvar()
     End Sub
 
@@ -87,6 +91,9 @@ Partial Class MemberPages_Quebras_Validade_CadastroValidade
         comando.Parameters.Add(New SqlParameter("@Usuario", SqlDbType.VarChar))
         comando.Parameters("@Usuario").Value = Page.User.Identity.Name
 
+        comando.Parameters.Add(New SqlParameter("@Obs", SqlDbType.VarChar))
+        comando.Parameters("@Obs").Value = txtObs.Value.ToString()
+
         Try
             con.Open()
             gravou = comando.ExecuteNonQuery    'Executa o comando, porém não retorna nenhum dado.
@@ -110,15 +117,26 @@ Partial Class MemberPages_Quebras_Validade_CadastroValidade
         Return gravou   'Toda função tem retornar alguma coisa
         'Neste caso o retorno será dados pela variavel "gavou"
 
+        grid_Dados.DataBind()
+
     End Function
 
     Private Sub LimparDados()
         txtHorariaChegada.Text = ""
         txtHorariaSaiada.Text = ""
- 
+
+    End Sub
+    Protected Sub ASPxGridView1_HtmlRowPrepared(sender As Object, e As ASPxGridViewTableRowEventArgs) Handles grid_Dados.HtmlRowPrepared
+
+        Dim NomeColuna As String = e.GetValue("Entrada")
+        Select Case NomeColuna
+            Case ""
+                e.Row.BackColor = System.Drawing.Color.LightCoral
+                e.Row.Font.Bold = True
+        End Select
+
     End Sub
 
-  
     Protected Sub cboDia_DateChanged(sender As Object, e As EventArgs) Handles cboDia.DateChanged
         Atualizar()
     End Sub

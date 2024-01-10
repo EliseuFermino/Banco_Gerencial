@@ -24,7 +24,6 @@ Partial Class MemberPages_Patrimonio_RelatorioPatrimonio
             Me.cboMes.AutoPostBack = False
 
             cboFilial.AutoPostBack = False
-            cboFilial.Visible_cboCorporacao = False
 
 
         End If

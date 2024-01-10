@@ -22,6 +22,7 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
             btnMenu_2.BackColor = Color.FromArgb(85, 134, 184)
             btnMenu_3.BackColor = Color.FromArgb(85, 134, 184)
             btnMenu_4.BackColor = Color.FromArgb(85, 134, 184)
+            btnMenu_6.BackColor = Color.FromArgb(85, 134, 184)
 
             Session("sMERCADOLOGICO") = 1
             Session("sOPCAO") = 1
@@ -336,6 +337,11 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         oFun.grid_RowSelectedWhole(ASPxGridView1, e, "idFilial", "6037", Drawing.Color.LightGray, True)
         oFun.grid_RowSelectedWhole(ASPxGridView1, e, "idFilial", "6099", Drawing.Color.PeachPuff, True)
 
+        oFun.grid_RowSelectedWhole(ASPxGridView1, e, "idFilial", "799", Drawing.Color.LightGray, True)
+
+        ' HIPERMAIS - ATACADO
+        oFun.grid_RowSelectedWhole(ASPxGridView1, e, "idFilial", "703", Drawing.Color.Lavender, True)
+
     End Sub
 
     Protected Sub cboDia_DiaVaiClick(sender As Object, e As EventArgs) Handles cboDia.DiaVaiClick
@@ -518,6 +524,70 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
 
 #End Region
 
+#Region "Acumulado Ano"
+
+    Private Sub MudarLegendaAno()
+        ' TOTALIZADOR ----
+        Me.gridTotalizadorAno.Columns.Item("bandAtual").Caption = selAnoMenu6.SelectedValue
+        Me.gridTotalizadorAno.Columns.Item("percCresc_RealAA1").Caption = selAnoMenu6.SelectedValue.ToString().Substring(2) + " X " + (selAnoMenu6.SelectedValue - 1).ToString().Substring(2)
+
+        ' LOJAS ----
+        Me.gridRankingAno.Columns.Item("bandAtual").Caption = selAnoMenu6.SelectedValue
+        Me.gridRankingAno.Columns.Item("percCresc_RealAA1").Caption = selAnoMenu6.SelectedValue.ToString().Substring(2) + " X " + (selAnoMenu6.SelectedValue - 1).ToString().Substring(2)
+
+    End Sub
+
+    Protected Sub cbPanelAno_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase) Handles cbPanelAno.Callback
+
+        Session("sANO") = selAnoMenu6.SelectedValue
+
+        MudarLegendaAno()
+
+        ' Atualiza Grids
+        gridTotalizadorAno.DataBind()
+        gridRankingAno.DataBind()
+
+    End Sub
+
+    Protected Sub AtualizarAcumuladoAno()
+
+        selAnoMenu6.SelectedValue = Year(Now())
+        Session("sANO") = selAnoMenu6.SelectedValue
+
+        MudarLegendaAno()
+
+        gridTotalizadorAno.DataBind()
+        gridRankingAno.DataBind()
+    End Sub
+
+    Protected Sub gridTotalizadorAno_HtmlDataCellPrepared(ByVal sender As Object, ByVal e As DevExpress.Web.ASPxGridViewTableDataCellEventArgs) Handles gridTotalizadorAno.HtmlDataCellPrepared
+
+        oFun.Grid_RedIsNegative(e, "percMargemDif")
+        oFun.Grid_RedIsNegative(e, "percMA")
+        oFun.Grid_RedIsNegative(e, "percCresc_RealMeta")
+        oFun.Grid_RedIsNegative(e, "percCresc_RealAA1")
+        oFun.Grid_RedIsNegative(e, "percCresc_RealAA2")
+        oFun.Grid_RedIsNegative(e, "percCresc_RealAA3")
+        oFun.Grid_RedIsNegative(e, "percCresc_MetaAnual")
+        oFun.Grid_RedIsNegative(e, "percMargMetaFinalDif")
+
+    End Sub
+
+    Protected Sub gridRankingAno_HtmlDataCellPrepared(ByVal sender As Object, ByVal e As DevExpress.Web.ASPxGridViewTableDataCellEventArgs) Handles gridRankingAno.HtmlDataCellPrepared
+
+        oFun.Grid_RedIsNegative(e, "percMargemDif")
+        oFun.Grid_RedIsNegative(e, "percMA")
+        oFun.Grid_RedIsNegative(e, "percCresc_RealMeta")
+        oFun.Grid_RedIsNegative(e, "percCresc_RealAA1")
+        oFun.Grid_RedIsNegative(e, "percCresc_RealAA2")
+        oFun.Grid_RedIsNegative(e, "percCresc_RealAA3")
+        oFun.Grid_RedIsNegative(e, "percCresc_MetaAnual")
+
+        oFun.Grid_RedIsNegative(e, "percMargMetaFinalDif")
+
+    End Sub
+#End Region
+
 #Region "Lucro negativo"
 
     Protected Sub grid_Top30_Lucro_Negativo_CustomUnboundColumnData(sender As Object, e As ASPxGridViewColumnDataEventArgs) Handles grid_Top30_Lucro_Negativo.CustomUnboundColumnData
@@ -597,7 +667,10 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
     Protected Sub btnMenu_1_Click(sender As Object, e As EventArgs)
         divAnalise.Visible = True
         divAcomp.Visible = False
+        divRankingMes.Visible = False
+        divLucroNegativo.Visible = False
         divAcumulado.Visible = False
+        divAcumuladoAno.Visible = False
 
         'Verde
         btnMenu_1.BackColor = Color.FromArgb(120, 167, 149)
@@ -605,6 +678,7 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         btnMenu_2.BackColor = Color.FromArgb(85, 134, 184)
         btnMenu_3.BackColor = Color.FromArgb(85, 134, 184)
         btnMenu_4.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_6.BackColor = Color.FromArgb(85, 134, 184)
 
         oVen.AtualizarEstatisticaPrograma(439, User.Identity.Name)
 
@@ -619,6 +693,7 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         divRankingMes.Visible = True
         divLucroNegativo.Visible = False
         divAcumulado.Visible = False
+        divAcumuladoAno.Visible = False
 
         'Verde
         btnMenu_2.BackColor = Color.FromArgb(120, 167, 149)
@@ -626,6 +701,7 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         btnMenu_1.BackColor = Color.FromArgb(85, 134, 184)
         btnMenu_3.BackColor = Color.FromArgb(85, 134, 184)
         btnMenu_4.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_6.BackColor = Color.FromArgb(85, 134, 184)
 
         oVen.AtualizarEstatisticaPrograma(438, User.Identity.Name)
 
@@ -637,6 +713,7 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         divAnalise.Visible = False
         divAcomp.Visible = False
         divAcumulado.Visible = True
+        divAcumuladoAno.Visible = False
 
         'Verde
         btnMenu_3.BackColor = Color.FromArgb(120, 167, 149)
@@ -644,6 +721,7 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         btnMenu_1.BackColor = Color.FromArgb(85, 134, 184)
         btnMenu_2.BackColor = Color.FromArgb(85, 134, 184)
         btnMenu_4.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_6.BackColor = Color.FromArgb(85, 134, 184)
 
         oVen.AtualizarEstatisticaPrograma(440, User.Identity.Name)
 
@@ -657,6 +735,7 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         divRankingMes.Visible = False
         divLucroNegativo.Visible = True
         divAcumulado.Visible = False
+        divAcumuladoAno.Visible = False
 
         'Verde
         btnMenu_4.BackColor = Color.FromArgb(120, 167, 149)
@@ -664,6 +743,7 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         btnMenu_1.BackColor = Color.FromArgb(85, 134, 184)
         btnMenu_2.BackColor = Color.FromArgb(85, 134, 184)
         btnMenu_3.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_6.BackColor = Color.FromArgb(85, 134, 184)
 
         oVen.AtualizarEstatisticaPrograma(441, User.Identity.Name)
 
@@ -679,6 +759,28 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         divMenu_2.Visible = False
         divMenu_3.Visible = True
         'divMenu_4.Visible = True
+    End Sub
+
+    Protected Sub btnMenu_6_Click(sender As Object, e As EventArgs)
+        divAnalise.Visible = False
+        divAcomp.Visible = False
+        divRankingMes.Visible = False
+        divLucroNegativo.Visible = False
+        divAcumulado.Visible = False
+        divAcumuladoAno.Visible = True
+
+        'Verde
+        btnMenu_6.BackColor = Color.FromArgb(120, 167, 149)
+        'Azul
+        btnMenu_1.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_2.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_3.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_4.BackColor = Color.FromArgb(85, 134, 184)
+
+        oVen.AtualizarEstatisticaPrograma(441, User.Identity.Name)
+
+        Call AtualizarAcumuladoAno()
+
     End Sub
 
 #End Region
@@ -698,6 +800,13 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         selAnoMenu3.Items.Add(New ListItem(DateTime.Today.AddYears(-1).Year).ToString())
         selAnoMenu3.Items.Add(New ListItem(DateTime.Today.AddYears(-2).Year).ToString())
         selAnoMenu3.SelectedIndex = 0
+
+        'Ranking Ano
+        selAnoMenu6.Items.Add(New ListItem(DateTime.Today.Year).ToString())
+        selAnoMenu6.Items.Add(New ListItem(DateTime.Today.AddYears(-1).Year).ToString())
+        selAnoMenu6.Items.Add(New ListItem(DateTime.Today.AddYears(-2).Year).ToString())
+        selAnoMenu6.Items.Add(New ListItem(DateTime.Today.AddYears(-3).Year).ToString())
+        selAnoMenu6.SelectedIndex = 0
 
     End Sub
 

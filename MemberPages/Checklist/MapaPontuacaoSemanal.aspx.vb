@@ -852,7 +852,7 @@ Partial Class MemberPages_Checklist_MapaPontuacaoSemanal
     Private Sub ChangeTitles(ByVal iMes As Byte)
         Dim DiaInicial As Date
 
-        DiaInicial = myDateTimes.GetFirstDayOfMonth_baseYearMonth(Session("sMES"), Session("sANO")).AddYears(-1)
+        DiaInicial = myDateTimes.GetFirstDayOfMonth_baseYearMonth(Session("sMES"), Session("sANO"))
         lblError.Text = DiaInicial
 
         oFun.Grid_ColumnTitle(grid, "Dia1", NomeDiaAbreviado(DiaInicial, iMes) & " <br />" & CStr(Left(DiaInicial, 5)))

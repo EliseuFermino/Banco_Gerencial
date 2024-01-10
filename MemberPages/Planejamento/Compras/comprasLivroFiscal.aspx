@@ -166,6 +166,13 @@
                                                             <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
+                                                    
+                                                    <dx:GridViewDataTextColumn Caption="Descrição Produto" FieldName="nomeProduto" HeaderStyle-Wrap="True" ShowInCustomizationForm="True" Width="200px">
+                                                        <Settings AutoFilterCondition="BeginsWith" />
+                                                        <CellStyle Wrap="False">
+                                                            <BorderRight BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                                                        </CellStyle>
+                                                    </dx:GridViewDataTextColumn>
 
                                                     <dx:GridViewDataTextColumn Caption="Valor Unitário"  HeaderStyle-Wrap="True" FieldName="vlrUnitario" CellStyle-HorizontalAlign="Center" ShowInCustomizationForm="True" Width="110px">
                                                         <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False" />

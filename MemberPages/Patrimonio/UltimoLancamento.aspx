@@ -48,7 +48,7 @@
             </FocusedRow>
         </Styles>
     </dx:ASPxGridView>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:gerProjetosConnectionString2 %>" SelectCommand="usp_DiasSemLancamento" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:gerProjetosConnectionString %>" SelectCommand="usp_DiasSemLancamento" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
     </div>
 </asp:Content>
 

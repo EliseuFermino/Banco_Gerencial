@@ -129,6 +129,9 @@ Public Class preencheSelects
             Case 9  ' Delivery
                 preencheFilial("SELECT idFilial AS Filial ,FilialDesc AS nomeFilial, icone FROM DW.dbo.DimFilial WHERE IsDelivery = 1", sSelect)
                 sSelect.SelectedIndex = 0
+            Case 12  ' Hipermais
+                preencheFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliais WHERE Tipo=12", sSelect)
+                sSelect.SelectedIndex = 0
             Case 199    'Corporação
                 Select Case sDepartamento
                     Case "gestor_comercial", "comercial"

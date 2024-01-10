@@ -146,6 +146,8 @@ Partial Class wucListaLojasComCorporacao
                     Me.cboCorporacao.Visible = False
                 Case "cd"
                     Me.cboCorporacao.Visible = False
+                Case "hipermais"
+                    Me.cboCorporacao.Visible = False
                 Case Else
                     Me.cboFilial.Enabled = True
             End Select
@@ -174,8 +176,12 @@ Partial Class wucListaLojasComCorporacao
                 Preenche_Corporacao("SELECT idUnidade ,descUnidade FROM gerCadastros.Cad.tblUnidadeLista WHERE idUnidade IN (3,8,9,199)")
             Case "postos"
                 Preenche_Corporacao("SELECT idUnidade ,descUnidade FROM gerCadastros.Cad.tblUnidadeLista WHERE idUnidade = 5")
+            Case "supervisor_postos"
+                Preenche_Corporacao("SELECT idUnidade ,descUnidade FROM gerCadastros.Cad.tblUnidadeLista WHERE idUnidade = 5")
             Case "loja"
                 Preenche_Corporacao("SELECT idUnidade ,descUnidade FROM gerCadastros.Cad.tblUnidadeLista WHERE idUnidade IN (3,9)")
+            Case "hipermais"
+                Preenche_Corporacao("SELECT idUnidade ,descUnidade FROM gerCadastros.Cad.tblUnidadeLista WHERE idUnidade IN (12)")
             Case "suprimentos"
                 Preenche_Corporacao("SELECT idUnidade ,descUnidade FROM gerCadastros.Cad.tblUnidadeLista")
                 cboCorporacao.Enabled = False
@@ -192,6 +198,9 @@ Partial Class wucListaLojasComCorporacao
                 Select Case Session("sDEPARTAMENTO")
 
                     Case "supervisor"
+
+                        cboCorporacao.Visible = False
+
                         If Session("sUSUARIO") = "bendixen" Then   'Supervisor Norte
                             Call Preenche_cboFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1006 ORDER BY nomeFilial")
                             cboFilial.SelectedIndex = 0
@@ -203,9 +212,6 @@ Partial Class wucListaLojasComCorporacao
                             cboFilial.SelectedIndex = 0
                         ElseIf Session("sUSUARIO") = "68977" Then   ' João Carlos
                             Call Preenche_cboFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1014 ORDER BY nomeFilial")
-                            cboFilial.SelectedIndex = 0
-                        ElseIf Session("sUSUARIO") = "100400" Then   ' João Carlos
-                            Call Preenche_cboFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1015 ORDER BY nomeFilial")
                             cboFilial.SelectedIndex = 0
                         ElseIf Session("sUSUARIO") = "207888" Then   ' Domingos
                             Call Preenche_cboFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1018 ORDER BY nomeFilial")
@@ -226,6 +232,17 @@ Partial Class wucListaLojasComCorporacao
 
                         End If
 
+                    Case "diretor_operacao"
+
+                        cboCorporacao.Visible = False
+
+                        If Session("sUSUARIO") = "Valdecir" Then   ' Valdecir
+                            Call Preenche_cboFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliais WHERE idDiretor_Operacao=1 ORDER BY nomeFilial")
+                            cboFilial.SelectedIndex = 0
+                        ElseIf Session("sUSUARIO") = "781" Then   ' Valdecir
+                            Call Preenche_cboFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliais WHERE idDiretor_Operacao=1 ORDER BY nomeFilial")
+                            cboFilial.SelectedIndex = 0
+                        End If
                     Case "supervisor_trainee"
                         Call Preenche_cboFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1015 ORDER BY nomeFilial")
                         cboFilial.SelectedIndex = 0
@@ -242,14 +259,13 @@ Partial Class wucListaLojasComCorporacao
                         Preenche_cboFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE IsLoja=1")
                         cboFilial.Value = 3
                     Case "controladoria", "administração", "perdas_supervisor", "seguranca_supervisor", "projetos_perdas", "suprimentos", "gerente_rh"
-                        Preenche_cboFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE idLojasCDs=1 OR IsAtacarejo=1")
+                        Preenche_cboFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliais WHERE  idLojasCDs = 1 OR IsPosto =1 OR isAtacarejo = 1 OR isHipermais = 1")
                         cboFilial.Value = 3
-
                     Case "gerente cd"
                         Preenche_cboFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE Filial IN (1,12,16)")
                         cboFilial.SelectedIndex = 0
                     Case "diretor", "diretor_informatica", "diretor_marketing", "contabilidade", "gerente_contabilidade", "gerente_financeiro", "trade marketing"
-                        Preenche_cboFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE idLojasCDs = 1")
+                        Preenche_cboFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliais WHERE  idLojasCDs = 1 OR IsPosto =1 OR isAtacarejo = 1 OR isHipermais = 1")
                         cboFilial.SelectedIndex = 0
                     Case "marketing", "marketing bi"
                         Preenche_cboFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE  idLojasCDs = 1")
@@ -257,6 +273,9 @@ Partial Class wucListaLojasComCorporacao
                     Case "gerente hsa", "hsa"
                         Preenche_cboFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE  idLojasCDs = 1")
                         cboFilial.SelectedIndex = 0
+                    Case "controle_caminhao_ceasa"
+                        Preenche_cboFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE IsLoja=1 OR isAtacarejo = 1")
+                        cboFilial.Value = 3
                     Case Else
                         Preenche_cboFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE Filial=" & vFilial & "")
                         cboFilial.SelectedIndex = 0
@@ -266,8 +285,28 @@ Partial Class wucListaLojasComCorporacao
                 Preenche_cboFilial("SELECT CodRegional As Filial ,Descricao AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliais_Regional")
                 cboFilial.SelectedIndex = 0
             Case 5  ' Posto
-                Preenche_cboFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliais WHERE IsPosto=1")
-                cboFilial.SelectedIndex = 2
+                Select Case Session("sDEPARTAMENTO")
+
+                    Case "supervisor_postos"
+
+                        cboCorporacao.Visible = False
+
+                        If Session("sUSUARIO") = "101437" Then   'Eliane
+                            Call Preenche_cboFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1019 ORDER BY nomeFilial")
+                            cboFilial.SelectedIndex = 0
+                        ElseIf Session("sUSUARIO") = "101436" Then   'Joilnen
+                            Call Preenche_cboFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1020 ORDER BY nomeFilial")
+                            cboFilial.SelectedIndex = 0
+                        ElseIf Session("sUSUARIO") = "20118" Or Session("sUSUARIO") = "881" Then
+                            Call Preenche_cboFilial("SELECT Filial, RTRIM(FilialLista) AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE CodigoRegional=1020 ORDER BY nomeFilial")
+                            cboFilial.SelectedIndex = 0
+                        End If
+
+                    Case Else
+                        Preenche_cboFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliais WHERE IsPosto=1")
+
+                End Select
+
             Case 6  ' Gestor
             Case 7  ' Comprador
             Case 8  ' Atacarejo
@@ -279,15 +318,19 @@ Partial Class wucListaLojasComCorporacao
             Case 11  ' Indústrias
                 Preenche_cboFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliais WHERE IsIndustria=1")
                 cboFilial.SelectedIndex = 0
+            Case 12  ' Hipermais
+                Preenche_cboFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliais WHERE Tipo=12")
+                cboFilial.SelectedIndex = 0
+                cboCorporacao.Visible = False
             Case 199    'Corporação
                 Select Case Session("sDEPARTAMENTO")
 
                     Case "gestor_comercial", "comercial"
-                        Preenche_cboFilial("SELECT Filial, Descricao AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE Filial IN (99,98,699) ORDER BY nomeFilial")
+                        Preenche_cboFilial("SELECT Filial, Descricao AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE Filial IN (99,98,699,799) ORDER BY nomeFilial")
                         cboFilial.SelectedIndex = 0
                         'Session("sFILIAL") = cboFilial.Value
                     Case Else
-                        Preenche_cboFilial("SELECT Filial, Descricao AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE Filial IN (99,198,199,98,699) ORDER BY nomeFilial")
+                        Preenche_cboFilial("SELECT Filial, Descricao AS nomeFilial, icone FROM Cadastros.tblCadFiliaisLista WHERE Filial IN (99,198,199,98,699,799) ORDER BY nomeFilial")
                         cboFilial.SelectedIndex = 0
                         'Session("sFILIAL") = cboFilial.Value
                 End Select

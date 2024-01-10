@@ -11,7 +11,6 @@ Partial Class MemberPages_Patrimonio_CadEtiqueta
         If Not IsPostBack Then
 
             oVem.AtualizarEstatisticaPrograma(329, User.Identity.Name)
-            cboFilial.Visible_cboCorporacao = False
 
             Dim DiaOntem As Date
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Conferência - Livro Fiscal / Compras" Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="ajustePercent.aspx.vb" Inherits="MemberPages_Planejamento_Perdas_AjustePercent" %>
+﻿<%@ Page Title="Ajustes percentual - Perdas" Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="ajustePercent.aspx.vb" Inherits="MemberPages_Planejamento_Perdas_AjustePercent" %>
 
 <%@ Register Assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
@@ -46,15 +46,15 @@
                                 <PanelCollection>
                                     <dx:PanelContent runat="server" SupportsDisabledAttributes="both">
 
-                                        <dx:ASPxGridView ID="gridPerc" runat="server" EnableTheming="true" Font-Size="14" Theme="SoftOrange" AutoGenerateColumns="False" KeyFieldName="idFilial" ClientInstanceName="gridPerc" DataSourceID="SqlDataSource1">
+                                        <dx:ASPxGridView ID="gridPerc" runat="server"  EnableTheming="True" Theme="MaterialCompact" Font-Size="14" AutoGenerateColumns="False" KeyFieldName="idFilial" ClientInstanceName="gridPerc" DataSourceID="SqlDataSource1">
                                             <ClientSideEvents BatchEditChangesSaving="function(s, e) {}"
                                                 BatchEditConfirmShowing="function(s, e) {}"
                                                 BatchEditEndEditing="function(s, e) {}"
-                                                EndCallback="function(s, e) {grid_Departamento.Refresh();}" />
+                                                EndCallback="function(s, e) {gridPanel.Refresh();}" />
                                             <SettingsPager Mode="ShowAllRecords">
                                             </SettingsPager>
                                             <SettingsEditing Mode="Batch">
-                                                <BatchEditSettings StartEditAction="Click" />
+                                                <BatchEditSettings StartEditAction="DblClick" />
                                             </SettingsEditing>
                                             <Settings HorizontalScrollBarMode="Visible" ShowFooter="True" VerticalScrollableHeight="400" />
                                             <SettingsResizing ColumnResizeMode="Disabled" />
@@ -115,7 +115,8 @@
                                             UpdateCommand=" Update	[gerManager].[Realizado].[tblReaQuebra] 
 			                                            Set		[perc] = @Perc 
 				                                            ,	[dataAtu] = Convert(varchar(20),getdate(),103)
-				                                            ,	[horaAtu] = CONVERT(VARCHAR(8), getdate(), 108) 
+				                                            ,	[horaAtu] = CONVERT(VARCHAR(8), getdate(), 108)
+                                                            ,   [matricula] = @usuario   
 			                                            Where	Ano			=	@Ano
 			                                            And		idFilial	=	@idFilial">
                                             <SelectParameters>
@@ -126,6 +127,7 @@
                                                 <asp:Parameter Name="Perc" Type="Decimal" />
                                                 <asp:Parameter Name="Ano" Type="Int16" />
                                                 <asp:Parameter Name="idFilial" Type="Int16" />
+                                                <asp:SessionParameter Name="usuario" SessionField="sUSUARIO" Type="string" />
                                             </UpdateParameters>
                                         </asp:SqlDataSource>
 

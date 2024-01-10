@@ -368,37 +368,37 @@
 
 
         <div id="divFilial" class="BGC_myBorder">
-            <uc1:wuclistalojascomcorporacao runat="server" id="cboFilial" />
+            <uc1:wucListaLojasComCorporacao runat="server" ID="cboFilial" />
         </div>
 
         <div id="divAno" class="BGC_myBorder">
-            <uc1:wucano runat="server" id="cboAno" />
+            <uc1:wucAno runat="server" ID="cboAno" />
         </div>
 
         <div id="divMes">
-            <uc1:wucilistames runat="server" id="cboMes" />
+            <uc1:wuciListaMes runat="server" ID="cboMes" />
         </div>
 
         <div id="divGrupoSubgrupo" class="BGC_myBorder">
-            <dx:aspxcheckbox id="chkGrupoSub" runat="server" theme="DevEx" text="por Grupo" forecolor="Blue" checkstate="Unchecked">
-                <clientsideevents checkedchanged="function(s, e) {	cbPanel.PerformCallback();    cbPanelNaoConforme.PerformCallback();}" />
-            </dx:aspxcheckbox>
+            <dx:ASPxCheckBox ID="chkGrupoSub" runat="server" Theme="DevEx" Text="por Grupo" ForeColor="Blue" CheckState="Unchecked">
+                <ClientSideEvents CheckedChanged="function(s, e) {	cbPanel.PerformCallback();    cbPanelNaoConforme.PerformCallback();}" />
+            </dx:ASPxCheckBox>
         </div>
 
         <div id="divBotaoAtualizar" class="BGC_myBorder">
-            <dx:aspxbutton id="btnAtualizar" runat="server" text="Atualizar" autopostback="False" theme="MetropolisBlue">
-                <clientsideevents click="function(s, e) {cbPanel.PerformCallback(); cbPanelNaoConforme.PerformCallback();}" />
-            </dx:aspxbutton>
+            <dx:ASPxButton ID="btnAtualizar" runat="server" Text="Atualizar" AutoPostBack="False" Theme="MetropolisBlue">
+                <ClientSideEvents Click="function(s, e) {cbPanel.PerformCallback(); cbPanelNaoConforme.PerformCallback();}" />
+            </dx:ASPxButton>
         </div>
 
         <div id="divExcel" class="BGC_myBorder">
-            <uc1:wucbotaoexcel runat="server" id="btnExcel" callgridviewid="grid" guianome="Pontuação Check-List" />
+            <uc1:wucBotaoExcel runat="server" ID="btnExcel" CallGridViewID="grid" GuiaNome="Pontuação Check-List" />
         </div>
 
-        <dx:aspxcallbackpanel id="cbPanel" runat="server" width="100%" clientinstancename="cbPanel" theme="Metropolis" settingsloadingpanel-text="Aguarde&amp;hellip;">
-            <settingsloadingpanel text="Aguarde&amp;hellip;"></settingsloadingpanel>
-            <panelcollection>
-                <dx:panelcontent id="PanelContent1" runat="server" supportsdisabledattributes="both">
+        <dx:ASPxCallbackPanel ID="cbPanel" runat="server" Width="100%" ClientInstanceName="cbPanel" Theme="Metropolis" SettingsLoadingPanel-Text="Aguarde&amp;hellip;">
+            <SettingsLoadingPanel Text="Aguarde&amp;hellip;"></SettingsLoadingPanel>
+            <PanelCollection>
+                <dx:PanelContent ID="PanelContent1" runat="server" supportsdisabledattributes="both">
                     <asp:Label ID="lblError" runat="server" Text="Label" Font-Bold="true" ForeColor="Red"></asp:Label>
                     <div class="row Quebra_Pagina_Row" visible="false" runat="server" id="divGrafico">
 
@@ -423,11 +423,11 @@
 
                                         <div id="div_Pontuacao">
 
-                                            <dxchartsui:webchartcontrol id="graph_Pontuacao_Mensal" runat="server" backcolor="Transparent" datasourceid="" height="150px" width="1000px">
+                                            <dxchartsui:WebChartControl ID="graph_Pontuacao_Mensal" runat="server" BackColor="Transparent" DataSourceID="" Height="150px" Width="1000px">
 
-                                                <borderoptions visible="False" />
-                                                <diagramserializable>
-                                                    <cc1:xydiagram>
+                                                <BorderOptions Visible="False" />
+                                                <DiagramSerializable>
+                                                    <cc1:XYDiagram>
                                                         <axisx visibleinpanesserializable="-1">
                                                             <tickmarks minorvisible="False" />
                                                             <label font="Tahoma, 10pt">
@@ -443,17 +443,17 @@
                                                         </axisy>
                                                         <defaultpane backcolor="Transparent" bordervisible="False">
                                                         </defaultpane>
-                                                    </cc1:xydiagram>
-                                                </diagramserializable>
-                                                <fillstyle>
+                                                    </cc1:XYDiagram>
+                                                </DiagramSerializable>
+                                                <FillStyle>
                                                     <optionsserializable>
                                                         <cc1:solidfilloptions></cc1:solidfilloptions>
                                                     </optionsserializable>
-                                                </fillstyle>
+                                                </FillStyle>
 
-                                                <legend visibility="False"></legend>
-                                                <seriesserializable>
-                                                    <cc1:series argumentdatamember="descMesRed" labelsvisibility="True" name="Series 1" valuedatamembersserializable="Nota">
+                                                <Legend Visibility="False"></Legend>
+                                                <SeriesSerializable>
+                                                    <cc1:Series ArgumentDataMember="descMesRed" LabelsVisibility="True" Name="Series 1" ValueDataMembersSerializable="Nota">
                                                         <viewserializable>
                                                             <cc1:lineseriesview markervisibility="True">
                                                                 <linemarkeroptions bordervisible="True">
@@ -481,10 +481,10 @@
                                                                 <valuenumericoptions format="Number" />
                                                             </cc1:pointoptions>
                                                         </legendpointoptionsserializable>
-                                                    </cc1:series>
-                                                </seriesserializable>
+                                                    </cc1:Series>
+                                                </SeriesSerializable>
 
-                                                <seriestemplate>
+                                                <SeriesTemplate>
                                                     <viewserializable>
                                                         <cc1:lineseriesview markervisibility="True">
                                                             <linemarkeroptions bordervisible="True">
@@ -507,26 +507,26 @@
                                                     <legendpointoptionsserializable>
                                                         <cc1:pointoptions></cc1:pointoptions>
                                                     </legendpointoptionsserializable>
-                                                </seriestemplate>
+                                                </SeriesTemplate>
 
-                                                <crosshairoptions>
+                                                <CrosshairOptions>
                                                     <commonlabelpositionserializable>
                                                         <cc1:crosshairmouseposition></cc1:crosshairmouseposition>
                                                     </commonlabelpositionserializable>
-                                                </crosshairoptions>
+                                                </CrosshairOptions>
 
-                                                <tooltipoptions>
+                                                <ToolTipOptions>
                                                     <tooltippositionserializable>
                                                         <cc1:tooltipmouseposition></cc1:tooltipmouseposition>
                                                     </tooltippositionserializable>
-                                                </tooltipoptions>
+                                                </ToolTipOptions>
 
-                                            </dxchartsui:webchartcontrol>
+                                            </dxchartsui:WebChartControl>
                                             <asp:SqlDataSource ID="dsPontuacao_Dados_Mensal" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="uspBuscarNotaLoja_Mes_a_Mes" SelectCommandType="StoredProcedure">
-                                                <selectparameters>
+                                                <SelectParameters>
                                                     <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="int16" />
                                                     <asp:SessionParameter Name="Ano" SessionField="sANO" Type="Int16" />
-                                                </selectparameters>
+                                                </SelectParameters>
                                             </asp:SqlDataSource>
                                         </div>
                                     </div>
@@ -559,548 +559,548 @@
                                 <div class="widget-body">
                                     <div class="widget-main">
 
-                                        <dx:aspxgridview id="grid" runat="server" autogeneratecolumns="False" datasourceid="dsDados" width="100%" keyfieldname="descPergunta">
-                                            <totalsummary>
-                                                <dx:aspxsummaryitem displayformat="{0:n0}" fieldname="Conforme" summarytype="Sum" />
-                                                <dx:aspxsummaryitem displayformat="{0:n0}" fieldname="Validos" summarytype="Sum" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Nota" summarytype="Custom" />
+                                        <dx:ASPxGridView ID="grid" runat="server" AutoGenerateColumns="False" DataSourceID="dsDados" Width="100%" KeyFieldName="descPergunta">
+                                            <TotalSummary>
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="Conforme" SummaryType="Sum" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="Validos" SummaryType="Sum" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Nota" SummaryType="Custom" />
 
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia1" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia2" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia3" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia4" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia5" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia6" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia7" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia8" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia9" summarytype="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia1" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia2" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia3" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia4" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia5" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia6" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia7" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia8" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia9" SummaryType="Custom" />
 
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia10" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia11" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia12" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia13" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia14" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia15" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia16" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia17" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia18" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia19" summarytype="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia10" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia11" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia12" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia13" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia14" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia15" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia16" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia17" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia18" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia19" SummaryType="Custom" />
 
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia20" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia21" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia22" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia23" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia24" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia25" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia26" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia27" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia28" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia29" summarytype="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia20" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia21" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia22" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia23" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia24" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia25" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia26" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia27" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia28" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia29" SummaryType="Custom" />
 
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia30" summarytype="Custom" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Dia31" summarytype="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia30" SummaryType="Custom" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Dia31" SummaryType="Custom" />
 
-                                            </totalsummary>
-                                            <groupsummary>
-                                                <dx:aspxsummaryitem displayformat="{0:n0}" fieldname="Conforme" showingroupfootercolumn="Conforme" summarytype="Sum" />
-                                                <dx:aspxsummaryitem displayformat="{0:n0}" fieldname="Validos" showingroupfootercolumn="Validos" summarytype="Sum" />
-                                                <dx:aspxsummaryitem displayformat="{0:n2}" fieldname="Nota" showingroupfootercolumn="Nota" summarytype="Custom" />
-                                            </groupsummary>
-                                            <columns>
-                                                <dx:gridviewcommandcolumn showincustomizationform="True" visible="False" visibleindex="0" showclearfilterbutton="True" />
-                                                <dx:gridviewdatatextcolumn fieldname="listaGrupo" showincustomizationform="True" visibleindex="33" width="115px" caption="Grupo" visible="True">
-                                                    <settings allowautofilter="True" autofiltercondition="Contains" />
-                                                    <cellstyle wrap="False">
-                                                    </cellstyle>
-                                                </dx:gridviewdatatextcolumn>
-                                                <dx:gridviewdatatextcolumn fieldname="descPergunta" showincustomizationform="True" visibleindex="1" width="260px" caption="Questão" fixedstyle="Left">
-                                                    <settings allowautofilter="True" autofiltercondition="Contains" />
-                                                    <cellstyle wrap="False">
-                                                    </cellstyle>
-                                                </dx:gridviewdatatextcolumn>
+                                            </TotalSummary>
+                                            <GroupSummary>
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="Conforme" ShowInGroupFooterColumn="Conforme" SummaryType="Sum" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="Validos" ShowInGroupFooterColumn="Validos" SummaryType="Sum" />
+                                                <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Nota" ShowInGroupFooterColumn="Nota" SummaryType="Custom" />
+                                            </GroupSummary>
+                                            <Columns>
+                                                <dx:GridViewCommandColumn ShowInCustomizationForm="True" Visible="False" VisibleIndex="0" ShowClearFilterButton="True" />
+                                                <dx:GridViewDataTextColumn FieldName="listaGrupo" ShowInCustomizationForm="True" VisibleIndex="33" Width="115px" Caption="Grupo" Visible="True">
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Contains" />
+                                                    <CellStyle Wrap="False">
+                                                    </CellStyle>
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataTextColumn FieldName="descPergunta" ShowInCustomizationForm="True" VisibleIndex="1" Width="260px" Caption="Questão" FixedStyle="Left">
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Contains" />
+                                                    <CellStyle Wrap="False">
+                                                    </CellStyle>
+                                                </dx:GridViewDataTextColumn>
 
-                                                <dx:gridviewbandcolumn caption="Pontuação" showincustomizationform="True" visibleindex="2" fixedstyle="Left">
-                                                    <columns>
-                                                        <dx:gridviewdatatextcolumn fieldname="Conforme" showincustomizationform="True" visibleindex="0" width="65px">
-                                                            <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                                            </propertiestextedit>
-                                                            <settings allowautofilter="False" />
-                                                            <cellstyle font-bold="True" forecolor="Blue" horizontalalign="Center">
-                                                            </cellstyle>
-                                                            <footercellstyle font-bold="True" forecolor="Blue" horizontalalign="Center">
-                                                            </footercellstyle>
-                                                        </dx:gridviewdatatextcolumn>
-                                                        <dx:gridviewdatatextcolumn fieldname="Validos" showincustomizationform="True" visibleindex="1" width="60px">
-                                                            <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                                            </propertiestextedit>
-                                                            <settings allowautofilter="False" />
-                                                            <cellstyle font-bold="True" forecolor="#009900" horizontalalign="Center">
-                                                            </cellstyle>
-                                                            <footercellstyle font-bold="True" forecolor="#009900" horizontalalign="Center">
-                                                            </footercellstyle>
-                                                        </dx:gridviewdatatextcolumn>
-                                                        <dx:gridviewdatatextcolumn fieldname="Peso" showincustomizationform="True" visibleindex="2" width="50px" caption="Peso">
-                                                            <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                                            </propertiestextedit>
-                                                            <settings autofiltercondition="Equals" />
-                                                            <cellstyle horizontalalign="Center">
-                                                            </cellstyle>
-                                                        </dx:gridviewdatatextcolumn>
-                                                        <dx:gridviewdatatextcolumn fieldname="Nota" showincustomizationform="True" visibleindex="3" width="60px">
-                                                            <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                                            </propertiestextedit>
-                                                            <settings allowautofilter="False" />
-                                                            <cellstyle font-bold="True" horizontalalign="Center">
-                                                            </cellstyle>
-                                                            <footercellstyle font-bold="True" horizontalalign="Center">
-                                                            </footercellstyle>
-                                                        </dx:gridviewdatatextcolumn>
-                                                    </columns>
-                                                </dx:gridviewbandcolumn>
-
-
-                                                <dx:gridviewdatacheckcolumn fieldname="Dia1" showincustomizationform="True" visibleindex="3" caption="Seg" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Ter" fieldname="Dia2" showincustomizationform="True" tooltip="Terça-Feira" visibleindex="4" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Qua" fieldname="Dia3" showincustomizationform="True" tooltip="Quarta-Feira" visibleindex="5" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Qui" fieldname="Dia4" showincustomizationform="True" tooltip="Quinta-Feira" visibleindex="6" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Sex" fieldname="Dia5" showincustomizationform="True" tooltip="Sexta-Feira" visibleindex="7" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Sáb" fieldname="Dia6" showincustomizationform="True" tooltip="Sábado" visibleindex="8" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-
-                                                <dx:gridviewdatacheckcolumn fieldname="Dia7" showincustomizationform="True" visibleindex="9" caption="Seg" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Ter" fieldname="Dia8" showincustomizationform="True" tooltip="Terça-Feira" visibleindex="10" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Qua" fieldname="Dia9" showincustomizationform="True" tooltip="Quarta-Feira" visibleindex="11" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Qui" fieldname="Dia10" showincustomizationform="True" tooltip="Quinta-Feira" visibleindex="12" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Sex" fieldname="Dia11" showincustomizationform="True" tooltip="Sexta-Feira" visibleindex="13" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Sáb" fieldname="Dia12" showincustomizationform="True" tooltip="Sábado" visibleindex="14" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-
-                                                <dx:gridviewdatacheckcolumn fieldname="Dia13" showincustomizationform="True" visibleindex="15" caption="Seg" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Ter" fieldname="Dia14" showincustomizationform="True" tooltip="Terça-Feira" visibleindex="16" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Qua" fieldname="Dia15" showincustomizationform="True" tooltip="Quarta-Feira" visibleindex="17" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Qui" fieldname="Dia16" showincustomizationform="True" tooltip="Quinta-Feira" visibleindex="18" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Sex" fieldname="Dia17" showincustomizationform="True" tooltip="Sexta-Feira" visibleindex="19" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Sáb" fieldname="Dia18" showincustomizationform="True" tooltip="Sábado" visibleindex="20" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-
-                                                <dx:gridviewdatacheckcolumn fieldname="Dia19" showincustomizationform="True" visibleindex="21" caption="Seg" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Ter" fieldname="Dia20" showincustomizationform="True" tooltip="Terça-Feira" visibleindex="22" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Qua" fieldname="Dia21" showincustomizationform="True" tooltip="Quarta-Feira" visibleindex="23" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Qui" fieldname="Dia22" showincustomizationform="True" tooltip="Quinta-Feira" visibleindex="24" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Sex" fieldname="Dia23" showincustomizationform="True" tooltip="Sexta-Feira" visibleindex="25" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Sáb" fieldname="Dia24" showincustomizationform="True" tooltip="Sábado" visibleindex="26" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-
-                                                <dx:gridviewdatacheckcolumn caption="Sáb" fieldname="Dia25" showincustomizationform="True" tooltip="Sábado" visibleindex="27" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Sáb" fieldname="Dia26" showincustomizationform="True" tooltip="Sábado" visibleindex="28" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Sáb" fieldname="Dia27" showincustomizationform="True" tooltip="Sábado" visibleindex="29" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-                                                <dx:gridviewdatacheckcolumn caption="Sáb" fieldname="Dia28" showincustomizationform="True" tooltip="Sábado" visibleindex="30" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-
-                                                <dx:gridviewdatacheckcolumn caption="Sáb" fieldname="Dia29" showincustomizationform="True" tooltip="Sábado" visibleindex="31" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-
-                                                <dx:gridviewdatacheckcolumn caption="Sáb" fieldname="Dia30" showincustomizationform="True" tooltip="Sábado" visibleindex="32" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
-
-                                                <dx:gridviewdatacheckcolumn caption="Sáb" fieldname="Dia31" showincustomizationform="True" tooltip="Sábado" visibleindex="32" width="50px">
-                                                    <propertiescheckedit>
-                                                        <displayimagechecked height="16px" url="~/image/check_16.png" width="16px">
-                                                        </displayimagechecked>
-                                                        <displayimageunchecked height="16px" url="~/image/check_no.png" width="16px">
-                                                        </displayimageunchecked>
-                                                        <displayimageundefined height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimageundefined>
-                                                        <displayimagegrayed height="16px" url="~/image/check_isnul.png" width="16px">
-                                                        </displayimagegrayed>
-                                                    </propertiescheckedit>
-                                                    <settings allowautofilter="True" autofiltercondition="Equals" />
-                                                </dx:gridviewdatacheckcolumn>
+                                                <dx:GridViewBandColumn Caption="Pontuação" ShowInCustomizationForm="True" VisibleIndex="2" FixedStyle="Left">
+                                                    <Columns>
+                                                        <dx:GridViewDataTextColumn FieldName="Conforme" ShowInCustomizationForm="True" VisibleIndex="0" Width="65px">
+                                                            <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                                            </PropertiesTextEdit>
+                                                            <Settings AllowAutoFilter="False" />
+                                                            <CellStyle Font-Bold="True" ForeColor="Blue" HorizontalAlign="Center">
+                                                            </CellStyle>
+                                                            <FooterCellStyle Font-Bold="True" ForeColor="Blue" HorizontalAlign="Center">
+                                                            </FooterCellStyle>
+                                                        </dx:GridViewDataTextColumn>
+                                                        <dx:GridViewDataTextColumn FieldName="Validos" ShowInCustomizationForm="True" VisibleIndex="1" Width="60px">
+                                                            <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                                            </PropertiesTextEdit>
+                                                            <Settings AllowAutoFilter="False" />
+                                                            <CellStyle Font-Bold="True" ForeColor="#009900" HorizontalAlign="Center">
+                                                            </CellStyle>
+                                                            <FooterCellStyle Font-Bold="True" ForeColor="#009900" HorizontalAlign="Center">
+                                                            </FooterCellStyle>
+                                                        </dx:GridViewDataTextColumn>
+                                                        <dx:GridViewDataTextColumn FieldName="Peso" ShowInCustomizationForm="True" VisibleIndex="2" Width="50px" Caption="Peso">
+                                                            <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                                            </PropertiesTextEdit>
+                                                            <Settings AutoFilterCondition="Equals" />
+                                                            <CellStyle HorizontalAlign="Center">
+                                                            </CellStyle>
+                                                        </dx:GridViewDataTextColumn>
+                                                        <dx:GridViewDataTextColumn FieldName="Nota" ShowInCustomizationForm="True" VisibleIndex="3" Width="60px">
+                                                            <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                                            </PropertiesTextEdit>
+                                                            <Settings AllowAutoFilter="False" />
+                                                            <CellStyle Font-Bold="True" HorizontalAlign="Center">
+                                                            </CellStyle>
+                                                            <FooterCellStyle Font-Bold="True" HorizontalAlign="Center">
+                                                            </FooterCellStyle>
+                                                        </dx:GridViewDataTextColumn>
+                                                    </Columns>
+                                                </dx:GridViewBandColumn>
 
 
+                                                <dx:GridViewDataCheckColumn FieldName="Dia1" ShowInCustomizationForm="True" VisibleIndex="3" Caption="Seg" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Ter" FieldName="Dia2" ShowInCustomizationForm="True" ToolTip="Terça-Feira" VisibleIndex="4" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Qua" FieldName="Dia3" ShowInCustomizationForm="True" ToolTip="Quarta-Feira" VisibleIndex="5" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Qui" FieldName="Dia4" ShowInCustomizationForm="True" ToolTip="Quinta-Feira" VisibleIndex="6" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Sex" FieldName="Dia5" ShowInCustomizationForm="True" ToolTip="Sexta-Feira" VisibleIndex="7" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Sáb" FieldName="Dia6" ShowInCustomizationForm="True" ToolTip="Sábado" VisibleIndex="8" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
 
-                                                <dx:gridviewdatatextcolumn fieldname="idGrupo" showincustomizationform="True" visible="False" visibleindex="32">
-                                                </dx:gridviewdatatextcolumn>
+                                                <dx:GridViewDataCheckColumn FieldName="Dia7" ShowInCustomizationForm="True" VisibleIndex="9" Caption="Seg" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Ter" FieldName="Dia8" ShowInCustomizationForm="True" ToolTip="Terça-Feira" VisibleIndex="10" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Qua" FieldName="Dia9" ShowInCustomizationForm="True" ToolTip="Quarta-Feira" VisibleIndex="11" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Qui" FieldName="Dia10" ShowInCustomizationForm="True" ToolTip="Quinta-Feira" VisibleIndex="12" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Sex" FieldName="Dia11" ShowInCustomizationForm="True" ToolTip="Sexta-Feira" VisibleIndex="13" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Sáb" FieldName="Dia12" ShowInCustomizationForm="True" ToolTip="Sábado" VisibleIndex="14" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+
+                                                <dx:GridViewDataCheckColumn FieldName="Dia13" ShowInCustomizationForm="True" VisibleIndex="15" Caption="Seg" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Ter" FieldName="Dia14" ShowInCustomizationForm="True" ToolTip="Terça-Feira" VisibleIndex="16" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Qua" FieldName="Dia15" ShowInCustomizationForm="True" ToolTip="Quarta-Feira" VisibleIndex="17" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Qui" FieldName="Dia16" ShowInCustomizationForm="True" ToolTip="Quinta-Feira" VisibleIndex="18" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Sex" FieldName="Dia17" ShowInCustomizationForm="True" ToolTip="Sexta-Feira" VisibleIndex="19" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Sáb" FieldName="Dia18" ShowInCustomizationForm="True" ToolTip="Sábado" VisibleIndex="20" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+
+                                                <dx:GridViewDataCheckColumn FieldName="Dia19" ShowInCustomizationForm="True" VisibleIndex="21" Caption="Seg" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Ter" FieldName="Dia20" ShowInCustomizationForm="True" ToolTip="Terça-Feira" VisibleIndex="22" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Qua" FieldName="Dia21" ShowInCustomizationForm="True" ToolTip="Quarta-Feira" VisibleIndex="23" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Qui" FieldName="Dia22" ShowInCustomizationForm="True" ToolTip="Quinta-Feira" VisibleIndex="24" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Sex" FieldName="Dia23" ShowInCustomizationForm="True" ToolTip="Sexta-Feira" VisibleIndex="25" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Sáb" FieldName="Dia24" ShowInCustomizationForm="True" ToolTip="Sábado" VisibleIndex="26" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+
+                                                <dx:GridViewDataCheckColumn Caption="Sáb" FieldName="Dia25" ShowInCustomizationForm="True" ToolTip="Sábado" VisibleIndex="27" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Sáb" FieldName="Dia26" ShowInCustomizationForm="True" ToolTip="Sábado" VisibleIndex="28" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Sáb" FieldName="Dia27" ShowInCustomizationForm="True" ToolTip="Sábado" VisibleIndex="29" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+                                                <dx:GridViewDataCheckColumn Caption="Sáb" FieldName="Dia28" ShowInCustomizationForm="True" ToolTip="Sábado" VisibleIndex="30" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+
+                                                <dx:GridViewDataCheckColumn Caption="Sáb" FieldName="Dia29" ShowInCustomizationForm="True" ToolTip="Sábado" VisibleIndex="31" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+
+                                                <dx:GridViewDataCheckColumn Caption="Sáb" FieldName="Dia30" ShowInCustomizationForm="True" ToolTip="Sábado" VisibleIndex="32" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
+
+                                                <dx:GridViewDataCheckColumn Caption="Sáb" FieldName="Dia31" ShowInCustomizationForm="True" ToolTip="Sábado" VisibleIndex="32" Width="50px">
+                                                    <PropertiesCheckEdit>
+                                                        <DisplayImageChecked Height="16px" Url="~/image/check_16.png" Width="16px">
+                                                        </DisplayImageChecked>
+                                                        <DisplayImageUnchecked Height="16px" Url="~/image/check_no.png" Width="16px">
+                                                        </DisplayImageUnchecked>
+                                                        <DisplayImageUndefined Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageUndefined>
+                                                        <DisplayImageGrayed Height="16px" Url="~/image/check_isnul.png" Width="16px">
+                                                        </DisplayImageGrayed>
+                                                    </PropertiesCheckEdit>
+                                                    <Settings AllowAutoFilter="True" AutoFilterCondition="Equals" />
+                                                </dx:GridViewDataCheckColumn>
 
 
 
-                                            </columns>
-                                            <settingsbehavior allowfocusedrow="True" columnresizemode="Control" />
-                                            <settingspager mode="ShowAllRecords">
-                                            </settingspager>
-                                            <settings verticalscrollableheight="500" verticalscrollbarmode="Auto" horizontalscrollbarmode="Auto" showfilterrow="True" showgroupfooter="VisibleAlways" showgrouppanel="True" showfooter="True" />
-                                            <settingstext grouppanel="Arraste o cabeçalho de uma coluna abaixo aqui dentro para agrupar" />
-                                            <styles>
-                                                <header horizontalalign="Center">
-                                                </header>
-                                                <alternatingrow backcolor="#F0F0F0">
-                                                </alternatingrow>
-                                                <focusedrow backcolor="Yellow" forecolor="Blue">
-                                                </focusedrow>
-                                                <groupfooter font-bold="True">
-                                                </groupfooter>
-                                            </styles>
-                                        </dx:aspxgridview>
+                                                <dx:GridViewDataTextColumn FieldName="idGrupo" ShowInCustomizationForm="True" Visible="False" VisibleIndex="32">
+                                                </dx:GridViewDataTextColumn>
+
+
+
+                                            </Columns>
+                                            <SettingsBehavior AllowFocusedRow="True" ColumnResizeMode="Control" />
+                                            <SettingsPager Mode="ShowAllRecords">
+                                            </SettingsPager>
+                                            <Settings VerticalScrollableHeight="500" VerticalScrollBarMode="Auto" HorizontalScrollBarMode="Auto" ShowFilterRow="True" ShowGroupFooter="VisibleAlways" ShowGroupPanel="True" ShowFooter="True" />
+                                            <SettingsText GroupPanel="Arraste o cabeçalho de uma coluna abaixo aqui dentro para agrupar" />
+                                            <Styles>
+                                                <Header HorizontalAlign="Center">
+                                                </Header>
+                                                <AlternatingRow BackColor="#F0F0F0">
+                                                </AlternatingRow>
+                                                <FocusedRow BackColor="Yellow" ForeColor="Blue">
+                                                </FocusedRow>
+                                                <GroupFooter Font-Bold="True">
+                                                </GroupFooter>
+                                            </Styles>
+                                        </dx:ASPxGridView>
 
                                         <asp:SqlDataSource ID="dsDados" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="Pontuacao.uspMapaSemanalLoja" SelectCommandType="StoredProcedure">
-                                            <selectparameters>
+                                            <SelectParameters>
                                                 <asp:SessionParameter Name="Ano" SessionField="sANO" DbType="Int16" DefaultValue="2020" />
                                                 <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" DefaultValue="10" />
                                                 <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Int16" DefaultValue="26" />
-                                            </selectparameters>
+                                            </SelectParameters>
                                         </asp:SqlDataSource>
 
 
@@ -1116,112 +1116,124 @@
                     <div id="div_Pontuacao_Mensal">
                         <br />
 
-                        <dx:aspxgridview id="grid_Notas" runat="server" autogeneratecolumns="False" datasourceid="dsGrid_Nota" enabletheming="True" theme="SoftOrange" keyfieldname="idFilial" width="1000px">
+                        <dx:ASPxGridView ID="grid_Notas" runat="server" AutoGenerateColumns="False" DataSourceID="dsGrid_Nota" EnableTheming="True" Theme="SoftOrange" KeyFieldName="idFilial" Width="100%">
 
-                            <toolbars>
-                                <dx:gridviewtoolbar enableadaptivity="true">
-                                    <items>
-                                        <dx:gridviewtoolbaritem command="ExportToXls" text="Exportar para Excel - XLS" tooltip="Versão do Excel 2007 para baixo" />
-                                        <dx:gridviewtoolbaritem command="ExportToXlsx" text="Exportar para Excel - XLSX" tooltip="Versão do Excel 2010 para cima" />
-                                        <dx:gridviewtoolbaritem command="ExportToCsv" text="Exportar para CSV" tooltip="Exporta arquivo sem formatação" />
-                                    </items>
-                                </dx:gridviewtoolbar>
-                            </toolbars>
+                            <Toolbars>
+                                <dx:GridViewToolbar EnableAdaptivity="true">
+                                    <Items>
+                                        <dx:GridViewToolbarItem Command="ExportToXls" Text="Exportar para Excel - XLS" ToolTip="Versão do Excel 2007 para baixo" />
+                                        <dx:GridViewToolbarItem Command="ExportToXlsx" Text="Exportar para Excel - XLSX" ToolTip="Versão do Excel 2010 para cima" />
+                                        <dx:GridViewToolbarItem Command="ExportToCsv" Text="Exportar para CSV" ToolTip="Exporta arquivo sem formatação" />
+                                    </Items>
+                                </dx:GridViewToolbar>
+                            </Toolbars>
 
-                            <columns>
-                                <dx:gridviewdatatextcolumn caption="Filial" fieldname="Descricao" visibleindex="0" fixedstyle="Left" width="200px">
-                                    <headerstyle backcolor="#999999" />
-                                </dx:gridviewdatatextcolumn>
-                                <dx:gridviewdatatextcolumn caption="Jan" fieldname="mes1" visibleindex="1" width="75px">
-                                    <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                    </propertiestextedit>
-                                </dx:gridviewdatatextcolumn>
-                                <dx:gridviewdatatextcolumn caption="Fev " fieldname="mes2" visibleindex="2" width="75px">
-                                    <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                    </propertiestextedit>
-                                </dx:gridviewdatatextcolumn>
-                                <dx:gridviewdatatextcolumn caption="Mar" fieldname="mes3" visibleindex="3" width="75px">
-                                    <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                    </propertiestextedit>
-                                </dx:gridviewdatatextcolumn>
-                                <dx:gridviewdatatextcolumn caption="Abr" fieldname="mes4" visibleindex="4" width="75px">
-                                    <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                    </propertiestextedit>
-                                </dx:gridviewdatatextcolumn>
-                                <dx:gridviewdatatextcolumn caption="1º Quad" fieldname="mes1Q" visibleindex="5" width="85px">
-                                    <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                    </propertiestextedit>
-                                    <headerstyle backcolor="#666666" />
-                                    <cellstyle font-bold="True">
-                                    </cellstyle>
-                                </dx:gridviewdatatextcolumn>
-                                <dx:gridviewdatatextcolumn caption="Mai" fieldname="mes5" visibleindex="6" width="75px">
-                                    <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                    </propertiestextedit>
-                                </dx:gridviewdatatextcolumn>
-                                <dx:gridviewdatatextcolumn caption="Jun" fieldname="mes6" visibleindex="7" width="75px">
-                                    <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                    </propertiestextedit>
-                                </dx:gridviewdatatextcolumn>
-                                <dx:gridviewdatatextcolumn caption="Jul" fieldname="mes7" visibleindex="8" width="75px">
-                                    <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                    </propertiestextedit>
-                                </dx:gridviewdatatextcolumn>
-                                <dx:gridviewdatatextcolumn caption="Ago" fieldname="mes8" visibleindex="9" width="75px">
-                                    <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                    </propertiestextedit>
-                                </dx:gridviewdatatextcolumn>
-                                <dx:gridviewdatatextcolumn caption="2º Quad" fieldname="mes2Q" visibleindex="10" width="90px">
-                                    <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                    </propertiestextedit>
-                                    <headerstyle backcolor="#666666" />
-                                    <cellstyle font-bold="True">
-                                    </cellstyle>
-                                </dx:gridviewdatatextcolumn>
-                                <dx:gridviewdatatextcolumn caption="Set" fieldname="mes9" visibleindex="11" width="75px">
-                                    <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                    </propertiestextedit>
-                                </dx:gridviewdatatextcolumn>
-                                <dx:gridviewdatatextcolumn caption="Out" fieldname="mes10" visibleindex="12" width="75px">
-                                    <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                    </propertiestextedit>
-                                </dx:gridviewdatatextcolumn>
-                                <dx:gridviewdatatextcolumn caption="Nov" fieldname="mes11" visibleindex="13" width="75px">
-                                    <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                    </propertiestextedit>
-                                </dx:gridviewdatatextcolumn>
-                                <dx:gridviewdatatextcolumn caption="Dez" fieldname="mes12" visibleindex="14" width="75px">
-                                    <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                    </propertiestextedit>
-                                </dx:gridviewdatatextcolumn>
-                                <dx:gridviewdatatextcolumn caption="3º Quad" fieldname="mes3Q" visibleindex="15" width="90px">
-                                    <propertiestextedit displayformatstring="{0:n2}" encodehtml="False">
-                                    </propertiestextedit>
-                                    <headerstyle backcolor="#666666" />
-                                    <cellstyle font-bold="True">
-                                    </cellstyle>
-                                </dx:gridviewdatatextcolumn>
-                            </columns>
-                            <settingsexport enableclientsideexportapi="true" excelexportmode="WYSIWYG"></settingsexport>
-                            <settingsbehavior allowfocusedrow="True" />
-                            <settingspager mode="ShowAllRecords">
-                            </settingspager>
-                            <settings horizontalscrollbarmode="Visible" verticalscrollableheight="400" verticalscrollbarmode="Visible" />
-                            <styles>
-                                <header horizontalalign="Center">
-                                </header>
-                                <alternatingrow backcolor="#E2E2E2">
-                                </alternatingrow>
-                            </styles>
+                            <Columns>
+                                <dx:GridViewDataTextColumn Caption="Filial" FieldName="Descricao" VisibleIndex="0" FixedStyle="Left" Width="200px">
+                                    <HeaderStyle BackColor="#999999" />
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn Caption="Jan" FieldName="mes1" VisibleIndex="1" Width="75px">
+                                    <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                    </PropertiesTextEdit>
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn Caption="Fev " FieldName="mes2" VisibleIndex="2" Width="75px">
+                                    <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                    </PropertiesTextEdit>
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn Caption="Mar" FieldName="mes3" VisibleIndex="3" Width="75px">
+                                    <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                    </PropertiesTextEdit>
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn Caption="1º Tri" FieldName="mes1T" VisibleIndex="4" Width="85px">
+                                    <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                    </PropertiesTextEdit>
+                                    <HeaderStyle BackColor="#666666" />
+                                    <CellStyle Font-Bold="True">
+                                    </CellStyle>
+                                </dx:GridViewDataTextColumn>
 
-                        </dx:aspxgridview>
+
+                                <dx:GridViewDataTextColumn Caption="Abr" FieldName="mes4" VisibleIndex="5" Width="75px">
+                                    <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                    </PropertiesTextEdit>
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn Caption="Mai" FieldName="mes5" VisibleIndex="6" Width="75px">
+                                    <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                    </PropertiesTextEdit>
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn Caption="Jun" FieldName="mes6" VisibleIndex="7" Width="75px">
+                                    <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                    </PropertiesTextEdit>
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn Caption="2º Tri" FieldName="mes2T" VisibleIndex="8" Width="90px">
+                                    <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                    </PropertiesTextEdit>
+                                    <HeaderStyle BackColor="#666666" />
+                                    <CellStyle Font-Bold="True">
+                                    </CellStyle>
+                                </dx:GridViewDataTextColumn>
+
+                                <dx:GridViewDataTextColumn Caption="Jul" FieldName="mes7" VisibleIndex="9" Width="75px">
+                                    <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                    </PropertiesTextEdit>
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn Caption="Ago" FieldName="mes8" VisibleIndex="10" Width="75px">
+                                    <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                    </PropertiesTextEdit>
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn Caption="Set" FieldName="mes9" VisibleIndex="11" Width="75px">
+                                    <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                    </PropertiesTextEdit>
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn Caption="3º Tri" FieldName="mes3T" VisibleIndex="12" Width="90px">
+                                    <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                    </PropertiesTextEdit>
+                                    <HeaderStyle BackColor="#666666" />
+                                    <CellStyle Font-Bold="True">
+                                    </CellStyle>
+                                </dx:GridViewDataTextColumn>
+
+                                <dx:GridViewDataTextColumn Caption="Out" FieldName="mes10" VisibleIndex="13" Width="75px">
+                                    <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                    </PropertiesTextEdit>
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn Caption="Nov" FieldName="mes11" VisibleIndex="14" Width="75px">
+                                    <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                    </PropertiesTextEdit>
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn Caption="Dez" FieldName="mes12" VisibleIndex="15" Width="75px">
+                                    <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                    </PropertiesTextEdit>
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn Caption="4º Tri" FieldName="mes4T" VisibleIndex="16" Width="90px">
+                                    <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                    </PropertiesTextEdit>
+                                    <HeaderStyle BackColor="#666666" />
+                                    <CellStyle Font-Bold="True">
+                                    </CellStyle>
+                                </dx:GridViewDataTextColumn>
+
+                            </Columns>
+                            <SettingsExport EnableClientSideExportAPI="true" ExcelExportMode="WYSIWYG"></SettingsExport>
+                            <SettingsBehavior AllowFocusedRow="True" />
+                            <SettingsPager Mode="ShowAllRecords">
+                            </SettingsPager>
+                            <Settings HorizontalScrollBarMode="Visible" VerticalScrollableHeight="400" VerticalScrollBarMode="Visible" />
+                            <Styles>
+                                <Header HorizontalAlign="Center">
+                                </Header>
+                                <AlternatingRow BackColor="#E2E2E2">
+                                </AlternatingRow>
+                            </Styles>
+
+                        </dx:ASPxGridView>
 
 
 
                         <asp:SqlDataSource ID="dsGrid_Nota" runat="server" ConnectionString="<%$ ConnectionStrings:gerCheckListConnectionString %>" SelectCommand="uspBuscarNotaLoja_Mes_a_Mes_TodasLojas" SelectCommandType="StoredProcedure">
-                            <selectparameters>
+                            <SelectParameters>
                                 <asp:SessionParameter Name="Ano" SessionField="sANO" Type="Int16" />
-                            </selectparameters>
+                            </SelectParameters>
                         </asp:SqlDataSource>
 
 
@@ -1230,9 +1242,9 @@
 
 
 
-                </dx:panelcontent>
-            </panelcollection>
-        </dx:aspxcallbackpanel>
+                </dx:PanelContent>
+            </PanelCollection>
+        </dx:ASPxCallbackPanel>
 
 
 

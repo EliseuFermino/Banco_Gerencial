@@ -74,7 +74,7 @@ Partial Class Default2
                             Response.Redirect("~/MemberPages/menuPrincipal_Ricardo.aspx")
                     End Select
                 End If
-            Case "processos"
+            Case "processos", "controle_caminhao_ceasa"
                 Response.Redirect("~/MemberPages/menuPrincipal_Basic.aspx")
             Case Else
                 Select Case userName

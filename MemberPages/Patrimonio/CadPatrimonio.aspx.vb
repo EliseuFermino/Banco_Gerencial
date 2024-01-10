@@ -11,24 +11,23 @@ Partial Class MemberPages_Patrimonio_CadPatrimonio
         If Not IsPostBack Then
 
             oVem.AtualizarEstatisticaPrograma(330, User.Identity.Name)
-            cboFilial.Visible_cboCorporacao = False
 
             Dim DiaOntem As Date
 
-            DiaOntem = DateAndTime.DateAdd(DateInterval.Day, -1, Date.Today)
+                DiaOntem = DateAndTime.DateAdd(DateInterval.Day, -1, Date.Today)
 
-            'cboDia_Inicio.Date = Today
-            'cboDia_Inicio.MinDate  = DiaOntem
+                'cboDia_Inicio.Date = Today
+                'cboDia_Inicio.MinDate  = DiaOntem
 
-            txtEAN.Attributes.Add("autocomplete", "off")
-            txtPreco.Attributes.Add("autocomplete", "off")
-            txtQtde.Attributes.Add("autocomplete", "off")
+                txtEAN.Attributes.Add("autocomplete", "off")
+                txtPreco.Attributes.Add("autocomplete", "off")
+                txtQtde.Attributes.Add("autocomplete", "off")
 
-            Enabled_Fields_False()
+                Enabled_Fields_False()
 
-            cboDia_Inicio.Date = Today 
+                cboDia_Inicio.Date = Today
 
-        End If
+            End If
     End Sub
 
     Private Sub BuscarProduto(ByVal iEAN As Int64)
