@@ -134,7 +134,7 @@
             
             <div class="row">
                 
-                <div class="col-md-3  ">                    
+                <div class="col-md-6  ">                    
                     <uc1:wucListaLojasComCorporacao runat="server" ID="cboFilial" />
                 </div>
 

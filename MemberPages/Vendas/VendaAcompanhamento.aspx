@@ -1115,6 +1115,7 @@
                             SelectCommandType="StoredProcedure">
                             <SelectParameters>
                                 <asp:SessionParameter Name="dia" SessionField="sDIA" DbType="Date" />
+                                <asp:SessionParameter Name="idUsuario" SessionField="sUSUARIO" DbType="String" />
 
                             </SelectParameters>
                         </asp:SqlDataSource>
@@ -1292,6 +1293,7 @@
                             <SelectParameters>
                                 <asp:SessionParameter DbType="Date" Name="Dia" SessionField="sDIA" />
                                 <asp:SessionParameter DbType="Int16" DefaultValue="99" Name="idFilial" SessionField="sFILIAL_LUCRO_NEGATIVO" />
+                                <asp:SessionParameter Name="idUsuario" SessionField="sUSUARIO" DbType="String" />
                             </SelectParameters>
                         </asp:SqlDataSource>
 
@@ -1455,6 +1457,7 @@
                             <SelectParameters>
                                 <asp:SessionParameter DbType="Date" Name="Dia" SessionField="sDIA" />
                                 <asp:SessionParameter DbType="Int16" DefaultValue="99" Name="idFilial" SessionField="sFILIAL_LUCRO_NEGATIVO" />
+                                <asp:SessionParameter Name="idUsuario" SessionField="sUSUARIO" DbType="String" />
                             </SelectParameters>
                         </asp:SqlDataSource>
 
@@ -2254,6 +2257,7 @@
                             SelectCommandType="StoredProcedure">
                             <SelectParameters>
                                 <asp:SessionParameter Name="dia" SessionField="sDIA" DbType="Date" />
+                                <asp:SessionParameter Name="idUsuario" SessionField="sUSUARIO" DbType="String" />
 
                             </SelectParameters>
                         </asp:SqlDataSource>
@@ -2713,6 +2717,7 @@
                             SelectCommandType="StoredProcedure">
                             <SelectParameters>
                                 <asp:SessionParameter Name="dia" SessionField="sDIA" DbType="Date" />
+                                <asp:SessionParameter Name="idUsuario" SessionField="sUSUARIO" DbType="String" />
 
                             </SelectParameters>
                         </asp:SqlDataSource>
@@ -3171,6 +3176,7 @@
                             SelectCommandType="StoredProcedure">
                             <SelectParameters>
                                 <asp:SessionParameter Name="dia" SessionField="sDIA" DbType="Date" />
+                                <asp:SessionParameter Name="idUsuario" SessionField="sUSUARIO" DbType="String" />
 
                             </SelectParameters>
                         </asp:SqlDataSource>

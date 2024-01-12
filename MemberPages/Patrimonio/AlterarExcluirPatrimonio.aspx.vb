@@ -11,8 +11,6 @@ Partial Class MemberPages_Patrimonio_CadPatrimonio
         If Not IsPostBack Then
             cboFilial.AutoPostBack = True
             oVem.AtualizarEstatisticaPrograma(243, User.Identity.Name)
-            cboFilial.Visible_cboCorporacao = False
-            cboFilial.AutoPostBack = True
             Session("sFILIAL") = 3
             gridPatrimonio.DataBind()
         End If

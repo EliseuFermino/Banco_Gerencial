@@ -9,30 +9,18 @@ Partial Class MemberPages_Quebras_Validade_CadastroValidade
 
     Dim oVem As New VendaEmpresaMes
     Dim oPro As New Projeto
+    Dim selects As New preencheSelects
+    Private vDepartamento As String
+    Private vFilial As String
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Not IsPostBack Then
 
-            Dim setor As String
-
+            vFilial = oPro.BuscarLocalDoUsuario(Page.User.Identity.Name)
+            vDepartamento = LCase(Trim(oPro.Buscar_Departamento_Usuario(Page.User.Identity.Name)))
             oVem.AtualizarEstatisticaPrograma(426, User.Identity.Name)
-            cboFilial.Visible_cboCorporacao = False
-
-            cboDia.Date = DateAndTime.Today()
-            cboDia.AutoPostBack = True
-
-            txtHorariaChegada.Attributes.Add("autocomplete", "off")
-            txtHorariaSaiada.Attributes.Add("autocomplete", "off")
-
-            cboFilial.Caption_Filial = ""
-
-            setor = oPro.BuscarDepartamentoDoUsuario(Page.User.Identity.Name)
-
-            'If setor = "Controladoria" Then
-            '    cboDia.Enabled = True
-            'Else
-            '    cboDia.Enabled = False
-            'End If
+            txtData.Value = DateTime.Now()
+            selects.Define_Filial(3, vDepartamento, User.Identity.Name, vFilial, selFilial)
 
             Atualizar()
 
@@ -41,7 +29,7 @@ Partial Class MemberPages_Quebras_Validade_CadastroValidade
     End Sub
 
     Private Sub Atualizar()
-        Session("sDIA") = cboDia.Date
+        Session("sDIA") = txtData.Value
         grid_Dados.DataBind()
     End Sub
 
@@ -51,21 +39,24 @@ Partial Class MemberPages_Quebras_Validade_CadastroValidade
         End If
     End Sub
 
-    Protected Sub Page_PreRenderComplete(sender As Object, e As EventArgs) Handles Me.PreRenderComplete
-        If Not IsPostBack Then
-            txtHorariaChegada.Focus()
-        End If
-    End Sub
-
     Protected Sub btnSalvar_Click(sender As Object, e As EventArgs) Handles btnSalvar.Click
 
-        If cboDia.Text = Nothing Then
-            oVem.UserMsgBox(Me, "Você deve informar o 'Vencimento'?")
-            txtHorariaChegada.Focus()
+        If (txtEntrada.Value = "" Or txtSaida.Value = "") Then
+            ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertaCampos('Preencha os campos corretamente antes de prosseguir!');", True)
+            Exit Sub
+        End If
+
+        If (txtEntrada.Value > txtSaida.Value) Then
+            ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertaCampos('Atenção! O Horário de saída não pode ser menor que o de entrada!');", True)
             Exit Sub
         End If
 
         Call Salvar()
+
+        grid_Dados.DataBind()
+
+        ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess();", True)
+
     End Sub
 
 
@@ -77,29 +68,28 @@ Partial Class MemberPages_Quebras_Validade_CadastroValidade
         comando.CommandType = CommandType.StoredProcedure
 
         comando.Parameters.Add(New SqlParameter("@Dia", SqlDbType.Date))
-        comando.Parameters("@Dia").Value = cboDia.Date
+        comando.Parameters("@Dia").Value = txtData.Value
 
         comando.Parameters.Add(New SqlParameter("@idFilial", SqlDbType.SmallInt))
-        comando.Parameters("@idFilial").Value = cboFilial.CallFilial
+        comando.Parameters("@idFilial").Value = selFilial.SelectedValue
 
         comando.Parameters.Add(New SqlParameter("@horaInicial", SqlDbType.Time))
-        comando.Parameters("@horaInicial").Value = txtHorariaChegada.Text
+        comando.Parameters("@horaInicial").Value = txtEntrada.Value
 
         comando.Parameters.Add(New SqlParameter("@horaFinal", SqlDbType.Time))
-        comando.Parameters("@horaFinal").Value = txtHorariaSaiada.Text
+        comando.Parameters("@horaFinal").Value = txtSaida.Value
 
         comando.Parameters.Add(New SqlParameter("@Usuario", SqlDbType.VarChar))
         comando.Parameters("@Usuario").Value = Page.User.Identity.Name
 
         comando.Parameters.Add(New SqlParameter("@Obs", SqlDbType.VarChar))
-        comando.Parameters("@Obs").Value = txtObs.Value.ToString()
+        comando.Parameters("@Obs").Value = txtObs.Value.ToString().ToUpper()
 
         Try
             con.Open()
             gravou = comando.ExecuteNonQuery    'Executa o comando, porém não retorna nenhum dado.
             oVem.UserMsgBox(Me, "O Cadastro foi salvo com sucesso!!!")
-            LimparDados()
-            txtHorariaChegada.Focus()
+            'LimparDados()
         Catch ex As Exception
             Select Case Err.Number
                 Case 5
@@ -117,15 +107,13 @@ Partial Class MemberPages_Quebras_Validade_CadastroValidade
         Return gravou   'Toda função tem retornar alguma coisa
         'Neste caso o retorno será dados pela variavel "gavou"
 
-        grid_Dados.DataBind()
-
     End Function
 
-    Private Sub LimparDados()
-        txtHorariaChegada.Text = ""
-        txtHorariaSaiada.Text = ""
-
-    End Sub
+    'Private Sub LimparDados()
+    '    txtSaida.Value = ""
+    '    txtEntrada.Value = ""
+    '    txtObs.Value = ""
+    'End Sub
     Protected Sub ASPxGridView1_HtmlRowPrepared(sender As Object, e As ASPxGridViewTableRowEventArgs) Handles grid_Dados.HtmlRowPrepared
 
         Dim NomeColuna As String = e.GetValue("Entrada")
@@ -137,7 +125,7 @@ Partial Class MemberPages_Quebras_Validade_CadastroValidade
 
     End Sub
 
-    Protected Sub cboDia_DateChanged(sender As Object, e As EventArgs) Handles cboDia.DateChanged
+    Protected Sub txtData_DateChanged(sender As Object, e As EventArgs)
         Atualizar()
     End Sub
 End Class
