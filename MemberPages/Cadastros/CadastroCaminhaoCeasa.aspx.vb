@@ -16,10 +16,12 @@ Partial Class MemberPages_Quebras_Validade_CadastroValidade
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Not IsPostBack Then
 
-            vFilial = oPro.BuscarLocalDoUsuario(Page.User.Identity.Name)
+            vFilial = oPro.Buscar_Filial_Usuario(Page.User.Identity.Name)
+            'vFilial = oPro.BuscarLocalDoUsuario(Page.User.Identity.Name)
             vDepartamento = LCase(Trim(oPro.Buscar_Departamento_Usuario(Page.User.Identity.Name)))
             oVem.AtualizarEstatisticaPrograma(426, User.Identity.Name)
             txtData.Value = DateTime.Now()
+
             selects.Define_Filial(3, vDepartamento, User.Identity.Name, vFilial, selFilial)
 
             Atualizar()

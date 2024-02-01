@@ -1,10 +1,13 @@
 ﻿Imports System.Data
+Imports System.Data.OleDb
 Imports System.Data.SqlClient
+Imports System.IO
 Imports System.Security.Cryptography
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports DevExpress.CodeParser
 Imports DevExpress.ExpressApp
 Imports DevExpress.Spreadsheet
+Imports DevExpress.Web.ASPxHtmlEditor.Internal
 Imports DevExpress.Web.Demos
 Imports Resources
 
@@ -27,6 +30,8 @@ Partial Class MemberPages_Cadastros_usersControl
             oProj.BuscarLocalDoUsuario(Page.User.Identity.Name)
             vDepartamento = LCase(Trim(oProj.Buscar_Departamento_Usuario(Page.User.Identity.Name)))
             Session("sDEPARTAMENTO") = vDepartamento
+
+            'LerCsvConfrec()
 
             carregaSelects()
 
@@ -80,6 +85,8 @@ Partial Class MemberPages_Cadastros_usersControl
                     Mountquery += " And (d.Depto like '%" & txtParamConsulta.Value.ToLower() & "%' Or a.Depto like '%" & txtParamConsulta.Value.ToLower() & "%')"
             End Select
 
+            Mountquery += " And a.Ativo = 1 Order By a.idfilial"
+
             con.Open()
             command = New SqlCommand(Mountquery, con)
             Dim idr As IDataReader = command.ExecuteReader()
@@ -100,6 +107,7 @@ Partial Class MemberPages_Cadastros_usersControl
         selects.preencherPerfis("Select DeptoID, Depto From [dbo].[aspnet_UsersDepto]", selPerfilNewUser)
         selects.preencherPerfis("Select DeptoID, Depto From [dbo].[aspnet_UsersDepto]", selPerfilAlterUser)
         selects.preencherPerfis("Select DeptoID, Depto From [dbo].[aspnet_UsersDepto]", selPerfilDuplicar)
+        preencherUsers("Select	Distinct id_usuario, desc_usuario From usu_ParamAcesso_Usuario Order By id_usuario", selUserBI)
 
         selects.Define_Corporacao(Session("sDEPARTAMENTO"), selTipo)
         selects.Define_Corporacao(Session("sDEPARTAMENTO"), selTipoAlter)
@@ -107,6 +115,38 @@ Partial Class MemberPages_Cadastros_usersControl
 
         selects.Define_Filial(selTipo.SelectedItem.Value, Session("sDEPARTAMENTO"), User.Identity.Name, Session("sFILIAL"), selFilial)
         selects.Define_Filial(selTipoAlter.SelectedItem.Value, Session("sDEPARTAMENTO"), User.Identity.Name, Session("sFILIAL"), selFilialAlter)
+
+    End Sub
+
+    Private Sub preencherUsers(ByVal iStr As String, ByRef sSelect As DropDownList)
+        Dim selectSQL As String = iStr
+        Dim con As New SqlConnection(Conexao.gerBI_str)
+        Dim cmd As New SqlCommand(selectSQL, con)
+
+        ' Open the connection
+        con.Open()
+
+        Try
+            ' Define the binding
+            sSelect.DataSource = cmd.ExecuteReader()
+            sSelect.DataTextField = "desc_usuario"
+            sSelect.DataValueField = "id_usuario"
+
+            ' Activate the binding.
+            sSelect.DataBind()
+            con.Close()
+
+        Catch ex As Exception
+            'lblError.Text = iStr
+        Finally
+            con.Close()
+        End Try
+
+        sSelect.Items.Insert(0, New ListItem("", "0"))
+        sSelect.SelectedIndex = -1
+        sSelect.ClearSelection()
+        sSelect.SelectedItem.Selected = False
+
 
     End Sub
 
@@ -174,6 +214,11 @@ Partial Class MemberPages_Cadastros_usersControl
 
         If retProc Then
             ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess('new_user');", True)
+            txtFirstName.Value = ""
+            txtLastName.Value = ""
+            txtLoginNew.Value = ""
+            txtMatricula.Value = ""
+            txtEmail.Value = ""
         Else
             ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertErro('new_user');", True)
         End If
@@ -490,6 +535,79 @@ Partial Class MemberPages_Cadastros_usersControl
 
     End Sub
 
+    Protected Sub btnFiltrarUserBI_Click(sender As Object, e As EventArgs)
+        divTreeBI.Visible = True
+        Dim ID = selUserBI.SelectedValue.ToLower()
+        Dim dtLoja As DataTable = Me.GetData("gerBIConnectionString", "Select	filial as ID, FilialLista As Text , Case When (Select Top 1 1 From usu_ParamAcesso b Where b.id_loja = a.Filial and id_usuario = '" + ID.ToString() + "') = 1 Then 'true' Else 'false' End as Checked From [gerCadastros].[Cadastros].[tblCadFiliais] a Where (idLojasCDs = 1 Or IsPosto = 1 Or isHipermais = 1 Or isAtacarejo = 1)")
+        Dim dtSecao As DataTable = Me.GetData("gerBIConnectionString", "Select	idProdutoSecao as ID, descProdutoSecaoLista as Text, Case When (Select Top 1 1 From usu_ParamAcesso b Where b.id_secao = a.idProdutoSecao and id_usuario = '" + ID.ToString() + "') = 1 Then 'true' Else 'false' End as Checked From DW.dbo.DimProdutos_Secao a Where Exists (Select Top 1 1 From DW.dbo.DimProdutos x Where a.idProdutoSecao = x.idProdutoSecao)")
+        Me.PopulateTreeViewNodesBI(dtLoja, 0, trwLoja)
+        Me.PopulateTreeViewNodesBI(dtSecao, 0, trwSecao)
+
+        ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "showWindow('bi_param');", True)
+    End Sub
+
+    Private Function callProcBI(user As String, idLoja As Integer, idSecao As Integer, action As Integer) As Boolean
+        Dim ret As Boolean = False
+        Dim constr As String = ConfigurationManager.ConnectionStrings("gerBIConnectionString").ConnectionString
+        Dim con As New SqlConnection(constr)
+        Dim comando As New SqlCommand("[uspMunutencaoParamAcessoBI]", con)
+        comando.CommandType = CommandType.StoredProcedure
+
+        comando.Parameters.Add(New SqlParameter("@User", SqlDbType.VarChar))
+        comando.Parameters.Add(New SqlParameter("@idLoja", SqlDbType.Int))
+        comando.Parameters.Add(New SqlParameter("@idSecao", SqlDbType.Int))
+        comando.Parameters.Add(New SqlParameter("@UserAction", SqlDbType.VarChar))
+        comando.Parameters.Add(New SqlParameter("@Action", SqlDbType.Int))
+
+        comando.Parameters("@User").Value = user
+        comando.Parameters("@idLoja").Value = idLoja
+        comando.Parameters("@idSecao").Value = idSecao
+        comando.Parameters("@UserAction").Value = Page.User.Identity.Name.ToString()
+        comando.Parameters("@Action").Value = action
+
+        Try
+            con.Open()
+            comando.ExecuteNonQuery()
+            ret = True
+        Catch ex As Exception
+            ret = False
+        Finally
+            con.Close()
+            comando.Dispose()
+        End Try
+
+        Return ret
+
+    End Function
+
+    Protected Sub btnSalvarParamBI_Click(sender As Object, e As EventArgs)
+        callProcBI(selUserBI.SelectedValue, 0, 0, 2)
+        callProcBI(selUserBI.SelectedValue, 0, 0, 2)
+        For Each n As TreeNode In trwLoja.CheckedNodes
+            retProc = callProcBI(selUserBI.SelectedValue, n.Value, 0, 1)
+
+            If Not retProc Then
+                ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertErro('bi_param');", True)
+                Return
+            End If
+        Next
+
+        For Each n As TreeNode In trwSecao.CheckedNodes
+            retProc = callProcBI(selUserBI.SelectedValue, 0, n.Value, 1)
+
+            If Not retProc Then
+                ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertErro('bi_param');", True)
+                Return
+            End If
+        Next
+
+        ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "alertSucess('bi_param');", True)
+    End Sub
+
+    Protected Sub btnAtualizarNovoUsuario_Click(sender As Object, e As EventArgs)
+        preencherUsers("Select	Distinct id_usuario, desc_usuario From usu_ParamAcesso_Usuario Order By id_usuario", selUserBI)
+        ScriptManager.RegisterStartupScript(sender, Me.GetType(), "Script", "showWindow('bi_param');", True)
+    End Sub
 #End Region
 
 #Region "TreeView Actions"
@@ -520,7 +638,7 @@ Partial Class MemberPages_Cadastros_usersControl
 
             If IsNothing(login) Then
                 If tipo = 1 Then
-                    dtChild = Me.GetData("LocalSqlServer", "Select a.* , Case When (Select Top 1 1 From [dbo].[aspnet_UsersDeptoItems] b Where a.ID = b.idMenuH and b.DeptoId = " + id.ToString() + ") = 1 Then 'true' Else 'false' End as Checked From Menu.Dados a  Where ParentID = " + child.Value + "order by MenuOrdem")
+                    dtChild = Me.GetData("LocalSqlServer", "Select a.* , Case When (Select Top 1 1 From [dbo].[aspnet_UsersDeptoItems] b Where a.ID = b.idMenuH And b.DeptoId = " + id.ToString() + ") = 1 Then 'true' Else 'false' End as Checked From Menu.Dados a  Where ParentID = " + child.Value + "order by MenuOrdem")
                 Else
                     dtChild = Me.GetData("LocalSqlServer", "Select Answer as Text, id, DescPGR , Case When (Select Top 1 1 From [dbo].[aspnet_UsersDeptoItems] b Where a.ID = b.idMenuV and b.DeptoId = " + id.ToString() + ") = 1 Then 'true' Else 'false' End as Checked From Menu.tblProgramas a Where ParentID = " + child.Value + "order by Sort")
                 End If
@@ -592,6 +710,30 @@ Partial Class MemberPages_Cadastros_usersControl
 
     End Sub
 
+    Private Sub PopulateTreeViewNodesBI(dtParent As DataTable, parentId As Integer, tree As WebControls.TreeView)
+        tree.Nodes.Clear()
+
+        For Each row As DataRow In dtParent.Rows
+            Dim child As New TreeNode() With {
+             .Text = "  " + row("Text").ToString(),
+             .Value = row("ID").ToString(),
+             .ShowCheckBox = True,
+             .Expanded = False,
+             .SelectAction = TreeNodeSelectAction.None
+            }
+
+            If row("Checked").ToString() = "true" Then
+                child.Checked = True
+            Else
+                child.Checked = False
+            End If
+
+            child.Target = row("Text").ToString()
+            tree.Nodes.Add(child)
+
+        Next
+    End Sub
+
     Private Function GetData(conString As String, query As String) As DataTable
         Dim dt As New DataTable()
         Dim constr As String = ConfigurationManager.ConnectionStrings(conString).ConnectionString
@@ -609,6 +751,9 @@ Partial Class MemberPages_Cadastros_usersControl
     End Function
 
 #End Region
+
+
+
 
 End Class
 

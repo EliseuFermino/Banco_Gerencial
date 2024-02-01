@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Gestão de Usuários" Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="usersControl.aspx.vb" Inherits="MemberPages_Cadastros_usersControl" %>
+﻿<%@ Page Title="Gestão do Sistema" Language="VB" MasterPageFile="~/MemberPages/Site.master" AutoEventWireup="false" CodeFile="usersControl.aspx.vb" Inherits="MemberPages_Cadastros_usersControl" %>
 
 <%@ Register Assembly="DevExpress.Web.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
@@ -10,7 +10,6 @@
     <script src="../../assets/bootstrap-5.0.2-dist/js/sidebars.js"></script>
     <link href="../../assets/bootstrap-5.0.2-dist/css/sidebars.css" rel="stylesheet" />
     <script src="../../assets/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
-
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
@@ -58,7 +57,10 @@
             document.getElementById('MainContent_divMenuExcecao').style.display = 'none';
             document.getElementById('MainContent_divNewRole').style.display = 'none';
             document.getElementById('MainContent_divParamMenu').style.display = 'none';
-            document.getElementById('MainContent_divNewMenu').style.display = 'none';
+            document.getElementById('MainContent_divNewMenuH').style.display = 'none';
+            document.getElementById('MainContent_divNewMenuV').style.display = 'none';
+            document.getElementById('MainContent_divUsersBI').style.display = 'none';
+            document.getElementById('MainContent_divParamBI').style.display = 'none';
 
             if (url == "new_user") {
                 document.getElementById('MainContent_divNewUser').style.display = 'block';
@@ -84,8 +86,16 @@
                 document.getElementById('MainContent_divParamMenu').style.display = 'block';
             }
 
-            if (url == "new_menu") {
-                document.getElementById('MainContent_divNewMenu').style.display = 'block';
+            if (url == "new_menuH") {
+                document.getElementById('MainContent_divNewMenuH').style.display = 'block';
+            }
+
+            if (url == "new_bi_user") {
+                document.getElementById('MainContent_divUsersBI').style.display = 'block';
+            }
+
+            if (url == "bi_param") {
+                document.getElementById('MainContent_divParamBI').style.display = 'block';
             }
         };
 
@@ -266,6 +276,7 @@
         };
 
     </script>
+
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="Server">
@@ -274,7 +285,7 @@
             <div class="row flex-nowrap">
 
                 <%--Menu lateral--%>
-                <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
+                <div class="col-auto px-0">
                     <div class="flex-shrink-0 p-3 bg-white">
                         <ul class="list-unstyled ps-0">
                             <li class="mb-3">
@@ -318,7 +329,26 @@
                                     <li>
                                         <div class="collapse show" id="menu-collapse" style="">
                                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                                <li><a onclick="javascript:showWindow('new_menu');" href="#" class="link-dark rounded">Cadastrar Menu</a></li>
+                                                <li><a onclick="javascript:showWindow('new_menuH');" href="#" class="link-dark rounded">Principal (Horizontal)</a></li>
+                                            </ul>
+                                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" style="display: none">
+                                                <li><a onclick="javascript:showWindow('new_menuV');" href="#" style="pointer-events: none" class="link-dark rounded disabled">Interno (Vertical) </a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="border-top my-3"></li>
+                            <li class="mb-1" style="display: block">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    <li>Acesso BI</li>
+                                    <li>
+                                        <div class="collapse show" id="acesso-collapse" style="">
+                                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                                <li><a onclick="javascript:showWindow('new_bi_user');" href="#" class="link-dark rounded">Usuário</a></li>
+                                            </ul>
+                                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                                <li><a onclick="javascript:showWindow('bi_param');" href="#" class="link-dark rounded">Lojas / Seções</a></li>
                                             </ul>
                                         </div>
                                     </li>
@@ -328,7 +358,7 @@
                     </div>
                 </div>
 
-                <div class="col text-center bg-white border-left">
+                <div class="col-auto col-md-10 text-center bg-white border-left">
                     <%--Contexto Aqui--%>
                     <aspxcallbackpanel id="cbPanel" runat="server" theme="Metropolis" clientinstancename="cbPanel" settingsloadingpanel-text="Atualizando">
                         <panelcollection>
@@ -354,7 +384,7 @@
                                         <br />
                                         <br />
                                         <br />
-                                        <h2>Gestão de usuários - Banco Gerencial</h2>
+                                        <h2>Gestão do Sistema - Banco Gerencial</h2>
                                     </div>
                                 </div>
 
@@ -662,7 +692,7 @@
                                 </asp:Panel>
 
                                 <%--Adicionar Menu - Exceção--%>
-                                <asp:Panel ID="panMenuExcecao" runat="server" CssClass="justify-content-center">
+                                <asp:Panel ID="panMenuExcecao" runat="server" CssClass="justify-content-center" DefaultButton="btnSalvarEx">
                                     <div class="container justify-content-center" runat="server" id="divMenuExcecao" style="padding: 15px 15px 15px 15px; display: none">
 
                                         <hr class="mb-3">
@@ -845,118 +875,334 @@
                                 </asp:Panel>
 
                                 <%--Menu--%>
-                                <%--Cadastro de Menu--%>
-                                <asp:Panel ID="pnlNewMenu" runat="server" CssClass="justify-content-center">
-                                    <div class="container justify-content-center" runat="server" id="divNewMenu" style="padding: 15px 15px 15px 15px; display: none">
+                                <%--Menu Principal--%>
+                                <asp:Panel ID="pnlNewMenuH" runat="server" CssClass="justify-content-center align-center" Width="95%">
+                                    <div class="container justify-content-center" runat="server" id="divNewMenuH" style="padding: 15px 15px 15px 15px; display: none; margin: 5px 20px 5px 20px !important">
                                         <hr class="mb-3">
                                         <br />
-                                        <div class="col-md-12">
-                                            <div class="row justify-content-between">
-                                                <div class="col-4 justify-content-center" style="min-width: 100px">
-                                                    <span class="col-auto input-group-text justify-content-center">Tipo</span>
-                                                    <div class="justify-content-center text-center">
-                                                       <div class="form-control" style="padding-top: 10px">
-                                                            <div class="form-check form-check-inline form-switch">
-                                                                <label class="form-check-label" for="rdlMenu">Barra de Menu</label>
-                                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="rdlMenuBarra" runat="server" value="1" checked />
-                                                            </div>
-                                                            <div class="form-check form-check-inline form-switch">
-                                                                <label class="form-check-label" for="rdlMenu">Menu Interno</label>
-                                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="rdlMenuInterno" runat="server" value="2" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="input-group input-group xs" style="max-height: 30px">
-                                                        <div class="input-group-prepend xs">
-                                                            <div class="input-group-prepend xs">
-                                                                <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Matrícula</span>
-                                                            </div>
-                                                        </div>
-                                                        <input type="number" class="form-control justify-content-center text-center" maxlength="50" id="Number1" runat="server">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="input-group input-group xs" style="max-height: 30px">
-                                                        <div class="input-group-prepend xs">
-                                                            <div class="input-group-prepend xs">
-                                                                <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Perfil</span>
-                                                            </div>
-                                                        </div>
-                                                        <asp:DropDownList class="form-control text-center" ID="DropDownList1" runat="server" DataTextField="Desc" AutoPostBack="false"></asp:DropDownList>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <br />
-                                            <div class="row justify-content-between">
-                                                <div class="col-4">
-                                                    <div class="input-group input-group xs" style="max-height: 30px">
-                                                        <div class="input-group-prepend xs">
-                                                            <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Nome</span>
-                                                        </div>
-                                                        <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="Text1" runat="server">
-                                                    </div>
-                                                </div>
-                                                <div class="col-8">
-                                                    <div class="input-group input-group xs" style="max-height: 30px">
-                                                        <div class="input-group-prepend xs">
-                                                            <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Sobrenome</span>
-                                                        </div>
-                                                        <input type="text" class="form-control justify-content-center text-center" maxlength="100" id="Text2" runat="server">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <br />
-                                            <div class="row justify-content-between">
-                                                <div class="col-4">
-                                                    <div class="input-group input-group xs" style="max-height: 30px">
-                                                        <div class="input-group-prepend xs">
-                                                            <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Login</span>
-                                                        </div>
-                                                        <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="Text3" runat="server">
-                                                    </div>
-                                                </div>
-                                                <div class="col-8">
-                                                    <div class="input-group input-group xs" style="max-height: 30px">
-                                                        <div class="input-group-prepend xs">
-                                                            <div class="input-group-prepend xs">
-                                                                <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Email</span>
-                                                            </div>
-                                                        </div>
-                                                        <input type="text" class="form-control justify-content-center text-center" maxlength="50" id="Text4" runat="server">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <br />
-                                            <div class="row justify-content-between text-center">
-                                                <div class="col-2 justify-content-center" style="min-width: 100px">
-                                                    <span class="col-auto input-group-text justify-content-center">É loja:</span>
-                                                    <div class="form-control justify-content-center text-center">
-                                                        <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" id="Checkbox1" runat="server" checked>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-2 justify-content-center text-center">
-                                                    <span class="col-auto input-group-text justify-content-center">Tipo</span>
-                                                    <asp:DropDownList class="form-control text-center" ID="DropDownList2" runat="server" DataTextField="Desc" AutoPostBack="true" OnSelectedIndexChanged="selTipo_SelectedIndexChanged"></asp:DropDownList>
-                                                </div>
-                                                <div class="col-8 justify-content-center text-center">
-                                                    <span class="col-auto input-group-text justify-content-center">Filial</span>
-                                                    <asp:DropDownList class="form-control " ID="DropDownList3" runat="server" DataTextField="Desc"></asp:DropDownList>
-                                                </div>
-                                            </div>
-                                            <br />
-                                            <div class="row justify-content-sm-center">
-                                                <asp:Button runat="server" OnClick="btnSubmit_Click" Width="200px" class="btn btn-primary btn-md" Text="Cadastrar" ID="Button1" />
-                                            </div>
-                                            <br />
+                                        <div class="col-auto">
+
+                                            <dx:ASPxGridView ID="gridMenusHorizontal" runat="server" Font-Size="X-Small" CssClass="justify-content-center" AutoGenerateColumns="False" KeyFieldName="ID" ClientInstanceName="gridPerc" DataSourceID="SqlDataSource1" EnableTheming="true" Theme="MaterialCompact">
+
+                                                <ClientSideEvents BatchEditChangesSaving="function(s, e) {}"
+                                                    BatchEditConfirmShowing="function(s, e) {}"
+                                                    BatchEditEndEditing="function(s, e) {}"
+                                                    EndCallback="function(s, e) {}" />
+                                                <SettingsBehavior ConfirmDelete="True" />
+                                                <Settings HorizontalScrollBarMode="Visible" ShowFilterRow="True" />
+                                                <SettingsResizing ColumnResizeMode="Control" />
+                                                <SettingsDataSecurity AllowDelete="True" AllowInsert="True" AllowEdit="true" />
+                                                <SettingsText CommandBatchEditCancel="Cancelar" CommandBatchEditPreviewChanges="Alterações" CommandBatchEditUpdate="Salvar" CommandNew="Novo" />
+                                                <Columns>
+                                                    <dx:GridViewCommandColumn Caption="Novo" HeaderStyle-Font-Size="Large" ShowDeleteButton="True" ShowEditButton="true" ShowNewButtonInHeader="True" VisibleIndex="0" Width="100px" CellStyle-HorizontalAlign="Center" />
+                                                    <dx:GridViewDataTextColumn FieldName="ID" Caption="ID" ReadOnly="true" VisibleIndex="1" CellStyle-HorizontalAlign="Center" Width="65px" />
+                                                    <dx:GridViewDataTextColumn FieldName="ParentID" Caption="ParentID" VisibleIndex="2" CellStyle-HorizontalAlign="center" Width="65px">
+                                                        <Settings ShowEditorInBatchEditMode="true" />
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="Text" Caption="Descrição" VisibleIndex="3" CellStyle-HorizontalAlign="Center" Width="200px">
+                                                        <Settings ShowEditorInBatchEditMode="true" />
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="NavigateURL" Caption="URL" VisibleIndex="4" CellStyle-HorizontalAlign="left" Width="300px">
+                                                        <Settings ShowEditorInBatchEditMode="true" />
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="Icone" Caption="icone" VisibleIndex="5" CellStyle-HorizontalAlign="left" Width="250px">
+                                                        <Settings ShowEditorInBatchEditMode="true" />
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="ToolTip" Caption="ToolTip" VisibleIndex="6" CellStyle-HorizontalAlign="left" Width="250px">
+                                                        <Settings ShowEditorInBatchEditMode="true" />
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="menuOrdem" Caption="Ordem" VisibleIndex="8" CellStyle-HorizontalAlign="Center" Width="60px">
+                                                        <Settings ShowEditorInBatchEditMode="true" />
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="idpgr" Caption="ID_PGR" VisibleIndex="9" CellStyle-HorizontalAlign="Center" Width="65px">
+                                                        <Settings ShowEditorInBatchEditMode="true" />
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="descPGR" Caption="Desc_PGR" VisibleIndex="10" CellStyle-HorizontalAlign="left" Width="200px">
+                                                        <Settings ShowEditorInBatchEditMode="true" />
+                                                    </dx:GridViewDataTextColumn>
+                                                </Columns>
+                                                <SettingsCommandButton>
+                                                    <EditButton Text="Alterar" />
+                                                    <NewButton Text="Novo" />
+                                                    <DeleteButton Text="Excluir" />
+                                                    <CancelButton Text="Cancelar" />
+                                                    <UpdateButton Text="Salvar" />
+                                                    <ClearFilterButton Text="Limpar" />
+                                                </SettingsCommandButton>
+                                                <Styles>
+                                                    <Row Wrap="False"></Row>
+                                                    <Header HorizontalAlign="Center" Font-Bold="true" Font-Size="Small">
+                                                    </Header>
+                                                    <AlternatingRow BackColor="#EFEFEF">
+                                                    </AlternatingRow>
+                                                    <Footer Font-Bold="True">
+                                                    </Footer>
+                                                </Styles>
+                                                <SettingsPager PageSize="30">
+                                                </SettingsPager>
+                                            </dx:ASPxGridView>
+                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:LocalSqlServer %>"
+                                                SelectCommand="	Select ID, ParentID, Text, NavigateURL, Icone, ToolTip, menuOrdem, idpgr , descPGR From Menu.Dados Order By ParentID, menuOrdem "
+                                                UpdateCommand=" Update GerCont.Menu.Dados Set ParentID = @parentid, Text = @text, NavigateURL = @NavigateURL, Icone = @icone, ToolTip = @tooltip, 
+                                                                        menuOrdem = @menuOrdem, idpgr = @idpgr , descPGR = @descpgr Where	ID = @ID "
+                                                DeleteCommand=" Delete From Menu.Dados Where ID = @id"
+                                                InsertCommand=" Insert Into Menu.Dados (idMenuGrupo, ID, ParentID, Text, NavigateURL, Icone, ToolTip, menuOrdem, idpgr , descPGR) 
+	                                                                    Values (1, (Select Top 1 Max(ID) From Menu.Dados Where ID Not IN (999,998)), @parentid, @text, @NavigateURL, @icone, @tooltip, @menuOrdem, @idpgr, @descpgr) ">
+                                                <UpdateParameters>
+                                                    <asp:Parameter Name="parentid" Type="Int16" />
+                                                    <asp:Parameter Name="text" Type="String" />
+                                                    <asp:Parameter Name="NavigateURL" Type="String" />
+                                                    <asp:Parameter Name="icone" Type="String" />
+                                                    <asp:Parameter Name="tooltip" Type="String" />
+                                                    <asp:Parameter Name="menuOrdem" Type="String" />
+                                                    <asp:Parameter Name="idpgr" Type="Int16" />
+                                                    <asp:Parameter Name="descpgr" Type="String" />
+                                                    <asp:Parameter Name="id" Type="Int16" />
+                                                </UpdateParameters>
+                                                <InsertParameters>
+                                                    <asp:Parameter Name="parentid" Type="Int16" />
+                                                    <asp:Parameter Name="text" Type="String" />
+                                                    <asp:Parameter Name="NavigateURL" Type="String" />
+                                                    <asp:Parameter Name="icone" Type="String" />
+                                                    <asp:Parameter Name="tooltip" Type="String" />
+                                                    <asp:Parameter Name="menuOrdem" Type="String" />
+                                                    <asp:Parameter Name="idpgr" Type="Int16" />
+                                                    <asp:Parameter Name="descpgr" Type="String" />
+                                                </InsertParameters>
+                                                <DeleteParameters>
+                                                    <asp:Parameter Name="id" Type="Int16" />
+                                                </DeleteParameters>
+                                            </asp:SqlDataSource>
+
                                             <hr class="mb-3">
                                         </div>
                                     </div>
                                 </asp:Panel>
 
+                                <%--Menu Interno--%>
+                                <asp:Panel ID="pnlNewMenuV" runat="server" CssClass="justify-content-center align-center" Width="95%">
+                                    <div class="container justify-content-center" runat="server" id="divNewMenuV" style="padding: 15px 15px 15px 15px; display: none; margin: 5px 20px 5px 20px !important">
+                                        <hr class="mb-3">
+                                        <br />
+                                        <div class="col-auto">
+
+                                            <dx:ASPxGridView ID="gridMenuVertical" runat="server" Font-Size="10" AutoGenerateColumns="False" KeyFieldName="idUnidade" Visible="false" ClientInstanceName="gridPerc" DataSourceID="SqlDataSource2" EnableTheming="True" Theme="MaterialCompact">
+                                                <SettingsEditing Mode="Batch">
+                                                    <BatchEditSettings StartEditAction="DblClick" />
+                                                </SettingsEditing>
+                                                <ClientSideEvents BatchEditChangesSaving="function(s, e) {}"
+                                                    BatchEditConfirmShowing="function(s, e) {}"
+                                                    BatchEditEndEditing="function(s, e) {}"
+                                                    EndCallback="function(s, e) {grid_Departamento.Refresh();}" />
+                                                <SettingsPager Mode="ShowAllRecords">
+                                                </SettingsPager>
+                                                <SettingsBehavior ConfirmDelete="True" />
+                                                <Settings HorizontalScrollBarMode="Visible" ShowFilterRow="True" />
+                                                <SettingsResizing ColumnResizeMode="Disabled" />
+                                                <SettingsDataSecurity AllowDelete="True" AllowInsert="True" AllowEdit="true" />
+                                                <SettingsText CommandBatchEditCancel="Cancelar" CommandBatchEditPreviewChanges="Alterações" CommandBatchEditUpdate="Salvar" CommandNew="Novo" />
+                                                <Columns>
+                                                    <dx:GridViewCommandColumn ShowDeleteButton="True" ShowNewButtonInHeader="True" VisibleIndex="0" />
+                                                    <dx:GridViewDataTextColumn FieldName="idUnidade" Caption="Id" ReadOnly="true" VisibleIndex="2" CellStyle-HorizontalAlign="Center">
+                                                        <Settings ShowEditorInBatchEditMode="true" />
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="descUnidade" Caption="Descrição" VisibleIndex="3" CellStyle-HorizontalAlign="center" Width="250px">
+                                                        <Settings ShowEditorInBatchEditMode="true" />
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="icone" Caption="icone" VisibleIndex="4" CellStyle-HorizontalAlign="left" Width="350px">
+                                                        <Settings ShowEditorInBatchEditMode="true" />
+                                                    </dx:GridViewDataTextColumn>
+                                                </Columns>
+                                                <SettingsCommandButton>
+                                                    <EditButton Text="Alterar" />
+                                                    <NewButton Text="Novo" />
+                                                    <DeleteButton Text="Excluir" />
+                                                    <CancelButton Text="Cancelar" />
+                                                    <UpdateButton Text="Salvar" />
+                                                    <ClearFilterButton Text="Limpar" />
+                                                </SettingsCommandButton>
+                                                <Styles>
+                                                    <Header HorizontalAlign="Center" Font-Bold="true" Font-Size="12">
+                                                    </Header>
+                                                    <AlternatingRow BackColor="#EFEFEF">
+                                                    </AlternatingRow>
+                                                    <Footer Font-Bold="True">
+                                                    </Footer>
+                                                </Styles>
+                                            </dx:ASPxGridView>
+                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:gerCadastrosConnectionString %>"
+                                                SelectCommand="	SELECT [idUnidade]
+                                                              ,[descUnidade]
+                                                              ,[icone]
+                                                          FROM [gerCadastros].[Cad].[tblUnidade]
+                                                            Order By idUnidade"
+                                                UpdateCommand=" Update	[gerCadastros].[Cad].[tblUnidade] 
+			                                            Set	    [descUnidade] = @descUnidade 
+				                                            ,	[icone] = @icone
+			                                            Where	idUnidade	=	@idUnidade "
+                                                DeleteCommand="Delete From	[gerCadastros].[Cad].[tblUnidade] Where	idUnidade =	@idUnidade"
+                                                InsertCommand=" INSERT INTO [Cad].[tblUnidade]
+                                                                ([idUnidade]
+                                                                ,[descUnidade]
+                                                                ,[icone]
+                                                                ,[descUnidade_Mini])
+                                                            VALUES
+                                                                (@idUnidade
+                                                                ,@descUnidade
+                                                                ,@icone
+                                                                ,null)">
+                                                <UpdateParameters>
+                                                    <asp:Parameter Name="idUnidade" Type="Int16" />
+                                                    <asp:Parameter Name="descUnidade" Type="String" />
+                                                    <asp:Parameter Name="icone" Type="String" />
+                                                </UpdateParameters>
+                                                <InsertParameters>
+                                                    <asp:Parameter Name="idUnidade" Type="Int16" />
+                                                    <asp:Parameter Name="descUnidade" Type="String" />
+                                                    <asp:Parameter Name="icone" Type="String" />
+                                                </InsertParameters>
+                                                <DeleteParameters>
+                                                    <asp:Parameter Name="idUnidade" Type="Int16" />
+                                                </DeleteParameters>
+                                            </asp:SqlDataSource>
+
+                                            <hr class="mb-3">
+                                        </div>
+                                    </div>
+                                </asp:Panel>
+
+                                <%--Acesso BI--%>
+                                <%--Usuários--%>
+                                <asp:Panel ID="pnlAcessoBIUsers" runat="server" CssClass="justify-content-center align-center" Width="95%">
+                                    <div class="container justify-content-center" id="divUsersBI" style="display: none; padding: 15px 15px 15px 15px;" runat="server">
+                                        <hr class="mb-3">
+                                        <br />
+
+                                        <div class="row col-12 justify-content-center">
+                                            <dx:ASPxGridView ID="grvUsersBI" runat="server" CssClass="justify-content-center align-center" AutoGenerateColumns="False" KeyFieldName="id_usuario"
+                                                ClientInstanceName="gridPerc" DataSourceID="dtsAcessoBI" EnableTheming="true" Font-Bold="true" Theme="MaterialCompact">
+                                                <ClientSideEvents BatchEditChangesSaving="function(s, e) {}"
+                                                    BatchEditConfirmShowing="function(s, e) {}"
+                                                    BatchEditEndEditing="function(s, e) {}"
+                                                    EndCallback="function(s, e) {}" />
+                                                <SettingsBehavior ConfirmDelete="True" />
+                                                <Settings HorizontalScrollBarMode="Visible" ShowFilterRow="True" />
+                                                <SettingsResizing ColumnResizeMode="Control" />
+                                                <SettingsDataSecurity AllowDelete="True" AllowInsert="True" AllowEdit="true" />
+                                                <SettingsText CommandBatchEditCancel="Cancelar" CommandBatchEditPreviewChanges="Alterações" CommandBatchEditUpdate="Salvar" CommandNew="Novo" />
+                                                <Columns>
+                                                    <dx:GridViewCommandColumn Caption="Novo" HeaderStyle-Font-Size="Large" ShowDeleteButton="True" ShowEditButton="true" ShowNewButtonInHeader="True" VisibleIndex="0" Width="150px" CellStyle-HorizontalAlign="Center" />
+                                                    <dx:GridViewDataTextColumn FieldName="id_tipo" Caption="Tipo" VisibleIndex="1" CellStyle-HorizontalAlign="Center" Width="70px" />
+                                                    <dx:GridViewDataTextColumn FieldName="id_usuario" Caption="Usuário" VisibleIndex="2" CellStyle-HorizontalAlign="center" Width="70px" />
+                                                    <dx:GridViewDataTextColumn FieldName="desc_usuario" Caption="Descrição" VisibleIndex="3" CellStyle-HorizontalAlign="Center" Width="220px" />
+                                                    <dx:GridViewDataTextColumn FieldName="email" Caption="E-mail" VisibleIndex="4" CellStyle-HorizontalAlign="center" Width="350px" />
+                                                </Columns>
+                                                <SettingsCommandButton>
+                                                    <EditButton Text="Alterar" />
+                                                    <NewButton Text="Novo" />
+                                                    <DeleteButton Text="Excluir" />
+                                                    <CancelButton Text="Cancelar" />
+                                                    <UpdateButton Text="Salvar" />
+                                                    <ClearFilterButton Text="Limpar" />
+                                                </SettingsCommandButton>
+                                                <Styles>
+                                                    <Row Wrap="False"></Row>
+                                                    <Header HorizontalAlign="Center" Font-Bold="true" Font-Size="Medium">
+                                                    </Header>
+                                                    <AlternatingRow BackColor="#EFEFEF">
+                                                    </AlternatingRow>
+                                                    <Footer Font-Bold="True">
+                                                    </Footer>
+                                                </Styles>
+                                                <SettingsPager PageSize="30">
+                                                </SettingsPager>
+                                            </dx:ASPxGridView>
+                                            <asp:SqlDataSource ID="dtsAcessoBI" runat="server" ConnectionString="<%$ ConnectionStrings:gerBIConnectionString %>"
+                                                SelectCommand="	Select	Distinct id_tipo , id_usuario, desc_usuario, email From usu_ParamAcesso_Usuario Order By id_tipo, id_usuario "
+                                                UpdateCommand=" Update usu_ParamAcesso_Usuario set id_tipo = @id_tipo , desc_usuario = @desc_usuario , email = @email Where id_usuario = @id_usuario "
+                                                DeleteCommand=" Exec [dbo].[uspMunutencaoParamAcessoBI] @id_usuario , 0 , 0 , '', 3 "
+                                                InsertCommand=" Insert Into usu_ParamAcesso_Usuario (id_tipo, id_usuario, desc_usuario, email) Values (@id_tipo, @id_usuario, @desc_usuario, @email) ">
+                                                <UpdateParameters>
+                                                    <asp:Parameter Name="id_tipo" Type="Int16" />
+                                                    <asp:Parameter Name="id_usuario" Type="Int16" />
+                                                    <asp:Parameter Name="desc_usuario" Type="String" />
+                                                    <asp:Parameter Name="email" Type="String" />
+                                                </UpdateParameters>
+                                                <InsertParameters>
+                                                    <asp:Parameter Name="id_tipo" Type="Int16" />
+                                                    <asp:Parameter Name="id_usuario" Type="Int16" />
+                                                    <asp:Parameter Name="desc_usuario" Type="String" />
+                                                    <asp:Parameter Name="email" Type="String" />
+                                                </InsertParameters>
+                                                <DeleteParameters>
+                                                    <asp:Parameter Name="id_usuario" Type="Int16" />
+                                                </DeleteParameters>
+                                            </asp:SqlDataSource>
+
+                                        </div>
+                                        <hr class="mb-3">
+                                    </div>
+                                </asp:Panel>
+
+                                <asp:Panel ID="pnlCadastroLojasSecoes" runat="server" CssClass="justify-content-center">
+                                    <div class="container justify-content-center" runat="server" id="divParamBI" style="padding: 15px 15px 15px 15px; display: none">
+
+                                        <hr class="mb-3">
+
+                                        <%--Adicionar Menu(Tela) no perfil--%>
+                                        <div class="row col-12 justify-content-center " style="background-color: #E9ECEF; padding: 20px 0 20px 0">
+                                            <div class="row col-12 justify-content-center" style="background-color: #E9ECEF; padding: 20px 0 20px 0">
+                                                <span class="justify-content-center sm h5">Parametrização de Acessos - BI</span>
+                                                <br />
+                                                <br />
+                                                
+                                                <div class="col-2 justify-content-end" style="padding-right: 25px">
+                                                    <asp:Button runat="server" OnClick="btnAtualizarNovoUsuario_Click" Width="125px" Height="35px" class="btn btn-warning btn-md" Text="Atualizar" ID="btnAtualizarNovoUsuario" />
+                                                </div>
+                                                <div class="col-4 justify-content-center" runat="server">
+                                                    <div class="input-group input-group xs" style="max-height: 30px">
+                                                        <div class="input-group-prepend xs">
+                                                            <span class="col-auto input-group-text justify-content-center" style="min-width: 110px">Usuário</span>
+                                                        </div>
+                                                        <asp:DropDownList class="form-control text-center" ID="selUserBI" runat="server" DataTextField="Desc" AutoPostBack="false"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 justify-content-end" style="padding-right: 25px">
+                                                    <asp:Button runat="server" OnClick="btnFiltrarUserBI_Click" Width="125px" Height="35px" class="btn btn-info btn-md" Text="Buscar" ID="btnFiltrarUserBI" />
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row col-12 justify-content-center" runat="server" id="divTreeBI" visible="false" style="background-color: #E9ECEF; padding: 20px 0 20px 0">
+                                                <div class="row col-12 justify-content-center " style="background-color: #E9ECEF; padding: 20px 0 20px 0">
+                                                    <div class="col-1"></div>
+                                                    <div class="col-5" style="background-color: white">
+                                                        <br />
+                                                        <span class="input-group-text justify-content-center"><b>(Lojas)</b></span>
+                                                        <asp:TreeView ID="trwLoja" CssClass="wj-treeview w-100 border" runat="server" ShowLines="True"
+                                                            BorderStyle="Dotted" ShowCheckBoxes="All">
+                                                        </asp:TreeView>
+                                                    </div>
+
+                                                    <div class="col-5" style="background-color: white">
+                                                        <br />
+                                                        <span class="input-group-text justify-content-center"><b>(Seções)</b></span>
+                                                        <asp:TreeView ID="trwSecao" CssClass="wj-treeview w-100 border tag-important" runat="server" ShowLines="True"
+                                                            BorderStyle="Dotted" ShowCheckBoxes="All">
+                                                        </asp:TreeView>
+                                                    </div>
+                                                    <div class="col-1"></div>
+                                                </div>
+
+                                                <div class="col-12 justify-content-center" style="padding-right: 25px">
+                                                    <asp:Button runat="server" OnClick="btnSalvarParamBI_Click" Width="125px" Height="35px" class="btn btn-info btn-md" Text="Salvar" ID="btnSalvarParamBI" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr class="mb-3">
+                                    </div>
+                                </asp:Panel>
                             </panelcontent>
                         </panelcollection>
                     </aspxcallbackpanel>
@@ -990,6 +1236,14 @@
             margin-left: auto;
             margin-right: auto;
             max-width: 850px;
+        }
+
+        .dxgvDataRow_MaterialCompact {
+            font-size: small;
+        }
+
+        .MainContent_gridMenusHorizontal_DXHeadersRow0 {
+            font-size: medium !important;
         }
 
         .gwFormat td {

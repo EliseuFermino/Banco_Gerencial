@@ -495,6 +495,11 @@
 
     <script src="../../assets/bootstrap-5.0.2-dist/Modal/jquery.min.js"></script>
     <script src="../../assets/bootstrap-5.0.2-dist/Modal/bootstrap.min.js"></script>
+    <script src="../../js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../assets/datepickerRange/jquery.min.js"></script>
+    <script type="text/javascript" src="../../assets/datepickerRange/moment.min.js"></script>
+    <script type="text/javascript" src="../../assets/datepickerRange/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../assets/datepickerRange/daterangepicker.css" />
 
     <style>
         .modal-dialog {
@@ -508,11 +513,6 @@
         }
     </style>
 
-    <script src="../../js/bootstrap.js"></script>
-    <script type="text/javascript" src="../../assets/datepickerRange/jquery.min.js"></script>
-    <script type="text/javascript" src="../../assets/datepickerRange/moment.min.js"></script>
-    <script type="text/javascript" src="../../assets/datepickerRange/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../assets/datepickerRange/daterangepicker.css" />
 
     <script type="text/javascript"> 
         function maxData() {

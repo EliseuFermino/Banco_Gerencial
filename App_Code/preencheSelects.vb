@@ -110,6 +110,9 @@ Public Class preencheSelects
                     Case "gerente hsa", "hsa"
                         preencheFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE  idLojasCDs = 1", sSelect)
                         sSelect.SelectedIndex = 0
+                    Case "controle_caminhao_ceasa"
+                        preencheFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE IsLoja=1 OR isAtacarejo = 1", sSelect)
+                        sSelect.SelectedIndex = 0
                     Case Else
                         preencheFilial("SELECT Filial ,RTRIM(FilialLista) AS nomeFilial, icone FROM gerCadastros.Cadastros.tblCadFiliaisLista WHERE Filial=" & sFilial & "", sSelect)
                         sSelect.SelectedIndex = 0
