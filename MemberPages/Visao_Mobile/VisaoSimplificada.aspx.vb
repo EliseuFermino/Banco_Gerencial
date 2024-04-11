@@ -23,6 +23,7 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
             btnMenu_3.BackColor = Color.FromArgb(85, 134, 184)
             btnMenu_4.BackColor = Color.FromArgb(85, 134, 184)
             btnMenu_6.BackColor = Color.FromArgb(85, 134, 184)
+            btnMenu_7.BackColor = Color.FromArgb(85, 134, 184)
 
             Session("sMERCADOLOGICO") = 1
             Session("sOPCAO") = 1
@@ -135,10 +136,8 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         Me.cboFilial.cboFilial_AutoPostBack = False
         Me.cboFilial.cboFilial_Visible_Legenda = False
 
-        selAnoMenu1.SelectedValue = Year(Now())
-
-        'Call RotinaInicio()
-        Call MudarTitulo()
+        Me.ASPxGridView2.Columns("vlr1").Caption = selAnoMenu1.SelectedValue - 1
+        Me.ASPxGridView2.Columns("vlr2").Caption = selAnoMenu1.SelectedValue
 
         Dim varStatus, varFilial As Byte
         If Me.rndEmpresa.Checked = True Then
@@ -165,8 +164,57 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         Me.ASPxGridView2.DataBind()
         Me.grid.DataBind()
 
+        divDados_1.Visible = True
+        divDados_2.Visible = True
+        divDados_2_SemPascoa.Visible = False
+
     End Sub
 
+    Private Sub AtualizarAnaliseHoraSemPascoa()
+
+        If Month(DateAndTime.Now()) = 1 And (DateAndTime.Now.Day = 1 Or DateAndTime.Now.Day = 2 Or DateAndTime.Now.Day = 3) Then
+            selAnoMenu3.SelectedValue = myDateTimes.YearToday() - 1
+            selMesMenu3.SelectedValue = 12
+        Else
+            selAnoMenu3.SelectedValue = Year(Now())
+            selMesMenu3.SelectedValue = Month(DateAndTime.Now())
+        End If
+
+        Me.cboFilial.cboFilial_AutoPostBack = False
+        Me.cboFilial.cboFilial_Visible_Legenda = False
+
+        'Call RotinaInicio()
+        Me.ASPxGridView3.Columns("vlrAnoAnterior").Caption = selAnoMenu1.SelectedValue - 1
+        Me.ASPxGridView3.Columns("vlrAnoAtual").Caption = selAnoMenu1.SelectedValue
+
+        Dim varStatus, varFilial As Byte
+        If Me.rndEmpresa.Checked = True Then
+            varStatus = 2
+        Else
+            varStatus = 1
+        End If
+
+        If Me.cboFilial.Visible = True Then
+            varFilial = Me.cboFilial.CallFilial
+            Session("sFILIAL") = varFilial
+        Else
+            varFilial = 99
+            Session("sFILIAL") = 99
+        End If
+
+        Session("sMES") = selMesMenu1.SelectedValue
+        Session("sANO") = selAnoMenu1.SelectedValue
+        Session("sLOJA_CORP") = 99
+        Session("sMESMOSDIAS") = 1
+        Session("sUSUARIO") = "Controladoria"
+        Session("sDIASEMANA") = selSemanaMenu1.SelectedValue
+
+        Me.ASPxGridView3.DataBind()
+
+        divDados_1.Visible = False
+        divDados_2.Visible = False
+        divDados_2_SemPascoa.Visible = True
+    End Sub
     Protected Sub ASPxGridView2_CustomSummaryCalculate(sender As Object, e As DevExpress.Data.CustomSummaryEventArgs) Handles ASPxGridView2.CustomSummaryCalculate
         oFun.Grid_Footer_Calculate(sender, e, ASPxGridView2, "vlr4", "vlr2", "vlr1", Funcoes.CalculateType.Growth)
     End Sub
@@ -174,6 +222,15 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
     Protected Sub ASPxGridView2_HtmlDataCellPrepared(sender As Object, e As DevExpress.Web.ASPxGridViewTableDataCellEventArgs) Handles ASPxGridView2.HtmlDataCellPrepared
         oFun.Grid_RedIsNegative(e, "vlr3")
         oFun.Grid_RedIsNegative(e, "vlr4")
+    End Sub
+
+    Protected Sub ASPxGridView3_CustomSummaryCalculate(sender As Object, e As DevExpress.Data.CustomSummaryEventArgs) Handles ASPxGridView3.CustomSummaryCalculate
+        oFun.Grid_Footer_Calculate(sender, e, ASPxGridView3, "clrCresc", "vlrAnoAtual", "vlrAnoAnterior", Funcoes.CalculateType.Growth)
+    End Sub
+
+    Protected Sub ASPxGridView3_HtmlDataCellPrepared(sender As Object, e As DevExpress.Web.ASPxGridViewTableDataCellEventArgs) Handles ASPxGridView3.HtmlDataCellPrepared
+        oFun.Grid_RedIsNegative(e, "vlrDiferenca")
+        oFun.Grid_RedIsNegative(e, "clrCresc")
     End Sub
 
     Protected Sub rndEmpresa_CheckedChanged(sender As Object, e As EventArgs) Handles rndEmpresa.CheckedChanged
@@ -194,10 +251,7 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         Call AtualizarAnaliseHora()
     End Sub
 
-    Private Sub MudarTitulo()
-        Me.ASPxGridView2.Columns("vlr1").Caption = selAnoMenu1.SelectedValue - 1
-        Me.ASPxGridView2.Columns("vlr2").Caption = selAnoMenu1.SelectedValue
-    End Sub
+
 
     Protected Sub ASPxGridView2_HtmlFooterCellPrepared(sender As Object, e As ASPxGridViewTableFooterCellEventArgs) Handles ASPxGridView2.HtmlFooterCellPrepared
         oFun.Grid_RedIsNegativeFooter(sender, e)
@@ -207,11 +261,23 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
 
         Session("sDIASEMANA") = selSemanaMenu1.SelectedValue
 
-        Call MudarTitulo()
-        Call AtualizarAnaliseHora()
 
-        Me.ASPxGridView1.DataBind()
-        Me.grid.DataBind()
+        If btnMenu_1.BackColor.Name = "ff78a795" Then
+
+            Call AtualizarAnaliseHora()
+            Me.ASPxGridView2.Columns("vlr1").Caption = selAnoMenu1.SelectedValue - 1
+            Me.ASPxGridView2.Columns("vlr2").Caption = selAnoMenu1.SelectedValue
+            Me.ASPxGridView1.DataBind()
+            Me.grid.DataBind()
+        Else
+
+            Call AtualizarAnaliseHoraSemPascoa()
+            Me.ASPxGridView3.Columns("vlrAnoAnterior").Caption = selAnoMenu1.SelectedValue - 1
+            Me.ASPxGridView3.Columns("vlrAnoAtual").Caption = selAnoMenu1.SelectedValue
+            Me.ASPxGridView3.DataBind()
+        End If
+
+
 
     End Sub
 
@@ -679,12 +745,14 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         btnMenu_3.BackColor = Color.FromArgb(85, 134, 184)
         btnMenu_4.BackColor = Color.FromArgb(85, 134, 184)
         btnMenu_6.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_7.BackColor = Color.FromArgb(85, 134, 184)
 
         oVen.AtualizarEstatisticaPrograma(439, User.Identity.Name)
 
         ' Atualiza Grids
         AtualizarAnaliseHora()
 
+        divDados_2_SemPascoa.Visible = False
     End Sub
 
     Protected Sub btnMenu_2_Click(sender As Object, e As EventArgs)
@@ -702,6 +770,7 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         btnMenu_3.BackColor = Color.FromArgb(85, 134, 184)
         btnMenu_4.BackColor = Color.FromArgb(85, 134, 184)
         btnMenu_6.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_7.BackColor = Color.FromArgb(85, 134, 184)
 
         oVen.AtualizarEstatisticaPrograma(438, User.Identity.Name)
 
@@ -722,6 +791,7 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         btnMenu_2.BackColor = Color.FromArgb(85, 134, 184)
         btnMenu_4.BackColor = Color.FromArgb(85, 134, 184)
         btnMenu_6.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_7.BackColor = Color.FromArgb(85, 134, 184)
 
         oVen.AtualizarEstatisticaPrograma(440, User.Identity.Name)
 
@@ -744,6 +814,7 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         btnMenu_2.BackColor = Color.FromArgb(85, 134, 184)
         btnMenu_3.BackColor = Color.FromArgb(85, 134, 184)
         btnMenu_6.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_7.BackColor = Color.FromArgb(85, 134, 184)
 
         oVen.AtualizarEstatisticaPrograma(441, User.Identity.Name)
 
@@ -776,11 +847,37 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
         btnMenu_2.BackColor = Color.FromArgb(85, 134, 184)
         btnMenu_3.BackColor = Color.FromArgb(85, 134, 184)
         btnMenu_4.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_7.BackColor = Color.FromArgb(85, 134, 184)
 
         oVen.AtualizarEstatisticaPrograma(441, User.Identity.Name)
 
         Call AtualizarAcumuladoAno()
 
+    End Sub
+
+    Protected Sub btnMenu_7_Click(sender As Object, e As EventArgs)
+        divAnalise.Visible = True
+        divAcomp.Visible = False
+        divRankingMes.Visible = False
+        divLucroNegativo.Visible = False
+        divAcumulado.Visible = False
+        divAcumuladoAno.Visible = False
+
+        'Verde
+        btnMenu_7.BackColor = Color.FromArgb(120, 167, 149)
+        'Azul
+        btnMenu_2.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_3.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_4.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_6.BackColor = Color.FromArgb(85, 134, 184)
+        btnMenu_1.BackColor = Color.FromArgb(85, 134, 184)
+
+        oVen.AtualizarEstatisticaPrograma(208, User.Identity.Name)
+
+        ' Atualiza Grids
+        AtualizarAnaliseHoraSemPascoa()
+
+        divDados_2_SemPascoa.Visible = True
     End Sub
 
 #End Region
@@ -811,5 +908,6 @@ Partial Class MemberPages_Visao_Mobile_VisaoSimplificada
     End Sub
 
 #End Region
+
 
 End Class

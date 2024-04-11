@@ -39,16 +39,20 @@
                     <asp:Button ID="btnMenu_1" Height="30px" CssClass="btn btn-sm" Text="Análise Hora" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_1_Click" Style="background-repeat: round" />
                     <%--#78A795 cor verde--%>
                 </div>
+                <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 1px; min-width: 60px" runat="server" id="divMenu_7">
+                    <asp:Button ID="btnMenu_7" Height="30px" CssClass="btn btn-sm" Text="Análise Hora (Sem Páscoa)" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_7_Click" Style="background-repeat: round" />
+                    <%--#78A795 cor verde--%>
+                </div>
                 <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 1px" runat="server" id="divMenu_2">
                     <asp:Button ID="btnMenu_2" Height="30px" CssClass="btn btn-sm" Text="Acompanhamento" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_2_Click" Style="background-repeat: round" />
                 </div>
                 <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 1px" runat="server" id="divMenu_3">
                     <asp:Button ID="btnMenu_3" Height="30px" CssClass="btn btn-sm" Text="Acumulado Mês" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_3_Click" Style="background-repeat: round" />
                 </div>
-                <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 1px" runat="server" id="divMenu_4">
+                <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 1px" runat="server" id="divMenu_6">
                     <asp:Button ID="btnMenu_6" Height="30px" CssClass="btn btn-sm" Text="Acumulado Ano" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_6_Click" Style="background-repeat: round" />
                 </div>
-                <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 1px" runat="server" id="div1">
+                <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 1px" runat="server" id="divMenu_4">
                     <asp:Button ID="btnMenu_4" Height="30px" CssClass="btn btn-sm" Text="Lucro Negativo" ForeColor="White" Font-Size="X-Small" AutoPostBack="False" runat="server" OnClick="btnMenu_4_Click" Style="background-repeat: round" />
                 </div>
                 <div class="col-auto justify-content-center" style="justify-content: space-between; padding: 15px 5px 15px 1px" runat="server" id="divMenu_5" visible="false">
@@ -60,7 +64,6 @@
             </div>
         </div>
     </div>
-
     <%--Menu Analise Hora--%>
     <div class="justify-content-center" runat="server" id="divAnalise" style="padding: 0 10px 0 10px;">
 
@@ -68,7 +71,7 @@
             <ClientSideEvents Tick="function(s, e) {   cbPanel2.PerformCallback()  ;  }" />
         </dx:ASPxTimer>
 
-        <section id="sec_Header">
+        <section id="sec_Header" runat="server">
             <div class="row justify-content-sm-center" style="padding-bottom: 4px">
                 <div class="col col-auto sm" style="width: 130px; padding-right: 2px">
                     <div class="input-group input-group-sm">
@@ -146,7 +149,7 @@
                 <PanelCollection>
                     <dx:PanelContent>
 
-                        <div id="divDados_1">
+                        <div id="divDados_1" runat="server" >
 
                             <dx:ASPxPivotGrid ID="grid" runat="server" ClientIDMode="AutoID"
                                 DataSourceID="dsDados" EnableTheming="True" Theme="DevEx" Width="100%" Font-Size="X-Small">
@@ -210,16 +213,16 @@
                         <br />
                         <br />
 
-                        <div id="divDados_2">
+                        <div id="divDados_2" runat="server">
                             <dx:ASPxGridView ID="ASPxGridView2" runat="server" DataSourceID="dsVendaDia"
                                 AutoGenerateColumns="False" Width="100%" EnableTheming="True" Theme="DevEx"
                                 KeyFieldName="DiaReduzido" Font-Size="X-Small">
                                 <TotalSummary>
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlr1"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlr1"
                                         SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlr2"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlr2"
                                         SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlr3"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlr3"
                                         SummaryType="Sum" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlr4"
                                         SummaryType="Custom" />
@@ -233,17 +236,17 @@
                                     </dx:GridViewDataTextColumn>
                                     <dx:GridViewDataTextColumn Caption="2011" FieldName="vlr1"
                                         VisibleIndex="2" MinWidth="90">
-                                        <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                         </PropertiesTextEdit>
                                     </dx:GridViewDataTextColumn>
                                     <dx:GridViewDataTextColumn Caption="2012" FieldName="vlr2"
                                         VisibleIndex="3" MinWidth="90">
-                                        <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                         </PropertiesTextEdit>
                                     </dx:GridViewDataTextColumn>
                                     <dx:GridViewDataTextColumn Caption="vlr. Dif." FieldName="vlr3"
                                         VisibleIndex="4" MinWidth="80">
-                                        <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                         </PropertiesTextEdit>
                                     </dx:GridViewDataTextColumn>
                                     <dx:GridViewDataTextColumn Caption="%" FieldName="vlr4" VisibleIndex="5"
@@ -284,12 +287,89 @@
 
                         </div>
 
+                        <br />
+                        <br />
+
+                        <%--Analise Hora Sem Pascoa--%>
+                        <div id="divDados_2_SemPascoa" runat="server" visible="false">
+
+                            <dx:ASPxGridView ID="ASPxGridView3" runat="server" DataSourceID="dsVendaDia_semPascoa"
+                                AutoGenerateColumns="False" Width="100%" EnableTheming="True" Theme="DevEx"
+                                KeyFieldName="DiaReduzido" Font-Size="X-Small">
+                                <TotalSummary>
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrAnoAnterior"
+                                        SummaryType="Sum" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrAnoAtual"
+                                        SummaryType="Sum" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrDiferenca"
+                                        SummaryType="Sum" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="clrCresc"
+                                        SummaryType="Custom" />
+                                </TotalSummary>
+                                <Columns>
+                                    <dx:GridViewDataTextColumn Caption="Desc" FieldName="Descricao"
+                                        VisibleIndex="1" MinWidth="60">
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn Caption="2011" FieldName="vlrAnoAnterior"
+                                        VisibleIndex="2" MinWidth="90">
+                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                        </PropertiesTextEdit>
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn Caption="2012" FieldName="vlrAnoAtual"
+                                        VisibleIndex="3" MinWidth="90">
+                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                        </PropertiesTextEdit>
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn Caption="vlr. Dif." FieldName="vlrDiferenca"
+                                        VisibleIndex="4" MinWidth="80">
+                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                        </PropertiesTextEdit>
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn Caption="%" FieldName="clrCresc"
+                                        VisibleIndex="5" MinWidth="60">
+                                        <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
+                                        </PropertiesTextEdit>
+                                    </dx:GridViewDataTextColumn>
+                                </Columns>
+                                <SettingsBehavior AllowFocusedRow="True" />
+                                <SettingsPager Mode="ShowAllRecords">
+                                </SettingsPager>
+                                <Settings ShowFooter="True" ShowTitlePanel="True" ShowVerticalScrollBar="True"
+                                    VerticalScrollableHeight="400" ShowFilterBar="Auto"
+                                    ShowFilterRow="True" ShowFilterRowMenu="True" />
+                                <SettingsText Title="Análise Vendas Mesmos Dias - Sem Pascoa" />
+                                <Styles>
+                                    <FocusedRow BackColor="#FFFFCC" ForeColor="#0066FF"></FocusedRow>
+                                    <Header Font-Bold="True" HorizontalAlign="Center">
+                                    </Header>
+                                    <AlternatingRow BackColor="#EEEEEE"></AlternatingRow>
+                                    <Footer Font-Bold="True">
+                                    </Footer>
+                                    <TitlePanel Font-Size="Medium">
+                                    </TitlePanel>
+                                </Styles>
+
+                            </dx:ASPxGridView>
+                            <asp:SqlDataSource ID="dsVendaDia_SemPascoa" runat="server"
+                                ConnectionString="<%$ ConnectionStrings:gerManagerConnectionString %>"
+                                SelectCommand="Vendas.uspAtualizarAnaliseHora_SemPascoa" SelectCommandType="StoredProcedure">
+                                <SelectParameters>
+                                    <asp:SessionParameter Name="Ano" SessionField="sANO" Type="Int16" />
+                                    <asp:SessionParameter Name="Mes" SessionField="sMES" Type="Byte" />
+                                    <asp:SessionParameter Name="LojaCorp" SessionField="sLOJA_CORP" Type="Byte" />
+                                    <asp:SessionParameter Name="idFilial" SessionField="sFILIAL" Type="Byte" />
+                                </SelectParameters>
+                            </asp:SqlDataSource>
+                            <br />
+                        </div>
+
                     </dx:PanelContent>
                 </PanelCollection>
             </dx:ASPxCallbackPanel>
         </section>
-
     </div>
+
+
 
     <%--Menu Acompanhamento--%>
     <div class="justify-content-center" runat="server" id="divAcomp" visible="false" style="padding: 0 10px 0 10px">
@@ -328,54 +408,54 @@
                                 AutoGenerateColumns="False" Font-Size="X-Small" KeyFieldName="Descricao"
                                 Theme="SoftOrange" EnableTheming="True" Width="100%" DataSourceID="dsVendaLojaTotal">
                                 <TotalSummary>
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrRealAA" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrRealAA" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percDifCresc" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrSugestaoVenda" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMetaVenda" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrRealVenda" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrSugestaoVenda" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrMetaVenda" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrRealVenda" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percAting" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="numClientes" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="numClientes" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMetaMargem" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percRealMargem" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percRealMargemSellOut" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="difMargem" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="NumClientes" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMetaMargem" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrRealMargem" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="NumClientes" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrMetaMargem" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrRealMargem" SummaryType="Custom" />
 
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrRealVendaClube" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrRealVendaClube" SummaryType="Custom" />
 
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="difLucro" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="difLucro" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percAtingLucro" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrVendaFunc" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrVendaFunc" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:c}" FieldName="vlrTicketMedio" SummaryType="Custom" />
 
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percRealMargemClube" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percRealMargemSellOutClube" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="numClientesClube" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="numClientesClube" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:c}" FieldName="vlrTicketMedioClube" SummaryType="Custom" />
 
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrVendaCheckout"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrVendaCheckout"
                                         SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrVendaMetragem"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrVendaMetragem"
                                         SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrRealMargemSellOutKit" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrRealMargemSellOutKit" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percRealMargemSellOutKit" SummaryType="Custom" />
                                 </TotalSummary>
                                 <GroupSummary>
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrSugestao"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrSugestao"
                                         ShowInGroupFooterColumn="vlrSugestao" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMetaVenda"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrMetaVenda"
                                         ShowInGroupFooterColumn="vlrMetaVenda" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrVenda"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrVenda"
                                         ShowInGroupFooterColumn="vlrVenda" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMetaLucro"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrMetaLucro"
                                         ShowInGroupFooterColumn="vlrMetaLucro" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMargem"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrMargem"
                                         ShowInGroupFooterColumn="vlrMargem" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="difLucro"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="difLucro"
                                         ShowInGroupFooterColumn="difLucro" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="NumClientes"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="NumClientes"
                                         ShowInGroupFooterColumn="NumClientes" SummaryType="Sum" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percAting"
                                         ShowInGroupFooterColumn="percAting" SummaryType="Custom" />
@@ -397,7 +477,7 @@
                                     <dx:GridViewBandColumn Caption="Ano Anterior" VisibleIndex="1">
                                         <Columns>
                                             <dx:GridViewDataTextColumn Caption="Real" FieldName="vlrRealAA" ToolTip="Venda do Ano Anterior (mesmo dia da semana)" VisibleIndex="0">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <HeaderStyle HorizontalAlign="Center" />
                                             </dx:GridViewDataTextColumn>
@@ -414,7 +494,7 @@
 
                                             <dx:GridViewDataTextColumn Caption="Meta" FieldName="vlrMetaVenda"
                                                 VisibleIndex="0" ToolTip="Valor da meta revista de venda que foi replanejada.">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False"></PropertiesTextEdit>
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False"></PropertiesTextEdit>
                                                 <HeaderStyle HorizontalAlign="Center" BackColor="#009900" ForeColor="White" />
                                                 <CellStyle ForeColor="#009900">
                                                 </CellStyle>
@@ -426,7 +506,7 @@
 
                                             <dx:GridViewDataTextColumn Caption="Total" FieldName="vlrRealVenda"
                                                 VisibleIndex="1" ToolTip="Valor da venda realizada.">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False"></PropertiesTextEdit>
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False"></PropertiesTextEdit>
                                                 <HeaderStyle HorizontalAlign="Center" BackColor="#003399" ForeColor="White" />
                                                 <CellStyle ForeColor="Blue">
                                                 </CellStyle>
@@ -530,54 +610,54 @@
                                 AutoGenerateColumns="False" EnableTheming="True" Font-Size="X-Small" KeyFieldName="Descricao"
                                 Theme="SoftOrange" Width="100%" DataSourceID="dsVendaLoja">
                                 <TotalSummary>
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrRealAA" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrRealAA" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percDifCresc" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrSugestaoVenda" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMetaVenda" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrRealVenda" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrSugestaoVenda" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrMetaVenda" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrRealVenda" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percAting" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="numClientes" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="numClientes" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMetaMargem" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percRealMargem" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percRealMargemSellOut" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="difMargem" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="NumClientes" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMetaMargem" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrRealMargem" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="NumClientes" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrMetaMargem" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrRealMargem" SummaryType="Custom" />
 
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrRealVendaClube" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrRealVendaClube" SummaryType="Custom" />
 
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="difLucro" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="difLucro" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percAtingLucro" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrVendaFunc" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrVendaFunc" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:c}" FieldName="vlrTicketMedio" SummaryType="Custom" />
 
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percRealMargemClube" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percRealMargemSellOutClube" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="numClientesClube" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="numClientesClube" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:c}" FieldName="vlrTicketMedioClube" SummaryType="Custom" />
 
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrVendaCheckout"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrVendaCheckout"
                                         SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrVendaMetragem"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrVendaMetragem"
                                         SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrRealMargemSellOutKit" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrRealMargemSellOutKit" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percRealMargemSellOutKit" SummaryType="Custom" />
                                 </TotalSummary>
                                 <GroupSummary>
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrSugestao"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrSugestao"
                                         ShowInGroupFooterColumn="vlrSugestao" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMetaVenda"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrMetaVenda"
                                         ShowInGroupFooterColumn="vlrMetaVenda" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrVenda"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrVenda"
                                         ShowInGroupFooterColumn="vlrVenda" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMetaLucro"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrMetaLucro"
                                         ShowInGroupFooterColumn="vlrMetaLucro" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMargem"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrMargem"
                                         ShowInGroupFooterColumn="vlrMargem" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="difLucro"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="difLucro"
                                         ShowInGroupFooterColumn="difLucro" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="NumClientes"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="NumClientes"
                                         ShowInGroupFooterColumn="NumClientes" SummaryType="Sum" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percAting"
                                         ShowInGroupFooterColumn="percAting" SummaryType="Custom" />
@@ -600,7 +680,7 @@
                                     <dx:GridViewBandColumn Caption="Ano Anterior" VisibleIndex="1">
                                         <Columns>
                                             <dx:GridViewDataTextColumn Caption="Real" FieldName="vlrRealAA" ToolTip="Venda do Ano Anterior (mesmo dia da semana)" VisibleIndex="0">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <HeaderStyle HorizontalAlign="Center" />
                                             </dx:GridViewDataTextColumn>
@@ -617,7 +697,7 @@
 
                                             <dx:GridViewDataTextColumn Caption="Meta" FieldName="vlrMetaVenda"
                                                 VisibleIndex="0" ToolTip="Valor da meta revista de venda que foi replanejada.">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False"></PropertiesTextEdit>
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False"></PropertiesTextEdit>
                                                 <HeaderStyle HorizontalAlign="Center" BackColor="#009900" ForeColor="White" />
                                                 <CellStyle ForeColor="#009900">
                                                 </CellStyle>
@@ -629,7 +709,7 @@
 
                                             <dx:GridViewDataTextColumn Caption="Total" FieldName="vlrRealVenda"
                                                 VisibleIndex="1" ToolTip="Valor da venda realizada.">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False"></PropertiesTextEdit>
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False"></PropertiesTextEdit>
                                                 <HeaderStyle HorizontalAlign="Center" BackColor="#003399" ForeColor="White" />
                                                 <CellStyle ForeColor="Blue">
                                                 </CellStyle>
@@ -743,7 +823,7 @@
                                                     <SettingsText Title="Projeção Venda Hoje" />
                                                     <Columns>
                                                         <dx:GridViewDataTextColumn Caption="Projeção Venda" FieldName="vlrProjecao" ReadOnly="True" ShowInCustomizationForm="True" VisibleIndex="2">
-                                                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                            <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                             </PropertiesTextEdit>
                                                             <CellStyle HorizontalAlign="Right">
                                                             </CellStyle>
@@ -761,7 +841,7 @@
                                                             </CellStyle>
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn Caption="Meta" FieldName="vlrMeta" ShowInCustomizationForm="True" VisibleIndex="1">
-                                                            <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                            <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                             </PropertiesTextEdit>
                                                         </dx:GridViewDataTextColumn>
                                                     </Columns>
@@ -830,12 +910,12 @@
                                     <dx:GridViewBandColumn Caption="Vendas" VisibleIndex="3">
                                         <Columns>
                                             <dx:GridViewDataTextColumn Caption="Volume" FieldName="QtdVendas" ToolTip="Volume ou quantidade dos itens vendidos" VisibleIndex="0">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <Settings AllowAutoFilter="False" />
                                             </dx:GridViewDataTextColumn>
                                             <dx:GridViewDataTextColumn Caption="R$" FieldName="Venda" ToolTip="Valor da venda de cada item" VisibleIndex="1">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <Settings AllowAutoFilter="False" />
                                                 <CellStyle Font-Bold="True" ForeColor="Blue">
@@ -854,7 +934,7 @@
                                     <dx:GridViewBandColumn Caption="Margem Final" ShowInCustomizationForm="True" VisibleIndex="4">
                                         <Columns>
                                             <dx:GridViewDataTextColumn Caption="R$" FieldName="vlrLucroFinal" ReadOnly="True" ShowInCustomizationForm="True" ToolTip="Valor do Lucro Final (Lucro Praticado + Lucro Sell Out)" VisibleIndex="0">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <Settings AllowAutoFilter="False" />
                                                 <HeaderStyle BackColor="#999999" />
@@ -878,14 +958,14 @@
                                 <SettingsText Title="Todos Itens com Lucro Negativo na Empresa" />
                                 <SettingsExport EnableClientSideExportAPI="true" ExcelExportMode="WYSIWYG"></SettingsExport>
                                 <TotalSummary>
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="QtdVendas" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="Venda" SummaryType="Sum" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="QtdVendas" SummaryType="Sum" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Venda" SummaryType="Sum" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="precoVenda" SummaryType="Average" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="LucroComercial" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="LucroSellOut" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="LucroSellOut_Kit" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrLucroFinal" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="numCliente" SummaryType="Sum" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="LucroComercial" SummaryType="Sum" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="LucroSellOut" SummaryType="Sum" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="LucroSellOut_Kit" SummaryType="Sum" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrLucroFinal" SummaryType="Sum" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="numCliente" SummaryType="Sum" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMargem" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMargemSellOut" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMargemFinal" SummaryType="Custom" />
@@ -943,12 +1023,12 @@
                                     <dx:GridViewBandColumn Caption="Vendas" VisibleIndex="3">
                                         <Columns>
                                             <dx:GridViewDataTextColumn Caption="Volume" FieldName="QtdVendas" ToolTip="Volume ou quantidade dos itens vendidos" VisibleIndex="0">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <Settings AllowAutoFilter="False" />
                                             </dx:GridViewDataTextColumn>
                                             <dx:GridViewDataTextColumn Caption="R$" FieldName="Venda" ToolTip="Valor da venda de cada item" VisibleIndex="1">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <Settings AllowAutoFilter="False" />
                                                 <CellStyle Font-Bold="True" ForeColor="Blue">
@@ -967,7 +1047,7 @@
                                     <dx:GridViewBandColumn Caption="Margem Final" ShowInCustomizationForm="True" VisibleIndex="4">
                                         <Columns>
                                             <dx:GridViewDataTextColumn Caption="R$" FieldName="vlrLucroFinal" ReadOnly="True" ShowInCustomizationForm="True" ToolTip="Valor do Lucro Final (Lucro Praticado + Lucro Sell Out)" VisibleIndex="0">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <Settings AllowAutoFilter="False" />
                                                 <HeaderStyle BackColor="#999999" />
@@ -991,14 +1071,14 @@
                                 <SettingsText Title="Todos Itens com Margem Final na Empresa entre 0,00% a 5,00%" />
                                 <SettingsExport EnableClientSideExportAPI="true" ExcelExportMode="WYSIWYG"></SettingsExport>
                                 <TotalSummary>
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="QtdVendas" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="Venda" SummaryType="Sum" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="QtdVendas" SummaryType="Sum" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="Venda" SummaryType="Sum" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="precoVenda" SummaryType="Average" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="LucroComercial" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="LucroSellOut" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="LucroSellOut_Kit" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrLucroFinal" SummaryType="Sum" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="numCliente" SummaryType="Sum" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="LucroComercial" SummaryType="Sum" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="LucroSellOut" SummaryType="Sum" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="LucroSellOut_Kit" SummaryType="Sum" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrLucroFinal" SummaryType="Sum" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="numCliente" SummaryType="Sum" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMargem" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMargemSellOut" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMargemFinal" SummaryType="Custom" />
@@ -1118,8 +1198,8 @@
                                 </Toolbars>
 
                                 <TotalSummary>
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMeta" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrRea" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrMeta" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrRea" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percCresc_RealMeta" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percCresc_RealAA2" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMargMeta" SummaryType="Custom" />
@@ -1140,7 +1220,7 @@
                                         <Columns>
                                             <dx:GridViewDataTextColumn Caption="Meta" FieldName="vlrMeta"
                                                 VisibleIndex="0">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <HeaderStyle HorizontalAlign="Center" BackColor="Green" ForeColor="White" />
                                                 <CellStyle ForeColor="#009900">
@@ -1151,7 +1231,7 @@
 
                                             <dx:GridViewDataTextColumn Caption="Total" FieldName="vlrRea"
                                                 VisibleIndex="1">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <HeaderStyle HorizontalAlign="Center" BackColor="Blue" ForeColor="White" />
                                                 <CellStyle ForeColor="Blue">
@@ -1285,17 +1365,17 @@
                                 </Toolbars>
 
                                 <TotalSummary>
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMeta"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrMeta"
                                         SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrRea"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrRea"
                                         SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMA"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrMA"
                                         SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrAA1"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrAA1"
                                         SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrAA2"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrAA2"
                                         SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrAA3"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrAA3"
                                         SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percCresc_RealMeta"
                                         SummaryType="Custom" />
@@ -1307,7 +1387,7 @@
                                         SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percCresc_RealAA2"
                                         SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMetaAnual"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrMetaAnual"
                                         SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percCresc_MetaAnual"
                                         SummaryType="Custom" />
@@ -1335,7 +1415,7 @@
                                         <Columns>
                                             <dx:GridViewDataTextColumn Caption="Meta" FieldName="vlrMeta"
                                                 VisibleIndex="0">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <HeaderStyle HorizontalAlign="Center" BackColor="Green" ForeColor="White" />
                                                 <CellStyle ForeColor="#009900">
@@ -1346,7 +1426,7 @@
 
                                             <dx:GridViewDataTextColumn Caption="Total" FieldName="vlrRea"
                                                 VisibleIndex="3">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <HeaderStyle HorizontalAlign="Center" BackColor="Blue" ForeColor="White" />
                                                 <CellStyle ForeColor="Blue">
@@ -1449,7 +1529,7 @@
         </div>
 
     </div>
-    
+
     <%--Menu Acumulado Ano--%>
     <div class="justify-content-center" runat="server" id="divAcumuladoAno" visible="false" style="padding: 0 10px 0 10px">
         <div class="row justify-content-sm-center" style="padding-bottom: 15px">
@@ -1517,8 +1597,8 @@
                                 </Toolbars>
 
                                 <TotalSummary>
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMeta" SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrRea" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrMeta" SummaryType="Custom" />
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrRea" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percCresc_RealMeta" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percCresc_RealAA2" SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percMargMeta" SummaryType="Custom" />
@@ -1539,7 +1619,7 @@
                                         <Columns>
                                             <dx:GridViewDataTextColumn Caption="Meta" FieldName="vlrMeta"
                                                 VisibleIndex="0">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <HeaderStyle HorizontalAlign="Center" BackColor="Green" ForeColor="White" />
                                                 <CellStyle ForeColor="#009900">
@@ -1550,7 +1630,7 @@
 
                                             <dx:GridViewDataTextColumn Caption="Total" FieldName="vlrRea"
                                                 VisibleIndex="1">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <HeaderStyle HorizontalAlign="Center" BackColor="Blue" ForeColor="White" />
                                                 <CellStyle ForeColor="Blue">
@@ -1685,17 +1765,17 @@
                                 </Toolbars>
 
                                 <TotalSummary>
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMeta"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrMeta"
                                         SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrRea"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrRea"
                                         SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMA"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrMA"
                                         SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrAA1"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrAA1"
                                         SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrAA2"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrAA2"
                                         SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrAA3"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrAA3"
                                         SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percCresc_RealMeta"
                                         SummaryType="Custom" />
@@ -1707,7 +1787,7 @@
                                         SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percCresc_RealAA2"
                                         SummaryType="Custom" />
-                                    <dx:ASPxSummaryItem DisplayFormat="{0:n0}" FieldName="vlrMetaAnual"
+                                    <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="vlrMetaAnual"
                                         SummaryType="Custom" />
                                     <dx:ASPxSummaryItem DisplayFormat="{0:n2}" FieldName="percCresc_MetaAnual"
                                         SummaryType="Custom" />
@@ -1735,7 +1815,7 @@
                                         <Columns>
                                             <dx:GridViewDataTextColumn Caption="Meta" FieldName="vlrMeta"
                                                 VisibleIndex="0">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <HeaderStyle HorizontalAlign="Center" BackColor="Green" ForeColor="White" />
                                                 <CellStyle ForeColor="#009900">
@@ -1746,7 +1826,7 @@
 
                                             <dx:GridViewDataTextColumn Caption="Total" FieldName="vlrRea"
                                                 VisibleIndex="3">
-                                                <PropertiesTextEdit DisplayFormatString="{0:n0}" EncodeHtml="False">
+                                                <PropertiesTextEdit DisplayFormatString="{0:n2}" EncodeHtml="False">
                                                 </PropertiesTextEdit>
                                                 <HeaderStyle HorizontalAlign="Center" BackColor="Blue" ForeColor="White" />
                                                 <CellStyle ForeColor="Blue">
